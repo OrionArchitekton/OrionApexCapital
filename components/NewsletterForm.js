@@ -22,17 +22,32 @@ export default function NewsletterForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card flex flex-col sm:flex-row gap-4 items-center">
+    <form
+      onSubmit={onSubmit}
+      className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-surface-0/60 p-4 sm:flex-row sm:items-center"
+    >
+      <label htmlFor="newsletter-email" className="sr-only">
+        Email address
+      </label>
       <input
+        id="newsletter-email"
         type="email"
         required
         value={email}
-        onChange={(e)=>setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
-        className="w-full rounded-lg bg-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+        className="w-full rounded-xl border border-white/10 bg-surface-1/80 px-4 py-3 text-sm text-text-primary outline-none transition focus:border-brand-copper focus:ring-2 focus:ring-brand-copper/70"
       />
-      <button className="btn btn-primary w-full sm:w-auto" type="submit">Get Insights</button>
-      {status && <p className="text-sm text-slate-300">{status}</p>}
+      <button
+        className="btn btn-primary w-full rounded-xl sm:w-auto"
+        type="submit"
+        disabled={status === "Loading..."}
+      >
+        {status === "Loading..." ? "Sending..." : "Get Insights"}
+      </button>
+      {status && status !== "Loading..." && (
+        <p className="text-xs text-brand-copper sm:pl-4">{status}</p>
+      )}
     </form>
   );
 }
