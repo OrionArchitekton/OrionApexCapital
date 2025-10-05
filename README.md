@@ -3,6 +3,8 @@
 
 A modern, trust-focused website for **Orion Apex Capital** built with **Next.js + TailwindCSS**.
 
+**Note:** Nav labels: Freelance Work is a Services offering.
+
 ## ▶️ Quickstart
 
 ```bash
