@@ -2,14 +2,25 @@ import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import Button from "@/components/Button";
+import Head from "next/head";
 import { getAllCases } from "@/lib/cases";
+import { generateFreelanceServiceJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
 
 export default function Freelance({ cases }) {
+  const freelanceJsonLd = generateFreelanceServiceJsonLd();
+
   return (
-    <Layout
-      title="Freelance Work"
-      description="Strategic consulting and implementation services across finance, operations, and web development."
-    >
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={renderJsonLdScript(freelanceJsonLd)}
+        />
+      </Head>
+      <Layout
+        title="Freelance Work"
+        description="Strategic consulting and implementation services across finance, operations, and web development."
+      >
       <section className="container py-16">
         <div className="flex items-center gap-3 mb-6">
           <Logo variant="crestWhite" size={28} />
@@ -74,7 +85,8 @@ export default function Freelance({ cases }) {
           ))}
         </div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 }
 
