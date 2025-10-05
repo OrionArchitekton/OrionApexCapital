@@ -50,7 +50,7 @@ export default function NavBar() {
         >
           <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/20 bg-surface-1">
             <Image
-              src="/assets/branding/03-icon_crest_white-transparent.png"
+              src="/images/branding/03-icon_crest_white-transparent.png"
               alt="Orion Apex Crest"
               fill
               priority
