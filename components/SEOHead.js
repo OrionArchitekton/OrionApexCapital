@@ -9,7 +9,7 @@ export default function SEOHead({
   canonical
 }) {
   const fullTitle = title
-    ? `${title} | Orion Apex Capital`
+    ? `${title} — Orion Apex Capital`
     : "Orion Apex Capital — Precision. Growth. Legacy.";
   const desc =
     description ||
