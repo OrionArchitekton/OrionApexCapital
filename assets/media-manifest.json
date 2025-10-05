@@ -1,0 +1,50 @@
+[
+	{
+		"id": "city-night-313782",
+		"kind": "photo",
+		"source": "Pexels",
+		"author": "Quintin Gellar",
+		"url": "https://www.pexels.com/photo/high-angle-view-of-cityscape-against-cloudy-sky-313782/",
+		"downloadUrl": "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?cs=srgb&dl=pexels-quintingellar-313782.jpg&fm=jpg",
+		"license": "Pexels License",
+		"filename": "media/photos/curated/pexels-quintin-gellar-313782.jpg",
+		"alt": "Aerial night view of a financial district skyline lit with copper and blue lights.",
+		"intendedUse": "feature"
+	},
+	{
+		"id": "collab-handshake-3184465",
+		"kind": "photo",
+		"source": "Pexels",
+		"author": "fauxels",
+		"url": "https://www.pexels.com/photo/man-and-woman-using-laptop-3184465/",
+		"downloadUrl": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?cs=srgb&dl=pexels-fauxels-3184465.jpg&fm=jpg",
+		"license": "Pexels License",
+		"filename": "media/photos/curated/pexels-fauxels-3184465.jpg",
+		"alt": "Executives shaking hands across a table with data notebooks and coffee cups.",
+		"intendedUse": "team"
+	},
+	{
+		"id": "summit-stars-1257860",
+		"kind": "photo",
+		"source": "Pexels",
+		"author": "Philippe Donn",
+		"url": "https://www.pexels.com/photo/person-standing-on-cliff-looking-at-mountain-and-starry-sky-1257860/",
+		"downloadUrl": "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg?cs=srgb&dl=pexels-philippedonn-1257860.jpg&fm=jpg",
+		"license": "Pexels License",
+		"filename": "media/photos/curated/pexels-philippe-donn-1257860.jpg",
+		"alt": "Silhouette of an explorer on a ridge under a vivid Milky Way sky.",
+		"intendedUse": "cta"
+	},
+	{
+		"id": "ambient-stars-857195",
+		"kind": "video",
+		"source": "Pexels",
+		"author": "Vimeo",
+		"url": "https://www.pexels.com/video/blue-milky-way-galaxy-857195/",
+		"downloadUrl": "https://www.pexels.com/download/video/857195/",
+		"license": "Pexels License (CC0)",
+		"filename": "media/videos/curated/pexels-vimeo-857195.mp4",
+		"alt": "Time-lapse of the Milky Way stretching across a night sky.",
+		"intendedUse": "ambient"
+	}
+]

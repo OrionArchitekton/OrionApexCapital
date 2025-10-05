@@ -2,119 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Premium Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   color-scheme: dark;
+  --bg: #0E2433;
+  --ink: #EAEFF5;
+  --accent: #9B4D42;
 }
 
 html,
 body {
-  background-color: #0B1F3B;
-  color: #F5F6F8;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   scroll-behavior: smooth;
 }
 
-/* Custom Animations */
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(229, 184, 0, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(229, 184, 0, 0.6), 0 0 60px rgba(229, 184, 0, 0.4); }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px dashed rgba(230, 197, 74, 0.6);
+  outline-offset: 3px;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
+.bg-astro {
+  background: radial-gradient(1200px 600px at 80% -10%, rgba(230, 197, 74, 0.15), transparent 60%), var(--bg);
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+.overlay-gradient {
+  background: linear-gradient(180deg, rgba(14, 36, 51, 0) 20%, rgba(14, 36, 51, 0.8) 70%);
 }
 
-.animate-glow {
-  animation: glow-pulse 3s ease-in-out infinite;
-}
-
-/* Helpers */
 .container {
   @apply mx-auto max-w-6xl px-6;
 }
 
-/* Buttons */
 .btn {
-  @apply inline-flex items-center justify-center rounded-lg font-semibold transition;
+  @apply inline-flex items-center justify-center rounded-lg font-semibold transition focus-visible:outline-none;
 }
 
 .btn-primary {
-  @apply bg-brand-maroon text-white px-5 py-3 hover:bg-maroon-600 focus:outline-teal-400 focus:ring-2 focus:ring-brand-accent;
+  @apply bg-brand-copper text-text-onCopper px-5 py-3 shadow-glow hover:opacity-95;
 }
 
 .btn-secondary {
-  @apply border border-white/20 text-white px-5 py-3 hover:bg-white/10;
+  @apply border border-white/20 text-text-primary px-5 py-3 hover:bg-white/10;
 }
 
-/* Inputs */
-.input,
-.textarea {
-  @apply w-full rounded-lg bg-white/10 px-4 py-3 outline-none
-    focus:ring-2 focus:ring-teal-400 placeholder:text-neutral-500;
+.surface-card {
+  @apply rounded-2xl border border-white/10 bg-surface-1/80 backdrop-blur-xl;
 }
 
-.textarea {
-  @apply min-h-[144px];
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
 }
 
-/* Cards */
-.card {
-  @apply rounded-xl border border-white/10 bg-white/5 p-6 shadow-card;
-}
-
-/* Starfield Hero */
-.starfield {
-  background: 
-    linear-gradient(to bottom, rgba(11, 31, 59, 0.7), rgba(11, 31, 59, 0.9)),
-    url("/images/branding/hero-wide-1536x768.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 1536px) {
-  .starfield {
-    background: 
-      linear-gradient(to bottom, rgba(11, 31, 59, 0.7), rgba(11, 31, 59, 0.9)),
-      url("/images/branding/hero-2560x1440.jpg");
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .starfield {
-    background: 
-      linear-gradient(to bottom, rgba(11, 31, 59, 0.8), rgba(11, 31, 59, 0.95)),
-      url("/images/branding/hero-mobile-1080x1920.jpg");
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-/* Accessibility */
 .skip-link {
-  @apply sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 bg-teal-400 text-navy-900 px-3 py-2 rounded;
+  @apply sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 bg-brand-gold text-brand-navy px-3 py-2 rounded-md shadow-lg;
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -122,5 +84,12 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .animate-spin,
+  .animate-ping,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
   }
 }

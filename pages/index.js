@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import Logo from "@/components/Logo";
 import LogoGrid from "@/components/LogoGrid";
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 
 // Environment-driven badge configuration
@@ -14,6 +15,27 @@ const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Years Operating"
 const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
 
 export default function Home({ posts }) {
+  const insightAccents = [
+    {
+      gradient: "from-brand-gold/30 via-brand-gold/10 to-transparent",
+      badge: "bg-brand-gold/15 text-brand-gold",
+      link: "text-brand-gold",
+      linkHover: "group-hover:text-brand-gold/80"
+    },
+    {
+      gradient: "from-brand-blue/30 via-brand-blue/10 to-transparent",
+      badge: "bg-brand-blue/15 text-brand-blue",
+      link: "text-brand-blue",
+      linkHover: "group-hover:text-brand-blue/80"
+    },
+    {
+      gradient: "from-brand-copper/30 via-brand-copper/10 to-transparent",
+      badge: "bg-brand-copper/15 text-brand-copper",
+      link: "text-brand-copper",
+      linkHover: "group-hover:text-brand-copper/80"
+    }
+  ];
+
   return (
     <Layout
       title="Precision. Growth. Legacy."
@@ -21,69 +43,77 @@ export default function Home({ posts }) {
       url="/"
     >
       {/* Premium Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-black">
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500 rounded-full blur-3xl opacity-10"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-teal-400 rounded-full blur-3xl opacity-10"></div>
-        </div>
-        
-        <div className="container relative z-10 text-center px-6">
-          {/* Logo with Subtle Glow */}
-          <div className="flex justify-center mb-8 group">
-            <div className="relative p-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-              <Logo variant="crestWhite" size={80} />
+      <section className="relative isolate overflow-hidden bg-astro">
+        <video
+          className="absolute inset-0 h-full w-full object-cover opacity-60"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/media/photos/curated/pexels-philippe-donn-1257860.jpg"
+          aria-hidden="true"
+        >
+          <source src="/media/videos/curated/pexels-vimeo-857195.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-brand-navy/70 mix-blend-multiply" aria-hidden="true"></div>
+        <div className="absolute inset-0 overlay-gradient" aria-hidden="true"></div>
+
+        <div className="relative mx-auto flex min-h-[85vh] w-full max-w-7xl flex-col items-center justify-center gap-10 px-6 py-24 text-center">
+          <div className="flex flex-col items-center gap-6">
+            <div className="rounded-full border border-white/15 bg-surface-1/70 p-6 backdrop-blur">
+              <Logo
+                variant="crestWhite"
+                size={88}
+                className="drop-shadow-[0_25px_40px_rgba(0,0,0,0.45)]"
+              />
             </div>
-          </div>
-          
-          {/* Main Heading with Production-Safe Gradient */}
-          <h1 className="text-5xl md:text-8xl font-black tracking-tight text-white mb-4">
-            <span className="bg-gradient-to-r from-white to-gold-500 bg-clip-text text-transparent">
-              ORION APEX
-            </span>
-          </h1>
-          <h2 className="text-3xl md:text-5xl font-light tracking-wider text-gold-500">
-            CAPITAL
-          </h2>
-          
-          {/* Premium Tagline */}
-          <div className="mt-8 mb-6">
-            <p className="text-xl md:text-3xl font-light bg-gradient-to-r from-neutral-100 to-teal-400 bg-clip-text text-transparent">
-              Precision • Growth • Legacy
+            <p className="text-xs uppercase tracking-[0.45em] text-text-muted">
+              Boutique Digital Asset Management
+            </p>
+            <h1 className="max-w-3xl font-display text-4xl leading-tight text-text-primary sm:text-5xl md:text-6xl">
+              Precision capital for the next frontier of wealth
+            </h1>
+            <p className="max-w-2xl text-base text-text-muted md:text-lg">
+              We deploy disciplined, risk-managed strategies across crypto markets and digital assets—aligning exceptional returns with long-term purpose.
             </p>
           </div>
-          
-          {/* Enhanced Description */}
-          <p className="mt-8 text-lg md:text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed font-light">
-            We deploy <span className="text-gold-500 font-semibold">disciplined, risk-managed strategies</span> across crypto markets 
-            and digital assets—<span className="text-teal-400 font-semibold">aligning exceptional returns</span> with long-term purpose.
-          </p>
-          
-          {/* Premium Call-to-Action Buttons */}
-          <div className="mt-12 flex items-center justify-center gap-6 flex-wrap">
-            <Button href="/services" className="bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+
+          <div className="flex flex-col items-center gap-4 sm:flex-row">
+            <Link href="/services" className="btn btn-primary min-w-[180px]">
               Explore Strategies
-            </Button>
-            <Button href="/contact" variant="secondary" className="border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-black px-8 py-4 text-lg font-semibold transition-all duration-300">
+            </Link>
+            <Link href="/contact" className="btn btn-secondary min-w-[180px]">
               Partner With Us
-            </Button>
+            </Link>
           </div>
-          
-          {/* Stats Row */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="group cursor-pointer" aria-label={`${BADGE_1_LABEL}: ${BADGE_1_VALUE}`}>
-              <div className="text-3xl md:text-4xl font-bold text-gold-500 group-hover:text-gold-400 transition-colors">{BADGE_1_VALUE}</div>
-              <div className="text-sm text-neutral-400 uppercase tracking-wider">{BADGE_1_LABEL}</div>
+
+          <dl className="mt-12 grid w-full max-w-4xl grid-cols-1 gap-6 text-left text-text-primary sm:grid-cols-3">
+            <div className="surface-card h-full p-5" aria-label={`${BADGE_1_LABEL}: ${BADGE_1_VALUE}`}>
+              <dt className="text-xs uppercase tracking-[0.3em] text-text-muted">
+                {BADGE_1_LABEL}
+              </dt>
+              <dd className="mt-3 text-3xl font-semibold text-text-primary">
+                {BADGE_1_VALUE}
+              </dd>
             </div>
-            <div className="group cursor-pointer" aria-label={`${BADGE_2_LABEL}: ${BADGE_2_VALUE}`}>
-              <div className="text-3xl md:text-4xl font-bold text-teal-400 group-hover:text-teal-300 transition-colors">{BADGE_2_VALUE}</div>
-              <div className="text-sm text-neutral-400 uppercase tracking-wider">{BADGE_2_LABEL}</div>
+            <div className="surface-card h-full p-5" aria-label={`${BADGE_2_LABEL}: ${BADGE_2_VALUE}`}>
+              <dt className="text-xs uppercase tracking-[0.3em] text-text-muted">
+                {BADGE_2_LABEL}
+              </dt>
+              <dd className="mt-3 text-3xl font-semibold text-text-primary">
+                {BADGE_2_VALUE}
+              </dd>
             </div>
-            <div className="group cursor-pointer" aria-label={`${BADGE_3_LABEL}: ${BADGE_3_VALUE}`}>
-              <div className="text-3xl md:text-4xl font-bold text-neutral-100 group-hover:text-white transition-colors">{BADGE_3_VALUE}</div>
-              <div className="text-sm text-neutral-400 uppercase tracking-wider">{BADGE_3_LABEL}</div>
+            <div className="surface-card h-full p-5" aria-label={`${BADGE_3_LABEL}: ${BADGE_3_VALUE}`}>
+              <dt className="text-xs uppercase tracking-[0.3em] text-text-muted">
+                {BADGE_3_LABEL}
+              </dt>
+              <dd className="mt-3 text-3xl font-semibold text-text-primary">
+                {BADGE_3_VALUE}
+              </dd>
             </div>
-          </div>
+          </dl>
         </div>
       </section>
 
@@ -92,199 +122,219 @@ export default function Home({ posts }) {
 
       {/* Premium Services Section */}
       <section className="container py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-neutral-100 to-gold-500 bg-clip-text text-transparent">
-            Disciplined Operator Lanes
+        <div className="mb-12 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-surface-1/60 px-4 py-2 text-xs uppercase tracking-[0.4em] text-text-muted">
+            Core Verticals
+          </span>
+          <h2 className="mt-6 font-display text-4xl text-text-primary md:text-5xl">
+            Disciplined operator lanes
           </h2>
-          <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
-            Two distinct verticals. One unified approach to <span className="text-gold-500">systematic wealth creation</span>.
+          <p className="mt-4 text-lg text-text-muted md:text-xl">
+            Two distinct verticals. One unified approach to <span className="text-brand-gold">systematic wealth creation</span>.
           </p>
         </div>
-        
-        <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-          {/* Crypto Trading Card */}
-          <div className="group relative">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-gold-500 to-teal-400 rounded-2xl blur opacity-30 group-hover:opacity-75 transition-all duration-500"></div>
-            <a href="/services#crypto" className="relative bg-gradient-to-br from-navy-800/80 to-navy-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 block hover:transform hover:scale-[1.02] transition-all duration-500 h-full">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-gradient-to-br from-gold-500/20 to-gold-600/20 rounded-xl">
-                  <svg className="w-8 h-8 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-bold text-2xl text-white group-hover:text-gold-400 transition-colors">
-                    Crypto Trading
-                  </h3>
-                  <div className="text-gold-500 text-sm font-semibold uppercase tracking-wider">
-                    High Frequency • Low Risk
-                  </div>
-                </div>
-              </div>
-              
-              <p className="text-neutral-300 mb-6 leading-relaxed">
-                Short-term setups with <strong className="text-white">strict risk controls</strong> and volatility gates. 
-                Systematic execution meets disciplined capital allocation.
-              </p>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
-                  Risk-managed position sizing
-                </div>
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
-                  Automated volatility gates
-                </div>
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
-                  Performance tracking & analytics
-                </div>
-              </div>
-              
-              <div className="mt-6 pt-4 border-t border-white/10">
-                <span className="text-gold-500 font-semibold group-hover:text-gold-400 transition-colors">
-                  Explore Strategy →
-                </span>
-              </div>
-            </a>
-          </div>
 
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+          {/* Crypto Trading Card */}
+          <Link
+            href="/services#crypto"
+            className="surface-card relative overflow-hidden p-8 transition-transform duration-500 hover:-translate-y-1"
+          >
+            <div className="pointer-events-none absolute inset-0 rounded-2xl border border-brand-copper/10 bg-gradient-to-br from-brand-copper/15 via-transparent to-brand-blue/10 opacity-80"></div>
+            <div className="relative z-10 flex items-start gap-4">
+              <div className="rounded-xl bg-brand-copper/20 p-3 text-brand-gold">
+                <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-2xl text-text-primary">
+                  Crypto Trading
+                </h3>
+                <p className="text-sm uppercase tracking-[0.2em] text-brand-gold/80">
+                  High Frequency • Low Risk
+                </p>
+              </div>
+            </div>
+            <p className="relative z-10 mt-6 text-sm leading-relaxed text-text-muted md:text-base">
+              Short-term setups with <span className="text-text-primary font-semibold">strict risk controls</span> and volatility gates. Systematic execution meets disciplined capital allocation.
+            </p>
+            <ul className="relative z-10 mt-6 space-y-3 text-sm text-text-muted">
+              <li className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-brand-gold"></span>
+                Risk-managed position sizing
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-brand-gold"></span>
+                Automated volatility gates
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-brand-gold"></span>
+                Performance tracking & analytics
+              </li>
+            </ul>
+            <span className="relative z-10 mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold">
+              Explore Strategy
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </Link>
 
           {/* Website Investing Card */}
-          <div className="group relative">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition-all duration-500"></div>
-            <a href="/services#websites" className="relative bg-gradient-to-br from-navy-800/80 to-navy-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 block hover:transform hover:scale-[1.02] transition-all duration-500 h-full">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl">
-                  <svg className="w-8 h-8 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-bold text-2xl text-white group-hover:text-purple-400 transition-colors">
-                    Website Investing
-                  </h3>
-                  <div className="text-purple-400 text-sm font-semibold uppercase tracking-wider">
-                    Digital Assets • Growth Hacking
-                  </div>
-                </div>
+          <Link
+            href="/services#websites"
+            className="surface-card relative overflow-hidden p-8 transition-transform duration-500 hover:-translate-y-1"
+          >
+            <div className="pointer-events-none absolute inset-0 rounded-2xl border border-brand-blue/15 bg-gradient-to-br from-brand-blue/20 via-transparent to-brand-gold/10 opacity-80"></div>
+            <div className="relative z-10 flex items-start gap-4">
+              <div className="rounded-xl bg-brand-blue/15 p-3 text-brand-gold">
+                <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </div>
-              
-              <p className="text-neutral-300 mb-6 leading-relaxed">
-                <strong className="text-white">Acquire → Improve → Recycle.</strong> Operator math over hype. 
-                Systematic value creation in digital properties.
+              <div>
+                <h3 className="font-semibold text-2xl text-text-primary">
+                  Website Investing
+                </h3>
+                <p className="text-sm uppercase tracking-[0.2em] text-brand-blue/70">
+                  Digital Assets • Growth Hacking
+                </p>
+              </div>
+            </div>
+            <p className="relative z-10 mt-6 text-sm leading-relaxed text-text-muted md:text-base">
+              <span className="text-text-primary font-semibold">Acquire → Improve → Recycle.</span> Operator math over hype. Systematic value creation in digital properties.
+            </p>
+            <ul className="relative z-10 mt-6 space-y-3 text-sm text-text-muted">
+              <li className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-brand-blue"></span>
+                Due diligence & valuation
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-brand-blue"></span>
+                Growth optimization systems
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-brand-blue"></span>
+                Strategic exit planning
+              </li>
+            </ul>
+            <span className="relative z-10 mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue">
+              Learn Process
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </Link>
+        </div>
+
+        <div className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-surface-1/80 shadow-glow">
+          <div className="md:grid md:grid-cols-[1.1fr_1fr] md:items-stretch">
+            <div className="relative h-64 md:h-full">
+              <Image
+                src="/media/photos/curated/pexels-fauxels-3184465.jpg"
+                alt="Executives shaking hands over a strategy session with notebooks on the table."
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/80 via-brand-navy/30 to-transparent" aria-hidden="true"></div>
+            </div>
+            <div className="flex flex-col gap-6 p-8 md:p-12">
+              <h3 className="font-display text-2xl text-text-primary md:text-3xl">
+                Partnership-first execution
+              </h3>
+              <p className="text-base text-text-muted">
+                Every mandate opens with measured discovery. We embed with stakeholders, navigate compliance, and translate market intelligence into accountable operating plans.
               </p>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  Due diligence & valuation
-                </div>
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  Growth optimization systems
-                </div>
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  Strategic exit planning
-                </div>
-              </div>
-              
-              <div className="mt-6 pt-4 border-t border-white/10">
-                <span className="text-purple-400 font-semibold group-hover:text-purple-300 transition-colors">
-                  Learn Process →
-                </span>
-              </div>
-            </a>
+              <ul className="space-y-3 text-sm text-text-muted">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
+                  Dedicated operator pods for each engagement
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
+                  Transparent reporting cadences and data rooms
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
+                  Outcomes tied to governance-ready metrics
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Featured Case Study - Premium Layout */}
       <section className="container py-20">
-        <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-gold-500 via-teal-400 to-gold-500 rounded-3xl blur-lg opacity-25 group-hover:opacity-50 transition-all duration-700"></div>
-          <div className="relative bg-gradient-to-br from-navy-800/90 to-navy-900/90 backdrop-blur-xl border border-white/20 rounded-3xl p-10 md:p-12">
-            <div className="md:flex items-center gap-12">
-              <div className="flex-1">
-                <div className="inline-flex items-center gap-2 bg-gold-500/10 border border-gold-500/30 rounded-full px-4 py-2 mb-6">
-                  <svg className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-gold-500 font-semibold text-sm uppercase tracking-wider">Featured Case Study</span>
-                </div>
-                
-                <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
-                  KPI Dashboard for Multi-Club Fitness Operator
+        <div className="overflow-hidden rounded-3xl border border-white/10 bg-surface-1/90 shadow-glow backdrop-blur-xl">
+          <div className="md:grid md:grid-cols-[1.15fr_0.85fr] md:items-stretch">
+            <div className="flex flex-col gap-8 p-10 md:p-12">
+              <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">
+                Featured Case Study
+              </span>
+              <div>
+                <h3 className="font-display text-3xl text-text-primary md:text-4xl">
+                  KPI dashboard for multi-club fitness operator
                 </h3>
-                
-                <p className="text-xl text-neutral-300 mb-8 leading-relaxed">
-                  Transformed operational efficiency through data visualization and automated reporting systems.
+                <p className="mt-4 max-w-xl text-lg text-text-muted">
+                  Transformed operational efficiency through data visualization and automated reporting systems tuned for franchise scale.
                 </p>
-                
-                {/* Metrics Grid */}
-                <div className="grid grid-cols-3 gap-6 mb-8">
-                  <div className="text-center group/metric">
-                    <div className="text-2xl md:text-3xl font-bold text-gold-500 group-hover/metric:text-gold-400 transition-colors">
-                      +2.8pp
-                    </div>
-                    <div className="text-sm text-neutral-400 uppercase tracking-wider">
-                      Retention Increase
-                    </div>
-                  </div>
-                  <div className="text-center group/metric">
-                    <div className="text-2xl md:text-3xl font-bold text-teal-400 group-hover/metric:text-teal-300 transition-colors">
-                      6-8 hrs
-                    </div>
-                    <div className="text-sm text-neutral-400 uppercase tracking-wider">
-                      Weekly Time Saved
-                    </div>
-                  </div>
-                  <div className="text-center group/metric">
-                    <div className="text-2xl md:text-3xl font-bold text-purple-400 group-hover/metric:text-purple-300 transition-colors">
-                      100%
-                    </div>
-                    <div className="text-sm text-neutral-400 uppercase tracking-wider">
-                      Data Accuracy
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex flex-wrap gap-4">
-                  <Button href="/freelance/kpi-dashboard-fitness" variant="primary">
-                    Read Full Case Study
-                  </Button>
-                  <Button href="/freelance" variant="outline">
-                    View All Work
-                  </Button>
-                </div>
               </div>
-              
-              {/* Visual Element */}
-              <div className="mt-8 md:mt-0 md:w-80">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-gold-500/20 to-teal-400/20 rounded-2xl blur-xl"></div>
-                  <div className="relative bg-gradient-to-br from-navy-700/50 to-navy-800/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-medium text-neutral-400">Monthly Revenue</div>
-                        <div className="text-green-400 text-sm font-semibold">↗ +18.2%</div>
-                      </div>
-                      <div className="h-2 bg-navy-900/50 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-gold-500 to-teal-400 rounded-full animate-pulse" style={{width: '75%'}}></div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
-                        <div>
-                          <div className="text-lg font-bold text-white">$247K</div>
-                          <div className="text-xs text-neutral-400">This Month</div>
-                        </div>
-                        <div>
-                          <div className="text-lg font-bold text-neutral-300">$209K</div>
-                          <div className="text-xs text-neutral-400">Last Month</div>
-                        </div>
-                      </div>
-                    </div>
+
+              <dl className="grid gap-6 sm:grid-cols-3">
+                <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
+                  <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Retention increase</dt>
+                  <dd className="mt-2 text-2xl font-semibold text-brand-gold">+2.8pp</dd>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
+                  <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Weekly time saved</dt>
+                  <dd className="mt-2 text-2xl font-semibold text-brand-blue">6-8 hrs</dd>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
+                  <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Data accuracy</dt>
+                  <dd className="mt-2 text-2xl font-semibold text-text-primary">100%</dd>
+                </div>
+              </dl>
+
+              <div className="flex flex-wrap gap-4">
+                <Button href="/freelance/kpi-dashboard-fitness" variant="primary">
+                  Read Full Case Study
+                </Button>
+                <Button href="/freelance" variant="outline">
+                  View All Work
+                </Button>
+              </div>
+            </div>
+            <div className="relative h-80 md:h-full">
+              <Image
+                src="/media/photos/curated/pexels-quintin-gellar-313782.jpg"
+                alt="City skyline at night with illuminated financial district skyscrapers."
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-navy/20 via-brand-navy/40 to-brand-navy/90" aria-hidden="true"></div>
+              <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/10 bg-surface-1/85 p-6 backdrop-blur">
+                <div className="flex items-center justify-between text-sm text-text-muted">
+                  <span>Monthly revenue</span>
+                  <span className="text-brand-gold font-semibold">↗ +18.2%</span>
+                </div>
+                <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
+                  <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
+                </div>
+                <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-text-muted">
+                  <div>
+                    <div className="text-lg font-semibold text-text-primary">$247K</div>
+                    <span>This month</span>
+                  </div>
+                  <div>
+                    <div className="text-lg font-semibold text-text-primary/70">$209K</div>
+                    <span>Last month</span>
                   </div>
                 </div>
               </div>
@@ -295,77 +345,60 @@ export default function Home({ posts }) {
 
       {/* Premium Insights Section */}
       <section className="container py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-neutral-100 to-teal-400 bg-clip-text text-transparent">
-            Market Insights
+        <div className="mb-16 text-center">
+          <h2 className="font-display text-4xl text-text-primary md:text-5xl">
+            Market insights
           </h2>
-          <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
-            Deep analysis and strategic frameworks from the front lines of <span className="text-teal-400">modern capital markets</span>.
+          <p className="mx-auto mt-4 max-w-3xl text-lg text-text-muted md:text-xl">
+            Deep analysis and strategic frameworks from the front lines of <span className="text-brand-blue">modern capital markets</span>.
           </p>
         </div>
-        
+
         <div className="grid gap-8 md:grid-cols-3">
-          {posts.slice(0, 3).map((p, index) => (
-            <div key={p.slug} className="group relative">
-              <div className={`absolute -inset-0.5 bg-gradient-to-r ${
-                index === 0 ? 'from-gold-500 to-yellow-500' :
-                index === 1 ? 'from-teal-400 to-blue-500' :
-                'from-purple-500 to-pink-500'
-              } rounded-2xl blur opacity-20 group-hover:opacity-60 transition-all duration-500`}></div>
-              
-              <a
-                href={`/insights/${p.slug}`}
-                className="relative bg-gradient-to-br from-navy-800/80 to-navy-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 block hover:transform hover:scale-[1.02] transition-all duration-500 h-full"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-2 rounded-lg ${
-                    index === 0 ? 'bg-gold-500/20 text-gold-500' :
-                    index === 1 ? 'bg-teal-400/20 text-teal-400' :
-                    'bg-purple-500/20 text-purple-400'
-                  }`}>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          {posts.slice(0, 3).map((p, index) => {
+            const accent = insightAccents[index % insightAccents.length];
+            const publishedOn = new Date(p.date).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            });
+
+            return (
+              <div key={p.slug} className="group relative">
+                <div className={`pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br ${accent.gradient} opacity-70 transition-opacity duration-500 group-hover:opacity-100`}></div>
+
+                <Link
+                  href={`/insights/${p.slug}`}
+                  className="surface-card relative flex h-full flex-col gap-6 p-8 transition-transform duration-500 hover:-translate-y-1"
+                >
+                  <div className={`relative z-10 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.35em] ${accent.badge}`}>
+                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
+                    <span>{publishedOn}</span>
                   </div>
-                  <div className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">
-                    {new Date(p.date).toLocaleDateString('en-US', { 
-                      month: 'short', 
-                      day: 'numeric', 
-                      year: 'numeric' 
-                    })}
-                  </div>
-                </div>
-                
-                <h3 className={`font-bold text-xl mb-4 group-hover:${
-                  index === 0 ? 'text-gold-400' :
-                  index === 1 ? 'text-teal-400' :
-                  'text-purple-400'
-                } transition-colors text-white`}>
-                  {p.title}
-                </h3>
-                
-                <p className="text-neutral-300 mb-6 leading-relaxed line-clamp-3">
-                  {p.excerpt}
-                </p>
-                
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <span className={`${
-                    index === 0 ? 'text-gold-500 group-hover:text-gold-400' :
-                    index === 1 ? 'text-teal-400 group-hover:text-teal-300' :
-                    'text-purple-400 group-hover:text-purple-300'
-                  } transition-colors`}>
-                    Read Analysis
+
+                  <h3 className={`relative z-10 text-xl font-semibold text-text-primary transition-colors duration-300 ${accent.linkHover}`}>
+                    {p.title}
+                  </h3>
+
+                  <p className="relative z-10 line-clamp-3 text-sm leading-relaxed text-text-muted md:text-base">
+                    {p.excerpt}
+                  </p>
+
+                  <span className={`relative z-10 inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-300 ${accent.link} ${accent.linkHover}`}>
+                    Read analysis
+                    <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </span>
-                  <svg className="w-4 h-4 text-current transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </a>
-            </div>
-          ))}
+                </Link>
+              </div>
+            );
+          })}
         </div>
-        
-        <div className="text-center mt-12">
+
+        <div className="mt-12 text-center">
           <Button href="/insights" variant="outline" className="px-8">
             View All Insights
           </Button>
@@ -374,73 +407,59 @@ export default function Home({ posts }) {
 
       {/* Premium Closing CTA */}
       <section className="container py-24">
-        <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-gold-500 via-teal-400 via-purple-500 to-gold-500 rounded-3xl blur-xl opacity-25 group-hover:opacity-50 transition-all duration-1000"></div>
-          <div className="relative bg-gradient-to-br from-navy-800/90 to-black/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-12 md:p-16 text-center overflow-hidden">
-            
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(229,184,0,0.1),transparent_70%)]"></div>
-            
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 bg-gold-500/10 border border-gold-500/30 rounded-full px-6 py-3 mb-8">
-                <svg className="w-5 h-5 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
+        <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-surface-1/80 text-center shadow-glow">
+          <Image
+            src="/media/photos/curated/pexels-philippe-donn-1257860.jpg"
+            alt="Explorer on a mountain ridge under the Milky Way."
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 70vw"
+          />
+          <div className="absolute inset-0 bg-brand-navy/75 mix-blend-multiply" aria-hidden="true"></div>
+          <div className="absolute inset-0 overlay-gradient" aria-hidden="true"></div>
+
+          <div className="relative z-10 flex flex-col gap-10 p-12 md:p-16">
+            <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/15 px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-brand-gold">
+              Elite Partnership
+            </span>
+            <h3 className="mx-auto max-w-3xl font-display text-4xl leading-tight text-text-primary md:text-6xl">
+              Ready to align execution with outcomes?
+            </h3>
+            <p className="mx-auto max-w-3xl text-lg text-text-muted md:text-xl">
+              Join the leaders who recognize that systematic wealth creation demands disciplined strategy, real-time intelligence, and operators that stay accountable from discovery to delivery.
+            </p>
+            <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
+              <Button href="/contact" variant="primary" className="px-10 py-4 text-base md:text-lg">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
-                <span className="text-gold-500 font-bold text-sm uppercase tracking-wider">Elite Partnership</span>
+                Schedule Consultation
+              </Button>
+              <Button href="/freelance" variant="secondary" className="px-8 py-4 text-base md:text-lg">
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                View Our Work
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 gap-6 border-t border-white/10 pt-8 md:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-6">
+                <div className="text-lg font-semibold text-brand-gold">Confidential</div>
+                <p className="mt-2 text-xs uppercase tracking-[0.25em] text-text-muted">
+                  NDA protected engagements
+                </p>
               </div>
-              
-              <h3 className="text-4xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white via-gold-500 to-teal-400 bg-clip-text text-transparent leading-tight">
-                Ready to Align Execution with Outcomes?
-              </h3>
-              
-              <p className="text-xl md:text-2xl text-neutral-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-                Join the <span className="text-gold-500 font-semibold">elite operators</span> who understand that 
-                <span className="text-teal-400 font-semibold"> systematic wealth creation</span> requires both 
-                <span className="text-white font-semibold">disciplined strategy and flawless execution</span>.
-              </p>
-              
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-                <Button href="/contact" variant="primary" className="px-10 py-4 text-lg font-bold">
-                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                  </svg>
-                  Schedule Consultation
-                </Button>
-                
-                <Button href="/freelance" variant="secondary" className="px-8 py-4 text-lg">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  View Our Work
-                </Button>
+              <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-6">
+                <div className="text-lg font-semibold text-brand-blue">Exclusive</div>
+                <p className="mt-2 text-xs uppercase tracking-[0.25em] text-text-muted">
+                  Limited client roster
+                </p>
               </div>
-              
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-white/10">
-                <div className="group cursor-pointer">
-                  <div className="text-2xl md:text-3xl font-bold text-gold-500 group-hover:text-gold-400 transition-colors mb-2">
-                    Confidential
-                  </div>
-                  <div className="text-sm text-neutral-400 uppercase tracking-wider">
-                    NDA Protected Engagements
-                  </div>
-                </div>
-                <div className="group cursor-pointer">
-                  <div className="text-2xl md:text-3xl font-bold text-teal-400 group-hover:text-teal-300 transition-colors mb-2">
-                    Exclusive
-                  </div>
-                  <div className="text-sm text-neutral-400 uppercase tracking-wider">
-                    Limited Client Roster
-                  </div>
-                </div>
-                <div className="group cursor-pointer">
-                  <div className="text-2xl md:text-3xl font-bold text-white group-hover:text-neutral-200 transition-colors mb-2">
-                    Results-Driven
-                  </div>
-                  <div className="text-sm text-neutral-400 uppercase tracking-wider">
-                    Performance-Based Outcomes
-                  </div>
-                </div>
+              <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-6">
+                <div className="text-lg font-semibold text-text-primary">Results-driven</div>
+                <p className="mt-2 text-xs uppercase tracking-[0.25em] text-text-muted">
+                  Performance-based outcomes
+                </p>
               </div>
             </div>
           </div>
