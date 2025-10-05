@@ -27,7 +27,7 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.2 }}
           className="mt-6 text-slate-300 max-w-3xl mx-auto"
         >
-          We deploy disciplined, risk‑managed strategies across crypto markets, automated cash businesses, and digital assets—aligning returns with long‑term purpose.
+          We deploy disciplined, risk‑managed strategies across crypto markets and digital assets—aligning returns with long‑term purpose.
         </motion.p>
         <div className="mt-10 flex items-center justify-center gap-4">
           <Link href="/services" className="btn btn-primary">Explore Strategies</Link>

@@ -5,7 +5,7 @@ export default function Services() {
   return (
     <Layout
       title="Services"
-      description="Disciplined operator lanes across crypto, ATMs, and digital assets."
+      description="Disciplined operator lanes across crypto and digital assets."
     >
       <section className="container py-16 space-y-10">
         <div className="flex items-center gap-3">
@@ -28,19 +28,6 @@ export default function Services() {
           </ul>
         </div>
 
-        <div id="atm" className="card">
-          <h2 className="text-2xl font-semibold">
-            ATM Placements & Operations
-          </h2>
-          <p className="text-slate-300 mt-2">
-            Uptime discipline, route scoring, refill thresholds, and
-            unit-economics reporting.
-          </p>
-          <ul className="text-slate-300 mt-4 list-disc pl-5 space-y-1">
-            <li>6–8 placements target; $18k–$25k annual profit objective</li>
-            <li>Transparent fee structure & uptime monitoring</li>
-          </ul>
-        </div>
 
         <div id="websites" className="card">
           <h2 className="text-2xl font-semibold">Website Investing</h2>

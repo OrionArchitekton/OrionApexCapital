@@ -43,8 +43,8 @@ export default function Home({ posts }) {
           
           {/* Enhanced Description */}
           <p className="mt-8 text-lg md:text-xl text-neutral-300 max-w-4xl mx-auto leading-relaxed font-light">
-            We deploy <span className="text-gold-500 font-semibold">disciplined, risk-managed strategies</span> across crypto markets, 
-            automated cash businesses, and digital assets—<span className="text-teal-400 font-semibold">aligning exceptional returns</span> with long-term purpose.
+            We deploy <span className="text-gold-500 font-semibold">disciplined, risk-managed strategies</span> across crypto markets 
+            and digital assets—<span className="text-teal-400 font-semibold">aligning exceptional returns</span> with long-term purpose.
           </p>
           
           {/* Premium Call-to-Action Buttons */}
@@ -85,11 +85,11 @@ export default function Home({ posts }) {
             Disciplined Operator Lanes
           </h2>
           <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
-            Three distinct verticals. One unified approach to <span className="text-gold-500">systematic wealth creation</span>.
+            Two distinct verticals. One unified approach to <span className="text-gold-500">systematic wealth creation</span>.
           </p>
         </div>
         
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
           {/* Crypto Trading Card */}
           <div className="group relative">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-gold-500 to-teal-400 rounded-2xl blur opacity-30 group-hover:opacity-75 transition-all duration-500"></div>
@@ -138,53 +138,6 @@ export default function Home({ posts }) {
             </a>
           </div>
 
-          {/* ATM Placements Card */}
-          <div className="group relative">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-400 to-blue-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition-all duration-500"></div>
-            <a href="/services#atm" className="relative bg-gradient-to-br from-navy-800/80 to-navy-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 block hover:transform hover:scale-[1.02] transition-all duration-500 h-full">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-gradient-to-br from-teal-400/20 to-teal-500/20 rounded-xl">
-                  <svg className="w-8 h-8 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-bold text-2xl text-white group-hover:text-teal-400 transition-colors">
-                    ATM Placements
-                  </h3>
-                  <div className="text-teal-400 text-sm font-semibold uppercase tracking-wider">
-                    Physical Assets • Cash Flow
-                  </div>
-                </div>
-              </div>
-              
-              <p className="text-neutral-300 mb-6 leading-relaxed">
-                <strong className="text-white">Uptime, route logic, and unit economics</strong> at the edge. 
-                Real-world infrastructure with predictable returns.
-              </p>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-teal-400 rounded-full"></div>
-                  Strategic location analysis
-                </div>
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-teal-400 rounded-full"></div>
-                  99.7% uptime monitoring
-                </div>
-                <div className="flex items-center gap-2 text-sm text-neutral-400">
-                  <div className="w-2 h-2 bg-teal-400 rounded-full"></div>
-                  Predictable cash generation
-                </div>
-              </div>
-              
-              <div className="mt-6 pt-4 border-t border-white/10">
-                <span className="text-teal-400 font-semibold group-hover:text-teal-300 transition-colors">
-                  View Opportunities →
-                </span>
-              </div>
-            </a>
-          </div>
 
           {/* Website Investing Card */}
           <div className="group relative">
