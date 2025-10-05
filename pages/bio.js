@@ -25,8 +25,7 @@ export default function Bio() {
             <p className="text-slate-300">
               I lead operations and sales at a major fitness brand while
               building Orion Apex Capital—an operator's studio focused on
-              disciplined growth across crypto, automated cash businesses, and
-              digital assets.
+              disciplined growth across crypto and digital assets.
             </p>
             <p className="text-slate-300">
               Trading specialty: short-term setups with strict risk management
@@ -38,7 +37,6 @@ export default function Bio() {
                 <h3 className="font-semibold">Focus Areas</h3>
                 <ul className="list-disc pl-5 text-slate-300 space-y-1 mt-2">
                   <li>Crypto trading (scalp, breakout, swing)</li>
-                  <li>ATM placements & uptime ops</li>
                   <li>Website investing & resale</li>
                   <li>Sales systems & GTM execution</li>
                 </ul>
@@ -68,8 +66,7 @@ export default function Bio() {
               Short-term trading framework with automated SL/TP management.
             </li>
             <li>
-              Launched ATM placements, website investing, and AI-assisted
-              assets.
+              Launched website investing and AI-assisted assets.
             </li>
           </ul>
         </div>

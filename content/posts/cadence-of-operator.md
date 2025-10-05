@@ -15,7 +15,7 @@ We bias toward clear inputs, time-boxed work, and measurable outcomes. **Cadence
 ## Weekly Cycle
 
 - **Monday**: Set week priorities, review trading plan
-- **Mid-week**: Ops reviews (ATM uptime, website metrics)
+- **Mid-week**: Ops reviews (website metrics, trading performance)
 - **Friday**: Week close-out, performance review, adjustment notes
 
 ## Monthly Cadence

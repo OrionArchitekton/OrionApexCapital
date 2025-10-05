@@ -11,7 +11,7 @@ export default function SEOHead({
     : "Orion Apex Capital — Precision. Growth. Legacy.";
   const desc =
     description ||
-    "Disciplined, risk-managed strategies across crypto markets, automated cash businesses, and digital assets.";
+    "Disciplined, risk-managed strategies across crypto markets and digital assets.";
 
   return (
     <Head>

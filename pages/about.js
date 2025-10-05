@@ -11,8 +11,7 @@ export default function About() {
         </div>
         <p className="text-slate-300 text-lg">
           Orion Apex Capital was founded on a simple idea: disciplined strategy
-          beats noise. We operate across crypto markets, automated cash
-          businesses, and digital assets with an emphasis on risk management,
+          beats noise.           We operate across crypto markets and digital assets with an emphasis on risk management,
           execution speed, and long-term alignment.
         </p>
 
