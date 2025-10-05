@@ -1,17 +1,23 @@
 import Head from "next/head";
+import { getCanonical } from "@/lib/seo/canonical";
 
 export default function SEOHead({
   title,
   description,
   image = "/images/og-banner.png",
-  url = "https://www.orionapexcapital.com"
+  url,
+  canonical
 }) {
   const fullTitle = title
-    ? `${title} — Orion Apex Capital`
+    ? `${title} | Orion Apex Capital`
     : "Orion Apex Capital — Precision. Growth. Legacy.";
   const desc =
     description ||
     "Disciplined, risk-managed strategies across crypto markets and digital assets.";
+  
+  // Use provided canonical or generate from URL
+  const canonicalUrl = canonical || (url ? getCanonical(url) : getCanonical('/'));
+  const ogUrl = url ? getCanonical(url) : getCanonical('/');
 
   return (
     <Head>
@@ -21,18 +27,21 @@ export default function SEOHead({
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonicalUrl} />
+      
       {/* Open Graph */}
       <meta property="og:type" content="website" />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
-      <meta property="og:url" content={url} />
-      <meta property="og:image" content={`${url}/images/branding/og-1200x630.png`} />
+      <meta property="og:url" content={ogUrl} />
+      <meta property="og:image" content={`${ogUrl}/images/branding/og-1200x630.png`} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
-      <meta name="twitter:image" content={`${url}/images/branding/twitter-1600x900.png`} />
+      <meta name="twitter:image" content={`${ogUrl}/images/branding/twitter-1600x900.png`} />
       
       {/* Favicons */}
       <link rel="icon" href="/images/branding/favicon.ico" />

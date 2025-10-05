@@ -4,7 +4,11 @@ import { getAllPosts } from "@/lib/posts";
 
 export default function Insights({ posts }) {
   return (
-    <Layout title="Insights">
+    <Layout 
+      title="Market Insights"
+      description="Deep analysis and strategic frameworks from the front lines of modern capital markets. Expert insights on crypto trading, digital assets, and systematic wealth creation."
+      url="/insights"
+    >
       <section className="container py-16">
         <div className="flex items-center gap-3 mb-6">
           <Logo variant="crestWhite" size={28} />

@@ -16,7 +16,8 @@ export default function Services() {
       </Head>
       <Layout
         title="Services"
-        description="Disciplined operator lanes across crypto and digital assets."
+        description="Disciplined operator lanes across crypto and digital assets. Crypto trading advisory and website investing with systematic approaches to wealth creation."
+        url="/services"
       >
       <section className="container py-16 space-y-10">
         <div className="flex items-center gap-3">

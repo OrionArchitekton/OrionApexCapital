@@ -18,8 +18,9 @@ export default function Freelance({ cases }) {
         />
       </Head>
       <Layout
-        title="Freelance Work"
-        description="Strategic consulting and implementation services across finance, operations, and web development."
+        title="Client Services"
+        description="Strategic consulting and implementation services for operators, investors, and founders. We deliver measurable outcomes through disciplined execution across finance, operations, and digital assets."
+        url="/freelance"
       >
       <section className="container py-16">
         <div className="flex items-center gap-3 mb-6">

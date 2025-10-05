@@ -6,7 +6,8 @@ export default function Contact() {
   return (
     <Layout
       title="Contact"
-      description="Tell us about your objectives and constraints."
+      description="Tell us about your objectives and constraints. We'll reply within 1–2 business days to discuss your strategic needs and partnership opportunities."
+      url="/contact"
     >
       <section className="container py-16 space-y-6 max-w-2xl">
         <div className="flex items-center gap-3">
