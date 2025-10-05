@@ -5,6 +5,14 @@ import LogoGrid from "@/components/LogoGrid";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
 
+// Environment-driven badge configuration
+const BADGE_1_LABEL = process.env.NEXT_PUBLIC_BADGE_1_LABEL ?? "Client Projects Delivered";
+const BADGE_1_VALUE = process.env.NEXT_PUBLIC_BADGE_1_VALUE ?? "15+";
+const BADGE_2_LABEL = process.env.NEXT_PUBLIC_BADGE_2_LABEL ?? "On-Time Delivery";
+const BADGE_2_VALUE = process.env.NEXT_PUBLIC_BADGE_2_VALUE ?? "97%";
+const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Years Operating";
+const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
+
 export default function Home({ posts }) {
   return (
     <Layout>
@@ -59,17 +67,17 @@ export default function Home({ posts }) {
           
           {/* Stats Row */}
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="group cursor-pointer">
-              <div className="text-3xl md:text-4xl font-bold text-gold-500 group-hover:text-gold-400 transition-colors">$50M+</div>
-              <div className="text-sm text-neutral-400 uppercase tracking-wider">Assets Under Management</div>
+            <div className="group cursor-pointer" aria-label={`${BADGE_1_LABEL}: ${BADGE_1_VALUE}`}>
+              <div className="text-3xl md:text-4xl font-bold text-gold-500 group-hover:text-gold-400 transition-colors">{BADGE_1_VALUE}</div>
+              <div className="text-sm text-neutral-400 uppercase tracking-wider">{BADGE_1_LABEL}</div>
             </div>
-            <div className="group cursor-pointer">
-              <div className="text-3xl md:text-4xl font-bold text-teal-400 group-hover:text-teal-300 transition-colors">98.7%</div>
-              <div className="text-sm text-neutral-400 uppercase tracking-wider">Uptime Reliability</div>
+            <div className="group cursor-pointer" aria-label={`${BADGE_2_LABEL}: ${BADGE_2_VALUE}`}>
+              <div className="text-3xl md:text-4xl font-bold text-teal-400 group-hover:text-teal-300 transition-colors">{BADGE_2_VALUE}</div>
+              <div className="text-sm text-neutral-400 uppercase tracking-wider">{BADGE_2_LABEL}</div>
             </div>
-            <div className="group cursor-pointer">
-              <div className="text-3xl md:text-4xl font-bold text-neutral-100 group-hover:text-white transition-colors">5+ Years</div>
-              <div className="text-sm text-neutral-400 uppercase tracking-wider">Market Experience</div>
+            <div className="group cursor-pointer" aria-label={`${BADGE_3_LABEL}: ${BADGE_3_VALUE}`}>
+              <div className="text-3xl md:text-4xl font-bold text-neutral-100 group-hover:text-white transition-colors">{BADGE_3_VALUE}</div>
+              <div className="text-sm text-neutral-400 uppercase tracking-wider">{BADGE_3_LABEL}</div>
             </div>
           </div>
         </div>

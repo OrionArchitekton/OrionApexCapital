@@ -91,6 +91,21 @@ The structured data helps Google understand and potentially display rich results
   Markdown content here…
   ```
 
+## 🏷️ Homepage Badges
+
+The homepage displays three KPI badges that can be customized via environment variables:
+
+- **Badge 1**: `NEXT_PUBLIC_BADGE_1_LABEL` / `NEXT_PUBLIC_BADGE_1_VALUE` (default: "Client Projects Delivered" / "15+")
+- **Badge 2**: `NEXT_PUBLIC_BADGE_2_LABEL` / `NEXT_PUBLIC_BADGE_2_VALUE` (default: "On-Time Delivery" / "97%")
+- **Badge 3**: `NEXT_PUBLIC_BADGE_3_LABEL` / `NEXT_PUBLIC_BADGE_3_VALUE` (default: "Years Operating" / "3+")
+
+To update badge values:
+1. Set environment variables in your deployment platform (Vercel, etc.)
+2. Or add them to your local `.env.local` file
+3. Restart the development server
+
+The badges are implemented in `pages/index.js` and include accessibility features with `aria-label` attributes.
+
 ## 🔒 Legal
 
 This site includes a basic Legal page. Customize `pages/legal.js` as needed. Nothing on the site constitutes financial advice.
