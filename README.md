@@ -39,6 +39,21 @@ npm start
 - `public/images/` — SVG graphics, favicon, and placeholders
 - `styles/` — Tailwind and custom CSS
 
+## 🔍 SEO Files
+
+- `public/robots.txt` — allows all agents and points to the sitemap
+- `public/sitemap.xml` — includes absolute URLs using `https://www.orionapexcapital.com`
+
+We use static files served from `public/` (not App Router generators). When routes change, update `public/sitemap.xml` to reflect additions/removals so that core pages remain discoverable. If you prefer generation, this repo includes `next-sitemap`; you can run:
+
+```bash
+npm run sitemap
+```
+
+This will regenerate `sitemap.xml` (and may overwrite `robots.txt`) under `public/` using `next-sitemap.config.js`. Ensure that all URLs remain absolute and use production domain `https://www.orionapexcapital.com`.
+
+Note: If you add blog posts under `pages/insights/[slug].js`, consider extending sitemap generation in a follow-up so individual posts are included.
+
 ## ✍️ Editing Content
 
 - Hero text: `components/Hero.js`
