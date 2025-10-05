@@ -3,7 +3,11 @@ import Logo from "@/components/Logo";
 
 export default function About() {
   return (
-    <Layout title="About">
+    <Layout 
+      title="About"
+      description="Orion Apex Capital was founded on disciplined strategy beating noise. We operate across crypto markets and digital assets with emphasis on risk management and execution speed."
+      url="/about"
+    >
       <section className="container py-16 space-y-6">
         <div className="flex items-center gap-3">
           <Logo variant="crestWhite" size={28} />

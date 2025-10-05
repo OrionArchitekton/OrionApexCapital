@@ -54,6 +54,36 @@ This will regenerate `sitemap.xml` (and may overwrite `robots.txt`) under `publi
 
 Note: If you add blog posts under `pages/insights/[slug].js`, consider extending sitemap generation in a follow-up so individual posts are included.
 
+## 🎯 Canonical & Meta Strategy
+
+The site implements comprehensive SEO with unique meta tags and canonical URLs for all primary routes:
+
+### Environment Configuration
+Set `NEXT_PUBLIC_SITE_URL` in your environment variables for production:
+```bash
+NEXT_PUBLIC_SITE_URL=https://www.orionapexcapital.com
+```
+
+### Canonical URL Handling
+- **Primary routes**: Each route has a unique, absolute canonical URL
+- **Alias handling**: `/services/client-services` canonicalizes to `/freelance`
+- **Fallback**: Uses production domain if `NEXT_PUBLIC_SITE_URL` is not set
+
+### Meta Tag Strategy
+- **Titles**: Format "Page Title | Orion Apex Capital" (≤60 chars)
+- **Descriptions**: Unique, descriptive content (≤160 chars)
+- **Canonical**: Single, absolute URL per page
+- **Open Graph**: Complete social sharing meta tags
+- **Twitter Cards**: Optimized for social media sharing
+
+### Route Coverage
+- `/` - Homepage with company positioning
+- `/services` - Service offerings overview
+- `/freelance` - Client services (canonical for client-services alias)
+- `/about` - Company information
+- `/insights` - Market analysis and blog
+- `/contact` - Contact and consultation
+
 ## 📊 Services Structured Data
 
 The site includes JSON-LD structured data for SEO optimization:

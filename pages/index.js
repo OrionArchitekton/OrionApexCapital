@@ -15,7 +15,11 @@ const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
 
 export default function Home({ posts }) {
   return (
-    <Layout>
+    <Layout
+      title="Precision. Growth. Legacy."
+      description="Disciplined, risk-managed strategies across crypto markets and digital assets. We align exceptional returns with long-term purpose through systematic wealth creation."
+      url="/"
+    >
       {/* Premium Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-black">
         {/* Subtle Background Elements */}
