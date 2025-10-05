@@ -6,50 +6,74 @@ export default function Footer() {
       <div className="container py-12 grid gap-8 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-3 mb-3">
-            <Logo variant="crestWhite" size={28} />
-            <h4 className="font-semibold">Orion Apex Capital</h4>
+            <Logo variant="crestWhite" size={32} />
+            <h4 className="font-semibold text-lg">Orion Apex Capital</h4>
           </div>
-          <p className="text-slate-300 text-sm">
+          <p className="text-slate-300 text-sm mb-4">
             Precision strategies for sustainable growth across digital and
             real-world assets.
           </p>
+          <p className="text-gold-500 font-medium text-sm">
+            Reach New Heights.
+          </p>
+        </div>
+
+        <div>
+          <h5 className="font-semibold mb-3">Services</h5>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/services#crypto">
+                Crypto Trading
+              </a>
+            </li>
+            <li>
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/services#websites">
+                Digital Assets/Website Investing
+              </a>
+            </li>
+            <li>
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/freelance">
+                Client Services
+              </a>
+            </li>
+          </ul>
         </div>
 
         <div>
           <h5 className="font-semibold mb-3">Navigate</h5>
           <ul className="space-y-2 text-sm">
             <li>
-              <a className="hover:underline" href="/about">
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/about">
                 About
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="/services">
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/services">
                 Services
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="/insights">
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/insights">
                 Insights
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="/freelance">
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/freelance">
                 Freelance Work
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="/bio">
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/bio">
                 Bio
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="/contact">
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/contact">
                 Contact
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="/legal">
+              <a className="hover:underline hover:text-gold-500 transition-colors" href="/legal">
                 Legal
               </a>
             </li>

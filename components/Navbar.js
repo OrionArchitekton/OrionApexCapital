@@ -57,15 +57,20 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-navy-900/80 backdrop-blur-xl">
       <div className="container py-4 flex items-center justify-between">
-        <Link className="flex items-center gap-3 group" href="/">
+        <Link 
+          className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-lg px-2 py-1" 
+          href="/"
+          aria-label="Orion Apex Capital - Home"
+        >
           <div className="relative">
             <div className="absolute -inset-2 bg-gradient-to-r from-gold-500 to-teal-400 rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
             <Image
               src="/images/branding/03-icon_crest_white-transparent.png"
-              alt="Orion Apex"
-              width={32}
-              height={32}
-              className="h-8 w-8 relative z-10 filter drop-shadow-lg"
+              alt="Orion Apex Capital"
+              width={36}
+              height={36}
+              className="h-9 w-9 relative z-10 filter drop-shadow-lg"
+              priority
             />
           </div>
           <span className="font-bold text-lg bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent group-hover:from-gold-500 group-hover:to-teal-400 transition-all duration-300">
