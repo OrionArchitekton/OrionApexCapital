@@ -38,7 +38,11 @@ export default function ClientServices() {
               <h2 className="text-lg font-semibold text-gold-500 mb-2">Note</h2>
               <p className="text-neutral-300">
                 This page has been moved to our main Client Services section. 
-                <a href="/freelance" className="text-gold-400 hover:text-gold-300 underline ml-1">
+                <a
+                  href="/freelance"
+                  className="text-gold-400 hover:text-gold-300 underline ml-1"
+                  aria-label="Visit our updated Client Services page"
+                >
                   Visit our updated Client Services page →
                 </a>
               </p>
