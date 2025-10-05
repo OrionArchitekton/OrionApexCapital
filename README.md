@@ -136,6 +136,27 @@ To update badge values:
 
 The badges are implemented in `pages/index.js` and include accessibility features with `aria-label` attributes.
 
+## 🎨 Brand in UI
+
+The site integrates Orion Apex Capital branding across key components:
+
+### Brand Assets
+- **Logo variants**: Available in `components/Logo.js` with multiple styles (crest, wordmark, horizontal)
+- **Asset paths**: All brand images stored in `public/images/branding/`
+- **Logo swapping**: To change the logo, update the `src` paths in `components/Logo.js`
+
+### Brand Integration Points
+- **Header** (`components/Navbar.js`): Crest logo + "Orion Apex Capital" text with hover effects
+- **Footer** (`components/Footer.js`): Crest logo, tagline "Reach New Heights", and Services list
+- **Hero** (`components/Hero.js`): Stacked primary logo with animated glow effect
+- **Brand colors**: Defined in `tailwind.config.js` (brand.midnight, brand.maroon, brand.accent)
+
+### Accessibility Features
+- All brand images include proper `alt` attributes
+- Header logo is keyboard-focusable with visible focus rings
+- Brand elements maintain sufficient color contrast (≥4.5:1)
+- Tap targets meet minimum 40px requirement
+
 ## 🔒 Legal
 
 This site includes a basic Legal page. Customize `pages/legal.js` as needed. Nothing on the site constitutes financial advice.

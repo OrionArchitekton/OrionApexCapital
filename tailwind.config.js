@@ -7,6 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          midnight: "#0E1730",
+          maroon: "#7A1E3A",
+          accent: "#E6FF4D"
+        },
         navy: {
           950: "#09162C",
           900: "#0B1F3B",

@@ -56,7 +56,7 @@ body {
 }
 
 .btn-primary {
-  @apply bg-maroon-700 text-white px-5 py-3 hover:bg-maroon-600 focus:outline-teal-400;
+  @apply bg-brand-maroon text-white px-5 py-3 hover:bg-maroon-600 focus:outline-teal-400 focus:ring-2 focus:ring-brand-accent;
 }
 
 .btn-secondary {
