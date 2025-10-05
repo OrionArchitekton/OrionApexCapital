@@ -19,7 +19,7 @@ const serviceLinks = [
 ];
 
 const socialLinks = [
-  { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/" },
+  { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/orioncapexcapital" },
   { label: "Twitter", icon: Twitter, href: "https://twitter.com/" },
   { label: "YouTube", icon: Youtube, href: "https://www.youtube.com/" }
 ];
