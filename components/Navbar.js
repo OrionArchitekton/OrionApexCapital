@@ -162,6 +162,9 @@ export default function Navbar() {
             <Link href="/insights" onClick={() => setOpen(false)}>
               Insights
             </Link>
+            <Link href="/freelance" onClick={() => setOpen(false)}>
+              Client Services (Freelance Work)
+            </Link>
             <Link href="/bio" onClick={() => setOpen(false)}>
               Bio
             </Link>
