@@ -2,6 +2,8 @@ import Layout from "@/components/Layout";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
 import LogoGrid from "@/components/LogoGrid";
+import { Section } from "@/components/Section";
+import { Featured } from "@/components/Featured";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
@@ -121,120 +123,80 @@ export default function Home({ posts }) {
       <LogoGrid />
 
       {/* Premium Services Section */}
-      <section className="container py-24">
-        <div className="mb-12 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-surface-1/60 px-4 py-2 text-xs uppercase tracking-[0.4em] text-text-muted">
-            Core Verticals
-          </span>
-          <h2 className="mt-6 font-display text-4xl text-text-primary md:text-5xl">
-            Disciplined operator lanes
-          </h2>
-          <p className="mt-4 text-lg text-text-muted md:text-xl">
-            Two distinct verticals. One unified approach to <span className="text-brand-gold">systematic wealth creation</span>.
-          </p>
-        </div>
-
-        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
-          {/* Crypto Trading Card */}
-          <Link
-            href="/services#crypto"
-            className="surface-card relative overflow-hidden p-8 transition-transform duration-500 hover:-translate-y-1"
-          >
-            <div className="pointer-events-none absolute inset-0 rounded-2xl border border-brand-copper/10 bg-gradient-to-br from-brand-copper/15 via-transparent to-brand-blue/10 opacity-80"></div>
-            <div className="relative z-10 flex items-start gap-4">
-              <div className="rounded-xl bg-brand-copper/20 p-3 text-brand-gold">
-                <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <Section
+        eyebrow="Core Verticals"
+        title="Disciplined operator lanes"
+        description="Two distinct verticals. One unified approach to systematic wealth creation."
+      >
+        <div className="grid gap-8 lg:grid-cols-12">
+          {[{
+            href: "/services#crypto",
+            title: "Crypto Trading",
+            tagline: "High Frequency • Low Risk",
+            gradient: "from-brand-copper/15 via-transparent to-brand-blue/10",
+            accentBg: "bg-brand-copper/20",
+            dotClass: "bg-brand-copper",
+            points: [
+              "Risk-managed position sizing",
+              "Automated volatility gates",
+              "Performance tracking & analytics"
+            ],
+            cta: "Explore Strategy"
+          },
+          {
+            href: "/services#websites",
+            title: "Website Investing",
+            tagline: "Digital Assets • Growth Hacking",
+            gradient: "from-brand-blue/20 via-transparent to-brand-gold/10",
+            accentBg: "bg-brand-blue/15",
+            dotClass: "bg-brand-blue",
+            points: [
+              "Due diligence & valuation",
+              "Growth optimization systems",
+              "Strategic exit planning"
+            ],
+            cta: "Learn Process"
+          }].map(({ href, title, tagline, gradient, accentBg, dotClass, points, cta }) => (
+            <Link
+              key={href}
+              href={href}
+              className="group relative lg:col-span-6 flex flex-col gap-5 overflow-hidden rounded-3xl border border-white/10 bg-surface-1/70 p-8 transition duration-300 hover:-translate-y-1 hover:border-brand-copper/50 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
+            >
+              <div className={`pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br ${gradient} opacity-90 transition group-hover:opacity-100`} />
+              <div className="relative z-10 flex items-start gap-4">
+                <div className={`rounded-xl ${accentBg} p-3 text-brand-gold`}></div>
+                <div>
+                  <h3 className="text-2xl font-semibold text-text-primary">{title}</h3>
+                  <p className="text-xs uppercase tracking-[0.3em] text-brand-gold/80">{tagline}</p>
+                </div>
+              </div>
+              <p className="relative z-10 text-sm leading-relaxed text-text-muted md:text-base">
+                {title === "Crypto Trading" ? (
+                  <>Short-term setups with <span className="font-semibold text-text-primary">strict risk controls</span> and volatility gates. Systematic execution meets disciplined capital allocation.</>
+                ) : (
+                  <><span className="font-semibold text-text-primary">Acquire → Improve → Recycle.</span> Operator math over hype. Systematic value creation in digital properties.</>
+                )}
+              </p>
+              <ul className="relative z-10 space-y-3 text-sm text-text-muted">
+                {points.map((point) => (
+                  <li key={point} className="flex items-center gap-2">
+                    <span className={`h-2 w-2 rounded-full ${dotClass}`}></span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <span className="relative z-10 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition group-hover:gap-3">
+                {cta}
+                <svg className="h-4 w-4 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </div>
-              <div>
-                <h3 className="font-semibold text-2xl text-text-primary">
-                  Crypto Trading
-                </h3>
-                <p className="text-sm uppercase tracking-[0.2em] text-brand-gold/80">
-                  High Frequency • Low Risk
-                </p>
-              </div>
-            </div>
-            <p className="relative z-10 mt-6 text-sm leading-relaxed text-text-muted md:text-base">
-              Short-term setups with <span className="text-text-primary font-semibold">strict risk controls</span> and volatility gates. Systematic execution meets disciplined capital allocation.
-            </p>
-            <ul className="relative z-10 mt-6 space-y-3 text-sm text-text-muted">
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-gold"></span>
-                Risk-managed position sizing
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-gold"></span>
-                Automated volatility gates
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-gold"></span>
-                Performance tracking & analytics
-              </li>
-            </ul>
-            <span className="relative z-10 mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold">
-              Explore Strategy
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </Link>
-
-          {/* Website Investing Card */}
-          <Link
-            href="/services#websites"
-            className="surface-card relative overflow-hidden p-8 transition-transform duration-500 hover:-translate-y-1"
-          >
-            <div className="pointer-events-none absolute inset-0 rounded-2xl border border-brand-blue/15 bg-gradient-to-br from-brand-blue/20 via-transparent to-brand-gold/10 opacity-80"></div>
-            <div className="relative z-10 flex items-start gap-4">
-              <div className="rounded-xl bg-brand-blue/15 p-3 text-brand-gold">
-                <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-semibold text-2xl text-text-primary">
-                  Website Investing
-                </h3>
-                <p className="text-sm uppercase tracking-[0.2em] text-brand-blue/70">
-                  Digital Assets • Growth Hacking
-                </p>
-              </div>
-            </div>
-            <p className="relative z-10 mt-6 text-sm leading-relaxed text-text-muted md:text-base">
-              <span className="text-text-primary font-semibold">Acquire → Improve → Recycle.</span> Operator math over hype. Systematic value creation in digital properties.
-            </p>
-            <ul className="relative z-10 mt-6 space-y-3 text-sm text-text-muted">
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-blue"></span>
-                Due diligence & valuation
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-blue"></span>
-                Growth optimization systems
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-blue"></span>
-                Strategic exit planning
-              </li>
-            </ul>
-            <span className="relative z-10 mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-blue">
-              Learn Process
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </Link>
+              </span>
+            </Link>
+          ))}
         </div>
-
-        <div className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-surface-1/80 shadow-glow">
-          <div className="md:grid md:grid-cols-[1.1fr_1fr] md:items-stretch">
-            <div className="relative h-64 md:h-full">
+        <div className="grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <div className="relative h-full overflow-hidden rounded-3xl border border-white/10 bg-surface-1/70">
               <Image
                 src="/media/photos/curated/pexels-fauxels-3184465.jpg"
                 alt="Executives shaking hands over a strategy session with notebooks on the table."
@@ -243,167 +205,142 @@ export default function Home({ posts }) {
               />
               <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/80 via-brand-navy/30 to-transparent" aria-hidden="true"></div>
             </div>
-            <div className="flex flex-col gap-6 p-8 md:p-12">
-              <h3 className="font-display text-2xl text-text-primary md:text-3xl">
-                Partnership-first execution
-              </h3>
-              <p className="text-base text-text-muted">
-                Every mandate opens with measured discovery. We embed with stakeholders, navigate compliance, and translate market intelligence into accountable operating plans.
-              </p>
-              <ul className="space-y-3 text-sm text-text-muted">
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
-                  Dedicated operator pods for each engagement
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
-                  Transparent reporting cadences and data rooms
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
-                  Outcomes tied to governance-ready metrics
-                </li>
-              </ul>
-            </div>
+          </div>
+          <div className="lg:col-span-5 flex flex-col gap-6 rounded-3xl border border-white/10 bg-surface-1/70 p-8">
+            <h3 className="font-display text-2xl text-text-primary md:text-3xl">Partnership-first execution</h3>
+            <p className="text-sm text-text-muted md:text-base">
+              Every mandate opens with measured discovery. We embed with stakeholders, navigate compliance, and translate market intelligence into accountable operating plans.
+            </p>
+            <ul className="space-y-3 text-sm text-text-muted">
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
+                Dedicated operator pods for each engagement
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
+                Transparent reporting cadences and data rooms
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold"></span>
+                Outcomes tied to governance-ready metrics
+              </li>
+            </ul>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Featured Case Study - Premium Layout */}
-      <section className="container py-20">
-        <div className="overflow-hidden rounded-3xl border border-white/10 bg-surface-1/90 shadow-glow backdrop-blur-xl">
-          <div className="md:grid md:grid-cols-[1.15fr_0.85fr] md:items-stretch">
-            <div className="flex flex-col gap-8 p-10 md:p-12">
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">
-                Featured Case Study
-              </span>
-              <div>
-                <h3 className="font-display text-3xl text-text-primary md:text-4xl">
-                  KPI dashboard for multi-club fitness operator
-                </h3>
-                <p className="mt-4 max-w-xl text-lg text-text-muted">
-                  Transformed operational efficiency through data visualization and automated reporting systems tuned for franchise scale.
-                </p>
+      <Section
+        eyebrow="Proven Execution"
+        title="KPI dashboard for multi-club fitness operator"
+        description="Transformed operational efficiency through data visualization and automated reporting systems tuned for franchise scale."
+      >
+        <div className="grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-7 flex flex-col gap-8 rounded-3xl border border-white/10 bg-surface-1/90 p-8 backdrop-blur-xl shadow-glow">
+            <Featured />
+            <dl className="grid gap-6 sm:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
+                <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Retention increase</dt>
+                <dd className="mt-2 text-2xl font-semibold text-brand-gold">+2.8pp</dd>
               </div>
-
-              <dl className="grid gap-6 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
-                  <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Retention increase</dt>
-                  <dd className="mt-2 text-2xl font-semibold text-brand-gold">+2.8pp</dd>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
-                  <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Weekly time saved</dt>
-                  <dd className="mt-2 text-2xl font-semibold text-brand-blue">6-8 hrs</dd>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
-                  <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Data accuracy</dt>
-                  <dd className="mt-2 text-2xl font-semibold text-text-primary">100%</dd>
-                </div>
-              </dl>
-
-              <div className="flex flex-wrap gap-4">
-                <Button href="/freelance/kpi-dashboard-fitness" variant="primary">
-                  Read Full Case Study
-                </Button>
-                <Button href="/freelance" variant="outline">
-                  View All Work
-                </Button>
+              <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
+                <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Weekly time saved</dt>
+                <dd className="mt-2 text-2xl font-semibold text-brand-blue">6-8 hrs</dd>
               </div>
+              <div className="rounded-2xl border border-white/10 bg-surface-0/60 p-4 text-center">
+                <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Data accuracy</dt>
+                <dd className="mt-2 text-2xl font-semibold text-text-primary">100%</dd>
+              </div>
+            </dl>
+            <div className="flex flex-wrap gap-4">
+              <Button href="/freelance/kpi-dashboard-fitness" variant="primary">
+                Read Full Case Study
+              </Button>
+              <Button href="/freelance" variant="outline">
+                View All Work
+              </Button>
             </div>
-            <div className="relative h-80 md:h-full">
-              <Image
-                src="/media/photos/curated/pexels-quintin-gellar-313782.jpg"
-                alt="City skyline at night with illuminated financial district skyscrapers."
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-navy/20 via-brand-navy/40 to-brand-navy/90" aria-hidden="true"></div>
-              <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/10 bg-surface-1/85 p-6 backdrop-blur">
-                <div className="flex items-center justify-between text-sm text-text-muted">
-                  <span>Monthly revenue</span>
-                  <span className="text-brand-gold font-semibold">↗ +18.2%</span>
+          </div>
+          <div className="relative lg:col-span-5 h-80 rounded-3xl border border-white/10 bg-surface-1/80 md:h-full">
+            <Image
+              src="/media/photos/curated/pexels-quintin-gellar-313782.jpg"
+              alt="City skyline at night with illuminated financial district skyscrapers."
+              fill
+              className="rounded-3xl object-cover"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-navy/20 via-brand-navy/40 to-brand-navy/90" aria-hidden="true"></div>
+            <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/10 bg-surface-1/85 p-6 backdrop-blur">
+              <div className="flex items-center justify-between text-sm text-text-muted">
+                <span>Monthly revenue</span>
+                <span className="text-brand-gold font-semibold">↗ +18.2%</span>
+              </div>
+              <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
+                <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-text-muted">
+                <div>
+                  <div className="text-lg font-semibold text-text-primary">$247K</div>
+                  <span>This month</span>
                 </div>
-                <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
-                  <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
-                </div>
-                <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-text-muted">
-                  <div>
-                    <div className="text-lg font-semibold text-text-primary">$247K</div>
-                    <span>This month</span>
-                  </div>
-                  <div>
-                    <div className="text-lg font-semibold text-text-primary/70">$209K</div>
-                    <span>Last month</span>
-                  </div>
+                <div>
+                  <div className="text-lg font-semibold text-text-primary/70">$209K</div>
+                  <span>Last month</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Premium Insights Section */}
-      <section className="container py-20">
-        <div className="mb-16 text-center">
-          <h2 className="font-display text-4xl text-text-primary md:text-5xl">
-            Market insights
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-text-muted md:text-xl">
-            Deep analysis and strategic frameworks from the front lines of <span className="text-brand-blue">modern capital markets</span>.
-          </p>
-        </div>
-
-        <div className="grid gap-8 md:grid-cols-3">
+      <Section
+        eyebrow="Market Intelligence"
+        title="Latest Insights"
+        description="Deep analysis and strategic frameworks from the front lines of modern capital markets."
+      >
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {posts.slice(0, 3).map((p, index) => {
             const accent = insightAccents[index % insightAccents.length];
-            const publishedOn = new Date(p.date).toLocaleDateString('en-US', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric'
+            const publishedOn = new Date(p.date).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
             });
 
             return (
-              <div key={p.slug} className="group relative">
-                <div className={`pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br ${accent.gradient} opacity-70 transition-opacity duration-500 group-hover:opacity-100`}></div>
-
-                <Link
-                  href={`/insights/${p.slug}`}
-                  className="surface-card relative flex h-full flex-col gap-6 p-8 transition-transform duration-500 hover:-translate-y-1"
-                >
-                  <div className={`relative z-10 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.35em] ${accent.badge}`}>
-                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span>{publishedOn}</span>
-                  </div>
-
-                  <h3 className={`relative z-10 text-xl font-semibold text-text-primary transition-colors duration-300 ${accent.linkHover}`}>
-                    {p.title}
-                  </h3>
-
-                  <p className="relative z-10 line-clamp-3 text-sm leading-relaxed text-text-muted md:text-base">
-                    {p.excerpt}
-                  </p>
-
-                  <span className={`relative z-10 inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-300 ${accent.link} ${accent.linkHover}`}>
-                    Read analysis
-                    <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </Link>
-              </div>
+              <Link
+                key={p.slug}
+                href={`/insights/${p.slug}`}
+                className="group relative flex h-full flex-col gap-5 overflow-hidden rounded-3xl border border-white/10 bg-surface-1/70 p-8 transition duration-300 hover:-translate-y-1 hover:border-brand-copper/50 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
+              >
+                <div className={`pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br ${accent.gradient} opacity-70 transition-opacity duration-500 group-hover:opacity-100`} />
+                <div className="relative z-10 flex items-center justify-between text-xs uppercase tracking-[0.35em] text-text-muted">
+                  <span>{publishedOn}</span>
+                  {p.featured && <Featured className="text-[0.55rem]">Featured</Featured>}
+                </div>
+                <h3 className={`relative z-10 text-xl font-semibold text-text-primary transition-colors duration-300 ${accent.linkHover}`}>
+                  {p.title}
+                </h3>
+                <p className="relative z-10 line-clamp-4 text-sm leading-relaxed text-text-muted md:text-base">
+                  {p.excerpt}
+                </p>
+                <span className={`relative z-10 mt-auto inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-300 ${accent.link} ${accent.linkHover}`}>
+                  Read analysis
+                  <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
             );
           })}
         </div>
-
         <div className="mt-12 text-center">
           <Button href="/insights" variant="outline" className="px-8">
             View All Insights
           </Button>
         </div>
-      </section>
+      </Section>
 
       {/* Premium Closing CTA */}
       <section className="container py-24">

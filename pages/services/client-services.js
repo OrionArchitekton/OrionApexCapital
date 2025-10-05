@@ -1,8 +1,12 @@
 import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
+import { Section } from "@/components/Section";
+import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { getCanonical } from "@/lib/seo/canonical";
 import { generateFreelanceServiceJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function ClientServices() {
   const freelanceJsonLd = generateFreelanceServiceJsonLd();
@@ -21,34 +25,40 @@ export default function ClientServices() {
         url="/services/client-services"
         canonical={getCanonical("/freelance")}
       >
-        <section className="container py-16">
-          <div className="flex items-center gap-3 mb-6">
-            <Logo variant="crestWhite" size={28} />
-            <h1 className="text-3xl md:text-4xl font-bold">Client Services</h1>
-          </div>
-
-          <div className="mb-8">
-            <p className="text-xl text-neutral-300 mb-6 max-w-3xl">
-              Strategic consulting and implementation services for operators, investors, and founders. 
-              We deliver <span className="text-gold-500 font-semibold">measurable outcomes</span> through 
-              disciplined execution across finance, operations, and digital assets.
+        <Section containerClassName="space-y-10">
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Services", href: "/services" },
+              { label: "Client Services" }
+            ]}
+          />
+          <Container className="space-y-8">
+            <div className="flex items-center gap-4">
+              <Logo variant="crestWhite" size={32} />
+              <h1 className="font-display text-4xl text-text-primary sm:text-5xl">
+                Client Services
+              </h1>
+            </div>
+            <p className="max-w-3xl text-base text-text-muted sm:text-lg">
+              Strategic consulting and implementation services for operators, investors, and founders. We deliver measurable outcomes through disciplined execution across finance, operations, and digital assets.
             </p>
-            
-            <div className="bg-gold-500/10 border border-gold-500/30 rounded-lg p-6 mb-8">
-              <h2 className="text-lg font-semibold text-gold-500 mb-2">Note</h2>
-              <p className="text-neutral-300">
-                This page has been moved to our main Client Services section. 
-                <a
+            <div className="rounded-3xl border border-brand-copper/30 bg-brand-copper/10 p-6 text-sm text-text-onCopper">
+              <h2 className="text-base font-semibold uppercase tracking-[0.3em]">Note</h2>
+              <p className="mt-3">
+                This page has been consolidated into our main Client Services hub.
+                <Link
                   href="/freelance"
-                  className="text-gold-400 hover:text-gold-300 underline ml-1"
+                  className="ml-1 inline-flex items-center gap-2 font-semibold underline"
                   aria-label="Visit our updated Client Services page"
                 >
-                  Visit our updated Client Services page →
-                </a>
+                  Visit our updated Client Services page
+                  <span aria-hidden="true">→</span>
+                </Link>
               </p>
             </div>
-          </div>
-        </section>
+          </Container>
+        </Section>
       </Layout>
     </>
   );
