@@ -54,6 +54,28 @@ This will regenerate `sitemap.xml` (and may overwrite `robots.txt`) under `publi
 
 Note: If you add blog posts under `pages/insights/[slug].js`, consider extending sitemap generation in a follow-up so individual posts are included.
 
+## 📊 Services Structured Data
+
+The site includes JSON-LD structured data for SEO optimization:
+
+- **Services page** (`/services`): Contains an `ItemList` with three `Service` entries:
+  - Crypto Trading Advisory (Financial Advisory)
+  - Digital Assets / Website Investing (Investment Advisory) 
+  - Client Services / Freelance Work (Consulting Services)
+
+- **Freelance page** (`/freelance`): Contains a standalone `Service` with `Offer` details
+
+### Updating Service Descriptions/Pricing
+
+To modify service descriptions or pricing:
+
+1. Edit `lib/seo/jsonldService.js`
+2. Update the service objects in `generateServicesItemListJsonLd()` for the services page
+3. Update `generateFreelanceServiceJsonLd()` for the freelance page
+4. All URLs use absolute paths (`https://www.orionapexcapital.com`)
+
+The structured data helps Google understand and potentially display rich results for your services in search results.
+
 ## ✍️ Editing Content
 
 - Hero text: `components/Hero.js`

@@ -1,12 +1,23 @@
 import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
+import Head from "next/head";
+import { generateServicesItemListJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
 
 export default function Services() {
+  const servicesJsonLd = generateServicesItemListJsonLd();
+
   return (
-    <Layout
-      title="Services"
-      description="Disciplined operator lanes across crypto and digital assets."
-    >
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={renderJsonLdScript(servicesJsonLd)}
+        />
+      </Head>
+      <Layout
+        title="Services"
+        description="Disciplined operator lanes across crypto and digital assets."
+      >
       <section className="container py-16 space-y-10">
         <div className="flex items-center gap-3">
           <Logo variant="crestWhite" size={28} />
@@ -44,6 +55,7 @@ export default function Services() {
           </p>
         </div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 }
