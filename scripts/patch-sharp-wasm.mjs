@@ -12,7 +12,7 @@ const ORIGINAL_RUNTIME_SNIPPET = 'Module.onRuntimeInitialized=()=>{module.export
 const PATCHED_RUNTIME_SNIPPET = 'Module.onRuntimeInitialized=()=>{const runtime=require("@emnapi/runtime");const context=runtime.getDefaultContext();if(!context.cbinfoStack){const stack=[];context.cbinfoStack={push:(thiz,data,args,func)=>{const entry={thiz:thiz,data:data,args:Array.from(args),func:func};stack.push(entry);return entry;},pop:()=>stack.pop(),get:entry=>entry===undefined?stack[stack.length-1]:entry};}module.exports=Module.emnapiInit({context});process.once("exit",()=>{_vips_shutdown();_uv_library_shutdown()})};';
 
 if (!fs.existsSync(wasmLoaderPath)) {
-  console.warn('[patch-sharp-wasm] wasm loader not found, skipping patch:', wasmLoaderPath);
+  console.warn('[patch-sharp-wasm] wasm loader not found (optional dependency skipped). This is expected on non-Windows hosts:', wasmLoaderPath);
   process.exit(0);
 }
 
