@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import Image from "next/image";
 
-import crestWhite from "@/assets/branding/03-icon_crest_white-transparent_sm.png";
+import crestWhite from "@/assets/branding/logo_icon_square_white_1024.png";
 import crestMaroonNavy from "@/assets/branding/orion-apex-logo.png";
-import wordmarkWhite from "@/assets/branding/04-wordmark_white-transparent.png";
-import wordmarkMaroonNavy from "@/assets/branding/04-wordmark_maroon-navy_sm.png";
-import horizontalWhite from "@/assets/branding/02-horizontal_primary_white-transparent.png";
-import horizontalMaroonNavy from "@/assets/branding/02b-horizontal_with_tagline_maroon-navy.png";
+import wordmarkWhite from "@/assets/branding/orion-apex-logo - Copy.png";
+import wordmarkMaroonNavy from "@/assets/branding/orion-apex-logo - Copy.png";
+import horizontalWhite from "@/assets/branding/hero-2560x1440.jpg";
+import horizontalMaroonNavy from "@/assets/branding/hero-2560x1440.jpg";
 
 const sources = {
   crestWhite,
