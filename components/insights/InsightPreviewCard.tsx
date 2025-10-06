@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
 import { Featured } from "@/components/Featured";
+import { formatDate } from "@/lib/date";
 
 interface InsightPreviewCardProps {
   post: {
@@ -27,13 +28,7 @@ export function InsightPreviewCard({
   ctaLabel = "Read insight",
   showTags = true
 }: InsightPreviewCardProps) {
-  const publishedOn = post.date
-    ? new Date(post.date).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      })
-    : undefined;
+  const publishedOn = post.date ? formatDate(post.date) : undefined;
 
   const displayBody = post.summary ?? post.excerpt ?? "";
 

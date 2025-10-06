@@ -15,17 +15,14 @@ import {
 } from "@/components/insights";
 import { Section } from "@/components/Section";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import { formatDate } from "@/lib/date";
 
 const mdxComponents = {
   InsightImage
 };
 
 export default function Post({ post, related }) {
-  const publishedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+  const publishedDate = formatDate(post.date) ?? post.date;
 
   return (
     <Layout title={post.title} description={post.excerpt}>

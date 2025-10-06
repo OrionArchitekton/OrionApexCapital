@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
+import { formatDate } from "@/lib/date";
 
 interface RelatedInsight {
   slug: string;
@@ -51,11 +52,7 @@ export function RelatedInsights({ posts, className }: RelatedInsightsProps) {
             <div className="flex flex-1 flex-col gap-3 p-6">
               {post.date && (
                 <span className="text-[0.65rem] uppercase tracking-[0.35em] text-text-muted">
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric"
-                  })}
+                  {formatDate(post.date)}
                 </span>
               )}
               <h4 className="text-lg font-semibold text-text-primary group-hover:text-brand-copper">
