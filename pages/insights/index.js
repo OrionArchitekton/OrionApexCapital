@@ -1,9 +1,8 @@
 import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
 import { Section } from "@/components/Section";
-import { Featured } from "@/components/Featured";
+import { InsightPreviewCard } from "@/components/insights";
 import { getAllPosts } from "@/lib/posts";
-import Link from "next/link";
 
 export default function Insights({ posts }) {
   return (
@@ -32,39 +31,10 @@ export default function Insights({ posts }) {
             Stay ahead with weekly operator notes across trading, digital asset velocity, and advisory systems.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {posts.map((p) => {
-            const published = new Date(p.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric"
-            });
-
-            return (
-              <Link
-                key={p.slug}
-                href={`/insights/${p.slug}`}
-                className="group flex h-full flex-col gap-4 rounded-2xl border border-white/10 bg-surface-1/70 p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-copper/60 hover:shadow-2xl hover:shadow-brand-copper/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
-              >
-                <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-text-muted">
-                  <span>{published}</span>
-                  {p.featured && <Featured className="text-[0.55rem]">Featured</Featured>}
-                </div>
-                <h3 className="text-xl font-semibold text-text-primary transition group-hover:text-brand-copper">
-                  {p.title}
-                </h3>
-                <p className="line-clamp-4 text-sm leading-relaxed text-text-muted">
-                  {p.excerpt}
-                </p>
-                <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-brand-copper transition group-hover:gap-3">
-                  Read insight
-                  <svg className="h-4 w-4 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </Link>
-            );
-          })}
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {posts.map((post) => (
+            <InsightPreviewCard key={post.slug} post={post} />
+          ))}
         </div>
       </Section>
     </Layout>

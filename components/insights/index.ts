@@ -8,3 +8,4 @@ export * from "./InsightKeyTakeaways";
 export * from "./InsightLayout";
 export * from "./InsightMeta";
 export * from "./RelatedInsights";
+export * from "./InsightPreviewCard";

@@ -57,7 +57,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/trading-insight-01/hero.webp",
 		"alt": "Multi-monitor workstation displaying colorful financial charts.",
-		"intendedUse": "insights/trading-insight-01 hero"
+		"intendedUse": "insights/trading-insight-01 hero & preview card"
 	},
 	{
 		"id": "insight-trading-analysis-5716032",
@@ -93,7 +93,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/market-rhythm-and-operator-cadence/hero.webp",
 		"alt": "Copper-accented watch surrounded by financial icons on a dark backdrop.",
-		"intendedUse": "insights/market-rhythm-and-operator-cadence hero"
+		"intendedUse": "insights/market-rhythm-and-operator-cadence hero & preview card"
 	},
 	{
 		"id": "insight-rhythm-schedule-7172774",
@@ -129,7 +129,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/execution-logs-what-the-tape-said-btcusdt/hero.webp",
 		"alt": "Stacks of bitcoin coins on a laptop with market data glowing in the background.",
-		"intendedUse": "insights/execution-logs-what-the-tape-said-btcusdt hero"
+		"intendedUse": "insights/execution-logs-what-the-tape-said-btcusdt hero & preview card"
 	},
 	{
 		"id": "insight-execution-desk-6780789",
@@ -165,7 +165,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/digital-assets-flywheel/hero.webp",
 		"alt": "Operator annotating a digital asset flywheel plan beside a laptop dashboard.",
-		"intendedUse": "insights/digital-assets-flywheel hero"
+		"intendedUse": "insights/digital-assets-flywheel hero & preview card"
 	},
 	{
 		"id": "insight-flywheel-audit-5716034",
@@ -201,7 +201,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/digital-assets-flywheel-v2/hero.webp",
 		"alt": "Minimal workspace with MacBook and brand notebook ready for site upgrades.",
-		"intendedUse": "insights/digital-assets-flywheel-v2 hero"
+		"intendedUse": "insights/digital-assets-flywheel-v2 hero & preview card"
 	},
 	{
 		"id": "insight-flywheelv2-playbook-4065876",
@@ -237,7 +237,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/advisory-snapshot-building-systems-that-scale/hero.webp",
 		"alt": "Executive team aligning operating priorities around a conference table.",
-		"intendedUse": "insights/advisory-snapshot-building-systems-that-scale hero"
+		"intendedUse": "insights/advisory-snapshot-building-systems-that-scale hero & preview card"
 	},
 	{
 		"id": "insight-advisory-workshop-7793098",
@@ -273,7 +273,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/cadence-of-operator/hero.webp",
 		"alt": "Operator sketching the weekly execution cadence on a translucent board.",
-		"intendedUse": "insights/cadence-of-operator hero"
+		"intendedUse": "insights/cadence-of-operator hero & preview card"
 	},
 	{
 		"id": "insight-cadence-planner-4065892",
@@ -309,7 +309,7 @@
 		"license": "Pexels License",
 		"filename": "media/insights/orion-framework/hero.webp",
 		"alt": "Abstract candlestick chart illustrating structured trade setups.",
-		"intendedUse": "insights/orion-framework hero"
+		"intendedUse": "insights/orion-framework hero & preview card"
 	},
 	{
 		"id": "insight-framework-checklist-30572289",

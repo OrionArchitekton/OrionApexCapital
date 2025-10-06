@@ -4,6 +4,7 @@ import Logo from "@/components/Logo";
 import LogoGrid from "@/components/LogoGrid";
 import { Section } from "@/components/Section";
 import { Featured } from "@/components/Featured";
+import { InsightPreviewCard } from "@/components/insights";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
@@ -17,27 +18,6 @@ const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Years Operating"
 const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
 
 export default function Home({ posts }) {
-  const insightAccents = [
-    {
-      gradient: "from-brand-gold/30 via-brand-gold/10 to-transparent",
-      badge: "bg-brand-gold/15 text-brand-gold",
-      link: "text-brand-gold",
-      linkHover: "group-hover:text-brand-gold/80"
-    },
-    {
-      gradient: "from-brand-blue/30 via-brand-blue/10 to-transparent",
-      badge: "bg-brand-blue/15 text-brand-blue",
-      link: "text-brand-blue",
-      linkHover: "group-hover:text-brand-blue/80"
-    },
-    {
-      gradient: "from-brand-copper/30 via-brand-copper/10 to-transparent",
-      badge: "bg-brand-copper/15 text-brand-copper",
-      link: "text-brand-copper",
-      linkHover: "group-hover:text-brand-copper/80"
-    }
-  ];
-
   return (
     <Layout
       title="Precision. Growth. Legacy."
@@ -300,40 +280,15 @@ export default function Home({ posts }) {
         description="Deep analysis and strategic frameworks from the front lines of modern capital markets."
       >
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {posts.slice(0, 3).map((p, index) => {
-            const accent = insightAccents[index % insightAccents.length];
-            const publishedOn = new Date(p.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric"
-            });
-
-            return (
-              <Link
-                key={p.slug}
-                href={`/insights/${p.slug}`}
-                className="group relative flex h-full flex-col gap-5 overflow-hidden rounded-3xl border border-white/10 bg-surface-1/70 p-8 transition duration-300 hover:-translate-y-1 hover:border-brand-copper/50 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
-              >
-                <div className={`pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br ${accent.gradient} opacity-70 transition-opacity duration-500 group-hover:opacity-100`} />
-                <div className="relative z-10 flex items-center justify-between text-xs uppercase tracking-[0.35em] text-text-muted">
-                  <span>{publishedOn}</span>
-                  {p.featured && <Featured className="text-[0.55rem]">Featured</Featured>}
-                </div>
-                <h3 className={`relative z-10 text-xl font-semibold text-text-primary transition-colors duration-300 ${accent.linkHover}`}>
-                  {p.title}
-                </h3>
-                <p className="relative z-10 line-clamp-4 text-sm leading-relaxed text-text-muted md:text-base">
-                  {p.excerpt}
-                </p>
-                <span className={`relative z-10 mt-auto inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-300 ${accent.link} ${accent.linkHover}`}>
-                  Read analysis
-                  <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </Link>
-            );
-          })}
+          {posts.slice(0, 3).map((post) => (
+            <InsightPreviewCard
+              key={post.slug}
+              post={post}
+              ctaLabel="Read analysis"
+              showTags={false}
+              className="h-full"
+            />
+          ))}
         </div>
         <div className="mt-12 text-center">
           <Button href="/insights" variant="outline" className="px-8">
