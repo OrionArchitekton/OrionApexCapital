@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import Image from "next/image";
 
-import crestWhite from "@/assets/branding/logo_icon_square_white_1024.png";
-import crestMaroonNavy from "@/assets/branding/orion-apex-logo.png";
-import wordmarkWhite from "@/assets/branding/orion-apex-logo - Copy.png";
-import wordmarkMaroonNavy from "@/assets/branding/orion-apex-logo - Copy.png";
-import horizontalWhite from "@/assets/branding/hero-2560x1440.jpg";
-import horizontalMaroonNavy from "@/assets/branding/hero-2560x1440.jpg";
+import crestWhite from "@/public/images/branding/03-icon_crest_white-transparent.png";
+import crestMaroonNavy from "@/public/images/branding/03-icon_crest_maroon-navy.png";
+import wordmarkWhite from "@/public/images/branding/04-wordmark_white-transparent.png";
+import wordmarkMaroonNavy from "@/public/images/branding/04-wordmark_maroon-navy.png";
+import horizontalWhite from "@/public/images/branding/02-horizontal_primary_white-transparent.png";
+import horizontalMaroonNavy from "@/public/images/branding/02-horizontal_primary_maroon-navy.png";
 
 const sources = {
   crestWhite,
@@ -24,13 +24,16 @@ export default function Logo({
   alt = "Orion Apex Capital"
 }) {
   const src = sources[variant] || sources.crestWhite;
+  const isStaticImport = typeof src === "object" && src !== null && "width" in src && "height" in src;
+  const width = size;
+  const height = isStaticImport ? Math.round((size * src.height) / src.width) : size;
 
   return (
     <Image
       src={src}
       alt={alt}
-      width={size}
-      height={size}
+      width={width}
+      height={height}
       className={clsx(className)}
     />
   );

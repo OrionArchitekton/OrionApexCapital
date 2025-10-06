@@ -1,52 +1,105 @@
+import { MDXRemote } from "next-mdx-remote";
 import Layout from "@/components/Layout";
-import { Section } from "@/components/Section";
-import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { Featured } from "@/components/Featured";
+import {
+  InsightBody,
+  InsightCTA,
+  InsightDivider,
+  InsightHero,
+  InsightHighlight,
+  InsightImage,
+  InsightKeyTakeaways,
+  InsightLayout,
+  InsightMeta,
+  RelatedInsights
+} from "@/components/insights";
+import { Section } from "@/components/Section";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 
-export default function Post({ post }) {
+const mdxComponents = {
+  InsightImage
+};
+
+export default function Post({ post, related }) {
+  const publishedDate = new Date(post.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+
   return (
     <Layout title={post.title} description={post.excerpt}>
-      <Section className="py-24" containerClassName="max-w-4xl space-y-12">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Insights", href: "/insights" },
-            { label: post.title }
-          ]}
+      <InsightLayout
+        header={
+          <>
+            <Section className="py-10" containerClassName="max-w-6xl">
+              <Breadcrumb
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Insights", href: "/insights" },
+                  { label: post.title }
+                ]}
+              />
+            </Section>
+            <InsightHero
+              title={post.title}
+              subtitle={post.summary}
+              eyebrow={post.eyebrow}
+              imageSrc={post.heroImage}
+              imageAlt={post.heroAlt}
+              priorityImage
+              meta={
+                <InsightMeta
+                  date={publishedDate}
+                  tags={post.tags ?? []}
+                  readingTime={post.readingTime}
+                  featured={post.featured}
+                />
+              }
+            >
+              {post.disclaimer && (
+                <p className="text-xs text-text-muted/80">{post.disclaimer}</p>
+              )}
+            </InsightHero>
+          </>
+        }
+        footer={
+          related?.length ? (
+            <RelatedInsights posts={related} className="pt-6" />
+          ) : null
+        }
+      >
+        <InsightBody>
+          <MDXRemote {...post.mdxSource} components={mdxComponents} />
+        </InsightBody>
+
+        {post.highlight && (
+          <>
+            <InsightDivider className="my-12" />
+            <InsightHighlight author={post.highlightAuthor}>{post.highlight}</InsightHighlight>
+          </>
+        )}
+
+        {post.takeaways?.length ? (
+          <>
+            <InsightDivider className="my-12" />
+            <InsightKeyTakeaways items={post.takeaways} />
+          </>
+        ) : null}
+
+        <InsightDivider className="my-12" />
+
+        <InsightCTA
+          title={post.ctaHeadline ?? "Partner with Orion Apex Capital"}
+          description={
+            post.ctaDescription ??
+            "Navigate market volatility and operational scaling with a team that has lived the playbook."
+          }
+          actionHref={post.ctaHref ?? "/contact"}
+          actionLabel={post.ctaActionLabel ?? "Start a Strategy Session"}
+          disclaimer={post.disclaimer ?? undefined}
         />
-        <Container className="space-y-6">
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-text-muted">
-              <span>{new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric"
-              })}</span>
-              {post.tags?.map((tag) => (
-                <span key={tag} className="rounded-full border border-white/15 px-3 py-1 text-[0.6rem]">
-                  {tag}
-                </span>
-              ))}
-              {post.featured && <Featured className="text-[0.55rem]">Featured</Featured>}
-            </div>
-            <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
-              {post.title}
-            </h1>
-            {post.summary && (
-              <p className="text-base text-text-muted sm:text-lg">{post.summary}</p>
-            )}
-          </div>
-          <article
-            className="prose prose-invert prose-slate max-w-none border-t border-white/10 pt-8
-              prose-headings:text-neutral-100 prose-h2:text-2xl prose-h2:tracking-tight prose-h3:text-xl
-              prose-p:text-text-muted prose-a:text-brand-copper prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-text-primary prose-ul:text-text-muted prose-ol:text-text-muted"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
-        </Container>
-      </Section>
+      </InsightLayout>
     </Layout>
   );
 }
@@ -61,5 +114,23 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const post = await getPostBySlug(params.slug);
-  return { props: { post } };
+  const posts = getAllPosts();
+
+  const related = posts
+    .filter((p) => p.slug !== post.slug)
+    .map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      date: p.date,
+      hero: p.heroImage,
+      tags: p.tags ?? []
+    }))
+    .filter((p) => {
+      if (!post.tags?.length) return true;
+      return p.tags?.some((tag) => post.tags.includes(tag));
+    })
+    .slice(0, 3);
+
+  return { props: { post, related } };
 }
