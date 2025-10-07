@@ -42,3 +42,6 @@ export function InsightImage({
     </figure>
   );
 }
+// ...existing code...
+          <source src="/media/videos/curated/branding-loop.mp4" type="video/mp4" />
+// ...existing code...
