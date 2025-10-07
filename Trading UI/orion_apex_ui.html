@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Orion Apex — Live Monitor v2.4 (Merged, Badges, Live Track, DD Reset)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="/assets/branding/Gemini_Generated_Image_89t5ue89t5ue89t5.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-primary: #060d1d;
+      --bg-secondary: #0b1529;
+      --bg-elevated: #13213a;
+      --accent-gold: #f2c14e;
+      --accent-maroon: #a11d33;
+      --accent-navy: #1c2f4d;
+      --accent-gold-soft: rgba(242, 193, 78, 0.65);
+      --accent-maroon-soft: rgba(161, 29, 51, 0.55);
+      --accent-navy-soft: rgba(28, 47, 77, 0.55);
+      --text-muted: #a7b4cc;
+      --border-soft: rgba(148, 163, 184, 0.12);
+      --shadow-strong: 0 24px 64px -32px rgba(3, 7, 18, 0.85);
+      --glow-gold: rgba(242, 193, 78, 0.45);
+      --glow-maroon: rgba(161, 29, 51, 0.38);
+      --glow-navy: rgba(28, 47, 77, 0.42);
+      --grid-line: rgba(148, 163, 184, 0.08);
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      position: relative;
+      overflow-x: hidden;
+      --cursor-x: 50%;
+      --cursor-y: 50%;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -10%;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::before {
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(161, 29, 51, 0.5) 0, rgba(6, 13, 29, 0) 45%),
+        radial-gradient(900px 700px at 110% 10%, rgba(242, 193, 78, 0.55) 0, rgba(6, 13, 29, 0) 40%),
+        linear-gradient(180deg, rgba(6, 13, 29, 0.92) 0%, rgba(6, 13, 29, 0.98) 100%);
+    }
+
+    body::after {
+      -webkit-mask-image: radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.65), transparent 60%);
+      mask-image: radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.65), transparent 60%);
+      background:
+        url("/assets/branding/Gemini_Generated_Image_xkk6ivxkk6ivxkk6.png") center/cover fixed no-repeat,
+        radial-gradient(1200px 800px at 10% -10%, rgba(161, 29, 51, 0.45) 0, rgba(6, 13, 29, 0) 45%),
+        radial-gradient(900px 700px at 110% 10%, rgba(242, 193, 78, 0.35) 0, rgba(6, 13, 29, 0) 40%);
+      opacity: 0.85;
+      mix-blend-mode: screen;
+    }
+
+    .background-video {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.42;
+      filter: saturate(130%) brightness(0.7) contrast(1.05);
+      transform: scale(1.03);
+    }
+
+    .background-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translateZ(0);
+    }
+
+    .aurora-field {
+      position: fixed;
+      inset: -25%;
+      pointer-events: none;
+      z-index: -3;
+      background:
+        radial-gradient(900px 600px at 20% 15%, rgba(242, 193, 78, 0.12), transparent 65%),
+        radial-gradient(800px 520px at 80% 20%, rgba(161, 29, 51, 0.16), transparent 70%),
+        radial-gradient(1000px 640px at 50% 90%, rgba(28, 47, 77, 0.16), transparent 75%);
+      filter: blur(40px) saturate(120%);
+      animation: auroraDrift 26s ease-in-out infinite alternate;
+    }
+
+    .sky-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -4;
+      background-image: linear-gradient(90deg, var(--grid-line) 1px, transparent 1px), linear-gradient(var(--grid-line) 1px, transparent 1px);
+      background-size: 90px 90px;
+      opacity: 0.18;
+      animation: gridShift 40s linear infinite;
+      mask-image: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.85), transparent 75%);
+    }
+
+    .app-bg {
+      min-height: 100vh;
+      background: transparent;
+    }
+
+    .app-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(161, 29, 51, 0.3), transparent 55%),
+        radial-gradient(circle at 120% 20%, rgba(242, 193, 78, 0.22), transparent 60%),
+        radial-gradient(circle at -10% 80%, rgba(28, 47, 77, 0.22), transparent 65%);
+      z-index: -1;
+      filter: blur(0.35px);
+    }
+
+    .glass,
+    .card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(19, 33, 58, 0.9), rgba(11, 20, 38, 0.82));
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 32px -26px rgba(3, 7, 18, 0.85);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+
+    .glass::before,
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: linear-gradient(120deg, rgba(242, 193, 78, 0.24), rgba(161, 29, 51, 0.28), rgba(28, 47, 77, 0.22));
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .glass::after,
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background: radial-gradient(circle at var(--cursor-x) var(--cursor-y), rgba(242, 193, 78, 0.3), transparent 220px);
+      mix-blend-mode: screen;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .glass:hover,
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(242, 193, 78, 0.38);
+      box-shadow: 0 24px 60px -24px rgba(242, 193, 78, 0.32);
+    }
+
+    .glass:hover::before,
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .glass:hover::after,
+    .card:hover::after {
+      opacity: 0.32;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .kpi-card {
+      padding: 1rem;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      isolation: isolate;
+    }
+
+    .aurora-card::before {
+      opacity: 0.28;
+    }
+
+    .aurora-card::after {
+      opacity: 0.22;
+    }
+
+    .summary-card {
+      padding: 1.15rem;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 25% 25%, rgba(242, 193, 78, 0.48), rgba(20, 30, 51, 0.1));
+      border: 1px solid rgba(242, 193, 78, 0.45);
+    }
+
+    .floating-icon {
+      animation: floatUp 6.5s ease-in-out infinite;
+    }
+
+    .float-delay-1 { animation-delay: -1.2s; }
+    .float-delay-2 { animation-delay: -2.4s; }
+    .float-delay-3 { animation-delay: -3.1s; }
+    .float-delay-4 { animation-delay: -3.8s; }
+
+    .summary-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(242, 193, 78, 0.24), rgba(161, 29, 51, 0.16));
+      opacity: 0.18;
+      z-index: -1;
+    }
+
+    .kpi-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(242, 193, 78, 0.22), rgba(161, 29, 51, 0.24) 45%, rgba(28, 47, 77, 0.18));
+      opacity: 0.2;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .kpi-card:hover::after {
+      opacity: 0.45;
+    }
+
+    .kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 30% 30%, rgba(242, 193, 78, 0.5), rgba(161, 29, 51, 0.18));
+      border: 1px solid rgba(242, 193, 78, 0.4);
+      box-shadow: 0 12px 28px -20px rgba(161, 29, 51, 0.55);
+    }
+
+    .kpi-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .kpi-value.compact {
+      font-size: 1.45rem;
+      letter-spacing: -0.005em;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+  color: #f4dca2;
+    }
+
+    .section-title span {
+      font-weight: 600;
+      letter-spacing: inherit;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+  background: linear-gradient(90deg, rgba(242, 193, 78, 0.45), transparent);
+      opacity: 0.6;
+    }
+
+    .section-title svg {
+      width: 18px;
+      height: 18px;
+      opacity: 0.75;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.48rem 1.1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(242, 193, 78, 0.28);
+      background: rgba(19, 30, 52, 0.62);
+      color: #fdf6d3;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+      transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(242, 193, 78, 0.25), transparent, rgba(161, 29, 51, 0.22));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      mix-blend-mode: screen;
+      animation: shimmer 5s linear infinite;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      border-color: rgba(242, 193, 78, 0.45);
+      background: rgba(11, 22, 40, 0.92);
+      box-shadow: 0 18px 36px -24px rgba(161, 29, 51, 0.32);
+      color: #f8efd2;
+    }
+
+    .nav-link:hover::before,
+    .nav-link:focus-visible::before {
+      opacity: 0.58;
+    }
+
+    .nav-link svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0.7;
+    }
+
+    .nav-link.active {
+      background: linear-gradient(135deg, rgba(242, 193, 78, 0.9), rgba(251, 217, 116, 0.95));
+      color: #2d1700;
+      box-shadow: 0 16px 30px -20px rgba(242, 193, 78, 0.6);
+    }
+
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      font-variant-ligatures: none;
+      white-space: nowrap;
+      letter-spacing: 0.12em;
+      background: rgba(52, 27, 45, 0.65);
+      border: 1px solid rgba(161, 29, 51, 0.35);
+      color: #f0a6b5;
+    }
+
+    .text-gold {
+      color: #f5d67b !important;
+    }
+
+    .text-maroon {
+      color: #f0a6b5 !important;
+    }
+
+    .text-navy {
+      color: #b0bfd9 !important;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost,
+    .btn-danger {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      border-radius: 0.75rem;
+      border: 1px solid transparent;
+      padding: 0.55rem 1.1rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(140deg, rgba(161, 29, 51, 0.92), rgba(242, 193, 78, 0.85));
+      border-color: rgba(161, 29, 51, 0.5);
+      box-shadow: 0 20px 40px -24px rgba(161, 29, 51, 0.55);
+      color: #120b16;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 48px -22px rgba(242, 193, 78, 0.55);
+    }
+
+    .btn-secondary {
+      background: rgba(18, 28, 49, 0.82);
+      border-color: rgba(242, 193, 78, 0.28);
+      color: #f5dca0;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(242, 193, 78, 0.45);
+      background: rgba(13, 22, 40, 0.92);
+      transform: translateY(-1px);
+      box-shadow: 0 20px 36px -30px rgba(161, 29, 51, 0.35);
+    }
+
+    .btn-ghost {
+      background: rgba(18, 28, 49, 0.45);
+      border-color: rgba(242, 193, 78, 0.18);
+      color: #f4dca2;
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, rgba(161, 29, 51, 0.9), rgba(96, 13, 29, 0.95));
+      border-color: rgba(161, 29, 51, 0.58);
+      box-shadow: 0 20px 44px -26px rgba(161, 29, 51, 0.5);
+    }
+
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 54px -28px rgba(161, 29, 51, 0.58);
+    }
+
+    .btn-primary svg,
+    .btn-secondary svg,
+    .btn-ghost svg,
+    .btn-danger svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0.9;
+    }
+
+    .scrollbox {
+      max-height: 58vh;
+      overflow: auto;
+      border-radius: 0.85rem;
+    }
+
+    .scrollbox::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    .scrollbox::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, rgba(242, 193, 78, 0.6), rgba(161, 29, 51, 0.55));
+      border-radius: 4px;
+    }
+
+    .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    thead.sticky {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    table thead tr {
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+    }
+
+    .responsive-table tbody tr {
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .responsive-table tbody tr:hover {
+      transform: translateY(-2px);
+      border-color: rgba(242, 193, 78, 0.32) !important;
+      box-shadow: 0 18px 36px -28px rgba(161, 29, 51, 0.32);
+    }
+
+    .mini {
+      font-size: 0.8rem;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      border: 1px solid transparent;
+      background: rgba(15, 23, 42, 0.65);
+    }
+
+    .badge svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .badge-cap {
+      background: rgba(161, 29, 51, 0.18);
+      color: #f0a6b5;
+      border-color: rgba(161, 29, 51, 0.42);
+    }
+
+    .badge-lift {
+      background: rgba(242, 193, 78, 0.18);
+      color: #fce5ac;
+      border-color: rgba(242, 193, 78, 0.42);
+    }
+
+    .badge-ttl {
+      background: rgba(28, 47, 77, 0.26);
+      color: #d4deef;
+      border-color: rgba(28, 47, 77, 0.45);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(27, 36, 64, 0.9);
+    }
+
+    .pill.ok {
+      background: rgba(21, 32, 57, 0.92);
+      border-color: rgba(242, 193, 78, 0.45);
+      color: #fbe9b6;
+    }
+
+    .pill.warn {
+      background: rgba(52, 27, 45, 0.92);
+      border-color: rgba(161, 29, 51, 0.45);
+      color: #f4b6c2;
+    }
+
+    .pill.bad {
+      background: rgba(55, 20, 28, 0.95);
+      border-color: rgba(161, 29, 51, 0.5);
+      color: #f58e9e;
+    }
+
+    #live-dot {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(242, 193, 78, 0.95), rgba(242, 193, 78, 0.2));
+      box-shadow: 0 0 18px rgba(242, 193, 78, 0.45);
+      animation: pulseDot 2.2s ease-in-out infinite;
+    }
+
+    #live-dot::after {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: inherit;
+      border: 1px solid rgba(242, 193, 78, 0.34);
+      box-shadow: 0 0 24px rgba(242, 193, 78, 0.32);
+      opacity: 0;
+      animation: pulseRing 2.8s ease-in-out infinite;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      background: rgba(18, 28, 49, 0.55);
+      border: 1px solid rgba(242, 193, 78, 0.25);
+      color: #f4dca2;
+    }
+
+    #scan-ribbon {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, rgba(242, 193, 78, 0.85), rgba(161, 29, 51, 0.85), rgba(28, 47, 77, 0.85));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .table-header-accent {
+      background: linear-gradient(120deg, rgba(18, 28, 49, 0.88), rgba(11, 20, 38, 0.84));
+      border-bottom: 1px solid rgba(242, 193, 78, 0.22);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-aurora {
+      overflow: visible;
+    }
+
+    .nav-aurora::before {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border-radius: 18px;
+      background: conic-gradient(from 90deg, rgba(242, 193, 78, 0.12), transparent 45%, rgba(161, 29, 51, 0.2) 60%, transparent 80%, rgba(242, 193, 78, 0.18));
+      filter: blur(24px);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .nav-glow {
+      position: absolute;
+      inset: 6px 12px;
+      border-radius: 16px;
+      background: linear-gradient(120deg, rgba(18, 30, 52, 0.82), rgba(13, 23, 44, 0.9));
+      border: 1px solid rgba(242, 193, 78, 0.16);
+      box-shadow: 0 22px 48px -32px rgba(3, 7, 18, 0.85);
+      pointer-events: none;
+    }
+
+    .nav-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .nav-brand-logo {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 1rem;
+      box-shadow: 0 18px 32px -22px rgba(242, 193, 78, 0.45);
+      border: 1px solid rgba(242, 193, 78, 0.22);
+    }
+
+    .nav-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .nav-title h1 {
+      font-size: clamp(1.2rem, 2vw + 0.5rem, 1.65rem);
+      letter-spacing: 0.34em;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #f8fafc;
+    }
+
+    .nav-title p {
+      font-size: 0.75rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    @media (max-width: 640px) {
+      .nav-brand {
+        gap: 0.9rem;
+      }
+
+      .nav-brand-logo {
+        width: 2.75rem;
+        height: 2.75rem;
+      }
+
+      .nav-title h1 {
+        font-size: clamp(1.05rem, 4vw + 0.4rem, 1.35rem);
+        letter-spacing: 0.24em;
+      }
+
+      .nav-title p {
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+      }
+    }
+
+    @keyframes auroraDrift {
+      0% { transform: translate3d(-4%, -2%, 0) scale(1.02); }
+      50% { transform: translate3d(4%, 3%, 0) scale(1.06); }
+      100% { transform: translate3d(-3%, 4%, 0) scale(1.03); }
+    }
+
+    @keyframes gridShift {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 90px 90px, 90px 90px; }
+    }
+
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 14px rgba(242, 193, 78, 0.42); }
+      50% { transform: scale(1.12); box-shadow: 0 0 26px rgba(242, 193, 78, 0.52); }
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(0.7); opacity: 0.7; }
+      70% { transform: scale(1.35); opacity: 0; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    @media (max-width: 1024px) {
+      .scrollbox {
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .responsive-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      .responsive-table thead {
+        display: none;
+      }
+
+      .responsive-table tbody {
+        display: block;
+      }
+
+      .responsive-table tbody tr {
+        display: block;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        border-radius: 0.9rem;
+        padding: 0.85rem;
+        margin-bottom: 0.85rem;
+      }
+
+      .responsive-table tbody tr:last-child {
+        margin-bottom: 0;
+      }
+
+      .responsive-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.55rem 0.5rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+      }
+
+      .responsive-table tbody td:last-child {
+        border-bottom: none;
+      }
+
+      .responsive-table tbody td::before {
+        content: attr(data-label);
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #64748b;
+        flex: 0 0 44%;
+        text-align: left;
+      }
+
+      .responsive-table tbody td > * {
+        flex: 1 1 auto;
+        text-align: right;
+      }
+
+      .responsive-table tbody td .mini {
+        font-size: 0.7rem;
+      }
+    }
+
+    footer {
+      position: relative;
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      inset-inline: 30%;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(242, 193, 78, 0), rgba(161, 29, 51, 0.65), rgba(242, 193, 78, 0));
+      opacity: 0.65;
+    }
+  </style>
+</head>
+<body class="app-bg text-slate-200">
+  <div class="background-video" aria-hidden="true">
+    <video autoplay muted loop preload="auto" poster="/assets/branding/Gemini_Generated_Image_xkk6ivxkk6ivxkk6.png">
+      <source src="/assets/branding/Video_Generation_From_Image%20(1).mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="aurora-field" aria-hidden="true"></div>
+  <div class="sky-grid" aria-hidden="true"></div>
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-30 glass shadow-lg nav-aurora relative">
+    <div class="nav-glow" aria-hidden="true"></div>
+  <div class="nav-content max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="nav-brand">
+        <img src="/assets/branding/Gemini_Generated_Image_89t5ue89t5ue89t5.png" alt="Orion Apex" class="nav-brand-logo" onerror="this.style.display='none'">
+        <div class="nav-title">
+          <h1>ORION APEX</h1>
+          <p>Live Trading Monitor</p>
+        </div>
+      </div>
+      <nav class="nav-links hidden sm:flex">
+        <a id="nav-trades" class="nav-link" href="/ui/trades" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v5h5"></path><path d="M21 21v-5h-5"></path><path d="M21 3h-5"/><path d="M8 21H3"/><path d="m3 9 7.5 7.5 4-4L21 18"/></svg>
+          Trades
+        </a>
+        <a id="nav-portfolio" class="nav-link" href="/ui/portfolio" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18"></path><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"></path><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path><path d="M12 12h.01"></path></svg>
+          Portfolio
+        </a>
+        <span id="ks-badge" class="nav-badge">KILL —</span>
+        <span id="fetch-meta" class="meta-pill mini" aria-live="polite">—</span>
+        <span id="live-dot"></span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- KPI Banner + Reset DD -->
+  <section class="max-w-7xl mx-auto px-4 mt-4">
+    <div class="grid grid-cols-2 md:grid-cols-7 gap-3">
+      <div class="glass kpi-card aurora-card">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="mini text-slate-400 uppercase tracking-wide">PnL Today</p>
+            <div id="kpi-pnl" class="kpi-value">—</div>
+          </div>
+          <span class="kpi-icon text-gold floating-icon float-delay-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path></svg>
+          </span>
+        </div>
+        <p class="mini text-slate-500">Net change across filled positions.</p>
+      </div>
+      <div class="glass kpi-card aurora-card">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="mini text-slate-400 uppercase tracking-wide">Trailing DD</p>
+            <div id="kpi-dd" class="kpi-value">—</div>
+          </div>
+          <span class="kpi-icon text-maroon floating-icon float-delay-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+        </div>
+        <p class="mini text-slate-500">Latest drawdown guardrail.</p>
+      </div>
+      <div class="glass kpi-card aurora-card">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="mini text-slate-400 uppercase tracking-wide">Pending</p>
+            <div id="kpi-pending" class="kpi-value">—</div>
+          </div>
+          <span class="kpi-icon text-gold floating-icon float-delay-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+        </div>
+        <p class="mini text-slate-500">Ideas awaiting confirmation.</p>
+      </div>
+      <div class="glass kpi-card aurora-card">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="mini text-slate-400 uppercase tracking-wide">Open</p>
+            <div id="kpi-open" class="kpi-value">—</div>
+          </div>
+          <span class="kpi-icon text-navy floating-icon float-delay-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v18l7-4 7 4V3"/></svg>
+          </span>
+        </div>
+        <p class="mini text-slate-500">Active positions live in-market.</p>
+      </div>
+      <div class="glass kpi-card aurora-card">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="mini text-slate-400 uppercase tracking-wide">Equity</p>
+            <div id="kpi-equity" class="kpi-value compact">—</div>
+          </div>
+          <span class="kpi-icon text-gold floating-icon float-delay-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v6H3z"/><path d="M18 21H6a3 3 0 0 1-3-3V9h18v9a3 3 0 0 1-3 3Z"/><path d="M9 14h6"/></svg>
+          </span>
+        </div>
+        <p class="mini text-slate-500">Portfolio foundation across buckets.</p>
+      </div>
+      <div class="glass kpi-card aurora-card">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <p class="mini text-slate-400 uppercase tracking-wide">Peak</p>
+            <div id="kpi-peak" class="kpi-value compact">—</div>
+          </div>
+          <span class="kpi-icon text-maroon floating-icon float-delay-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 3 7.5 7.5"/><path d="m13.5 13.5 7.5 7.5"/><path d="m21 3-9 9-3-3-6 6"/></svg>
+          </span>
+        </div>
+        <p class="mini text-slate-500">Highest equity snapshot to date.</p>
+      </div>
+      <div class="glass kpi-card aurora-card items-center justify-center text-center">
+        <div class="flex flex-col items-center gap-3">
+          <span class="mini text-slate-400 uppercase tracking-wide">Safety Controls</span>
+          <button id="btn-dd-reset" class="btn-danger text-xs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12a10 10 0 1 0 10-10"/><path d="M2 2v6h6"/></svg>
+            Reset DD Baseline
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls -->
+  <section class="max-w-7xl mx-auto px-4 mt-4">
+  <div class="glass aurora-card rounded-xl p-4 grid grid-cols-1 md:grid-cols-6 gap-3 items-end shadow-md">
+      <label class="text-sm">
+        <span class="block text-slate-300 mb-1">Symbols</span>
+        <input id="f-sym" placeholder="BTCUSDT,ETHUSDT" class="w-full bg-slate-900/50 border border-slate-700/40 rounded px-3 py-2 focus:ring-2 focus:ring-cyan-500" />
+      </label>
+      <label class="text-sm">
+        <span class="block text-slate-300 mb-1">Lane</span>
+        <input id="f-lane" placeholder="BREAKOUT_4H" class="w-full bg-slate-900/50 border border-slate-700/40 rounded px-3 py-2 focus:ring-2 focus:ring-cyan-500" />
+      </label>
+      <label class="text-sm">
+        <span class="block text-slate-300 mb-1">Status</span>
+        <select id="f-status" class="w-full bg-slate-900/50 border border-slate-700/40 rounded px-3 py-2 focus:ring-2 focus:ring-cyan-500">
+          <option>All</option><option>OK</option><option>FAIL</option>
+        </select>
+      </label>
+      <label class="text-sm">
+        <span class="block text-slate-300 mb-1">Min Confidence</span>
+        <input id="f-conf" type="number" min="0" max="100" value="0" class="w-full bg-slate-900/50 border border-slate-700/40 rounded px-3 py-2 focus:ring-2 focus:ring-cyan-500" />
+      </label>
+      <label class="text-sm">
+        <span class="block text-slate-300 mb-1">Window (min)</span>
+        <input id="f-win" type="number" min="1" value="120" class="w-full bg-slate-900/50 border border-slate-700/40 rounded px-3 py-2 focus:ring-2 focus:ring-cyan-500" />
+      </label>
+      <label class="text-sm">
+        <span class="block text-slate-300 mb-1">Tail lines</span>
+        <input id="f-tail" type="number" min="200" value="20000" class="w-full bg-slate-900/50 border border-slate-700/40 rounded px-3 py-2 focus:ring-2 focus:ring-cyan-500" />
+      </label>
+
+      <div class="col-span-1 md:col-span-6 flex flex-wrap items-center gap-4">
+        <label class="text-sm flex items-center gap-2"><input id="f-dedupe" type="checkbox" checked> <span>Dedupe ideas (latest per symbol|lane)</span></label>
+        <label class="text-sm flex items-center gap-2"><input id="f-errors" type="checkbox"> <span>Errors only</span></label>
+        <button id="btn-latest" class="btn-primary text-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v4"/><path d="m3 5 4 4 4-4"/><path d="M19 21v-4"/><path d="m21 19-4-4-4 4"/><path d="m12 13 3-3-3-3"/><path d="m12 11-3 3 3 3"/></svg>
+          Latest Scan
+        </button>
+        <button id="btn-load-pending" class="btn-secondary text-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18"/><path d="M3 7v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="m12 15 3-3-3-3"/><path d="m12 9-3 3 3 3"/></svg>
+          Load Pending
+        </button>
+        <button id="btn-pause" class="btn-secondary text-sm ml-auto" data-state="pause">
+          <svg id="pause-ic" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h2v16h-2z"/><path d="M14 4h2v16h-2z"/></svg>
+          <span id="pause-txt">Pause</span>
+        </button>
+        <div class="flex items-center gap-2 mini text-slate-400">
+          <span class="uppercase tracking-wide text-slate-500">Legend</span>
+          <span class="pill ok">Healthy</span>
+          <span class="pill warn">Watch</span>
+          <span class="pill bad">Risk</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btn-export-scan" class="btn-ghost text-xs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V7"/><path d="M8 3h8a2 2 0 0 1 2 2v12"/><path d="M2 7h20"/><path d="m12 12-3 3"/><path d="m12 12 3 3"/><path d="M12 12v9"/></svg>
+            Export Scanner CSV
+          </button>
+          <button id="btn-export-engine" class="btn-ghost text-xs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h18"/><path d="M7 6h10"/><path d="m12 10-7 6"/><path d="m12 10 7 6"/><path d="M5 18h14"/></svg>
+            Export Engine CSV
+          </button>
+          <button id="btn-export-exec" class="btn-ghost text-xs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13"/><path d="m8 13 4 4 4-4"/><path d="M5 20h14"/></svg>
+            Export Exec CSV
+          </button>
+        </div>
+      </div>
+      <div id="alert" class="hidden col-span-1 md:col-span-6 bg-red-500/10 border border-red-500/40 text-red-300 text-sm px-3 py-2 rounded"></div>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="max-w-7xl mx-auto px-4 mt-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="card summary-card aurora-card shadow">
+        <div class="flex items-center justify-between">
+          <p class="mini text-slate-400 uppercase tracking-wide">Staged</p>
+          <span class="summary-icon text-navy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10"/><path d="M5 8h14"/><path d="m5 12 2 8h10l2-8"/><path d="M10 12v4"/><path d="M14 12v4"/></svg>
+          </span>
+    </div>
+        <p id="sum-staged" class="text-3xl font-bold">0</p>
+        <p class="mini text-slate-500">Awaiting human confirmation.</p>
+      </div>
+  <div class="card summary-card aurora-card shadow">
+        <div class="flex items-center justify-between">
+          <p class="mini text-slate-400 uppercase tracking-wide">Confirmed</p>
+          <span class="summary-icon text-gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/><path d="M2 12a10 10 0 1 1 10 10"/></svg>
+          </span>
+        </div>
+        <p id="sum-conf" class="text-3xl font-bold">0</p>
+        <p class="mini text-slate-500">Ready for deployment.</p>
+      </div>
+  <div class="card summary-card aurora-card shadow">
+        <div class="flex items-center justify-between">
+          <p class="mini text-slate-400 uppercase tracking-wide">Executed</p>
+          <span class="summary-icon text-maroon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 3 3 3"/><path d="m18 3 3 3"/><path d="M12 11v4"/><path d="M8 15h8"/><path d="M5 21h14"/><path d="M4 6h16v6H4z"/></svg>
+          </span>
+        </div>
+        <p id="sum-exec" class="text-3xl font-bold">0</p>
+        <p class="mini text-slate-500">Completed per execution logs.</p>
+      </div>
+    </div>
+  <div id="scan-ribbon" class="mt-3 text-xs text-gold">—</div>
+  </section>
+
+  <!-- Panels grid -->
+  <main class="max-w-7xl mx-auto px-4 mt-4 grid grid-cols-1 lg:grid-cols-12 gap-6 pb-16">
+    <!-- Scanner -->
+  <section class="card rounded-xl p-4 shadow order-1 lg:col-span-7">
+      <h2 class="section-title mb-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>Scanner Results</span>
+      </h2>
+  <div class="text-xs text-slate-400 mb-1 flex items-center gap-2"><span id="scan-source">Source: —</span><span class="hidden sm:inline-flex items-center gap-1 text-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>Live filtered feed</span></div>
+      <div id="panel-scan" class="scrollbox">
+  <table id="tbl-scan" class="responsive-table table-fixed w-full text-sm">
+          <thead class="sticky table-header-accent text-slate-300 uppercase text-xs">
+            <tr>
+              <th class="px-3 py-2 w-44">Symbol</th>
+              <th class="px-3 py-2 w-40">Lane</th>
+              <th class="px-3 py-2 num w-28">Entry</th>
+              <th class="px-3 py-2 num w-28">TP2</th>
+              <th class="px-3 py-2 num w-20">RR</th>
+              <th class="px-3 py-2 num w-20">Conf</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+  <!-- Live Track (full width) -->
+  <section class="card rounded-xl p-4 shadow order-3 lg:col-span-12">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 19h4"/><path d="M15 19h2"/><path d="M9 7h4"/><path d="M3 3v2"/><path d="M21 3v2"/><path d="M5 19v2"/><path d="M19 19v2"/><rect x="7" y="9" width="10" height="10" rx="2"/></svg>
+          <span>Live Track — Pending</span>
+        </h2>
+        <div class="flex items-center gap-2">
+          <label class="mini flex items-center gap-1"><input id="lt-auto" type="checkbox"> Auto (10s)</label>
+          <button id="lt-refresh" class="btn-ghost text-xs px-3 py-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 0-3 6.7"/><path d="M21 12h-4"/><path d="m21 12-2 2"/></svg>
+            Refresh
+          </button>
+        </div>
+        </div>
+      <div class="mini text-slate-400 mb-2">Prices via Binance.US public endpoints (proxied; falls back to Binance US open API).</div>
+      <div class="scrollbox">
+  <table id="tbl-live" class="responsive-table table-fixed w-full text-sm">
+          <thead class="sticky table-header-accent text-slate-300 uppercase text-xs">
+            <tr>
+              <th class="px-3 py-2 w-28">Symbol</th>
+              <th class="px-3 py-2 w-36">Lane</th>
+              <th class="px-3 py-2 num w-28">Entry</th>
+              <th class="px-3 py-2 num w-28">TP2</th>
+              <th class="px-3 py-2 num w-28">Current</th>
+              <th class="px-3 py-2 num w-24">Δ bps</th>
+              <th class="px-3 py-2 num w-24">24h %</th>
+              <th class="px-3 py-2 num w-24">RR@Now</th>
+              <th class="px-3 py-2 w-28">As Of</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Portfolio (quick glance) -->
+  <section class="card rounded-xl p-4 shadow order-2 lg:col-span-5">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v4H4z"/><path d="M2 8h20v9a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3Z"/><path d="M10 12h4"/></svg>
+          <span>Portfolio (Last Scan)</span>
+        </h2>
+        <div class="flex items-center gap-2">
+          <a id="nav-portfolio-sm" class="btn-ghost text-xs px-3 py-1" href="/ui/portfolio" target="_blank">Open</a>
+          <button id="btn-pf" class="btn-ghost text-xs px-3 py-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 0-3 6.7"/><path d="M21 12h-4"/><path d="m21 12-2 2"/></svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+      <div id="pf-disclaimer" class="text-xs text-slate-400 mb-2">—</div>
+      <div class="grid grid-cols-3 gap-3 mb-2 text-sm">
+        <div class="glass rounded p-2"><div class="text-slate-400 text-xs">Total</div><div id="pf-total" class="text-lg font-bold">—</div></div>
+        <div class="glass rounded p-2"><div class="text-slate-400 text-xs">Stable</div><div id="pf-stable" class="text-lg font-bold">—</div></div>
+        <div class="glass rounded p-2"><div class="text-slate-400 text-xs">Crypto</div><div id="pf-crypto" class="text-lg font-bold">—</div></div>
+      </div>
+      <div class="scrollbox">
+  <table id="tbl-portfolio" class="responsive-table table-fixed w-full text-sm">
+          <thead class="sticky table-header-accent text-slate-300 uppercase text-xs">
+            <tr>
+              <th class="px-3 py-2 w-24">Asset</th>
+              <th class="px-3 py-2 num w-28">Value (USD)</th>
+              <th class="px-3 py-2 num w-20">Pct</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="mt-3">
+        <h3 class="text-xs uppercase text-slate-400 mb-1">Open Orders</h3>
+  <table id="tbl-oo" class="responsive-table w-full text-xs">
+          <thead class="text-slate-400 table-header-accent">
+            <tr><th class="px-2 py-1 w-28">Symbol</th><th class="px-2 py-1 num">Count</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Engine -->
+  <section class="card rounded-xl p-4 shadow order-4 lg:col-span-6">
+      <h2 class="section-title mb-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v4"/><path d="M19 3v4"/><path d="M5 21v-4"/><path d="M19 21v-4"/><path d="M3 7h18"/><path d="M3 17h18"/><path d="M9 7v10"/><path d="M15 7v10"/></svg>
+        <span>Engine Checks</span>
+      </h2>
+      <div class="scrollbox">
+  <table id="tbl-engine" class="responsive-table table-fixed w-full text-sm">
+          <thead class="sticky table-header-accent text-slate-300 uppercase text-xs">
+            <tr>
+              <th class="px-3 py-2 w-24">Symbol</th>
+              <th class="px-3 py-2 w-40">Lane</th>
+              <th class="px-3 py-2">Check</th>
+              <th class="px-3 py-2 w-16">Result</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Executor -->
+  <section class="card rounded-xl p-4 shadow order-6 lg:col-span-6">
+      <h2 class="section-title mb-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9"/><path d="m16 7-4-4-4 4"/><path d="M6 21h12"/><path d="m12 15-4 4"/><path d="m12 15 4 4"/></svg>
+        <span>Executor Lifecycle</span>
+      </h2>
+      <div class="scrollbox">
+  <table id="tbl-exec" class="responsive-table table-fixed w-full text-sm">
+          <thead class="sticky table-header-accent text-slate-300 uppercase text-xs">
+            <tr>
+              <th class="px-3 py-2 w-24">Symbol</th>
+              <th class="px-3 py-2 w-28">Phase</th>
+              <th class="px-3 py-2 w-16">Status</th>
+              <th class="px-3 py-2 num w-28">Price</th>
+              <th class="px-3 py-2 num w-28">Qty</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Monitor -->
+  <section class="card rounded-xl p-4 shadow order-7 lg:col-span-6">
+      <h2 class="section-title mb-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18"/><path d="M3 19h18"/><path d="M9 5v14"/><path d="M15 5v14"/><path d="M9 10h6"/></svg>
+        <span>Monitor Feed</span>
+      </h2>
+      <div class="scrollbox">
+  <table id="tbl-mon" class="responsive-table table-fixed w-full text-sm">
+          <thead class="sticky table-header-accent text-slate-300 uppercase text-xs">
+            <tr>
+              <th class="px-3 py-2 w-40">Type</th>
+              <th class="px-3 py-2 w-24">Symbol</th>
+              <th class="px-3 py-2 w-16">Status</th>
+              <th class="px-3 py-2">Message</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Trades (manual) -->
+  <section class="card rounded-xl p-4 shadow order-5 lg:col-span-6">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M10 11h10"/><path d="M6 15h10"/><path d="M12 19h8"/></svg>
+          <span>Trades</span>
+        </h2>
+        <div class="flex items-center gap-2">
+          <label class="mini flex items-center gap-2">Tail <input id="tr-tail" type="number" min="100" step="100" value="2000" class="bg-slate-900/60 border border-slate-700 rounded px-2 py-1 w-24"></label>
+          <button class="btn-secondary text-xs px-3 py-1" id="btn-trades-load">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v6H4z"/><path d="M4 14h16v6H4z"/><path d="M12 14v6"/></svg>
+            Load
+          </button>
+          <button class="btn-ghost text-xs px-3 py-1" id="btn-trades-export">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 17l4 4 4-4"/><path d="M12 12v9"/><path d="M8 7l4-4 4 4"/><path d="M12 12V3"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+      <div id="trades-status" class="mini text-slate-400 mb-1">Not loaded</div>
+      <div class="scrollbox">
+  <table id="trades-table" class="responsive-table table-fixed w-full text-sm">
+          <thead class="sticky table-header-accent text-slate-300 uppercase text-xs">
+            <tr>
+              <th class="px-3 py-2 w-28">Time</th>
+              <th class="px-3 py-2 w-28">Type</th>
+              <th class="px-3 py-2 w-24">Symbol</th>
+              <th class="px-3 py-2 w-16">Side</th>
+              <th class="px-3 py-2 num w-28">Qty</th>
+              <th class="px-3 py-2 num w-28">Price</th>
+              <th class="px-3 py-2 num w-32">USD Notional</th>
+              <th class="px-3 py-2 w-28">Lane</th>
+              <th class="px-3 py-2 w-28">OrderId</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-8 text-slate-400 text-xs">Orion Apex v2.4 — Live Monitor</footer>
+
+  <script>
+    // ------------------ Helpers ------------------
+    const $ = s => document.querySelector(s);
+    function withTs(url){ const sep=url.includes('?')?'&':'?'; return `${url}${sep}ts=${Date.now()}`; }
+    function fmt(x,dec=8){ const n=Number(x); if(!Number.isFinite(n)) return x??'—'; const d=n>=1000?2:n>=100?3:dec; return n.toLocaleString(undefined,{maximumFractionDigits:d}); }
+    function fmtPct(x, d=2){ const n=Number(x); if(!Number.isFinite(n)) return '—'; return n.toFixed(d)+'%'; }
+    function fmtTime(ts){ try{ const t=(ts??0); if (typeof t==='number' && t>1e12) return new Date(t).toLocaleString(); if (typeof t==='number' && t>0) return new Date(t*1000).toLocaleString(); if (typeof t==='string') return new Date(t).toLocaleString(); }catch{} return ''; }
+    const toNum = (v)=>{ if(v==null) return 0; const s=String(v).trim(); const n=parseFloat(s.replace(/%$/, '')); return Number.isFinite(n)? n : 0; };
+    const rr2Of = (entry, stop, tp2)=>{ const e=toNum(entry), s=toNum(stop), t=toNum(tp2); const R=Math.max(1e-9, e - s); return (t - e) / R; };
+
+    function applyTableLabels(table){
+      if (!table) return;
+      const headers = Array.from(table.querySelectorAll('thead th')).map(th=>th.textContent.trim());
+      table.querySelectorAll('tbody tr').forEach(tr=>{
+        Array.from(tr.children).forEach((td, idx)=>{
+          if (!headers[idx]) return;
+          td.setAttribute('data-label', headers[idx]);
+        });
+      });
+    }
+
+    function enableResponsiveTables(){
+      const tables = document.querySelectorAll('.responsive-table');
+      tables.forEach(table=>{
+        applyTableLabels(table);
+        const tbody = table.querySelector('tbody');
+        if (!tbody) return;
+        if (typeof MutationObserver === 'undefined') return;
+        const observer = new MutationObserver(()=>applyTableLabels(table));
+        observer.observe(tbody,{childList:true, subtree:true});
+      });
+    }
+
+    // -------------- Pointer-driven glow blending --------------
+    (function initAuroraPointer(){
+      const root = document.documentElement;
+      if(!root) return;
+      let rafToken = null;
+      let lastX = window.innerWidth/2;
+      let lastY = window.innerHeight/2;
+
+      const commit = ()=>{
+        rafToken = null;
+        const x = `${lastX}px`;
+        const y = `${lastY}px`;
+        root.style.setProperty('--pointer-x', x);
+        root.style.setProperty('--pointer-y', y);
+        root.style.setProperty('--cursor-x', x);
+        root.style.setProperty('--cursor-y', y);
+      };
+
+      const queue = (x,y)=>{
+        lastX = x;
+        lastY = y;
+        if(rafToken!==null) return;
+        rafToken = requestAnimationFrame(commit);
+      };
+
+      const onPointerMove = evt=>{
+        if(!evt) return;
+        queue(evt.clientX ?? lastX, evt.clientY ?? lastY);
+      };
+
+      const onTouchMove = evt=>{
+        if(!evt?.touches?.length) return;
+        const touch = evt.touches[0];
+        queue(touch.clientX ?? lastX, touch.clientY ?? lastY);
+      };
+
+      const reset = ()=>queue(window.innerWidth/2, window.innerHeight/2);
+
+      document.addEventListener('pointermove', onPointerMove, {passive:true});
+      document.addEventListener('touchmove', onTouchMove, {passive:true});
+      document.addEventListener('mouseleave', reset, {passive:true});
+      window.addEventListener('resize', reset, {passive:true});
+      queue(lastX, lastY);
+    })();
+
+    // -------------- State ----------------
+    let paused=false;
+    const all = { scanner:[], engine:[], exec:[], mon:[] };
+
+    // -------------- Deduped rendering controls --------------
+    function laneOf(row){
+      const t=row.trade_type, tf=row.context_tf, lane=row.lane;
+      if (lane) return String(lane).toUpperCase();
+      if (t && tf) return `${String(t).toUpperCase()}_${String(tf).toUpperCase()}`;
+      return String(tf||'').toUpperCase();
+    }
+
+    // -------------- DRIFT CAP / ATR --------------
+    const DRIFT = { tf:"1h", n:14, factor:0.60, min_bps:30, max_bps:120, lane_mult:{BREAKOUT:1.00, SWING:0.80, SCALP:1.10}, cache_sec:180 };
+    const LIFT_CAP = 8.0;
+    const _klCache = new Map(); // sym -> {t, atrPct}
+    async function fetchKlines(symbol){
+      // prefer backend proxy
+      try{ const r=await fetch(withTs(`/market/klines?symbol=${encodeURIComponent(symbol)}&interval=${DRIFT.tf}&limit=${Math.max(2*DRIFT.n,50)}`), {cache:'no-store'}); if(r.ok) return r.json(); }catch{}
+      // fallback to binance.us
+      try{ const r=await fetch(withTs(`https://api.binance.us/api/v3/klines?symbol=${encodeURIComponent(symbol)}&interval=${DRIFT.tf}&limit=${Math.max(2*DRIFT.n,50)}`)); if(r.ok) return r.json(); }catch{}
+      return null;
+    }
+    function computeAtrPctFromKlines(kl,n=14){
+      if(!kl||kl.length<n+1) return null;
+      const highs=kl.map(k=>+k[2]), lows=kl.map(k=>+k[3]), closes=kl.map(k=>+k[4]);
+      const trs=[]; let pc=closes[0];
+      for(let i=0;i<kl.length;i++){ const tr=Math.max(highs[i]-lows[i], Math.abs(highs[i]-pc), Math.abs(lows[i]-pc)); trs.push(tr); pc=closes[i]; }
+      let atr=trs.slice(0,n).reduce((a,b)=>a+b,0)/n; const a=1/n; for(let i=n;i<trs.length;i++) atr=a*trs[i]+(1-a)*atr;
+      const last=closes[closes.length-1]; if(!(isFinite(atr)&&isFinite(last)&&last>0)) return null; return (atr/last)*100; // percent
+    }
+    async function fetchAtrPct(symbol){
+      const now = Date.now()/1000, c = _klCache.get(symbol);
+      if(c && (now-(c.t||0)) < DRIFT.cache_sec) return c.atrPct;
+      const kl = await fetchKlines(symbol); const atrPct = computeAtrPctFromKlines(kl, DRIFT.n);
+      _klCache.set(symbol,{t:now, atrPct}); return atrPct;
+    }
+    function laneFamily(l){ const u=(l||'').toUpperCase(); if(u.startsWith('SWING')) return 'SWING'; if(u.startsWith('SCALP')) return 'SCALP'; return 'BREAKOUT'; }
+    function capFromAtrPct(atrpct, lane){
+      const fam = laneFamily(lane);
+      const mult = DRIFT.lane_mult[fam] ?? 1.0;
+      const raw  = (atrpct/100)*10000 * DRIFT.factor * mult;
+      return Math.max(DRIFT.min_bps, Math.min(DRIFT.max_bps, raw));
+    }
+    async function fetchPrice(symbol){
+      try{ const r=await fetch(withTs(`/market/price?symbol=${encodeURIComponent(symbol)}`),{cache:'no-store'}); if(r.ok){ const j=await r.json(); return Number(j?.price)||0; } }catch{}
+      try{ const r=await fetch(withTs(`https://api.binance.us/api/v3/ticker/price?symbol=${encodeURIComponent(symbol)}`)); if(r.ok){ const j=await r.json(); return Number(j?.price)||0; } }catch{}
+      return 0;
+    }
+    async function updateBadgesForRow(r, key){
+      // Drift cap badge
+      const capEl = document.querySelector(`[data-drift-key="${key}"]`);
+      const liftEl= document.querySelector(`[data-lift-key="${key}"]`);
+      const ttlEl = document.querySelector(`[data-ttl-key="${key}"]`);
+      // Drift
+      if (capEl){
+        try{
+          const atrpct = await fetchAtrPct(r.symbol);
+          if(atrpct!=null){
+            const cap = capFromAtrPct(atrpct, r.lane||'');
+            capEl.textContent = `Drift cap: ${cap.toFixed(0)} bps (ATR ${atrpct.toFixed(2)}%)`;
+            capEl.classList.add('badge','badge-cap');
+          } else capEl.textContent='';
+        }catch{ capEl.textContent=''; }
+      }
+      // Lift
+      if (liftEl){
+        try{
+          const last = await fetchPrice(r.symbol);
+          if(last>0){
+            const lift = Math.abs((Number(r.entry||0)-last)/last)*100;
+            liftEl.textContent = `Lift: ${lift.toFixed(2)}% (cap ${LIFT_CAP.toFixed(1)}%)`;
+            liftEl.classList.add('badge','badge-lift');
+          } else liftEl.textContent='';
+        }catch{ liftEl.textContent=''; }
+      }
+      // TTL
+      if (ttlEl){
+        const ttlH = Number(r.ttl_hours||24);
+        const bornMs = (typeof r.ts==='number' ? (r.ts>1e12?r.ts:r.ts*1000) : Date.parse(r.as_of||r.asOf||'')) || Date.now();
+        const tick = ()=>{
+          const left = Math.max(0, (bornMs + ttlH*3600*1000) - Date.now());
+          const h = Math.floor(left/3600000), m=Math.floor((left%3600000)/60000);
+          ttlEl.textContent = `TTL: ${h}h ${m}m`;
+          ttlEl.classList.add('badge','badge-ttl');
+        };
+        tick(); setInterval(tick, 60000);
+      }
+    }
+
+    // -------------- Scanner rendering --------------
+    function renderScanner(rows){
+      const tb = document.querySelector('#tbl-scan tbody'); if (!tb) return 0;
+      tb.innerHTML='';
+      let shown=0;
+      const slice = rows.slice(0, 300);
+      for(let idx=0; idx<slice.length; idx++){
+        const r = slice[idx];
+        const s = String(r.symbol||'').toUpperCase();
+        const lane = laneOf(r);
+        const entry = toNum(r.entry), tp2 = toNum(r.tp2), stop = toNum(r.stop);
+        let rr = toNum(r.rr ?? r.rr_tp2 ?? r.rr_selected);
+        if (!Number.isFinite(rr) || rr===0) rr = rr2Of(entry, stop, tp2);
+        const conf = toNum(r.confidence ?? r.conf ?? r.conf_pct);
+        r.entry = entry; r.tp2 = tp2; r.rr = rr; r.conf = conf;
+        const key = `${s}|${lane}|${idx}`;
+        const tr = document.createElement('tr');
+        tr.className = "border-b border-slate-800/40 hover:bg-slate-800/30 transition";
+        tr.innerHTML = `
+          <td class="px-3 py-2">
+            ${s}
+            <span data-drift-key="${key}" class="ml-2"></span>
+            <span data-lift-key="${key}"  class="ml-1"></span>
+            <span data-ttl-key="${key}"   class="ml-1"></span>
+          </td>
+          <td class="px-3 py-2">${lane||''}</td>
+          <td class="px-3 py-2 num mono">${fmt(entry)}</td>
+          <td class="px-3 py-2 num mono">${fmt(tp2)}</td>
+          <td class="px-3 py-2 num mono">${Number.isFinite(rr)? rr.toFixed(2) : '—'}</td>
+          <td class="px-3 py-2 num mono">${Number.isFinite(conf)? conf.toFixed(0) : '—'}</td>
+        `;
+        tb.appendChild(tr); shown++;
+        updateBadgesForRow({symbol:s, lane, entry, ttl_hours:r.ttl_hours, as_of:r.as_of||r.asOf, ts:r.ts}, key);
+      }
+      // Ribbon summary based on first visible row
+      const ribbon = document.getElementById('scan-ribbon');
+      if (slice.length && ribbon){
+        (async ()=>{
+          ribbon.textContent = 'Loading drift/lift/ttl…';
+          const first = slice[0];
+          const sym = String(first.symbol||'').toUpperCase();
+          const ln  = laneOf(first);
+          const atr = await fetchAtrPct(sym);
+          const cap = (atr!=null)? capFromAtrPct(atr, ln).toFixed(0) : '—';
+          const last = await fetchPrice(sym);
+          const liftStr = last>0 ? `${(Math.abs((Number(first.entry||0)-last)/last)*100).toFixed(2)}% (cap ${LIFT_CAP.toFixed(1)}%)` : '—';
+          const ttlH = Number(first.ttl_hours||24);
+          const bornMs = (typeof first.ts==='number' ? (first.ts>1e12?first.ts:first.ts*1000) : Date.parse(first.as_of||first.asOf||'')) || Date.now();
+          const left = Math.max(0, (bornMs + ttlH*3600*1000) - Date.now());
+          const h=Math.floor(left/3600000), m=Math.floor((left%3600000)/60000);
+          ribbon.textContent = `Drift cap: ${cap} bps (ATR ${atr!=null? atr.toFixed(2)+'%':'—'})   Lift: ${liftStr}   TTL: ${h}h ${m}m`;
+        })();
+      }
+      return shown;
+    }
+
+    // -------------- Pending loaders (JSON/CSV fallback) --------------
+    function parseCSVtoObjects(csvText){
+      const lines = csvText.split(/\r?\n/).filter(Boolean);
+      if (!lines.length) return [];
+      const split = line => {
+        const out=[]; let s="", q=false;
+        for (let i=0;i<line.length;i++){
+          const c=line[i], n=line[i+1];
+          if (q){
+            if (c==='"' && n==='"'){ s+='"'; i++; continue; }
+            if (c==='"'){ q=false; continue; }
+            s+=c; continue;
+          }
+          if (c==='"'){ q=true; continue; }
+          if (c===','){ out.push(s); s=""; continue; }
+          s+=c;
+        }
+        out.push(s); return out;
+      };
+      const header = split(lines[0]).map(h=>h.trim());
+      const rows=[];
+      for (let i=1;i<lines.length;i++){
+        const cols = split(lines[i]);
+        const obj = {}; for (let j=0;j<header.length;j++) obj[header[j]] = cols[j] ?? "";
+        rows.push(obj);
+      }
+      return rows;
+    }
+    async function fetchPendingAny(){
+      const sources = [
+        {url:'/reports/pending.json', kind:'pending.json'},
+        {url:'/scanner/pending.json?limit=500', kind:'helper.json'},
+        {url:'/reports/table_pending.csv', kind:'csv'},
+        {url:'/scanner/pending', kind:'csv2'},
+        {url:'/pending.csv', kind:'csv3'},
+        {url:'/api/pending', kind:'csv4'}
+      ];
+        for (const s of sources){
+          try{
+          const r = await fetch(withTs(s.url), { cache:'no-store' });
+            if (!r.ok) continue;
+            if (s.kind.endsWith('json')){
+              const j = await r.json();
+              const rows = Array.isArray(j) ? j : (j.rows||[]);
+              document.getElementById('scan-source').textContent = `Pending (${s.kind})`;
+            return rows;
+            } else {
+              const txt = await r.text();
+            const rows = parseCSVtoObjects(txt);
+              document.getElementById('scan-source').textContent = `Pending (${s.kind})`;
+            return rows;
+            }
+          }catch{}
+        }
+      document.getElementById('scan-source').textContent = 'Source: —';
+      return [];
+    }
+    async function loadPendingJson(){
+      const rows = await fetchPendingAny();
+      const shown = renderScanner(rows);
+      const alertBox = document.getElementById('alert');
+      if (shown===0) alertBox?.classList.remove('hidden'); else alertBox?.classList.add('hidden');
+    }
+
+    // -------------- Events ingestion for "Latest Scan" --------------
+    async function loadLatestFromBus(){
+      const n = Math.max(200, parseInt(document.getElementById('f-tail')?.value||'20000',10));
+      const res = await fetch(withTs(`/logs/events.jsonl?tail=${n}`), {cache:'no-store'});
+      if (!res.ok) return;
+      const txt = await res.text();
+      const rows = txt.split(/\r?\n/).filter(Boolean).map(l=>{ try{return JSON.parse(l)}catch{return null} }).filter(Boolean);
+      const ideas = rows.filter(o=>String(o.type||'').toLowerCase()==='scanner.idea')
+                        .map(o=>({
+                          ts:o.ts||0, symbol:(o.symbol||'').toUpperCase(),
+                          lane:(o.lane || (o.trade_type?`${o.trade_type}_${o.tf}`:'') || o.tf || '').toUpperCase(),
+                          entry:o.entry, tp2:o.tp2, rr:o.rr_tp2??o.rr_selected, conf:o.confidence,
+                          ttl_hours:o.ttl_hours, as_of:o.as_of||o.asOf
+                        }));
+      if (ideas.length){
+        renderScanner(ideas);
+        document.getElementById('scan-source').textContent='Latest Scan (events)';
+      }
+    }
+
+    // -------------- Live Track Panel --------------
+    async function fetch24h(symbol){
+      try{ const r=await fetch(withTs(`/market/ticker24h?symbol=${encodeURIComponent(symbol)}`),{cache:'no-store'}); if(r.ok){ const j=await r.json(); return Number(j?.priceChangePercent)||0; } }catch{}
+      try{ const r=await fetch(withTs(`https://api.binance.us/api/v3/ticker/24hr?symbol=${encodeURIComponent(symbol)}`)); if(r.ok){ const j=await r.json(); return Number(j?.priceChangePercent)||0; } }catch{}
+      return 0;
+    }
+    async function getPendingRowsForLive(){ return fetchPendingAny(); }
+    async function loadLiveOnce(){
+      const rows = await getPendingRowsForLive();
+      const syms = Array.from(new Set(rows.map(r=>String(r.symbol||'').toUpperCase()).filter(Boolean)));
+      const tb = document.querySelector('#tbl-live tbody'); if (!tb) return 0;
+      tb.innerHTML='';
+      if (!syms.length) return 0;
+      const px={}, d24={};
+      await Promise.all(syms.map(async s=>{ px[s]=await fetchPrice(s); }));
+      await Promise.all(syms.map(async s=>{ d24[s]=await fetch24h(s); }));
+      let count=0;
+      for(const r of rows){
+        const s = String(r.symbol||'').toUpperCase();
+        const lane = laneOf(r);
+        const entry = Number(r.entry||0), tp2 = Number(r.tp2||0), stop = Number(r.stop||0);
+        const curr = Number(px[s]||0), chg24 = Number(d24[s]||0);
+        const driftBps = (entry>0 && curr>0) ? Math.round(Math.abs(curr-entry)/entry*10000) : 0;
+        const rrNow = (stop && curr && stop<entry) ? (curr-entry)/(entry-stop) : NaN;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="px-3 py-1">${s}</td>
+          <td class="px-3 py-1">${lane||''}</td>
+          <td class="px-3 py-1 num">${fmt(entry,8)}</td>
+          <td class="px-3 py-1 num">${fmt(tp2,8)}</td>
+          <td class="px-3 py-1 num">${curr?fmt(curr,8):'—'}</td>
+          <td class="px-3 py-1 num ${driftBps? (driftBps>0?'text-gold':'') : ''}">${driftBps? (driftBps+' bps') : '—'}</td>
+          <td class="px-3 py-1 num ${Number.isFinite(chg24)? (chg24>=0?'text-gold':'text-maroon') : ''}">${Number.isFinite(chg24)? chg24.toFixed(2)+'%' : '—'}</td>
+          <td class="px-3 py-1 num">${Number.isFinite(rrNow)? rrNow.toFixed(2) : '—'}</td>
+          <td class="px-3 py-1 mini">${new Date().toLocaleTimeString()}</td>
+        `;
+        tb.appendChild(tr); count++;
+      }
+      return count;
+    }
+    let ltTimer=null;
+    document.getElementById('lt-refresh')?.addEventListener('click', loadLiveOnce);
+    document.getElementById('lt-auto')?.addEventListener('change', e=>{
+      if (e.target.checked){ loadLiveOnce(); ltTimer=setInterval(loadLiveOnce, 10000); }
+      else { if(ltTimer){ clearInterval(ltTimer); ltTimer=null; } }
+    });
+
+    // -------------- Metrics + KillSwitch badge --------------
+    async function refreshKPIs(){
+      try{
+        const j = await fetch(withTs('/metrics'), {cache:'no-store'}).then(r=>r.json());
+        const m = j.metrics || j.Metrics || {};
+        $('#kpi-pnl').textContent = (m.pnl_today!=null) ? (m.pnl_today).toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:2}) : '—';
+        $('#kpi-dd').textContent  = (m.dd_trailing_pct!=null) ? fmtPct(m.dd_trailing_pct,2) : '—';
+        $('#kpi-pending').textContent = (m.pending!=null) ? m.pending : '—';
+        $('#kpi-open').textContent    = (m.open!=null) ? m.open : '—';
+        $('#kpi-equity').textContent  = (m.equity!=null) ? (m.equity).toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:2}) : '—';
+        $('#kpi-peak').textContent    = (m.peak_equity!=null) ? (m.peak_equity).toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:2}) : '—';
+
+        const el = $('#ks-badge');
+        if (el){
+          el.style.fontVariantLigatures='none'; el.style.textTransform='uppercase'; el.style.whiteSpace='nowrap';
+          const ks = m.killSwitch;
+          const on = ks===1 || ks===true || ks==='1' || (typeof ks==='string' && ks.toUpperCase()==='ON');
+          el.textContent = on ? 'KILL ON' : 'KILL OFF';
+          el.className = on ? 'px-2 py-0.5 rounded bg-red-500/20 text-red-300' : 'px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300';
+        }
+      }catch(e){
+        // fallback to /controls/state
+        try{
+          const r = await fetch('/controls/state',{cache:'no-store'}); if(!r.ok) return;
+          const j = await r.json(); const el=$('#ks-badge');
+          const on = j.killSwitch===1 || j.killSwitch===true || j.killSwitch==='1' || (typeof j.killSwitch==='string' && j.killSwitch.toUpperCase()==='ON');
+          if (el){ el.textContent = on ? 'KILL ON' : 'KILL OFF'; el.className = on ? 'px-2 py-0.5 rounded bg-red-500/20 text-red-300' : 'px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300'; }
+        }catch{}
+      }
+    }
+
+    // -------------- Events polling --------------
+    async function fetchEvents(){
+      if (paused) return;
+      try{
+        const tail = parseInt($('#f-tail')?.value||'20000',10);
+        const res = await fetch(withTs(`/logs/events.jsonl?tail=${encodeURIComponent(tail)}`), { cache:'no-store' });
+        if(!res.ok){ setFetchMeta(false); return; }
+        const txt = await res.text();
+        const lines = txt.split(/\r?\n/).filter(Boolean).map(l=>{ try{return JSON.parse(l)}catch{return null} }).filter(Boolean);
+        // ingest
+        const ideaRaw=[], engine=[], exec=[], mon=[];
+        for(const e of lines){
+          if (String(e.type||'').toLowerCase()==='scanner.idea'){
+            ideaRaw.push({
+              ts:e.ts||0, symbol:(e.symbol||'').toUpperCase(),
+              lane:(e.lane || (e.trade_type?`${e.trade_type}_${e.tf}`:'') || e.tf || '').toUpperCase(),
+              entry:e.entry, tp2:e.tp2, rr:e.rr_tp2??e.rr_selected, conf:e.confidence,
+              ttl_hours:e.ttl_hours, as_of:e.as_of||e.asOf
+            }); continue;
+          }
+          if (String(e.type||'').startsWith('engine')){
+            engine.push({ts:e.ts||0, symbol:(e.symbol||'').toUpperCase(), lane:(e.lane||'').toUpperCase(), check:e.check||e.reason||'Check', result:e.result||e.status||''}); continue;
+          }
+          if (String(e.type||'').startsWith('executor')){
+            exec.push({ts:e.ts||0, symbol:(e.symbol||'').toUpperCase(), phase:e.phase||e.note||'', status:e.status||'', price:e.price, qty:e.qty}); continue;
+          }
+          mon.push({ ts:e.ts||0, type:e.type||'', symbol:(e.symbol||'').toUpperCase(), status:e.status||e.result||'', msg:e.msg||e.reason||e.check||'' });
+        }
+        all.scanner = ideaRaw; all.engine=engine; all.exec=exec; all.mon=mon;
+
+        render();
+        setFetchMeta(true);
+      }catch(e){ setFetchMeta(false); }
+    }
+    function setFetchMeta(ok){
+      const el = $('#fetch-meta'); if (!el) return;
+      const now = Date.now(); if (ok) window.__lastFetchTs = now;
+      const t = window.__lastFetchTs; const age = t ? Math.round((now - t)/1000) : null;
+      el.textContent = t ? `Last fetch: ${new Date(t).toLocaleTimeString()} • Age: ${age}s` : '—';
+    }
+
+    // -------------- Scanner summary & controls --------------
+    function setSummary(st, cf, ex){ $('#sum-staged').textContent=st; $('#sum-conf').textContent=cf; $('#sum-exec').textContent=ex; }
+    function render(){
+      const sym=(($('#f-sym')?.value)||'').toUpperCase().split(',').map(s=>s.trim()).filter(Boolean);
+      const lane=(($('#f-lane')?.value)||'').toUpperCase().trim();
+      const stat=(($('#f-status')?.value)||'All');
+      const minC= parseInt((($('#f-conf')?.value)||'0'), 10) || 0;
+      const now=Date.now();
+      const winMs=(parseInt((($('#f-win')?.value)||'120'),10)||120)*60*1000;
+
+      let ideas = all.scanner.filter(r=>!r.ts || (now - r.ts) <= winMs);
+      // dedupe latest per symbol|lane
+      const m=new Map(); for(const r of ideas.sort((a,b)=>b.ts-a.ts)){ const k=`${r.symbol}|${r.lane}`; if(!m.has(k)) m.set(k,r); }
+      ideas = Array.from(m.values());
+      let fScan = ideas.filter(r => (!sym.length || sym.includes(r.symbol)) && (!lane || (r.lane||'').includes(lane)) && (r.conf??0) >= minC).sort((a,b)=>b.ts-a.ts);
+
+      setSummary(fScan.length, all.engine.filter(r=>(r.result||'')==='OK').length, all.exec.length);
+
+      const tb = document.querySelector('#tbl-scan tbody');
+      tb.innerHTML = fScan.slice(0, 250).map((r,idx)=>{
+        const key = `${r.symbol}|${r.lane||''}|${idx}`;
+        return `<tr class="border-b border-slate-800/40 hover:bg-slate-800/30 transition">
+          <td class="px-3 py-2">${r.symbol}
+            <span data-drift-key="${key}" class="ml-2"></span>
+            <span data-lift-key="${key}"  class="ml-1"></span>
+            <span data-ttl-key="${key}"   class="ml-1"></span>
+          </td>
+          <td class="px-3 py-2">${r.lane||''}</td>
+          <td class="px-3 py-2 num mono">${fmt(r.entry)}</td>
+          <td class="px-3 py-2 num mono">${fmt(r.tp2)}</td>
+          <td class="px-3 py-2 num mono">${Number.isFinite(r.rr)? r.rr.toFixed(2) : '—'}</td>
+          <td class="px-3 py-2 num mono">${Number.isFinite(r.conf)? r.conf.toFixed(0) : '—'}</td>
+        </tr>`;
+      }).join('');
+
+      // hydrate drift/lift/ttl badges for visible rows
+      fScan.slice(0, 60).forEach((r,idx)=>updateBadgesForRow(r, `${r.symbol}|${r.lane||''}|${idx}`));
+    }
+
+    // -------------- Buttons & bindings --------------
+    document.getElementById('btn-dd-reset')?.addEventListener('click', async ()=>{
+      try{
+        const r = await fetch('/risk/trailing_dd/reset', {method:'POST', cache:'no-store'});
+        if (!r.ok){ const t=await r.text(); alert('Reset failed: '+t); return; }
+        const j = await r.json(); alert('DD baseline reset ✓'); await refreshKPIs();
+      }catch(e){ alert('Reset failed: ' + (e?.message||e)); }
+    });
+    document.getElementById('btn-latest')?.addEventListener('click', loadLatestFromBus);
+    document.getElementById('btn-load-pending')?.addEventListener('click', loadPendingJson);
+    document.getElementById('btn-pause')?.addEventListener('click', ()=>{
+      paused=!paused;
+      document.getElementById('pause-txt').textContent = paused? 'Resume' : 'Pause';
+    });
+    document.getElementById('btn-export-scan')?.addEventListener('click', ()=>{
+      const cols = ["symbol","lane","entry","tp2","rr","conf","ts"];
+      const esc = v => { if (v==null) return ""; const s=String(v); return /[\",\\n]/.test(s) ? `"${s.replace(/\"/g,'""')}"` : s; };
+      const csv = [cols.join(",")].concat(all.scanner.map(r=>[r.symbol,r.lane,r.entry,r.tp2,r.rr,r.conf,r.ts].map(esc).join(","))).join("\n");
+      const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download=`scanner_${Date.now()}.csv`; a.click();
+    });
+    document.getElementById('btn-export-engine')?.addEventListener('click', ()=>{
+      const cols = ["ts","symbol","lane","check","result"];
+      const esc = v => { if (v==null) return ""; const s=String(v); return /[\",\\n]/.test(s) ? `"${s.replace(/\"/g,'""')}"` : s; };
+      const csv = [cols.join(",")].concat(all.engine.map(r=>[r.ts,r.symbol,r.lane,r.check,r.result].map(esc).join(","))).join("\n");
+      const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download=`engine_${Date.now()}.csv`; a.click();
+    });
+    document.getElementById('btn-export-exec')?.addEventListener('click', ()=>{
+      const cols = ["ts","symbol","phase","status","price","qty"];
+      const esc = v => { if (v==null) return ""; const s=String(v); return /[\",\\n]/.test(s) ? `"${s.replace(/\"/g,'""')}"` : s; };
+      const csv = [cols.join(",")].concat(all.exec.map(r=>[r.ts,r.symbol,r.phase,r.status,r.price,r.qty].map(esc).join(","))).join("\n");
+      const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download=`executor_${Date.now()}.csv`; a.click();
+    });
+
+    // -------------- Init --------------
+    window.addEventListener('load', async ()=>{
+      enableResponsiveTables();
+      await refreshKPIs();
+      await loadPendingJson();
+      await fetchEvents();
+      await refreshPortfolio();
+      // Timers (kept minimal; can be paused)
+      setInterval(()=>{ if(!paused) fetchEvents(); }, 5000);
+      setInterval(()=>{ if(!paused) refreshKPIs(); }, 8000);
+    });
+
+    // -------------- Portfolio refresh --------------
+    async function refreshPortfolio(){
+      try{
+        const j = await fetch(withTs('/portfolio/summary'), {cache:'no-store'}).then(r=>r.json());
+        document.getElementById('pf-total').textContent  = (j.totalValueUSD??0).toLocaleString(undefined,{style:'currency',currency:'USD'});
+        document.getElementById('pf-stable').textContent = (j.stableValueUSD??0).toLocaleString(undefined,{style:'currency',currency:'USD'});
+        document.getElementById('pf-crypto').textContent = (j.cryptoValueUSD??0).toLocaleString(undefined,{style:'currency',currency:'USD'});
+        document.getElementById('pf-disclaimer').textContent = j.disclaimer || '';
+        const tb = document.querySelector('#tbl-portfolio tbody'); tb.innerHTML='';
+        (j.topHoldings||[]).forEach(x=>{
+          const tr=document.createElement('tr');
+          tr.innerHTML = `<td class="px-3 py-2">${x.asset}</td>
+                          <td class="px-3 py-2 num mono">${fmt(x.valueUSD,2)}</td>
+                          <td class="px-3 py-2 num mono">${Number.isFinite(x.pct)? x.pct.toFixed(2)+'%' : '—'}</td>`;
+          tb.appendChild(tr);
+        });
+        const oo = j.openOrders || {count:0, bySymbol:[]};
+        const oob = document.querySelector('#tbl-oo tbody'); oob.innerHTML='';
+        (oo.bySymbol||[]).forEach(r=>{
+          const tr=document.createElement('tr');
+          tr.innerHTML = `<td class="px-2 py-1">${r.symbol}</td><td class="px-2 py-1 num mono">${r.count}</td>`;
+          oob.appendChild(tr);
+        });
+      }catch{/* ignore */}
+    }
+    document.getElementById('btn-pf')?.addEventListener('click', refreshPortfolio);
+  </script>
+</body>
+</html>
+x`  

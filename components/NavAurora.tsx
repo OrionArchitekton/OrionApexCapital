@@ -1,22 +1,85 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+const NAV_LINKS = [
+  { href: "/services", label: "Services", description: "Capabilities" },
+  { href: "/insights", label: "Insights", description: "Playbooks" },
+  { href: "/freelance", label: "Client Work", description: "Outcomes" },
+  { href: "/contact", label: "Contact", description: "Work With Us" },
+];
 
 export default function NavAurora() {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const ariaExpanded = open ? true : false;
+
+  useEffect(() => {
+    const close = () => setOpen(false);
+    router.events.on("routeChangeComplete", close);
+    return () => {
+      router.events.off("routeChangeComplete", close);
+    };
+  }, [router]);
+
+  const isActive = (href: string) => {
+    const current = router.asPath || router.pathname;
+    if (current === href) return true;
+    if (current.startsWith(`${href}/`)) return true;
+    return false;
+  };
+
   return (
-    <header className="sticky top-0 z-30 glass relative">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl border border-[rgba(242,193,78,.22)] shadow-[0_18px_32px_-22px_rgba(242,193,78,.45)] bg-[rgba(18,28,49,.6)]" />
-          <div className="leading-tight">
-            <p className="uppercase tracking-[0.34em] text-xs text-slate-200">ORION APEX</p>
-            <p className="uppercase tracking-[0.22em] text-[11px] text-slate-400">Capital</p>
-          </div>
-        </div>
-        <nav className="hidden md:flex items-center gap-2">
-          <Link href="/services" className="nav-link">Services</Link>
-          <Link href="/insights" className="nav-link">Insights</Link>
-          <Link href="/freelance" className="nav-link">Client Work</Link>
-          <Link href="/contact" className="nav-link">Contact</Link>
+    <header className="nav-aurora glass shadow-lg">
+      <div className="nav-glow" aria-hidden="true" />
+      <div className="nav-content">
+        <Link href="/" className="nav-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[rgba(242,193,78,0.55)] focus-visible:ring-offset-[rgba(6,13,29,0.9)]">
+          <span className="nav-brand-logo" aria-hidden="true">
+            <Image
+              src="/images/branding/03-icon_crest_white-transparent.png"
+              alt="Orion Apex crest"
+              width={40}
+              height={40}
+              className="h-full w-full object-contain"
+              priority
+            />
+          </span>
+          <span className="nav-title">
+            <span className="nav-title-line">Orion Apex</span>
+            <span className="nav-title-sub">Capital Intelligence</span>
+          </span>
+        </Link>
+
+        <nav className="nav-links">
+          {NAV_LINKS.map(({ href, label, description }) => (
+            <Link key={href} href={href} className={`nav-link${isActive(href) ? " active" : ""}`}>
+              <span className="nav-link-label">{label}</span>
+              <span className="nav-link-sub">{description}</span>
+            </Link>
+          ))}
         </nav>
+
+        <button
+          type="button"
+          className={`nav-toggle${open ? " open" : ""}`}
+          aria-label="Toggle navigation"
+          aria-expanded={ariaExpanded}
+          onClick={() => setOpen((prev) => !prev)}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
+      </div>
+
+      <div className={`nav-mobile${open ? " open" : ""}`}>
+        {NAV_LINKS.map(({ href, label, description }) => (
+          <Link key={href} href={href} className={`nav-link nav-link-mobile${isActive(href) ? " active" : ""}`}>
+            <span className="nav-link-label">{label}</span>
+            <span className="nav-link-sub">{description}</span>
+          </Link>
+        ))}
       </div>
     </header>
   );

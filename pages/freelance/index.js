@@ -1,13 +1,37 @@
+import { useMemo, useState } from "react";
 import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import Button from "@/components/Button";
+import FilterBar from "@/components/FilterBar";
 import Head from "next/head";
 import { getAllCases } from "@/lib/cases";
 import { generateFreelanceServiceJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
 
 export default function Freelance({ cases }) {
   const freelanceJsonLd = generateFreelanceServiceJsonLd();
+  const [selection, setSelection] = useState({ industry: "", outcome: "" });
+
+  const industries = useMemo(() => {
+    const values = cases
+      .map((c) => c.industry ?? c.sector)
+      .filter(Boolean);
+    return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b));
+  }, [cases]);
+
+  const outcomes = useMemo(() => {
+    const values = cases.map((c) => c.outcome).filter(Boolean);
+    return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b));
+  }, [cases]);
+
+  const filteredCases = useMemo(() => {
+    return cases.filter((c) => {
+      const industryValue = c.industry ?? c.sector ?? "";
+      const matchesIndustry = !selection.industry || industryValue === selection.industry;
+      const matchesOutcome = !selection.outcome || c.outcome === selection.outcome;
+      return matchesIndustry && matchesOutcome;
+    });
+  }, [cases, selection]);
 
   return (
     <>
@@ -63,27 +87,30 @@ export default function Freelance({ cases }) {
           </p>
         </div>
 
-        {/* Filters - Static demo */}
-        <div className="mb-6 flex flex-wrap gap-3">
-          <span className="rounded bg-white/10 px-3 py-1 text-sm">Sector</span>
-          <span className="rounded bg-white/10 px-3 py-1 text-sm">
-            Service Type
-          </span>
-          <span className="rounded bg-white/10 px-3 py-1 text-sm">
-            Outcome
-          </span>
-        </div>
+        <FilterBar
+          industries={industries}
+          outcomes={outcomes}
+          industry={selection.industry}
+          outcome={selection.outcome}
+          onChange={setSelection}
+        />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {cases.map((c) => (
-            <CaseStudyCard
-              key={c.slug}
-              slug={c.slug}
-              title={c.title}
-              outcome={c.outcome}
-              tags={c.tags || []}
-            />
-          ))}
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {filteredCases.length ? (
+            filteredCases.map((c) => (
+              <CaseStudyCard
+                key={c.slug}
+                slug={c.slug}
+                title={c.title}
+                outcome={c.outcome}
+                tags={c.tags || []}
+              />
+            ))
+          ) : (
+            <div className="md:col-span-2 lg:col-span-3 rounded-3xl border border-white/10 bg-surface-1/70 p-8 text-center text-sm text-neutral-300">
+              No case studies match the selected filters. Try clearing one of the options above.
+            </div>
+          )}
         </div>
       </section>
       </Layout>

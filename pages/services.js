@@ -8,7 +8,7 @@ import { Featured } from "@/components/Featured";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import Button from "@/components/Button";
 
-export default function Services() {
+export default function Services({ coreOps }) {
   const servicesJsonLd = generateServicesItemListJsonLd();
 
   return (
@@ -23,6 +23,7 @@ export default function Services() {
         title="Services"
         description="Disciplined operator lanes across crypto and digital assets. Crypto trading advisory and website investing with systematic approaches to wealth creation."
         url="/services"
+        image="/og/og-services.png"
       >
         <Section className="pb-12" containerClassName="space-y-10">
           <Breadcrumb
@@ -140,7 +141,38 @@ export default function Services() {
             </p>
           </Container>
         </Section>
+
+        <Section eyebrow="Core Operations" title={coreOps.title} className="pt-0">
+          <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-glow">
+            <div
+              className="space-y-6 text-base leading-relaxed text-text-muted [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-text-primary [&_ul]:space-y-2 [&_li]:pl-4 [&_li]:text-sm [&_li]:text-text-muted [&_li]:before:-ml-3 [&_li]:before:mr-1 [&_li]:before:text-brand-gold [&_li]:before:content-['•']"
+              dangerouslySetInnerHTML={{ __html: coreOps.html }}
+            />
+          </div>
+        </Section>
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const path = await import("path");
+  const fs = await import("fs/promises");
+  const matter = (await import("gray-matter")).default;
+  const { remark } = await import("remark");
+  const remarkHtml = (await import("remark-html")).default;
+
+  const coreOpsPath = path.join(process.cwd(), "content", "sections", "core-operations.md");
+  const file = await fs.readFile(coreOpsPath, "utf8");
+  const { data, content } = matter(file);
+  const processed = await remark().use(remarkHtml).process(content);
+
+  return {
+    props: {
+      coreOps: {
+        title: data.title ?? "Core Operations",
+        html: processed.toString()
+      }
+    }
+  };
 }

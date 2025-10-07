@@ -1,15 +1,47 @@
-type Props = { head: string[]; rows: (string | number | React.ReactNode)[][]; className?: string };
-export default function ResponsiveTable({ head, rows, className="" }: Props) {
+import { ReactNode } from "react";
+import clsx from "clsx";
+
+type ResponsiveTableProps = {
+  head: ReactNode[];
+  rows: ReactNode[][];
+  className?: string;
+  headClassName?: string;
+  bodyClassName?: string;
+};
+
+export default function ResponsiveTable({
+  head,
+  rows,
+  className,
+  headClassName,
+  bodyClassName
+}: ResponsiveTableProps) {
   return (
-    <div className={`table-shell ${className}`}>
+    <div className={clsx("table-shell", className)}>
       <table className="responsive-table w-full text-sm">
-        <thead className="sticky text-slate-300 uppercase text-xs">
-          <tr>{head.map((h,i)=>(<th key={i} className="px-3 py-2">{h}</th>))}</tr>
+        <thead className={clsx("sticky text-slate-300 uppercase text-xs", headClassName)}>
+          <tr>
+            {head.map((cell, index) => (
+              <th key={index} className="px-3 py-2 font-semibold tracking-[0.2em]">
+                {cell}
+              </th>
+            ))}
+          </tr>
         </thead>
-        <tbody>
-          {rows.map((r,ri)=>(
-            <tr key={ri} className="border-b border-slate-800/40 hover:bg-slate-800/30 transition">
-              {r.map((c,ci)=>(<td key={ci} className={`px-3 py-2 ${ci>1?'num mono':''}`}>{c}</td>))}
+        <tbody className={bodyClassName}>
+          {rows.map((row, rowIndex) => (
+            <tr
+              key={rowIndex}
+              className="border-b border-slate-800/40 transition hover:-translate-y-[1px] hover:border-[rgba(242,193,78,0.22)] hover:bg-[rgba(12,21,39,0.6)]"
+            >
+              {row.map((cell, cellIndex) => (
+                <td
+                  key={cellIndex}
+                  className={clsx("px-3 py-2 align-middle", cellIndex > 1 && "num mono")}
+                >
+                  {cell}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>

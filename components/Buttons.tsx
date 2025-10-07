@@ -1,16 +1,15 @@
-export function BtnPrimary(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { className = "", ...rest } = props;
-  return <button className={`btn btn-primary ${className}`} {...rest} />;
+import { ButtonHTMLAttributes } from "react";
+import clsx from "clsx";
+
+type Variant = "primary" | "secondary" | "ghost" | "danger";
+
+function variantButton(variant: Variant) {
+  return function VariantButton({ className, ...rest }: ButtonHTMLAttributes<HTMLButtonElement>) {
+    return <button className={clsx("btn", `btn-${variant}`, className)} {...rest} />;
+  };
 }
-export function BtnSecondary(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { className = "", ...rest } = props;
-  return <button className={`btn btn-secondary ${className}`} {...rest} />;
-}
-export function BtnGhost(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { className = "", ...rest } = props;
-  return <button className={`btn btn-ghost ${className}`} {...rest} />;
-}
-export function BtnDanger(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { className = "", ...rest } = props;
-  return <button className={`btn btn-danger ${className}`} {...rest} />;
-}
+
+export const BtnPrimary = variantButton("primary");
+export const BtnSecondary = variantButton("secondary");
+export const BtnGhost = variantButton("ghost");
+export const BtnDanger = variantButton("danger");

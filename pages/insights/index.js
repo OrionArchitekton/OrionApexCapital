@@ -10,6 +10,7 @@ export default function Insights({ posts }) {
       title="Market Insights"
       description="Deep analysis and strategic frameworks from the front lines of modern capital markets. Expert insights on crypto trading, digital assets, and systematic wealth creation."
       url="/insights"
+      image="/og/og-insights.png"
     >
       <Section
         eyebrow="Intelligence Briefs"

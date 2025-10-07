@@ -4,7 +4,8 @@ import { getCanonical } from "@/lib/seo/canonical";
 export default function SEOHead({
   title,
   description,
-  image = "/images/og-banner.png",
+  image = "/og/og-home.png",
+  twitterImage,
   url,
   canonical
 }) {
@@ -18,6 +19,12 @@ export default function SEOHead({
   // Use provided canonical or generate from URL
   const canonicalUrl = canonical || (url ? getCanonical(url) : getCanonical('/'));
   const ogUrl = url ? getCanonical(url) : getCanonical('/');
+  const siteOrigin = getCanonical('/').replace(/\/$/, "");
+  const ogImageUrl = image?.startsWith("http") ? image : `${siteOrigin}${image}`;
+  const twitterImagePath = twitterImage || image;
+  const twitterImageUrl = twitterImagePath?.startsWith("http")
+    ? twitterImagePath
+    : `${siteOrigin}${twitterImagePath}`;
 
   return (
     <Head>
@@ -35,13 +42,13 @@ export default function SEOHead({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={ogUrl} />
-      <meta property="og:image" content={`${ogUrl}/images/branding/og-1200x630.png`} />
+  <meta property="og:image" content={ogImageUrl} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
-      <meta name="twitter:image" content={`${ogUrl}/images/branding/twitter-1600x900.png`} />
+  <meta name="twitter:image" content={twitterImageUrl} />
       
       {/* Favicons */}
       <link rel="icon" href="/images/branding/favicon.ico" />

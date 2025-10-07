@@ -4,7 +4,7 @@ import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
-export default function About() {
+export default function About({ missionVision }) {
   return (
     <Layout 
       title="About"
@@ -97,6 +97,44 @@ export default function About() {
           ))}
         </Container>
       </Section>
+
+      <Section
+        eyebrow="Mission & Vision"
+        title={missionVision.title}
+        description={missionVision.summary}
+      >
+        <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-glow">
+          <div
+            className="space-y-6 text-base leading-relaxed text-text-muted [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-text-primary [&_blockquote]:border-l-2 [&_blockquote]:border-brand-gold [&_blockquote]:pl-4 [&_blockquote]:text-text-muted [&_strong]:text-text-primary"
+            dangerouslySetInnerHTML={{ __html: missionVision.html }}
+          />
+        </div>
+      </Section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const path = await import("path");
+  const fs = await import("fs/promises");
+  const matter = (await import("gray-matter")).default;
+  const { remark } = await import("remark");
+  const remarkHtml = (await import("remark-html")).default;
+
+  const missionFilePath = path.join(process.cwd(), "content", "pages", "mission-vision.md");
+  const file = await fs.readFile(missionFilePath, "utf8");
+  const { data, content } = matter(file);
+  const processed = await remark().use(remarkHtml).process(content);
+
+  const missionVision = {
+    title: data.title ?? "Mission & Vision",
+    summary: data.summary ?? "",
+    html: processed.toString()
+  };
+
+  return {
+    props: {
+      missionVision
+    }
+  };
 }

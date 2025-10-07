@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import Link from "next/link";
 import { getAllCases, getCaseBySlug } from "@/lib/cases";
 
 export default function CaseStudy({ cs }) {
@@ -46,9 +47,9 @@ export default function CaseStudy({ cs }) {
           <div className="card bg-teal-400/5 border-teal-400/20">
             <p className="text-slate-300">
               <strong>Interested in similar work?</strong>{" "}
-              <a href="/contact" className="underline text-teal-400">
+              <Link href="/contact" className="underline text-teal-400">
                 Get in touch
-              </a>
+              </Link>
               .
             </p>
           </div>

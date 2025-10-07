@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orion Apex — Trades</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #060d1d;
+      --bg-alt: #0b1529;
+      --card: rgba(18, 28, 49, 0.82);
+      --card-inner: rgba(12, 20, 36, 0.68);
+      --card-outline: rgba(242, 193, 78, 0.18);
+      --accent-gold: #f2c14e;
+      --accent-maroon: #a11d33;
+      --accent-navy: #1c2f4d;
+      --muted: #92a3c7;
+      --text: #f5f7ff;
+      --danger: #f05b78;
+      --shadow-card: 0 24px 64px -32px rgba(3, 7, 18, 0.85);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+      background:
+        radial-gradient(1200px 800px at 12% -10%, rgba(161, 29, 51, 0.45) 0, rgba(6, 13, 29, 0) 45%),
+        radial-gradient(900px 700px at 108% 12%, rgba(242, 193, 78, 0.4) 0, rgba(6, 13, 29, 0) 50%),
+        radial-gradient(1000px 800px at -8% 88%, rgba(28, 47, 77, 0.45) 0, rgba(6, 13, 29, 0) 58%),
+        linear-gradient(180deg, rgba(6, 13, 29, 0.94) 0%, rgba(6, 13, 29, 1) 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      --cursor-x: 50%;
+      --cursor-y: 50%;
+      --pointer-x: 50%;
+      --pointer-y: 50%;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -10%;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::before {
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(161, 29, 51, 0.5) 0, rgba(6, 13, 29, 0) 45%),
+        radial-gradient(900px 700px at 110% 10%, rgba(242, 193, 78, 0.55) 0, rgba(6, 13, 29, 0) 40%),
+        linear-gradient(180deg, rgba(6, 13, 29, 0.92) 0%, rgba(6, 13, 29, 0.98) 100%);
+    }
+
+    body::after {
+      -webkit-mask-image: radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.65), transparent 60%);
+      mask-image: radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.65), transparent 60%);
+      background:
+        url("/assets/branding/Gemini_Generated_Image_xkk6ivxkk6ivxkk6.png") center/cover fixed no-repeat,
+        radial-gradient(1200px 800px at 10% -10%, rgba(161, 29, 51, 0.45) 0, rgba(6, 13, 29, 0) 45%),
+        radial-gradient(900px 700px at 110% 10%, rgba(242, 193, 78, 0.35) 0, rgba(6, 13, 29, 0) 40%);
+      opacity: 0.85;
+      mix-blend-mode: screen;
+    }
+
+    .background-video {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.42;
+      filter: saturate(130%) brightness(0.7) contrast(1.05);
+      transform: scale(1.03);
+    }
+
+    .background-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translateZ(0);
+    }
+
+    .aurora-field {
+      position: fixed;
+      inset: -25%;
+      pointer-events: none;
+      z-index: -3;
+      background:
+        radial-gradient(900px 600px at 20% 15%, rgba(242, 193, 78, 0.12), transparent 65%),
+        radial-gradient(800px 520px at 80% 20%, rgba(161, 29, 51, 0.16), transparent 70%),
+        radial-gradient(1000px 640px at 50% 90%, rgba(28, 47, 77, 0.16), transparent 75%);
+      filter: blur(40px) saturate(120%);
+      animation: auroraDrift 26s ease-in-out infinite alternate;
+    }
+
+    .sky-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -4;
+      background-image: linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px), linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 90px 90px;
+  opacity: 0.18;
+  animation: gridShift 40s linear infinite;
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.85), transparent 75%);
+  mask-image: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.85), transparent 75%);
+    }
+    a { color: var(--accent-gold); text-decoration: none; }
+    a:hover { color: #ffe3a0; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 34px 24px 56px; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: 18px 0 0;
+      background: linear-gradient(180deg, rgba(6, 13, 29, 0.96) 0%, rgba(6, 13, 29, 0) 100%);
+    }
+    .nav-aurora {
+      position: relative;
+      width: 100%;
+      margin: 0;
+      padding: 0 24px 18px;
+      border-radius: 0;
+      overflow: visible;
+    }
+    .nav-aurora::before {
+      content: "";
+      position: absolute;
+      inset: -14px;
+      border-radius: 0;
+      background: conic-gradient(from 90deg, rgba(242, 193, 78, 0.16), transparent 40%, rgba(161, 29, 51, 0.25) 65%, transparent 80%, rgba(242, 193, 78, 0.2));
+      filter: blur(28px);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+    .nav-glow {
+      position: absolute;
+      inset: 6px 12px;
+      border-radius: 0;
+      background: linear-gradient(128deg, rgba(13, 22, 40, 0.94), rgba(8, 16, 32, 0.9));
+      border: 1px solid rgba(242, 193, 78, 0.18);
+      box-shadow: 0 26px 60px -32px rgba(3, 7, 18, 0.85);
+      pointer-events: none;
+    }
+    .nav-content { position: relative; z-index: 1; }
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      min-height: 68px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border-radius: 16px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .nav-brand-logo {
+      width: 3.1rem;
+      height: 3.1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(242, 193, 78, 0.22);
+      box-shadow: 0 18px 36px -24px rgba(242, 193, 78, 0.52);
+    }
+    .nav-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+    }
+    .nav-title h1 {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw + 0.45rem, 1.68rem);
+      letter-spacing: 0.34em;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #f8fafc;
+    }
+    .nav-title p {
+      margin: 0;
+      font-size: 0.76rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(199, 210, 230, 0.92);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 193, 78, 0.28);
+      color: #fdf6d3;
+      background: rgba(19, 30, 52, 0.6);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(242, 193, 78, 0.24), transparent, rgba(161, 29, 51, 0.2));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      mix-blend-mode: screen;
+      animation: shimmer 5s linear infinite;
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      background: rgba(11, 22, 40, 0.92);
+      border-color: rgba(242, 193, 78, 0.45);
+      color: #fff9dc;
+      box-shadow: 0 18px 36px -24px rgba(161, 29, 51, 0.32);
+    }
+    .nav-link:hover::before,
+    .nav-link:focus-visible::before {
+      opacity: 0.58;
+    }
+    .nav-link.active {
+      background: linear-gradient(135deg, rgba(242, 193, 78, 0.9), rgba(251, 217, 116, 0.95));
+      color: #2d1700;
+      box-shadow: 0 16px 30px -20px rgba(242, 193, 78, 0.6);
+    }
+    .panel {
+      position: relative; padding: 28px 28px 32px; border-radius: 22px;
+      background: var(--card); border: 1px solid var(--card-outline);
+      box-shadow: var(--shadow-card);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+    .panel::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(242, 193, 78, 0.16), rgba(161, 29, 51, 0.16));
+      opacity: 0; transition: opacity .35s ease; pointer-events: none;
+    }
+    .panel:hover::before { opacity: .45; }
+    h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--accent-gold); }
+    h1 span { display: block; margin-top: 6px; font-size: 12px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); }
+    .panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .status-badge {
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(28, 47, 77, 0.55);
+      border: 1px solid rgba(242, 193, 78, 0.18);
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #f9eac4;
+    }
+    .panel-body {
+      margin-top: 24px; padding: 18px; border-radius: 18px;
+      background: var(--card-inner);
+      border: 1px solid rgba(242, 193, 78, 0.12);
+      display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+    }
+    .control-stack { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+    .action-stack { display: flex; gap: 12px; align-items: center; }
+  .label { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
+  .label-inline { margin-bottom: 0; }
+    .control-block { display: flex; flex-direction: column; gap: 6px; }
+    input, select, button {
+      font-family: inherit; font-size: 14px;
+      border-radius: 12px; border: 1px solid rgba(242, 193, 78, 0.24);
+      padding: 10px 14px;
+      background: rgba(8, 14, 27, 0.9);
+      color: var(--text);
+      transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    input:focus, select:focus {
+      outline: none; border-color: rgba(242, 193, 78, 0.6);
+      box-shadow: 0 0 0 3px rgba(242, 193, 78, 0.18);
+      background: rgba(9, 16, 30, 0.95);
+    }
+    select { appearance: none; }
+    .btn { cursor: pointer; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; border-radius: 14px; padding: 12px 20px; border: none; }
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(242, 193, 78, 0.9), rgba(251, 217, 116, 0.95));
+      color: #291000; box-shadow: 0 12px 24px -18px rgba(242, 193, 78, 0.65);
+    }
+    .btn-primary:hover { box-shadow: 0 18px 32px -16px rgba(242, 193, 78, 0.75); transform: translateY(-1px); }
+    .btn-secondary {
+      background: rgba(28, 47, 77, 0.65);
+      border: 1px solid rgba(242, 193, 78, 0.28);
+      color: #fdf1c5;
+    }
+    .btn-secondary:hover { border-color: rgba(242, 193, 78, 0.48); background: rgba(28, 47, 77, 0.82); }
+    .filter-panel {
+      margin-top: 18px; padding: 18px; border-radius: 18px;
+      border: 1px solid rgba(242, 193, 78, 0.12);
+      background: rgba(11, 21, 41, 0.72);
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    }
+    .checkbox-stack { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .checkbox-stack label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .checkbox-stack input { width: 16px; height: 16px; border-radius: 4px; }
+    .table-shell {
+      margin-top: 20px; border-radius: 20px;
+      border: 1px solid rgba(242, 193, 78, 0.18);
+      background: rgba(12, 20, 36, 0.92);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      max-height: 70vh; overflow: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    thead { position: sticky; top: 0; z-index: 1; }
+    th, td { padding: 12px 14px; text-align: left; }
+    th {
+      background: rgba(11, 21, 39, 0.92);
+      color: var(--muted);
+      font-size: 12px; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+      border-bottom: 1px solid rgba(242, 193, 78, 0.18);
+    }
+    td { border-bottom: 1px solid rgba(242, 193, 78, 0.12); }
+    td:nth-child(2) { color: var(--accent-gold); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+    td:nth-child(4) { text-transform: uppercase; }
+    td.right { text-align: right; }
+    tbody tr:hover { background: rgba(242, 193, 78, 0.08); }
+    .note { margin-top: 14px; font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+    .w-110 { width: 110px; }
+    .w-130 { width: 130px; }
+    .min-160 { min-width: 160px; }
+    @media (max-width: 960px) { .panel-body { flex-direction: column; align-items: stretch; } .action-stack { width: 100%; justify-content: space-between; } }
+    @media (max-width: 680px) {
+      .header-inner { flex-direction: column; align-items: flex-start; gap: 18px; padding: 18px 20px; }
+      .nav-links { width: 100%; justify-content: flex-start; }
+      .nav-brand { gap: 0.9rem; }
+      .nav-brand-logo { width: 2.7rem; height: 2.7rem; }
+      .nav-title h1 { font-size: clamp(1.05rem, 5vw + 0.35rem, 1.4rem); letter-spacing: 0.24em; }
+      .nav-title p { font-size: 0.7rem; letter-spacing: 0.16em; }
+      .panel { padding: 24px; }
+      .panel-body, .filter-panel { padding: 16px; }
+      th, td { padding: 10px 12px; }
+    }
+
+    .app-bg {
+      min-height: 100vh;
+      background: transparent;
+    }
+
+    .app-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(161, 29, 51, 0.3), transparent 55%),
+        radial-gradient(circle at 120% 20%, rgba(242, 193, 78, 0.22), transparent 60%),
+        radial-gradient(circle at -10% 80%, rgba(28, 47, 77, 0.22), transparent 65%);
+      z-index: -1;
+      filter: blur(0.35px);
+    }
+
+    @keyframes auroraDrift {
+      0% { transform: translate3d(-4%, -2%, 0) scale(1.02); }
+      50% { transform: translate3d(4%, 3%, 0) scale(1.06); }
+      100% { transform: translate3d(-3%, 4%, 0) scale(1.03); }
+    }
+
+    @keyframes gridShift {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 90px 90px, 90px 90px; }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+  </style>
+  <link rel="icon" href="/assets/branding/orion-apex-logo.png" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="color-scheme" content="dark" />
+</head>
+<body class="app-bg">
+  <div class="background-video" aria-hidden="true">
+    <video autoplay muted loop preload="auto" poster="/assets/branding/Gemini_Generated_Image_xkk6ivxkk6ivxkk6.png">
+      <source src="/assets/branding/Video_Generation_From_Image%20(1).mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="aurora-field" aria-hidden="true"></div>
+  <div class="sky-grid" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="nav-aurora">
+      <div class="nav-glow" aria-hidden="true"></div>
+      <div class="header-inner nav-content">
+        <div class="nav-brand">
+          <img src="/assets/branding/Gemini_Generated_Image_89t5ue89t5ue89t5.png" alt="Orion Apex" class="nav-brand-logo" onerror="this.style.display='none'">
+          <div class="nav-title">
+            <h1>ORION APEX</h1>
+            <p>Trades Console</p>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a class="nav-link" href="/ui/modern">Live Monitor</a>
+          <a class="nav-link active" href="/ui/trades" aria-current="page">Trades</a>
+          <a class="nav-link" href="/ui/portfolio">Portfolio</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+    <section class="panel">
+      <div class="panel-heading">
+        <h1>Trade Event Ledger<span>Manual refresh tools &amp; filters</span></h1>
+        <div class="status-badge" id="tr2-status">Not loaded</div>
+      </div>
+      <div class="panel-body">
+        <div class="control-stack">
+          <label class="control-block">
+            <span class="label">Tail</span>
+            <input id="tr2-tail" class="w-110" type="number" min="100" step="100" value="5000">
+          </label>
+          <label class="control-block">
+            <span class="label">Symbol filter</span>
+            <input id="tr2-sym" class="min-160" placeholder="e.g., BTC">
+          </label>
+          <label class="control-block">
+            <span class="label">Side</span>
+            <select id="tr2-side">
+              <option value="">All sides</option>
+              <option>BUY</option>
+              <option>SELL</option>
+            </select>
+          </label>
+          <label class="control-block">
+            <span class="label">Min USD notional</span>
+            <input id="tr2-minusd" class="w-130" type="number" min="0" step="0.01" value="0">
+          </label>
+        </div>
+        <div class="action-stack">
+          <button class="btn btn-primary" id="tr2-load">Load Trades</button>
+          <button class="btn btn-secondary" id="tr2-export">Export CSV</button>
+        </div>
+      </div>
+      <div class="filter-panel">
+        <span class="label label-inline">Types</span>
+        <div class="checkbox-stack">
+          <label><input type="checkbox" class="tr2-type" value="order_sent" checked> order_sent</label>
+          <label><input type="checkbox" class="tr2-type" value="order_ack" checked> order_ack</label>
+          <label><input type="checkbox" class="tr2-type" value="fill" checked> fill</label>
+          <label><input type="checkbox" class="tr2-type" value="partial_fill" checked> partial_fill</label>
+          <label><input type="checkbox" class="tr2-type" value="cancel" checked> cancel</label>
+          <label><input type="checkbox" class="tr2-type" value="tp" checked> tp</label>
+          <label><input type="checkbox" class="tr2-type" value="sl" checked> sl</label>
+          <label><input type="checkbox" class="tr2-type" value="position_closed" checked> position_closed</label>
+        </div>
+      </div>
+      <div class="table-shell">
+        <table id="tr2-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Type</th>
+              <th>Symbol</th>
+              <th>Side</th>
+              <th class="right">Qty</th>
+              <th class="right">Price</th>
+              <th class="right">USD Notional</th>
+              <th>Lane</th>
+              <th>Order ID</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note">
+        Note: prefers <code>/logs/trades.jsonl</code>. If unavailable, filters from <code>/logs/events.jsonl</code>.
+      </div>
+    </section>
+  </div>
+  <script>
+    const TR_RX = /^executor\.(order_sent|order_ack|fill|partial_fill|cancel|tp|sl|position_closed)$/;
+    const qs = sel => document.querySelector(sel);
+    const qsa = sel => Array.from(document.querySelectorAll(sel));
+    const parseJSONL = txt => txt.split(/\r?\n/).filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
+    const num = (x, d=6)=>{ const n=Number(x); return isFinite(n)? n.toLocaleString(undefined,{maximumFractionDigits:d}) : "" };
+    const usd = x => { const n=Number(x); return isFinite(n)? n.toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:8}) : "" };
+    const fmtTime = ts => {
+      try{
+        if (typeof ts === "number" && ts>1e12) return new Date(ts).toLocaleString();
+        if (typeof ts === "number" && ts>0) return new Date(ts*1000).toLocaleString();
+        if (typeof ts === "string") return new Date(ts).toLocaleString();
+      }catch{}
+      return "";
+    };
+    async function fetchTrades(tail){
+      try{
+        const r = await fetch(`/logs/trades.jsonl?tail=${encodeURIComponent(tail)}`, {cache:'no-store'});
+        if (r.ok) return parseJSONL(await r.text());
+      }catch{}
+      const r2 = await fetch(`/logs/events.jsonl?tail=${encodeURIComponent(tail)}`, {cache:'no-store'});
+      if (!r2.ok) throw new Error(`HTTP ${r2.status}`);
+      const all = parseJSONL(await r2.text());
+      const execEv = all.filter(o => String(o.type||'') === 'executor.event');
+      const mapped = execEv.map(o => {
+        const phase = String(o.phase||'').toUpperCase();
+        let t = 'order_sent';
+        if (phase === 'ENTRY') t = 'fill';
+        else if (phase === 'TP1' || phase === 'TP2') t = 'tp';
+        else if (phase === 'SL') t = 'sl';
+        else if (phase === 'CANCEL') t = 'cancel';
+        return {
+          ts: o.ts, type: `executor.${t}`,
+          symbol: o.symbol, side: o.side,
+          qty: o.qty ?? o.quantity ?? o.base_qty,
+          price: o.price ?? o.avg_price ?? o.fill_price,
+          usd_notional: o.usd_notional ?? o.notional_usd ?? o.quote_qty,
+          lane: o.lane ?? o.strategy, orderId: o.orderId ?? o.order_id
+        };
+      });
+      const native = all.filter(o => TR_RX.test(String(o.type||'')));
+      return native.length ? native : mapped;
+    }
+    function applyFilters(rows){
+      const sym = (qs('#tr2-sym').value||'').trim().toUpperCase();
+      const side = (qs('#tr2-side').value||'').toUpperCase();
+      const min = Number(qs('#tr2-minusd').value||'0');
+      const types = qsa('.tr2-type').filter(cb=>cb.checked).map(cb=>cb.value);
+      return rows.filter(o=>{
+        const t = String(o.type||'');
+        if (types.length && !types.some(tt => t.endsWith(tt))) return false;
+        if (sym && !String(o.symbol||'').toUpperCase().includes(sym)) return false;
+        if (side && String(o.side||'').toUpperCase() !== side) return false;
+        const usdNot = Number(o.usd_notional ?? o.notional_usd ?? o.quote_qty ?? 0);
+        if (isFinite(min) && min>0 && usdNot < min) return false;
+        return true;
+      });
+    }
+    function render(rows){
+      const tb = qs('#tr2-table tbody'); tb.innerHTML='';
+      const filtered = applyFilters(rows);
+      filtered.forEach(o=>{
+        const tr=document.createElement('tr');
+        const ts=o.ts??o.timestamp??o.asOf??o.date??"";
+        tr.innerHTML = `
+          <td>${fmtTime(ts)}</td>
+          <td>${o.type||""}</td>
+          <td>${o.symbol||""}</td>
+          <td>${o.side||""}</td>
+          <td class="right">${num(o.qty ?? o.quantity ?? o.base_qty,8)}</td>
+          <td class="right">${num(o.price ?? o.avg_price ?? o.fill_price,8)}</td>
+          <td class="right">${usd(o.usd_notional ?? o.notional_usd ?? o.quote_qty)}</td>
+          <td>${o.lane ?? o.strategy ?? ""}</td>
+          <td>${o.orderId ?? o.order_id ?? ""}</td>
+        `;
+        tb.appendChild(tr);
+      });
+      return filtered.length;
+    }
+    function persistFilters(){
+      const obj = {
+        sym: qs('#tr2-sym').value||'',
+        side: qs('#tr2-side').value||'',
+        min: qs('#tr2-minusd').value||'0',
+        types: qsa('.tr2-type').map(cb=>({v:cb.value,c:cb.checked}))
+      };
+      sessionStorage.setItem('tr2_filters', JSON.stringify(obj));
+    }
+    function restoreFilters(){
+      try{
+        const obj = JSON.parse(sessionStorage.getItem('tr2_filters')||'null');
+        if (!obj) return;
+        qs('#tr2-sym').value = obj.sym || '';
+        qs('#tr2-side').value = obj.side || '';
+        qs('#tr2-minusd').value = obj.min || '0';
+        const map = new Map((obj.types||[]).map(x=>[x.v,x.c]));
+        qsa('.tr2-type').forEach(cb=>{ if(map.has(cb.value)) cb.checked = !!map.get(cb.value); });
+      }catch{}
+    }
+    async function load(){
+      const status = qs('#tr2-status'); status.textContent = 'Loading…';
+      const tail = Math.max(100, parseInt(qs('#tr2-tail').value||'5000',10));
+      try{
+        const rows = await fetchTrades(tail);
+        sessionStorage.setItem('tr2_last', JSON.stringify(rows));
+        restoreFilters();
+        const shown = render(rows);
+        status.textContent = `Loaded ${shown} trade events · ${new Date().toLocaleString()}`;
+      }catch(e){
+        status.textContent = `Error: ${e?.message||e}`;
+      }
+    }
+    function exportCSV(){
+      const raw = sessionStorage.getItem('tr2_last');
+      if (!raw){ alert('Load trades first.'); return; }
+      const rows = applyFilters(JSON.parse(raw));
+      const cols = ["ts","type","symbol","side","qty","price","usd_notional","lane","orderId"];
+      const esc = s => {
+        if (s==null) return "";
+        const t=String(s); return /[",\n]/.test(t)?`"${t.replace(/"/g,'""')}"`:t;
+      };
+      const lines = [cols.join(",")].concat(rows.map(o=>[
+        o.ts ?? o.timestamp ?? o.asOf ?? "",
+        o.type ?? "", o.symbol ?? "", o.side ?? "",
+        o.qty ?? o.quantity ?? o.base_qty ?? "",
+        o.price ?? o.avg_price ?? o.fill_price ?? "",
+        o.usd_notional ?? o.notional_usd ?? o.quote_qty ?? "",
+        o.lane ?? o.strategy ?? "", o.orderId ?? o.order_id ?? ""
+      ].map(esc).join(",")));
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([lines.join("\n")],{type:'text/csv'}));
+      a.download = `trades_${Date.now()}.csv`; a.click();
+    }
+    // wire
+    qs('#tr2-load').addEventListener('click', load);
+    qs('#tr2-export').addEventListener('click', exportCSV);
+    ['#tr2-sym','#tr2-side','#tr2-minusd'].forEach(sel=>qs(sel).addEventListener('input', ()=>{ persistFilters(); const raw=sessionStorage.getItem('tr2_last'); if(raw){ render(JSON.parse(raw)); }}));
+    qsa('.tr2-type').forEach(cb=>cb.addEventListener('change', ()=>{ persistFilters(); const raw=sessionStorage.getItem('tr2_last'); if(raw){ render(JSON.parse(raw)); }}));
+    // initial
+    restoreFilters();
+  </script>
+</body>
+
+
+<!doctype html>
+

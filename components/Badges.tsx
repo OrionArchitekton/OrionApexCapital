@@ -1,6 +1,21 @@
-export function Badge({ children, className="" }: { children: React.ReactNode; className?: string }) {
-  return <span className={`badge ${className}`}>{children}</span>;
+import { HTMLAttributes } from "react";
+import clsx from "clsx";
+
+type BadgeProps = HTMLAttributes<HTMLSpanElement>;
+
+export function Badge({ className, children, ...rest }: BadgeProps) {
+  return (
+    <span className={clsx("badge", className)} {...rest}>
+      {children}
+    </span>
+  );
 }
-export const BadgeCap = (p:any)=> <Badge className="badge-cap" {...p} />;
-export const BadgeLift = (p:any)=> <Badge className="badge-lift" {...p} />;
-export const BadgeTtl = (p:any)=> <Badge className="badge-ttl" {...p} />;
+
+const variantBadge = (variantClass: string) =>
+  function VariantBadge({ className, ...rest }: BadgeProps) {
+    return <Badge className={clsx(variantClass, className)} {...rest} />;
+  };
+
+export const BadgeCap = variantBadge("badge-cap");
+export const BadgeLift = variantBadge("badge-lift");
+export const BadgeTtl = variantBadge("badge-ttl");

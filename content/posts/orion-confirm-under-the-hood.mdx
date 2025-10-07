@@ -1,0 +1,64 @@
+---
+title: "Orion Confirm — Under the Hood"
+date: "2025-10-07"
+excerpt: "How we ship publish-ready intelligence with a repeatable MDX pipeline that keeps brand, accessibility, and compliance intact."
+summary: "A look inside the Orion Confirm publishing pipeline and the automation that keeps every insight consistent."
+eyebrow: "MDX Pipeline"
+heroImage: "/media/photos/curated/pexels-fauxels-3184465.jpg"
+heroAlt: "Operators collaborating around an illuminated analytics dashboard."
+highlight: "Every insight passes through Orion Confirm before it touches production — the pipeline is the secret sauce."
+highlightAuthor: "Orion Apex Capital — Editorial Systems"
+ctaHeadline: "Ready to publish with operator rigor?"
+ctaDescription: "Pair your thought leadership with a pipeline that enforces brand, accessibility, and distribution quality."
+ctaActionLabel: "Audit My Pipeline"
+ctaHref: "/contact"
+tags: ["mdx", "automation", "publishing", "process"]
+featured: true
+---
+
+## Why "Confirm" Exists
+
+Our insight cadence used to be a scramble: last-minute formatting fixes, mismatched metadata, and the occasional broken embed. "Orion Confirm" is the automation layer that keeps every post on brand and on schedule.
+
+It starts the moment a strategist commits a draft:
+
+- **Linting & MDX validation** run locally with the same rules the production site expects.
+- **Content heuristics** score readability, link hygiene, and compliance copy blocks.
+- **Image optimization** and alt-text checks make sure creative assets are accessible before merge.
+
+<Callout eyebrow="Guardrails" title="Every post ships with proof" variant="signal">
+  The pipeline attaches a JSON summary to each PR: reading time deltas, linter output, and a diff of SEO metadata. If something drifts — font casing, tone words, or missing disclosures — the reviewer sees it instantly.
+</Callout>
+
+## Five Stages from Draft to Production
+
+1. **Draft Sync** — Writers commit MDX with frontmatter that includes hero art, CTAs, and disclaimers.
+2. **Automated QA** — `confirm check` runs remark/rehype plugins, accessibility tests, and brand token enforcement.
+3. **Preview Deploy** — Vercel preview spins up with production config so stakeholders can comment on a real build.
+4. **Approval Snapshot** — Confirm snapshots OG images, generates social copy, and stores a signed artifact in KV.
+5. **Scheduled Publish** — A simple `confirm publish slug` pushes the post live, updates the sitemap, and pings distribution hooks.
+
+<Callout eyebrow="Automation" title="Compliance stays in the loop" variant="warning">
+  Confirm prompts reviewers for disclosure updates when a post references financial performance. The pipeline blocks merge until legal checkboxes are cleared or a waiver is logged.
+</Callout>
+
+## Tooling Stack
+
+- **Content layer** — MDX with custom components (`<Callout />`, `<InsightImage />`, interactive metrics)
+- **Validation** — remark, rehype, and bespoke brand plugins that enforce casing, glossary usage, and CTA length
+- **Artifacts** — Signed JSON stored in Vercel KV so every post has an audit trail
+- **Distribution** — Webhooks push to email, LinkedIn, and the internal market monitor once the publish flag flips
+
+<Callout eyebrow="Velocity" title="It feels like magic" variant="success">
+  Editors approve in minutes, not hours. The pipeline catches regressions, aligns visuals, and prepares the share assets automatically. Creators stay focused on insight, not formatting.
+</Callout>
+
+## What This Means for Partners
+
+When you hand us research, thought leadership, or operation guides, you get:
+
+- **Predictable releases** keyed to your calendar
+- **Live previews** that non-technical stakeholders can annotate
+- **Brand-safe output** every time, across web, email, and social
+
+Ready to bring the same rigor to your publishing pipeline? Let's align on a confirm-ready setup.
