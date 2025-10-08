@@ -5,6 +5,7 @@ import CaseStudyCard from "@/components/CaseStudyCard";
 import Button from "@/components/Button";
 import FilterBar from "@/components/FilterBar";
 import { Section } from "@/components/Section";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import Head from "next/head";
 import { getAllCases } from "@/lib/cases";
 import { generateFreelanceServiceJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
@@ -48,6 +49,13 @@ export default function Freelance({ cases }) {
         url="/freelance"
       >
         <Section containerClassName="space-y-12">
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Services", href: "/services" },
+              { label: "Client Services" }
+            ]}
+          />
           <div className="panel panel--accent panel--static p-10">
             <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
               <div className="space-y-6 lg:max-w-3xl">

@@ -3,19 +3,13 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import taglines from "@/public/taglines.json";
 
-const DEFAULT_BADGES = [
-  { label: "Client Projects Delivered", value: "15+" },
-  { label: "On-Time Delivery", value: "97%" },
-  { label: "Years Operating", value: "3+" }
-];
-
 const FEATURE_BULLETS = [
   "Systematic wealth operations with AI + human oversight",
   "Live capital dashboards with compliance-ready reporting",
   "Boutique operator pods that ship outcomes, not decks"
 ];
 
-export default function Hero({ badges = DEFAULT_BADGES }) {
+export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const rotatingTaglines = useMemo(() => {
     if (Array.isArray(taglines.rotation) && taglines.rotation.length > 0) {
@@ -145,14 +139,6 @@ export default function Hero({ badges = DEFAULT_BADGES }) {
                       <path d="M12 19V5M5 12l7-7 7 7" />
                     </svg>
                   </div>
-                </div>
-                <div className="grid gap-4">
-                  {badges.map(({ label, value }) => (
-                    <div key={label} className="panel panel--inline panel--static p-5">
-                      <p className="text-xs uppercase tracking-[0.3em] text-text-muted/80">{label}</p>
-                      <p className="mt-2 text-3xl font-semibold text-text-primary">{value}</p>
-                    </div>
-                  ))}
                 </div>
                 <div className="panel panel--inline panel--static p-5 text-left">
                   <p className="text-xs uppercase tracking-[0.3em] text-text-muted/80">Confidence Rating</p>
