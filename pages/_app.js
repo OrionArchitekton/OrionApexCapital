@@ -49,6 +49,18 @@ export default function MyApp({ Component, pageProps }) {
   }, [tryPlayVideo]);
 
   useEffect(() => {
+    const handleVisibility = () => {
+      if (document.hidden) return;
+      tryPlayVideo();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, [tryPlayVideo]);
+
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
