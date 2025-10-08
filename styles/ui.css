@@ -623,9 +623,28 @@ select.form-field {
   .nav-mobile { display: none !important; }
 }
 
+/* Reduce ambient animation for motion-sensitive visitors */
 @media (prefers-reduced-motion: reduce) {
   .nav-link,
   .nav-toggle,
   .nav-aurora::before,
-  .nav-glow { transition: none !important; animation: none !important; }
+  .nav-glow {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .aurora-field,
+  .sky-grid {
+    animation: none !important;
+    opacity: 0.4;
+  }
+
+  [data-reduce-motion="true"] .aurora-field,
+  [data-reduce-motion="true"] .sky-grid {
+    opacity: 0.25;
+  }
+
+  .panel::after {
+    transition: none !important;
+  }
 }

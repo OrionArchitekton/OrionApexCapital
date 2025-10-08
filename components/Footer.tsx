@@ -110,10 +110,13 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-col justify-between gap-4 border-t border-white/5 pt-6 text-xs text-text-muted sm:flex-row">
-          <p>© {new Date().getFullYear()} Orion Apex Capital. All rights reserved.</p>
+          {/* Preserve copyright glyph without relying on OS encoding */}
+          <p>
+            &copy; {new Date().getFullYear()} Orion Apex Capital. All rights reserved.
+          </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/legal" className="hover:text-brand-copper">Legal</Link>
-            <span>CLS &lt; 0.1 • AA Contrast</span>
+            <span aria-label="Core experience metrics">CLS &lt; 0.1 &bull; AA contrast</span>
             <Link href="#top" className="hover:text-brand-copper">Back to top</Link>
           </div>
         </div>

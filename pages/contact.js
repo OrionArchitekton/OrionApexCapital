@@ -34,15 +34,15 @@ export default function Contact() {
               <p className="text-base text-text-muted sm:text-lg">
                 Tell us about your objectives, constraints, and timeline. We reply within one to two business days to schedule discovery or share next steps.
               </p>
-              <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-sm text-text-onCopper">
-                <p className="text-xs uppercase tracking-[0.32em]">What to include</p>
+              <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-sm text-text-primary">
+                <p className="text-xs uppercase tracking-[0.32em] text-brand-gold/80">What to include</p>
                 <ul className="space-y-3">
                   {[
                     "Scope of work or trading mandate",
                     "Capital allocation or operating budget",
                     "Compliance, governance, or timeline constraints"
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-text-onCopper/90">
+                    <li key={item} className="flex items-start gap-3 text-text-primary/90">
                       <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                       {item}
                     </li>

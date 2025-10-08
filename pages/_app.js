@@ -11,7 +11,9 @@ export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const videoRef = useRef(null);
   const [autoplayFailed, setAutoplayFailed] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
+  // Honour user motion preferences to keep ambient layers comfortable
   useEffect(() => {
     const handleRouteChange = (url) => {
       track("page_view", { page_path: url });
@@ -25,9 +27,31 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(media.matches);
+    updatePreference();
+    if (typeof media.addEventListener === "function") {
+      media.addEventListener("change", updatePreference);
+      return () => media.removeEventListener("change", updatePreference);
+    }
+    if (typeof media.addListener === "function") {
+      media.addListener(updatePreference);
+      return () => media.removeListener(updatePreference);
+    }
+    return undefined;
+  }, []);
+
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || prefersReducedMotion) {
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+      return;
+    }
 
     try {
       video.muted = true;
@@ -42,12 +66,20 @@ export default function MyApp({ Component, pageProps }) {
       console.warn("Background video playback exception", error);
       setAutoplayFailed(true);
     }
-  }, []);
+  }, [prefersReducedMotion]);
 
   const resumePlayback = useCallback(() => {
+    if (prefersReducedMotion) {
+      const video = videoRef.current;
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+      return;
+    }
     if (typeof document !== "undefined" && document.hidden) return;
     tryPlayVideo();
-  }, [tryPlayVideo]);
+  }, [prefersReducedMotion, tryPlayVideo]);
 
   useEffect(() => {
     resumePlayback();
@@ -62,17 +94,17 @@ export default function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || prefersReducedMotion) return;
 
     video.addEventListener("loadeddata", resumePlayback, { once: true });
 
     return () => {
       video.removeEventListener("loadeddata", resumePlayback);
     };
-  }, [resumePlayback]);
+  }, [resumePlayback, prefersReducedMotion]);
 
   useEffect(() => {
-    if (!autoplayFailed) return;
+    if (!autoplayFailed || prefersReducedMotion) return;
 
     const handleUserInteract = () => {
       const video = videoRef.current;
@@ -93,7 +125,7 @@ export default function MyApp({ Component, pageProps }) {
       window.removeEventListener("pointerdown", handleUserInteract);
       window.removeEventListener("keydown", handleUserInteract);
     };
-  }, [autoplayFailed]);
+  }, [autoplayFailed, prefersReducedMotion]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -159,22 +191,30 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <div className="background-canvas" aria-hidden="true" data-autoplay-failed={autoplayFailed ? "true" : "false"}>
-        <div className="background-video-layer">
-          <video
-            ref={videoRef}
-            className="background-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="/images/branding/hero-1920x1080.jpg"
-          >
-            <source src={BACKGROUND_VIDEO_SRC} type="video/mp4" />
-          </video>
-          <div className="background-video-overlay" />
-        </div>
+      <div
+        className="background-canvas"
+        aria-hidden="true"
+        data-autoplay-failed={autoplayFailed ? "true" : "false"}
+        data-reduce-motion={prefersReducedMotion ? "true" : "false"}
+      >
+        {/* Skip video renderer when reduced-motion is enabled */}
+        {!prefersReducedMotion && (
+          <div className="background-video-layer">
+            <video
+              ref={videoRef}
+              className="background-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster="/images/branding/hero-1920x1080.jpg"
+            >
+              <source src={BACKGROUND_VIDEO_SRC} type="video/mp4" />
+            </video>
+            <div className="background-video-overlay" />
+          </div>
+        )}
         <div className="aurora-field" />
         <div className="sky-grid" />
       </div>

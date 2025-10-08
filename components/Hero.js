@@ -76,7 +76,7 @@ export default function Hero({ badges = DEFAULT_BADGES }) {
                 </motion.span>
               </AnimatePresence>
               <span className="hidden text-xs uppercase tracking-[0.32em] text-text-muted/90 md:inline-flex">
-                Boutique digital asset operators • Confidential engagements only
+                Boutique digital asset operators &bull; Confidential engagements only
               </span>
             </motion.div>
 

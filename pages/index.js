@@ -16,6 +16,7 @@ const BADGE_2_LABEL = process.env.NEXT_PUBLIC_BADGE_2_LABEL ?? "On-Time Delivery
 const BADGE_2_VALUE = process.env.NEXT_PUBLIC_BADGE_2_VALUE ?? "97%";
 const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Years Operating";
 const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
+const BULLET = "\u2022"; // Shared bullet token keeps ASCII-only source
 
 export default function Home({ posts }) {
   const heroBadges = [
@@ -46,7 +47,7 @@ export default function Home({ posts }) {
           {[{
             href: "/services#crypto",
             title: "Crypto Trading",
-            tagline: "High Frequency • Low Risk",
+            tagline: `"High Frequency ${BULLET} Low Risk`",
             gradient: "from-brand-copper/15 via-transparent to-brand-blue/10",
             accentBg: "bg-brand-copper/20",
             dotClass: "bg-brand-copper",
@@ -60,7 +61,7 @@ export default function Home({ posts }) {
           {
             href: "/services#websites",
             title: "Website Investing",
-            tagline: "Digital Assets • Growth Hacking",
+            tagline: "Digital Assets \� Growth Hacking",
             gradient: "from-brand-blue/20 via-transparent to-brand-gold/10",
             accentBg: "bg-brand-blue/15",
             dotClass: "bg-brand-blue",
@@ -298,3 +299,4 @@ export default function Home({ posts }) {
 export async function getStaticProps() {
   return { props: { posts: getAllPosts() } };
 }
+
