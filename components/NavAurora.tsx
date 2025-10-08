@@ -14,11 +14,7 @@ const NAV_LINKS = [
 export default function NavAurora() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-    // ARIA booleans should be strings to satisfy older assistive tech
-  const expanded = open ? "true" : "false";
-  const hidden = open ? "false" : "true";
-  const expandedAttrs = open ? { "aria-expanded": "true" as const } : { "aria-expanded": "false" as const };
-  const hiddenAttrs = open ? { "aria-hidden": "false" as const } : { "aria-hidden": "true" as const };
+  const navListId = "primary-navigation";
   const mobileNavId = "mobile-navigation";
 
   useEffect(() => {
@@ -35,6 +31,15 @@ export default function NavAurora() {
     if (current.startsWith(`${href}/`)) return true;
     return false;
   };
+
+  const handleToggle = () => setOpen((prev) => !prev);
+
+  const mobileNavLinks = NAV_LINKS.map(({ href, label, description }) => (
+    <Link key={href} href={href} className={`nav-link nav-link-mobile${isActive(href) ? " active" : ""}`}>
+      <span className="nav-link-label">{label}</span>
+      <span className="nav-link-sub">{description}</span>
+    </Link>
+  ));
 
   return (
     <header className="nav-aurora glass shadow-lg">
@@ -67,31 +72,44 @@ export default function NavAurora() {
           ))}
         </nav>
 
-        {/* axe expects literal aria values; converted boolean string via expanded */}
-        {/* eslint-disable-next-line axe/aria */}
-        <button
-          type="button"
-          className={`nav-toggle${open ? " open" : ""}`}
-          aria-label="Toggle navigation"
-          aria-expanded={expanded}
-          aria-controls={mobileNavId}
-          {...expandedAttrs}
-        >
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
-        </button>
+        {open ? (
+          <button
+            type="button"
+            className="nav-toggle open"
+            aria-label="Toggle navigation"
+            aria-controls={mobileNavId}
+            aria-expanded="true"
+            onClick={handleToggle}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label="Toggle navigation"
+            aria-controls={mobileNavId}
+            aria-expanded="false"
+            onClick={handleToggle}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </button>
+        )}
       </div>
 
-  {/* eslint-disable-next-line axe/aria */}
-  <div className={`nav-mobile${open ? " open" : ""}`} id={mobileNavId} aria-hidden={hidden}>
-        {NAV_LINKS.map(({ href, label, description }) => (
-      <div className={`nav-mobile${open ? " open" : ""}`} id={mobileNavId} {...hiddenAttrs}>
-            <span className="nav-link-label">{label}</span>
-            <span className="nav-link-sub">{description}</span>
-          </Link>
-        ))}
-      </div>
+      {open ? (
+        <div className="nav-mobile open" id={mobileNavId} aria-hidden="false">
+          {mobileNavLinks}
+        </div>
+      ) : (
+        <div className="nav-mobile" id={mobileNavId} aria-hidden="true">
+          {mobileNavLinks}
+        </div>
+      )}
     </header>
   );
 }
