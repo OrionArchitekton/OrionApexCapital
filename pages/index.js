@@ -107,7 +107,7 @@ export default function Home({ posts }) {
         </div>
         <div className="grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <div className="panel panel--subtle relative h-full overflow-hidden p-0">
+            <div className="panel panel--accent relative h-full overflow-hidden p-0 floating-1">
               <Image
                 src="/media/photos/curated/pexels-fauxels-3184465.jpg"
                 alt="Executives shaking hands over a strategy session with notebooks on the table."
@@ -117,7 +117,7 @@ export default function Home({ posts }) {
               <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/80 via-brand-navy/30 to-transparent" aria-hidden="true"></div>
             </div>
           </div>
-          <div className="panel panel--subtle lg:col-span-5 flex flex-col gap-6 p-8">
+          <div className="panel panel--aurora lg:col-span-5 flex flex-col gap-6 p-8 floating-2">
             <h3 className="font-display text-2xl text-text-primary md:text-3xl">Partnership-first execution</h3>
             <p className="text-sm text-text-muted md:text-base">
               Every mandate opens with measured discovery. We embed with stakeholders, navigate compliance, and translate market intelligence into accountable operating plans.
@@ -147,18 +147,18 @@ export default function Home({ posts }) {
         description="Transformed operational efficiency through data visualization and automated reporting systems tuned for franchise scale."
       >
         <div className="grid gap-8 lg:grid-cols-12">
-          <div className="panel panel--accent lg:col-span-7 flex flex-col gap-8 p-8 backdrop-blur-xl">
+          <div className="panel panel--accent lg:col-span-7 flex flex-col gap-8 p-8 backdrop-blur-xl floating-1">
             <Featured />
             <dl className="grid gap-6 sm:grid-cols-3">
-              <div className="panel panel--inline panel--static p-4 text-center">
+              <div className="panel panel--kpi panel--inline panel--static p-4 text-center">
                 <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Retention increase</dt>
                 <dd className="mt-2 text-2xl font-semibold text-brand-gold">+2.8pp</dd>
               </div>
-              <div className="panel panel--inline panel--static p-4 text-center">
+              <div className="panel panel--kpi panel--inline panel--static p-4 text-center">
                 <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Weekly time saved</dt>
                 <dd className="mt-2 text-2xl font-semibold text-brand-blue">6-8 hrs</dd>
               </div>
-              <div className="panel panel--inline panel--static p-4 text-center">
+              <div className="panel panel--kpi panel--inline panel--static p-4 text-center">
                 <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Data accuracy</dt>
                 <dd className="mt-2 text-2xl font-semibold text-text-primary">100%</dd>
               </div>
@@ -172,7 +172,7 @@ export default function Home({ posts }) {
               </Button>
             </div>
           </div>
-          <div className="panel panel--subtle relative lg:col-span-5 h-80 p-0 md:h-full">
+          <div className="panel panel--accent relative lg:col-span-5 h-80 p-0 md:h-full floating-3">
             <Image
               src="/media/photos/curated/pexels-quintin-gellar-313782.jpg"
               alt="City skyline at night with illuminated financial district skyscrapers."
@@ -181,7 +181,7 @@ export default function Home({ posts }) {
               sizes="(max-width: 768px) 100vw, 40vw"
             />
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-navy/20 via-brand-navy/40 to-brand-navy/90" aria-hidden="true"></div>
-            <div className="panel panel--inline panel--static absolute bottom-6 left-6 right-6 p-6 backdrop-blur">
+            <div className="panel panel--aurora panel--inline panel--static absolute bottom-6 left-6 right-6 p-6 backdrop-blur">
               <div className="flex items-center justify-between text-sm text-text-muted">
                 <span>Monthly revenue</span>
                 <span className="text-brand-gold font-semibold">Up +18.2%</span>
@@ -211,13 +211,13 @@ export default function Home({ posts }) {
         description="Deep analysis and strategic frameworks from the front lines of modern capital markets."
       >
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {posts.slice(0, 3).map((post) => (
+          {posts.slice(0, 3).map((post, index) => (
             <InsightPreviewCard
               key={post.slug}
               post={post}
               ctaLabel="Read analysis"
               showTags={false}
-              className="h-full"
+              className={`h-full panel--aurora floating-${index + 1}`}
             />
           ))}
         </div>
@@ -230,7 +230,7 @@ export default function Home({ posts }) {
 
       {/* Premium Closing CTA */}
       <section className="container py-24">
-  <div className="panel panel--accent panel--static relative overflow-hidden text-center">
+  <div className="panel panel--accent panel--aurora relative overflow-hidden text-center floating-2">
           <Image
             src="/media/photos/curated/pexels-philippe-donn-1257860.jpg"
             alt="Explorer on a mountain ridge under the Milky Way."
@@ -242,7 +242,7 @@ export default function Home({ posts }) {
           <div className="absolute inset-0 overlay-gradient" aria-hidden="true"></div>
 
           <div className="relative z-10 flex flex-col gap-10 p-12 md:p-16">
-            <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/15 px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-brand-gold">
+            <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/15 px-6 py-3 text-xs font-semibold uppercase tracking-[0.35em] text-brand-gold pulse-dot">
               Elite Partnership
             </span>
             <h3 className="mx-auto max-w-3xl font-display text-4xl leading-tight text-text-primary md:text-6xl">
@@ -266,19 +266,19 @@ export default function Home({ posts }) {
               </Button>
             </div>
             <div className="grid grid-cols-1 gap-6 border-t border-white/10 pt-8 md:grid-cols-3">
-              <div className="panel panel--inline panel--static p-6">
+              <div className="panel panel--kpi panel--inline panel--static p-6">
                 <div className="text-lg font-semibold text-brand-gold">Confidential</div>
                 <p className="mt-2 text-xs uppercase tracking-[0.25em] text-text-muted">
                   NDA protected engagements
                 </p>
               </div>
-              <div className="panel panel--inline panel--static p-6">
+              <div className="panel panel--kpi panel--inline panel--static p-6">
                 <div className="text-lg font-semibold text-brand-blue">Exclusive</div>
                 <p className="mt-2 text-xs uppercase tracking-[0.25em] text-text-muted">
                   Limited client roster
                 </p>
               </div>
-              <div className="panel panel--inline panel--static p-6">
+              <div className="panel panel--kpi panel--inline panel--static p-6">
                 <div className="text-lg font-semibold text-text-primary">Results-driven</div>
                 <p className="mt-2 text-xs uppercase tracking-[0.25em] text-text-muted">
                   Performance-based outcomes

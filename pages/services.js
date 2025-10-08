@@ -1,16 +1,14 @@
 import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
 import Head from "next/head";
-import clsx from "clsx";
 import { generateServicesItemListJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
 import { Section } from "@/components/Section";
 import { motion } from "framer-motion";
 import { Container } from "@/components/Container";
-import { Featured } from "@/components/Featured";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import Button from "@/components/Button";
 
-export default function Services({ coreOps }) {
+export default function Services() {
   const servicesJsonLd = generateServicesItemListJsonLd();
 
   return (
@@ -34,13 +32,13 @@ export default function Services({ coreOps }) {
               { label: "Core Operations" }
             ]}
           />
-          <div className="panel panel--accent panel--static overflow-hidden p-10">
+          <div className="panel panel--accent panel--aurora overflow-hidden p-10 floating-1">
             <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
               <div className="space-y-7">
                 <div className="flex items-center gap-4">
                   <Logo variant="crestWhite" size={36} />
                   <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator lanes</p>
+                    <p className="text-xs uppercase tracking-[0.35em] text-brand-copper pulse-dot">Operator lanes</p>
                     <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
                       Mandates tuned for precision capital
                     </h1>
@@ -54,8 +52,8 @@ export default function Services({ coreOps }) {
                     { label: "Discovery to launch", value: "14-30 days" },
                     { label: "Engagement length", value: "3-9 months" },
                     { label: "Operator pods", value: "4-person team" }
-                  ].map(({ label, value }) => (
-                    <div key={label} className="panel panel--inline panel--static p-4 text-left">
+                  ].map(({ label, value }, index) => (
+                    <div key={label} className={`panel panel--kpi panel--inline panel--static p-4 text-left floating-${index + 1}`}>
                       <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                       <p className="mt-2 text-xl font-semibold text-text-primary">{value}</p>
                     </div>
@@ -99,89 +97,12 @@ export default function Services({ coreOps }) {
           </div>
         </Section>
 
+
+
         <Section
-          eyebrow="Service Catalog"
+          eyebrow="Three Core Lanes"
           title="Disciplined operator programs"
-          description="Each vertical includes structured discovery, execution roadmaps, and post-engagement support."
-        >
-          <Container className="grid gap-8 lg:grid-cols-12">
-            {[{
-              id: "crypto",
-              title: "Crypto Trading",
-              summary: "Short-duration systems with strict risk governance and volatility gates.",
-              bullets: [
-                "2:1 minimum risk-to-reward; ATR-anchored stops",
-                "Automated execution playbooks and post-entry management",
-                "Focus symbols: BTC, ETH, SOL, XRP, LINK, LTC, BCH, DOGE"
-              ],
-              featured: true
-            },
-            {
-              id: "websites",
-              title: "Digital Asset Investing",
-              summary: "Acquire + Improve + Recycle framework for content and commerce properties.",
-              bullets: [
-                "Due diligence and valuation frameworks",
-                "Growth optimization sprints across UX, monetization, and search",
-                "Exit planning with operator-friendly transitions"
-              ],
-              featured: false
-            }].map(({ id, title, summary, bullets, featured }) => (
-              <article
-                key={id}
-                id={id}
-                className={clsx(
-                  "panel flex flex-col gap-6 p-8 transition duration-300",
-                  featured ? "panel--accent" : "panel--subtle",
-                  "lg:col-span-6"
-                )}
-              >
-                <div className="flex items-center gap-3">
-                  <h2 className="text-2xl font-semibold text-text-primary">{title}</h2>
-                  {featured && <Featured />}
-                </div>
-                <p className="text-sm leading-relaxed text-text-muted">{summary}</p>
-                <ul className="space-y-3 text-sm text-text-muted">
-                  {bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-3">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto">
-                  <Button href={`/contact?interest=${encodeURIComponent(title)}`} variant="secondary" className="rounded-full">
-                    Scope engagement
-                  </Button>
-                </div>
-              </article>
-            ))}
-          </Container>
-        </Section>
-
-        <Section className="pt-0" containerClassName="space-y-6">
-          <Container className="panel panel--inline panel--static p-8">
-            <h3 className="text-lg font-semibold text-text-primary">Disclaimer</h3>
-            <p className="mt-2 text-sm text-text-muted">
-              Nothing here is a solicitation to invest or an offer of securities. Engagements proceed only after compliance reviews and mutual scope alignment.
-            </p>
-          </Container>
-        </Section>
-
-        <Section eyebrow="Core Operations" title={coreOps.title} className="pt-0">
-          <div className="panel panel--subtle panel--static p-8">
-            <div
-              className="space-y-6 text-base leading-relaxed text-text-muted [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-text-primary [&_ul]:space-y-2 [&_li]:pl-4 [&_li]:text-sm [&_li]:text-text-muted [&_li]:before:-ml-3 [&_li]:before:mr-1 [&_li]:before:text-brand-gold [&_li]:before:content-['\\2022']"
-              dangerouslySetInnerHTML={{ __html: coreOps.html }}
-            />
-          </div>
-        </Section>
-
-        <Section
-          eyebrow="Strategic Pillars"
-          title="Core operator pillars"
-          description="AI-powered trading intelligence, accretive digital asset cycles, and applied AI integration for execution leverage."
-          className="pt-0"
+          description="AI-powered trading intelligence, digital asset acquisition cycles, and custom AI integration — each with embedded governance and risk discipline."
         >
           <Container className="grid gap-8 lg:grid-cols-12">
             {[{
@@ -243,35 +164,46 @@ export default function Services({ coreOps }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="panel panel--subtle flex flex-col gap-6 p-8 lg:col-span-4"
+                className={`panel panel--accent panel--aurora flex flex-col gap-8 p-10 lg:col-span-4 floating-${id === 'ai-trading' ? '1' : id === 'digital-assets' ? '2' : '3'}`}
               >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15 ring-1 ring-brand-gold/30">
+                <div className="space-y-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-gold/20 ring-2 ring-brand-gold/40">
                     {icon}
                   </div>
-                  <span className="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-brand-gold/80">{label}</span>
+                  <div>
+                    <h3 className="text-2xl font-semibold text-text-primary mb-2">{label}</h3>
+                    {body && (
+                      <p className="text-base leading-relaxed text-text-muted/90">{body}</p>
+                    )}
+                  </div>
                 </div>
-                <div className="space-y-3">
-                  <h3 className="text-xl font-semibold text-text-primary">{headline}</h3>
-                  {body && (
-                    <p className="text-sm leading-relaxed text-text-muted">{body}</p>
-                  )}
-                </div>
-                <ul className="space-y-2 text-sm text-text-muted">
-                  {bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" aria-hidden="true" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto pt-2">
-                  <Button href={cta.href} variant="secondary" className="rounded-full text-xs uppercase tracking-[0.3em]">
-                    {cta.label}
-                  </Button>
+                <div className="space-y-4">
+                  <ul className="space-y-4 text-sm text-text-muted">
+                    {bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-4">
+                        <span className="mt-2 h-2 w-2 rounded-full bg-brand-copper flex-shrink-0" aria-hidden="true" />
+                        <span className="leading-relaxed">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="pt-4 border-t border-white/10">
+                    <Button href={cta.href} variant="primary" className="w-full justify-center px-6 py-3 text-sm font-semibold">
+                      {cta.label}
+                    </Button>
+                  </div>
                 </div>
               </motion.div>
             ))}
+          </Container>
+        </Section>
+
+        <Section className="pt-0">
+          <Container className="panel panel--subtle panel--static p-8 text-center">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">Risk Disclosure</h3>
+            <p className="text-sm text-text-muted max-w-3xl mx-auto">
+              Nothing here constitutes investment advice or a solicitation to invest. All engagements proceed only after compliance reviews, 
+              mutual scope alignment, and appropriate documentation. Past performance does not guarantee future results.
+            </p>
           </Container>
         </Section>
       </Layout>
@@ -280,23 +212,7 @@ export default function Services({ coreOps }) {
 }
 
 export async function getStaticProps() {
-  const path = await import("path");
-  const fs = await import("fs/promises");
-  const matter = (await import("gray-matter")).default;
-  const { remark } = await import("remark");
-  const remarkHtml = (await import("remark-html")).default;
-
-  const coreOpsPath = path.join(process.cwd(), "content", "sections", "core-operations.md");
-  const file = await fs.readFile(coreOpsPath, "utf8");
-  const { data, content } = matter(file);
-  const processed = await remark().use(remarkHtml).process(content);
-
   return {
-    props: {
-      coreOps: {
-        title: data.title ?? "Core Operations",
-        html: processed.toString()
-      }
-    }
+    props: {}
   };
 }

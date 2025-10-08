@@ -53,7 +53,7 @@ export default function Hero() {
               initial={fadeUp.initial}
               animate={fadeUp.animate}
               transition={transition}
-              className="flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-between"
+              className="flex flex-col items-center gap-4"
             >
               <AnimatePresence mode="wait">
                 <motion.span
@@ -69,65 +69,48 @@ export default function Hero() {
                   {rotatingTaglines[taglineIndex] ?? taglines.micro}
                 </motion.span>
               </AnimatePresence>
-              <span className="hidden text-xs uppercase tracking-[0.32em] text-text-muted/90 md:inline-flex">
-                Boutique digital asset operators &bull; Confidential engagements only
-              </span>
             </motion.div>
 
-            <div className="grid gap-12 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
+            <div className="grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-center">
               <motion.div
                 initial={fadeUp.initial}
                 animate={fadeUp.animate}
                 transition={{ ...transition, delay: 0.08 }}
-                className="flex flex-col items-center gap-6 text-center md:items-start md:text-left"
+                className="flex flex-col items-center gap-8 text-center md:items-start md:text-left"
               >
-                <div className="flex flex-col items-center gap-3 md:items-start">
+                <div className="flex flex-col items-center gap-4 md:items-start">
                   <h1 className="max-w-2xl font-display text-4xl leading-tight text-text-primary sm:text-5xl md:text-6xl">
                     {taglines.signature}
                   </h1>
-                  <p className="max-w-2xl text-base text-text-muted md:text-lg">
+                  <p className="max-w-lg text-lg text-text-muted/80 md:text-xl">
                     {taglines.short}
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center gap-4 sm:flex-row md:items-center">
-                  <Link href="/services#ai-trading" className="btn btn-primary min-w-[180px] text-sm uppercase tracking-[0.28em]">
+                <div className="flex flex-col items-center gap-4 sm:flex-row">
+                  <Link href="/services#ai-trading" className="btn btn-primary min-w-[200px] px-8 py-3 text-sm uppercase tracking-[0.28em]">
                     Explore Strategies
                   </Link>
-                  <Link href="/contact" className="btn btn-secondary min-w-[180px] text-sm uppercase tracking-[0.28em]">
+                  <Link href="/contact" className="btn btn-secondary min-w-[200px] px-8 py-3 text-sm uppercase tracking-[0.28em]">
                     Partner With Us
                   </Link>
                 </div>
-
-                <motion.ul
-                  initial={fadeUp.initial}
-                  animate={fadeUp.animate}
-                  transition={{ ...transition, delay: 0.18 }}
-                  className="grid w-full gap-3 text-left text-sm text-text-muted md:max-w-xl"
-                >
-                  {FEATURE_BULLETS.map((bullet) => (
-                    <li key={bullet} className="panel panel--inline panel--static flex items-center gap-3 p-4">
-                      <span className="inline-flex h-2 w-2 rounded-full bg-[rgba(242,193,78,0.8)]" aria-hidden="true" />
-                      <span className="text-sm leading-relaxed text-text-primary/90">{bullet}</span>
-                    </li>
-                  ))}
-                </motion.ul>
               </motion.div>
 
               <motion.aside
                 initial={fadeUp.initial}
                 animate={fadeUp.animate}
-                transition={{ ...transition, delay: 0.22 }}
-                className="panel panel--subtle panel--static relative flex h-full flex-col justify-between gap-6 p-8"
+                transition={{ ...transition, delay: 0.16 }}
+                className="panel panel--accent relative flex h-full flex-col gap-6 p-6"
               >
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs uppercase tracking-[0.32em] text-text-muted/80">Mission Control</p>
-                    <p className="mt-2 text-2xl font-semibold text-text-primary">Operator Snapshot</p>
+                    <p className="mt-2 text-xl font-semibold text-text-primary">Operator Snapshot</p>
                   </div>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(242,193,78,0.35)] bg-[rgba(18,28,49,0.65)] text-[rgba(242,193,78,0.9)]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(242,193,78,0.35)] bg-[rgba(18,28,49,0.65)] text-[rgba(242,193,78,0.9)]">
                     <svg
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -140,31 +123,17 @@ export default function Hero() {
                     </svg>
                   </div>
                 </div>
-                <div className="space-y-4">
-                  <div className="grid gap-3 text-center">
-                    {[
-                      { label: "Client Projects Delivered", value: "15+" },
-                      { label: "On-Time Delivery", value: "97%" },
-                      { label: "Years Operating", value: "3+" }
-                    ].map(({ label, value }) => (
-                      <div key={label} className="panel panel--inline panel--static p-3 text-left">
-                        <p className="text-xs uppercase tracking-[0.28em] text-text-muted/80">{label}</p>
-                        <p className="mt-1 text-xl font-semibold text-text-primary">{value}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="panel panel--inline panel--static p-4 text-left">
-                    <p className="text-xs uppercase tracking-[0.3em] text-text-muted/80">Confidence Rating</p>
-                    <div className="mt-3 flex items-center gap-3">
-                      <div className="h-2 flex-1 overflow-hidden rounded-full bg-brand-gold/15">
-                        <div className="h-full w-[82%] rounded-full bg-gradient-to-r from-[rgba(242,193,78,0.8)] via-[rgba(161,29,51,0.85)] to-[rgba(28,47,77,0.9)]" />
-                      </div>
-                      <span className="text-sm font-semibold text-text-primary/90">82%</span>
+                <div className="grid gap-3 text-center">
+                  {[
+                    { label: "Projects", value: "15+" },
+                    { label: "On-Time", value: "97%" },
+                    { label: "Operating", value: "3+ yrs" }
+                  ].map(({ label, value }) => (
+                    <div key={label} className="panel panel--inline panel--static p-3 text-center">
+                      <p className="text-xs uppercase tracking-[0.28em] text-text-muted/80">{label}</p>
+                      <p className="mt-1 text-lg font-semibold text-text-primary">{value}</p>
                     </div>
-                    <p className="mt-3 text-xs text-text-muted">
-                      Active mandates across DeFi, digital assets, and revenue-backed transformations.
-                    </p>
-                  </div>
+                  ))}
                 </div>
               </motion.aside>
             </div>
