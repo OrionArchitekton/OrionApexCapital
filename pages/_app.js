@@ -10,6 +10,7 @@ const BACKGROUND_VIDEO_SRC = "/media/videos/curated/video_generation_from_image.
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const videoRef = useRef(null);
+  const [allowMotion, setAllowMotion] = useState(true);
   const [autoplayFailed, setAutoplayFailed] = useState(false);
 
   useEffect(() => {
@@ -25,13 +26,20 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotionPreference = () => setAllowMotion(!mediaQuery.matches);
+    syncMotionPreference();
+    mediaQuery.addEventListener("change", syncMotionPreference);
+    return () => mediaQuery.removeEventListener("change", syncMotionPreference);
+  }, []);
+
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
 
     try {
-      // Ensure muted stays in sync before attempting autoplay on stricter browsers
-      video.muted = true;
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch((error) => {
@@ -46,8 +54,16 @@ export default function MyApp({ Component, pageProps }) {
   }, []);
 
   useEffect(() => {
-    tryPlayVideo();
-  }, [tryPlayVideo]);
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (allowMotion) {
+      tryPlayVideo();
+    } else {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }, [allowMotion, tryPlayVideo]);
 
   useEffect(() => {
     if (!autoplayFailed) return;
@@ -79,9 +95,9 @@ export default function MyApp({ Component, pageProps }) {
         <div className="background-video">
           <video
             ref={videoRef}
-            autoPlay
+            autoPlay={allowMotion}
             muted
-            loop
+            loop={allowMotion}
             playsInline
             preload="auto"
             poster="/images/branding/Gemini_Generated_Image_xkk6ivxkk6ivxkk6.png"
