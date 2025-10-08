@@ -55,7 +55,7 @@ export default function NavAurora() {
       <div className="nav-glow" aria-hidden="true" />
       <div className="nav-content">
         {/* Custom focus ring utilities live in ui.css; remove invalid Tailwind token */}
-        <Link href="/" className="nav-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-[var(--focus-ring-offset)]">
+        <Link href="/" className="nav-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[rgba(242,193,78,0.55)] focus-visible:ring-offset-[rgba(6,13,29,0.9)]">
           <span className="nav-brand-logo" aria-hidden="true">
             <Image
               src="/images/branding/header-logo.png"
@@ -89,18 +89,33 @@ export default function NavAurora() {
           })}
         </nav>
 
-        <button
-          type="button"
-          className={`nav-toggle${open ? " open" : ""}`}
-          aria-label="Toggle navigation"
-          aria-controls={mobileNavId}
-          aria-expanded={open ? "true" : "false"}
-          onClick={handleToggle}
-        >
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
-        </button>
+        {open ? (
+          <button
+            type="button"
+            className="nav-toggle open"
+            aria-label="Toggle navigation"
+            aria-controls={mobileNavId}
+            aria-expanded="true"
+            onClick={handleToggle}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label="Toggle navigation"
+            aria-controls={mobileNavId}
+            aria-expanded="false"
+            onClick={handleToggle}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </button>
+        )}
       </div>
 
       {open ? (
