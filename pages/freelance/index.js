@@ -46,71 +46,97 @@ export default function Freelance({ cases }) {
         description="Strategic consulting and implementation services for operators, investors, and founders. We deliver measurable outcomes through disciplined execution across finance, operations, and digital assets."
         url="/freelance"
       >
-      <section className="container py-16">
-        <div className="mb-6 flex items-center gap-3">
-          <Logo variant="crestWhite" size={28} />
-          <h1 className="font-display text-3xl text-text-primary md:text-4xl">Freelance Work</h1>
-        </div>
-
-        {/* Service Description */}
-        <div className="mb-8">
-          <p className="mb-6 max-w-3xl text-xl text-text-muted">
-            Strategic consulting and implementation services for operators, investors, and founders. 
-            We deliver <span className="font-semibold text-brand-gold">measurable outcomes</span> through 
-            disciplined execution across finance, operations, and digital assets.
-          </p>
-          
-          {/* CTA Section */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <Button href="/contact" variant="primary" className="px-8 py-4 text-lg">
-              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-              </svg>
-              Schedule Consultation
-            </Button>
-            <Button href="/contact" variant="outline" className="px-8 py-4 text-lg">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Request Proposal
-            </Button>
-          </div>
-        </div>
-
-        {/* Portfolio Section Header */}
-        <div className="mb-6">
-          <h2 className="mb-4 bg-gradient-to-r from-brand-gold/90 via-brand-gold to-brand-copper/90 bg-clip-text text-2xl font-semibold text-transparent">
-            Selected Case Studies
-          </h2>
-          <p className="mb-4 text-text-muted">
-            Real projects with measurable impact across different sectors and service types.
-          </p>
-        </div>
-
-        <FilterBar
-          industries={industries}
-          outcomes={outcomes}
-          industry={selection.industry}
-          outcome={selection.outcome}
-          onChange={setSelection}
-        />
-
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredCases.length ? (
-            filteredCases.map((c) => (
-              <CaseStudyCard
-                key={c.slug}
-                slug={c.slug}
-                title={c.title}
-                outcome={c.outcome}
-                tags={c.tags || []}
-              />
-            ))
-          ) : (
-            <div className="md:col-span-2 lg:col-span-3 rounded-3xl border border-white/10 bg-surface-1/70 p-8 text-center text-sm text-text-muted">
-              No case studies match the selected filters. Try clearing one of the options above.
+      <section className="container py-20">
+        <div className="rounded-[2.75rem] border border-white/10 bg-surface-1/70 p-10 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.75)]">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+            <div className="space-y-6 lg:max-w-3xl">
+              <div className="flex items-center gap-3">
+                <Logo variant="crestWhite" size={32} />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator Studio</p>
+                  <h1 className="font-display text-4xl text-text-primary sm:text-5xl">Client Services</h1>
+                </div>
+              </div>
+              <p className="text-lg text-text-muted">
+                Strategic consulting and implementation across crypto trading, digital asset investing, and revenue operations. We ship <span className="font-semibold text-brand-gold">measurable outcomes</span> with disciplined execution and telemetry-backed governance.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  { label: "Engagements shipped", value: "28" },
+                  { label: "Mandate win rate", value: "84%" },
+                  { label: "Retention", value: "90 day+" }
+                ].map(({ label, value }) => (
+                  <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                    <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
+                    <p className="mt-2 text-2xl font-semibold text-text-primary">{value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          )}
+            <div className="flex flex-col gap-4 text-sm text-text-muted lg:max-w-sm">
+              <div className="glass space-y-4 rounded-3xl border border-white/10 bg-brand-copper/10 p-6 text-text-onCopper">
+                <p className="text-xs uppercase tracking-[0.32em]">Mandate cadence</p>
+                <ul className="space-y-3 text-text-onCopper/90">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
+                    Weekly operating reviews + dashboards
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
+                    Playbooks for market + ops turbulence
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
+                    Confidential telemetry sharing
+                  </li>
+                </ul>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button href="/contact" variant="primary" className="flex-1 px-8 py-4">
+                  Schedule Consultation
+                </Button>
+                <Button href="/contact" variant="secondary" className="flex-1 px-8 py-4">
+                  Request Proposal
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 space-y-6">
+            <header className="space-y-3">
+              <p className="text-xs uppercase tracking-[0.32em] text-text-muted/80">Selected case studies</p>
+              <h2 className="text-2xl font-semibold text-text-primary">Outcomes shipped for operators</h2>
+              <p className="text-sm text-text-muted">
+                Filter by sector focus and target outcome to explore relevant engagements.
+              </p>
+            </header>
+
+            <FilterBar
+              industries={industries}
+              outcomes={outcomes}
+              industry={selection.industry}
+              outcome={selection.outcome}
+              onChange={setSelection}
+            />
+
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {filteredCases.length ? (
+                filteredCases.map((c) => (
+                  <CaseStudyCard
+                    key={c.slug}
+                    slug={c.slug}
+                    title={c.title}
+                    outcome={c.outcome}
+                    tags={c.tags || []}
+                  />
+                ))
+              ) : (
+                <div className="md:col-span-2 xl:col-span-3 rounded-3xl border border-white/10 bg-surface-1/70 p-8 text-center text-sm text-text-muted/90">
+                  No case studies match the selected filters. Try clearing one of the options above.
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
       </Layout>

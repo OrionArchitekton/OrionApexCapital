@@ -8,7 +8,7 @@ export default function Button({
   className,
   ...props
 }) {
-  const baseStyles = "relative inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-xs uppercase tracking-[0.3em] transition-all duration-300 rounded-lg overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
+  const baseStyles = "btn relative px-6 py-3 text-xs transition-all duration-300 rounded-lg overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
   
   const variants = {
     primary: "bg-brand-copper text-text-onCopper shadow-glow hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-brand-gold/60",

@@ -10,7 +10,6 @@ const BACKGROUND_VIDEO_SRC = "/media/videos/curated/branding-loop.mp4";
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const videoRef = useRef(null);
-  const [allowMotion, setAllowMotion] = useState(true);
   const [autoplayFailed, setAutoplayFailed] = useState(false);
 
   useEffect(() => {
@@ -26,20 +25,12 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncMotionPreference = () => setAllowMotion(!mediaQuery.matches);
-    syncMotionPreference();
-    mediaQuery.addEventListener("change", syncMotionPreference);
-    return () => mediaQuery.removeEventListener("change", syncMotionPreference);
-  }, []);
-
   const tryPlayVideo = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
 
     try {
+      video.muted = true;
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch((error) => {
@@ -54,16 +45,8 @@ export default function MyApp({ Component, pageProps }) {
   }, []);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (allowMotion) {
-      tryPlayVideo();
-    } else {
-      video.pause();
-      video.currentTime = 0;
-    }
-  }, [allowMotion, tryPlayVideo]);
+    tryPlayVideo();
+  }, [tryPlayVideo]);
 
   useEffect(() => {
     if (!autoplayFailed) return;
@@ -89,16 +72,78 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [autoplayFailed]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const root = document.documentElement;
+    if (!root) return;
+
+    let rafId = null;
+    let lastX = window.innerWidth / 2;
+    let lastY = window.innerHeight / 2;
+
+    const commit = () => {
+      rafId = null;
+      const x = `${lastX}px`;
+      const y = `${lastY}px`;
+      root.style.setProperty("--pointer-x", x);
+      root.style.setProperty("--pointer-y", y);
+      root.style.setProperty("--cursor-x", x);
+      root.style.setProperty("--cursor-y", y);
+    };
+
+    const queue = (x, y) => {
+      lastX = x;
+      lastY = y;
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(commit);
+    };
+
+    const handlePointerMove = (event) => {
+      queue(event?.clientX ?? lastX, event?.clientY ?? lastY);
+    };
+
+    const handleTouchMove = (event) => {
+      const touch = event?.touches?.[0];
+      if (!touch) return;
+      queue(touch.clientX ?? lastX, touch.clientY ?? lastY);
+    };
+
+    const resetToCenter = () => {
+      queue(window.innerWidth / 2, window.innerHeight / 2);
+    };
+
+    document.addEventListener("pointermove", handlePointerMove, { passive: true });
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
+    document.addEventListener("mouseleave", resetToCenter, { passive: true });
+    window.addEventListener("resize", resetToCenter, { passive: true });
+
+    queue(lastX, lastY);
+
+    return () => {
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("mouseleave", resetToCenter);
+      window.removeEventListener("resize", resetToCenter);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      root.style.removeProperty("--pointer-x");
+      root.style.removeProperty("--pointer-y");
+      root.style.removeProperty("--cursor-x");
+      root.style.removeProperty("--cursor-y");
+    };
+  }, []);
+
   return (
     <>
-  <div className="background-canvas" aria-hidden="true" data-autoplay-failed={autoplayFailed ? "true" : "false"}>
+      <div className="background-canvas" aria-hidden="true" data-autoplay-failed={autoplayFailed ? "true" : "false"}>
         <div className="background-video-layer">
           <video
             ref={videoRef}
             className="background-video"
-            autoPlay={allowMotion}
+            autoPlay
             muted
-            loop={allowMotion}
+            loop
             playsInline
             preload="auto"
             poster="/images/branding/hero-1920x1080.jpg"

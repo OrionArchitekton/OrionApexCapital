@@ -18,54 +18,60 @@ export default function About({ missionVision }) {
             { label: "About" }
           ]}
         />
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <div className="flex items-center gap-4">
-              <Logo variant="crestWhite" size={36} />
-              <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Our platform</p>
-                <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
-                  About Orion Apex Capital
-                </h1>
-              </div>
-            </div>
-            <p className="text-base text-text-muted sm:text-lg">
-              Orion Apex Capital operates on a simple mandate: disciplined strategy beats noise. We partner with investors and operators who value precision, transparent communication, and resilient execution across crypto markets and digital asset programs.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {[
-                { label: "Years operating", value: "3+" },
-                { label: "Programs deployed", value: "28" },
-                { label: "Markets covered", value: "4" }
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-white/10 bg-surface-1/70 p-4 text-center">
-                  <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{stat.label}</p>
-                  <p className="mt-2 text-2xl font-semibold text-text-primary">{stat.value}</p>
+        <div className="overflow-hidden rounded-[2.75rem] border border-white/10 bg-surface-1/70 p-10 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.75)]">
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+            <div className="space-y-8">
+              <div className="flex flex-wrap items-center gap-4">
+                <Logo variant="crestWhite" size={40} />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator studio</p>
+                  <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
+                    About Orion Apex Capital
+                  </h1>
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-2xl shadow-black/30">
-              <p className="text-sm uppercase tracking-[0.3em] text-brand-copper">Operator code</p>
-              <p className="mt-4 text-lg leading-relaxed text-text-muted">
-                We anchor every mandate in rigorous market prep, scenario planning, and risk-first governance. Execution teams stay lean, data-native, and accountable to cadence.
+              </div>
+              <p className="text-lg leading-relaxed text-text-muted">
+                Orion Apex Capital operates on a simple mandate: disciplined strategy beats noise. We partner with investors and operators who value precision, transparent communication, and resilient execution across crypto markets and digital asset programs.
               </p>
-              <div className="mt-6 space-y-3 text-sm text-text-muted">
-                <div className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-brand-copper" />
-                  Institutional-grade reporting standards
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-brand-copper" />
-                  Playbooks for both market and ops turbulence
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-brand-copper" />
-                  Team of operators embedded in strategy + delivery
-                </div>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  { label: "Years operating", value: "3+" },
+                  { label: "Programs deployed", value: "28" },
+                  { label: "Markets covered", value: "4" }
+                ].map(({ label, value }) => (
+                  <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                    <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
+                    <p className="mt-2 text-2xl font-semibold text-text-primary">{value}</p>
+                  </div>
+                ))}
               </div>
             </div>
+            <aside className="space-y-6 rounded-3xl border border-white/10 bg-surface-0/80 p-8 shadow-inner">
+              <div className="space-y-4">
+                <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Operator code</p>
+                <p className="text-base text-text-muted">
+                  Every mandate opens with rigorous market prep, scenario planning, and risk-first governance. Execution pods stay lean, data-native, and accountable to cadence.
+                </p>
+              </div>
+              <ul className="space-y-3 text-sm text-text-muted">
+                {[
+                  "Institutional-grade reporting standards",
+                  "Playbooks for market and ops turbulence",
+                  "Operators embedded from strategy to delivery"
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="rounded-2xl border border-brand-copper/25 bg-brand-copper/10 p-5 text-sm text-text-onCopper">
+                <p className="text-xs uppercase tracking-[0.3em]">Signature belief</p>
+                <p className="mt-3 text-text-onCopper/90">
+                  Wealth compounds when discipline, telemetry, and purpose align. We structure engagements to keep all three anchored in every decision.
+                </p>
+              </div>
+            </aside>
           </div>
         </div>
       </Section>
@@ -90,9 +96,9 @@ export default function About({ missionVision }) {
               copy: "Quantified trading systems + operator-led execution in real businesses, linked through shared telemetry."
             }
           ].map(({ title, copy }) => (
-            <div key={title} className="lg:col-span-4 flex flex-col gap-3 rounded-2xl border border-white/10 bg-surface-1/70 p-6 transition hover:-translate-y-1 hover:border-brand-copper/50 hover:shadow-glow">
-              <h3 className="text-xl font-semibold text-text-primary">{title}</h3>
-              <p className="text-sm leading-relaxed text-text-muted">{copy}</p>
+            <div key={title} className="lg:col-span-4 flex flex-col gap-4 rounded-3xl border border-white/10 bg-surface-1/70 p-6 transition hover:-translate-y-1 hover:border-brand-gold/45 hover:shadow-glow">
+              <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{title}</p>
+              <p className="text-base text-text-muted/90">{copy}</p>
             </div>
           ))}
         </Container>

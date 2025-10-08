@@ -32,47 +32,65 @@ export default function Services({ coreOps }) {
               { label: "Services" }
             ]}
           />
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center gap-4">
-                <Logo variant="crestWhite" size={36} />
-                <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator lanes</p>
-                  <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
-                    Mandates tuned for precision capital
-                  </h1>
+          <div className="overflow-hidden rounded-[2.75rem] border border-white/10 bg-surface-1/70 p-10 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.75)]">
+            <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+              <div className="space-y-7">
+                <div className="flex items-center gap-4">
+                  <Logo variant="crestWhite" size={36} />
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator lanes</p>
+                    <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
+                      Mandates tuned for precision capital
+                    </h1>
+                  </div>
+                </div>
+                <p className="text-lg text-text-muted">
+                  We run two core engagements—crypto trading and digital asset acquisition—each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system stays consistent.
+                </p>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  {[
+                    { label: "Discovery to launch", value: "14-30 days" },
+                    { label: "Engagement length", value: "3-9 months" },
+                    { label: "Operator pods", value: "≤4 team" }
+                  ].map(({ label, value }) => (
+                    <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                      <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
+                      <p className="mt-2 text-xl font-semibold text-text-primary">{value}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Button href="/contact" variant="primary" className="px-8 py-4">
+                    Request Discovery Call
+                  </Button>
+                  <Button href="/insights" variant="secondary" className="px-8 py-4">
+                    View Research
+                  </Button>
                 </div>
               </div>
-              <p className="text-base text-text-muted sm:text-lg">
-                We run two core engagements—crypto trading and digital asset acquisition—each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system remains consistent.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button href="/contact" variant="primary" className="rounded-full">
-                  Request Discovery Call
-                </Button>
-                <Button href="/insights" variant="ghost" className="rounded-full border border-white/10">
-                  View Research
-                </Button>
-              </div>
-            </div>
-            <div className="lg:col-span-5">
-              <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-2xl">
-                <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Engagement cadence</p>
-                <ul className="mt-5 space-y-4 text-sm text-text-muted">
+              <aside className="space-y-5 rounded-3xl border border-white/10 bg-surface-0/80 p-8 shadow-inner">
+                <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Engagement cadence</p>
+                <ul className="space-y-4 text-sm text-text-muted">
                   <li className="flex items-start gap-3">
-                    <span className="mt-2 h-2 w-2 rounded-full bg-brand-copper" />
-                    Weekly operating calls and market recaps
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
+                    Weekly operator calls with market + ops recaps
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-2 h-2 w-2 rounded-full bg-brand-copper" />
-                    Shared dashboards with live telemetry
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
+                    Shared dashboards with live telemetry + compliance notes
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-2 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Governance-ready documentation for stakeholders
                   </li>
                 </ul>
-              </div>
+                <div className="rounded-2xl border border-brand-copper/25 bg-brand-copper/10 p-5 text-sm text-text-onCopper">
+                  <p className="text-xs uppercase tracking-[0.3em]">Credentialed</p>
+                  <p className="mt-3 text-text-onCopper/90">
+                    Operator pods combine trading, acquisition, and GTM experience across 4 markets and 7-figure mandates.
+                  </p>
+                </div>
+              </aside>
             </div>
           </div>
         </Section>
@@ -108,7 +126,7 @@ export default function Services({ coreOps }) {
               <article
                 key={id}
                 id={id}
-                className="lg:col-span-6 flex flex-col gap-5 rounded-3xl border border-white/10 bg-surface-1/70 p-8 transition duration-300 hover:-translate-y-1 hover:border-brand-copper/50 hover:shadow-glow"
+                className="lg:col-span-6 flex flex-col gap-6 rounded-3xl border border-white/12 bg-surface-0/80 p-8 transition duration-300 hover:-translate-y-1 hover:border-brand-gold/50 hover:shadow-glow"
               >
                 <div className="flex items-center gap-3">
                   <h2 className="text-2xl font-semibold text-text-primary">{title}</h2>

@@ -30,29 +30,43 @@ export default function Legal() {
     <Layout title="Legal">
       <Section
         className="pb-10"
-        containerClassName="max-w-4xl space-y-10"
+        containerClassName="max-w-5xl space-y-12"
         eyebrow="Compliance"
         title="Legal"
         description="Our commitments to transparency, data stewardship, and responsible use of Orion Apex assets."
       >
         <Container className="space-y-8">
-          <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-surface-1/70 p-6 shadow-glow md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-4">
-              <Logo variant="crestWhite" size={36} />
-              <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-brand-gold/80">Orion Apex Capital</p>
-                <p className="text-lg font-semibold text-text-primary">Governance & Policies</p>
+          <div className="rounded-[2.5rem] border border-white/12 bg-surface-1/70 p-8 shadow-[0_36px_90px_-60px_rgba(0,0,0,0.75)]">
+            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-4">
+                <Logo variant="crestWhite" size={36} />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-gold/80">Orion Apex Capital</p>
+                  <p className="text-lg font-semibold text-text-primary">Governance & Policies</p>
+                </div>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  { label: "Jurisdictions", value: "US + global" },
+                  { label: "Data retention", value: "12 months" },
+                  { label: "Consent refresh", value: "Quarterly" }
+                ].map(({ label, value }) => (
+                  <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                    <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
+                    <p className="mt-2 text-base font-semibold text-text-primary">{value}</p>
+                  </div>
+                ))}
               </div>
             </div>
-            <p className="text-sm text-text-muted md:max-w-sm">
+            <p className="mt-6 text-sm text-text-muted md:max-w-3xl">
               We operate under the same rigor we demand from our clients: clear communication, custody hygiene, and defensible record keeping.
             </p>
           </div>
 
           <div className="grid gap-6">
             {LEGAL_BLOCKS.map(({ title, copy, link }) => (
-              <article key={title} className="glass space-y-3 p-6">
-                <h2 className="text-xl font-semibold text-text-primary">{title}</h2>
+              <article key={title} className="card space-y-4 rounded-3xl border border-white/12 bg-surface-0/80 p-6">
+                <p className="text-xs uppercase tracking-[0.28em] text-brand-gold/80">{title}</p>
                 <p className="text-sm leading-relaxed text-text-muted">
                   {copy.split(link?.label ?? "__NONE__").map((segment, index, arr) => (
                     <span key={`${title}-segment-${index}`}>

@@ -59,12 +59,12 @@ export default function Hero({ badges = DEFAULT_BADGES }) {
           >
             <div className="flex flex-col items-center gap-4 md:items-start">
               <Image
-                src="/images/branding/02-horizontal_primary_white-transparent.png"
-                alt="Orion Apex Capital wordmark"
+                src="/images/branding/header-logo.png"
+                alt="Orion Apex Capital crest and wordmark"
                 width={260}
                 height={90}
                 priority
-                className="drop-shadow-[0_22px_48px_rgba(13,22,40,0.6)]"
+                className="drop-shadow-[0_22px_48px_rgba(13,22,40,0.65)]"
               />
               <h1 className="max-w-2xl font-display text-4xl leading-tight text-text-primary sm:text-5xl md:text-6xl">
                 {taglines.signature}
