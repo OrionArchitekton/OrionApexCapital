@@ -29,7 +29,7 @@ export default function FilterBar({ industries, outcomes, industry, outcome, onC
   const resetDisabled = !industry && !outcome;
 
   return (
-    <div className="panel panel--accent panel--inline panel--static flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between">
+    <div className="panel panel--accent panel--aurora panel--inline flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between floating-3">
       <div className="space-y-2 text-left">
         <p className="text-xs uppercase tracking-[0.32em] text-brand-gold">Filter engagement history</p>
         <p className="text-sm text-white">

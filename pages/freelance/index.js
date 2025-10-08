@@ -56,13 +56,13 @@ export default function Freelance({ cases }) {
               { label: "Client Work" }
             ]}
           />
-          <div className="panel panel--accent panel--static p-10">
+          <div className="panel panel--accent panel--aurora p-10 floating-1">
             <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
               <div className="space-y-6 lg:max-w-3xl">
                 <div className="flex items-center gap-3">
                   <Logo variant="crestWhite" size={32} />
                   <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator Studio</p>
+                    <p className="text-xs uppercase tracking-[0.35em] text-brand-copper pulse-dot">Operator Studio</p>
                     <h1 className="font-display text-4xl text-text-primary sm:text-5xl">Client Work</h1>
                   </div>
                 </div>
@@ -74,8 +74,8 @@ export default function Freelance({ cases }) {
                     { label: "Engagements shipped", value: "28" },
                     { label: "Mandate win rate", value: "84%" },
                     { label: "Retention", value: "90 day+" }
-                  ].map(({ label, value }) => (
-                    <div key={label} className="panel panel--inline panel--static p-4 text-left">
+                  ].map(({ label, value }, index) => (
+                    <div key={label} className={`panel panel--kpi panel--inline panel--static p-4 text-left floating-${index + 1}`}>
                       <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                       <p className="mt-2 text-2xl font-semibold text-text-primary">{value}</p>
                     </div>
@@ -83,8 +83,8 @@ export default function Freelance({ cases }) {
                 </div>
               </div>
               <div className="flex flex-col gap-4 text-sm text-text-primary/80 lg:max-w-sm">
-                <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-text-primary">
-                  <p className="text-xs uppercase tracking-[0.32em] text-brand-gold/80">Mandate cadence</p>
+                <div className="panel panel--accent panel--aurora panel--inline p-6 text-text-primary floating-2">
+                  <p className="text-xs uppercase tracking-[0.32em] text-brand-gold/80 mb-4">Mandate cadence</p>
                   <ul className="space-y-3 text-text-primary/85">
                     <li className="flex items-start gap-3 text-text-primary/90">
                       <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
@@ -130,17 +130,18 @@ export default function Freelance({ cases }) {
 
               <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {filteredCases.length ? (
-                  filteredCases.map((c) => (
+                  filteredCases.map((c, index) => (
                     <CaseStudyCard
                       key={c.slug}
                       slug={c.slug}
                       title={c.title}
                       outcome={c.outcome}
                       tags={c.tags || []}
+                      className={`floating-${(index % 3) + 1}`}
                     />
                   ))
                 ) : (
-                  <div className="md:col-span-2 xl:col-span-3 panel panel--subtle panel--static p-8 text-center text-sm text-text-muted/90">
+                  <div className="md:col-span-2 xl:col-span-3 panel panel--subtle panel--aurora p-8 text-center text-sm text-text-muted/90">
                     No case studies match the selected filters. Try clearing one of the options above.
                   </div>
                 )}

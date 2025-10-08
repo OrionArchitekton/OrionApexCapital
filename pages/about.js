@@ -18,13 +18,13 @@ export default function About({ missionVision }) {
             { label: "About" }
           ]}
         />
-  <div className="panel panel--accent panel--static overflow-hidden p-10">
+  <div className="panel panel--accent panel--aurora overflow-hidden p-10 floating-1">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
             <div className="space-y-8">
               <div className="flex flex-wrap items-center gap-4">
                 <Logo variant="crestWhite" size={40} />
                 <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator studio</p>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper pulse-dot">Operator studio</p>
                   <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
                     About Orion Apex Capital
                   </h1>
@@ -38,15 +38,15 @@ export default function About({ missionVision }) {
                   { label: "Years operating", value: "3+" },
                   { label: "Programs deployed", value: "28" },
                   { label: "Markets covered", value: "4" }
-                ].map(({ label, value }) => (
-                  <div key={label} className="panel panel--inline panel--static p-4 text-left">
+                ].map(({ label, value }, index) => (
+                  <div key={label} className={`panel panel--kpi panel--inline p-4 text-left floating-${index + 1}`}>
                     <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                     <p className="mt-2 text-2xl font-semibold text-text-primary">{value}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <aside className="panel panel--subtle panel--static space-y-6 p-8">
+            <aside className="panel panel--accent panel--aurora space-y-6 p-8 floating-2">
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Operator code</p>
                 <p className="text-base text-text-muted">

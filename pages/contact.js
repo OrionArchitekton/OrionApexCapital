@@ -20,12 +20,12 @@ export default function Contact() {
           ]}
         />
         <Container className="max-w-5xl space-y-12">
-          <section className="panel panel--accent panel--static grid gap-10 p-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <section className="panel panel--accent panel--aurora grid gap-10 p-8 lg:grid-cols-[1.1fr_0.9fr] floating-1">
             <div className="space-y-7">
               <div className="flex items-center gap-4">
                 <Logo variant="crestWhite" size={32} />
                 <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Partnerships</p>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper pulse-dot">Partnerships</p>
                   <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
                     Contact Orion Apex
                   </h1>
@@ -34,7 +34,7 @@ export default function Contact() {
               <p className="text-base text-text-muted sm:text-lg">
                 Tell us about your objectives, constraints, and timeline. We reply within one to two business days to schedule discovery or share next steps.
               </p>
-              <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-sm text-text-primary">
+              <div className="panel panel--accent panel--aurora panel--inline space-y-4 p-6 text-sm text-text-primary floating-2">
                 <p className="text-xs uppercase tracking-[0.32em] text-brand-gold/80">What to include</p>
                 <ul className="space-y-3">
                   {[
@@ -54,15 +54,15 @@ export default function Contact() {
                   { label: "Response time", value: "1-2 days" },
                   { label: "Engagement cap", value: "2 concurrent" },
                   { label: "Preferred start", value: "2+ weeks" }
-                ].map((item) => (
-                  <div key={item.label} className="panel panel--inline panel--static p-4 text-left">
+                ].map((item, index) => (
+                  <div key={item.label} className={`panel panel--kpi panel--inline p-4 text-left floating-${index + 1}`}>
                     <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{item.label}</p>
                     <p className="mt-2 text-xl font-semibold text-text-primary">{item.value}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="panel panel--subtle panel--static p-6">
+            <div className="panel panel--accent panel--aurora p-6 floating-3">
               <ContactForm />
             </div>
           </section>

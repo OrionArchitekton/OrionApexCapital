@@ -18,9 +18,9 @@ export default function CaseStudy({ cs }) {
           ]}
         />
         <Container className="max-w-3xl space-y-8">
-          <header className="panel panel--accent panel--static space-y-5 p-8">
+          <header className="panel panel--accent panel--aurora space-y-5 p-8 floating-1">
             <div className="space-y-3">
-              <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Case study</p>
+              <p className="text-xs uppercase tracking-[0.32em] text-brand-copper pulse-dot">Case study</p>
               <h1 className="font-display text-3xl text-text-primary md:text-4xl">{cs.title}</h1>
               <p className="text-base text-text-muted md:text-lg">{cs.outcome}</p>
             </div>
@@ -37,13 +37,13 @@ export default function CaseStudy({ cs }) {
               </div>
             )}
             {cs.timeline && (
-              <div className="panel panel--inline panel--static p-4 text-sm text-text-muted">
+              <div className="panel panel--kpi panel--inline p-4 text-sm text-text-muted floating-2">
                 <span className="font-semibold text-text-primary">Timeline:</span> {cs.timeline}
               </div>
             )}
           </header>
 
-          <article className="panel panel--subtle panel--static p-8">
+          <article className="panel panel--accent panel--aurora p-8 floating-2">
             <div
               className="prose prose-invert max-w-none
                 prose-headings:text-text-primary
@@ -55,7 +55,7 @@ export default function CaseStudy({ cs }) {
             />
           </article>
 
-          <div className="panel panel--accent panel--inline panel--static p-6 text-sm text-text-onCopper">
+          <div className="panel panel--accent panel--aurora panel--inline p-6 text-sm text-text-onCopper floating-3">
             <p>
               <span className="font-semibold text-text-onCopper">Interested in similar work?</span>{" "}
               <Link href="/contact" className="underline">

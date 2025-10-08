@@ -86,9 +86,9 @@ export default function Services() {
                     </li>
                   </ul>
                 </div>
-                <div className="panel panel--accent panel--inline panel--static p-5 text-sm text-text-onCopper">
-                  <p className="text-xs uppercase tracking-[0.3em]">Credentialed</p>
-                  <p className="mt-3 text-text-onCopper/90">
+                <div className="panel panel--accent panel--inline p-5 text-sm floating-3">
+                  <p className="text-xs uppercase tracking-[0.3em] text-brand-gold/80 mb-3">Credentialed</p>
+                  <p className="text-text-primary/90 leading-relaxed">
                     Operator pods combine trading, acquisition, and GTM experience across 4 markets and 7-figure mandates.
                   </p>
                 </div>

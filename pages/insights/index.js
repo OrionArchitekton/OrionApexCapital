@@ -22,12 +22,12 @@ export default function Insights({ posts }) {
             { label: "Insights" }
           ]}
         />
-        <div className="panel panel--accent panel--static overflow-hidden p-10">
+        <div className="panel panel--accent panel--aurora overflow-hidden p-10 floating-1">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4">
               <Logo variant="crestWhite" size={32} />
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Briefing center</p>
+                <p className="text-xs uppercase tracking-[0.35em] text-brand-copper pulse-dot">Briefing center</p>
                 <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-[2.75rem]">
                   Market Insights
                 </h1>
@@ -42,8 +42,8 @@ export default function Insights({ posts }) {
               { label: "Median read", value: "7 min" },
               { label: "Tags tracked", value: "12" },
               { label: "Featured briefs", value: featuredCount > 0 ? featuredCount : "3" }
-            ].map(({ label, value }) => (
-              <div key={label} className="panel panel--inline panel--static p-5 text-left">
+            ].map(({ label, value }, index) => (
+              <div key={label} className={`panel panel--kpi panel--inline p-5 text-left floating-${index + 1}`}>
                 <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                 <p className="mt-2 text-xl font-semibold text-text-primary">{value}</p>
               </div>
@@ -51,8 +51,8 @@ export default function Insights({ posts }) {
           </div>
         </div>
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {posts.map((post) => (
-            <InsightPreviewCard key={post.slug} post={post} />
+          {posts.map((post, index) => (
+            <InsightPreviewCard key={post.slug} post={post} className={`floating-${(index % 3) + 1}`} />
           ))}
         </div>
       </Section>

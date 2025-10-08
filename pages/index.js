@@ -181,22 +181,22 @@ export default function Home({ posts }) {
               sizes="(max-width: 768px) 100vw, 40vw"
             />
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-navy/20 via-brand-navy/40 to-brand-navy/90" aria-hidden="true"></div>
-            <div className="panel panel--aurora panel--inline panel--static absolute bottom-6 left-6 right-6 p-6 backdrop-blur">
-              <div className="flex items-center justify-between text-sm text-text-muted">
-                <span>Monthly revenue</span>
+            <div className="panel panel--aurora panel--inline absolute bottom-4 left-4 right-4 p-4 backdrop-blur md:bottom-6 md:left-6 md:right-6 md:p-6">
+              <div className="flex items-center justify-between text-sm text-text-muted mb-3">
+                <span className="font-medium">Monthly revenue</span>
                 <span className="text-brand-gold font-semibold">Up +18.2%</span>
               </div>
-              <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-brand-gold/15">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-brand-gold/15 mb-4">
                 <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-text-muted">
-                <div>
-                  <div className="text-lg font-semibold text-text-primary">$247K</div>
-                  <span>This month</span>
+              <div className="grid grid-cols-2 gap-3 text-xs text-text-muted">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-text-primary mb-1">$247K</div>
+                  <div className="text-text-muted/80">This month</div>
                 </div>
-                <div>
-                  <div className="text-lg font-semibold text-text-primary/70">$209K</div>
-                  <span>Last month</span>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-text-primary/70 mb-1">$209K</div>
+                  <div className="text-text-muted/80">Last month</div>
                 </div>
               </div>
             </div>

@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-export default function CaseStudyCard({ slug, title, outcome, tags = [] }) {
+export default function CaseStudyCard({ slug, title, outcome, tags = [], className = "" }) {
   return (
     <Link
       href={`/freelance/${slug}`}
-      className="panel panel--subtle block h-full p-6 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+      className={`panel panel--accent panel--aurora block h-full p-6 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${className}`}
     >
       <div className="flex items-center justify-between gap-3 text-xs uppercase tracking-[0.28em] text-text-muted/70">
         <span>Case Study</span>

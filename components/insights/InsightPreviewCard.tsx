@@ -36,7 +36,7 @@ export function InsightPreviewCard({
     <Link
       href={`/insights/${post.slug}`}
       className={clsx(
-        "panel panel--subtle group flex h-full flex-col overflow-hidden transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
+        "panel panel--accent panel--aurora group flex h-full flex-col overflow-hidden transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
         className
       )}
     >
