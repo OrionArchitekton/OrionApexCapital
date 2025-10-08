@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { track } from "@/lib/analytics";
 import CookieConsent from "@/components/CookieConsent";
 
-const BACKGROUND_VIDEO_SRC = "/media/videos/curated/branding-loop.mp4";
+const BACKGROUND_VIDEO_SRC = "/media/videos/curated/video_generation_from_image.mp4";
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -91,21 +91,19 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
-  <div className="background-canvas" aria-hidden="true" data-autoplay-failed={autoplayFailed ? "true" : "false"}>
-        <div className="background-video-layer">
+      <div className="background-canvas" aria-hidden="true" data-autoplay-failed={autoplayFailed ? "true" : "false"}>
+        <div className="background-video">
           <video
             ref={videoRef}
-            className="background-video"
             autoPlay={allowMotion}
             muted
             loop={allowMotion}
             playsInline
             preload="auto"
-            poster="/images/branding/hero-1920x1080.jpg"
+            poster="/images/branding/Gemini_Generated_Image_xkk6ivxkk6ivxkk6.png"
           >
             <source src={BACKGROUND_VIDEO_SRC} type="video/mp4" />
           </video>
-          <div className="background-video-overlay" />
         </div>
         <div className="aurora-field" />
         <div className="sky-grid" />
