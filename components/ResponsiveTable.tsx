@@ -19,7 +19,7 @@ export default function ResponsiveTable({
   return (
     <div className={clsx("table-shell", className)}>
       <table className="responsive-table w-full text-sm">
-        <thead className={clsx("sticky text-slate-300 uppercase text-xs", headClassName)}>
+        <thead className={clsx("sticky text-text-muted uppercase text-xs", headClassName)}>
           <tr>
             {head.map((cell, index) => (
               <th key={index} className="px-3 py-2 font-semibold tracking-[0.2em]">
@@ -32,7 +32,7 @@ export default function ResponsiveTable({
           {rows.map((row, rowIndex) => (
             <tr
               key={rowIndex}
-              className="border-b border-slate-800/40 transition hover:-translate-y-[1px] hover:border-[rgba(242,193,78,0.22)] hover:bg-[rgba(12,21,39,0.6)]"
+              className="border-b border-[rgba(28,47,77,0.35)] transition hover:-translate-y-[1px] hover:border-[rgba(242,193,78,0.28)] hover:bg-[rgba(12,21,39,0.6)]"
             >
               {row.map((cell, cellIndex) => (
                 <td

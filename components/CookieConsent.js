@@ -21,12 +21,12 @@ export default function CookieConsent() {
   };
 
   return (
-    <div role="dialog" aria-live="polite" className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 max-w-xl w-[92%]">
-      <div className="card bg-navy-900/90 backdrop-blur border-white/20">
-        <p className="text-sm text-slate-200">
+    <div role="dialog" aria-live="polite" className="fixed bottom-4 left-1/2 z-50 w-[92%] max-w-xl -translate-x-1/2">
+      <div className="glass border border-white/15 bg-[rgba(9,16,30,0.88)] p-5">
+        <p className="text-sm text-text-muted">
           We use minimal analytics to improve the site. Consent is optional.
         </p>
-        <div className="mt-3 flex gap-3 justify-end">
+        <div className="mt-3 flex justify-end gap-3">
           <button onClick={decline} className="btn btn-secondary text-sm">Decline</button>
           <button onClick={accept} className="btn btn-primary text-sm">Accept</button>
         </div>

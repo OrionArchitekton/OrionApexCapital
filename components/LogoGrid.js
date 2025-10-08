@@ -12,7 +12,7 @@ export default function LogoGrid() {
 
   return (
     <div className="container py-10">
-      <p className="text-center text-slate-400 text-sm mb-6">
+      <p className="mb-6 text-center text-sm text-text-muted">
         Operators &amp; Partners We&apos;ve Worked With
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 opacity-60">

@@ -47,16 +47,16 @@ export default function Freelance({ cases }) {
         url="/freelance"
       >
       <section className="container py-16">
-        <div className="flex items-center gap-3 mb-6">
+        <div className="mb-6 flex items-center gap-3">
           <Logo variant="crestWhite" size={28} />
-          <h1 className="text-3xl md:text-4xl font-bold">Freelance Work</h1>
+          <h1 className="font-display text-3xl text-text-primary md:text-4xl">Freelance Work</h1>
         </div>
 
         {/* Service Description */}
         <div className="mb-8">
-          <p className="text-xl text-neutral-300 mb-6 max-w-3xl">
+          <p className="mb-6 max-w-3xl text-xl text-text-muted">
             Strategic consulting and implementation services for operators, investors, and founders. 
-            We deliver <span className="text-gold-500 font-semibold">measurable outcomes</span> through 
+            We deliver <span className="font-semibold text-brand-gold">measurable outcomes</span> through 
             disciplined execution across finance, operations, and digital assets.
           </p>
           
@@ -79,10 +79,10 @@ export default function Freelance({ cases }) {
 
         {/* Portfolio Section Header */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
+          <h2 className="mb-4 bg-gradient-to-r from-brand-gold/90 via-brand-gold to-brand-copper/90 bg-clip-text text-2xl font-semibold text-transparent">
             Selected Case Studies
           </h2>
-          <p className="text-neutral-400 mb-4">
+          <p className="mb-4 text-text-muted">
             Real projects with measurable impact across different sectors and service types.
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function Freelance({ cases }) {
               />
             ))
           ) : (
-            <div className="md:col-span-2 lg:col-span-3 rounded-3xl border border-white/10 bg-surface-1/70 p-8 text-center text-sm text-neutral-300">
+            <div className="md:col-span-2 lg:col-span-3 rounded-3xl border border-white/10 bg-surface-1/70 p-8 text-center text-sm text-text-muted">
               No case studies match the selected filters. Try clearing one of the options above.
             </div>
           )}

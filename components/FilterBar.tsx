@@ -31,18 +31,18 @@ export default function FilterBar({ industries, outcomes, industry, outcome, onC
   return (
     <div className="glass flex flex-col gap-5 rounded-3xl border border-white/10 bg-[rgba(12,21,39,0.72)] p-6 md:flex-row md:items-center md:justify-between">
       <div className="space-y-2 text-left">
-        <p className="text-xs uppercase tracking-[0.32em] text-slate-300/70">Filter engagement history</p>
-        <p className="text-sm text-slate-300/90">
+        <p className="text-xs uppercase tracking-[0.32em] text-text-muted/80">Filter engagement history</p>
+        <p className="text-sm text-text-muted">
           Narrow the portfolio by sector focus and measurable outcome.
         </p>
       </div>
       <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-end">
-        <label className="flex flex-1 flex-col text-left text-xs uppercase tracking-[0.28em] text-slate-300/60">
+        <label className="flex flex-1 flex-col text-left text-xs uppercase tracking-[0.28em] text-text-muted/70">
           Industry
           <select
             value={industry}
             onChange={handleOptionChange(selection, onChange, "industry")}
-            className="mt-2 w-full rounded-2xl border border-white/15 bg-[rgba(10,18,34,0.85)] px-4 py-3 text-sm text-slate-100 shadow-inner transition focus:border-[rgba(242,193,78,0.4)] focus:outline-none focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
+            className="mt-2 w-full rounded-2xl border border-white/15 bg-[rgba(10,18,34,0.85)] px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-[rgba(242,193,78,0.4)] focus:outline-none focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
           >
             <option value="">All Industries</option>
             {industries.map((value) => (
@@ -52,12 +52,12 @@ export default function FilterBar({ industries, outcomes, industry, outcome, onC
             ))}
           </select>
         </label>
-        <label className="flex flex-1 flex-col text-left text-xs uppercase tracking-[0.28em] text-slate-300/60">
+        <label className="flex flex-1 flex-col text-left text-xs uppercase tracking-[0.28em] text-text-muted/70">
           Outcome
           <select
             value={outcome}
             onChange={handleOptionChange(selection, onChange, "outcome")}
-            className="mt-2 w-full rounded-2xl border border-white/15 bg-[rgba(10,18,34,0.85)] px-4 py-3 text-sm text-slate-100 shadow-inner transition focus:border-[rgba(242,193,78,0.4)] focus:outline-none focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
+            className="mt-2 w-full rounded-2xl border border-white/15 bg-[rgba(10,18,34,0.85)] px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-[rgba(242,193,78,0.4)] focus:outline-none focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
           >
             <option value="">All Outcomes</option>
             {outcomes.map((value) => (

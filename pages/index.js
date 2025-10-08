@@ -189,7 +189,7 @@ export default function Home({ posts }) {
                 <span>Monthly revenue</span>
                 <span className="text-brand-gold font-semibold">↗ +18.2%</span>
               </div>
-              <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
+              <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-brand-gold/15">
                 <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-text-muted">

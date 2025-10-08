@@ -88,12 +88,12 @@ export default function Callout({ title, eyebrow, variant = "signal", children }
         </span>
         <div className="space-y-3 text-left">
           {eyebrow ? (
-            <p className="text-[0.65rem] uppercase tracking-[0.35em] text-slate-400/80">{eyebrow}</p>
+            <p className="text-[0.65rem] uppercase tracking-[0.35em] text-text-muted/80">{eyebrow}</p>
           ) : null}
           {title ? (
-            <h4 className="text-lg font-semibold text-slate-50">{title}</h4>
+            <h4 className="text-lg font-semibold text-text-primary">{title}</h4>
           ) : null}
-          <div className="text-sm leading-relaxed text-slate-200/90">{children}</div>
+          <div className="text-sm leading-relaxed text-text-muted">{children}</div>
         </div>
       </div>
     </aside>

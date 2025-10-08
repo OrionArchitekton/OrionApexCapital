@@ -8,8 +8,8 @@ export default function CaseStudy({ cs }) {
       <section className="container py-16 max-w-3xl">
         <article className="space-y-6">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold">{cs.title}</h1>
-            <p className="text-lg text-slate-300 mt-3">{cs.outcome}</p>
+            <h1 className="text-3xl font-display text-text-primary md:text-4xl">{cs.title}</h1>
+            <p className="mt-3 text-lg text-text-muted">{cs.outcome}</p>
           </div>
 
           {cs.tags && cs.tags.length > 0 && (
@@ -17,7 +17,7 @@ export default function CaseStudy({ cs }) {
               {cs.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded bg-white/10 px-3 py-1 text-sm"
+                  className="rounded-full border border-brand-gold/35 bg-brand-gold/10 px-3 py-1 text-sm uppercase tracking-[0.18em] text-brand-gold"
                 >
                   {tag}
                 </span>
@@ -26,28 +26,27 @@ export default function CaseStudy({ cs }) {
           )}
 
           {cs.timeline && (
-            <div className="card bg-white/3">
-              <p className="text-sm">
-                <strong>Timeline:</strong> {cs.timeline}
+            <div className="glass border border-brand-gold/20 bg-surface-1/70 p-4">
+              <p className="text-sm text-text-muted">
+                <span className="font-semibold text-text-primary">Timeline:</span> {cs.timeline}
               </p>
             </div>
           )}
 
           <div
-            className="prose prose-invert prose-slate max-w-none
-              prose-headings:text-neutral-100
-              prose-p:text-slate-300
-              prose-a:text-teal-400 prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-neutral-100
-              prose-ul:text-slate-300
-              prose-ol:text-slate-300"
+            className="prose prose-invert max-w-none
+              prose-headings:text-text-primary
+              prose-p:text-text-muted
+              prose-strong:text-text-primary
+              prose-a:text-brand-gold prose-a:no-underline hover:prose-a:underline hover:prose-a:text-brand-gold/80
+              prose-ul:text-text-muted prose-ol:text-text-muted prose-li:marker:text-brand-gold/80"
             dangerouslySetInnerHTML={{ __html: cs.html }}
           />
 
-          <div className="card bg-teal-400/5 border-teal-400/20">
-            <p className="text-slate-300">
-              <strong>Interested in similar work?</strong>{" "}
-              <Link href="/contact" className="underline text-teal-400">
+          <div className="glass border border-brand-gold/30 bg-brand-gold/10">
+            <p className="text-text-muted">
+              <span className="font-semibold text-text-primary">Interested in similar work?</span>{" "}
+              <Link href="/contact" className="underline text-brand-gold transition hover:text-brand-gold/80">
                 Get in touch
               </Link>
               .

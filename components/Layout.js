@@ -25,12 +25,9 @@ export default function Layout({ title, description, url, canonical, image, twit
       />
       <SkipLink />
       <ScrollProgress />
-      <div className="app-bg min-h-screen flex flex-col">
-        {/* Trading-UI background layers */}
-        <div className="aurora-field" />
-        <div className="sky-grid" />
+      <div className="site-shell">
         <Header />
-        <main id="main" className="flex-1">{children}</main>
+        <main id="main" className="site-main">{children}</main>
         <Footer />
       </div>
       <BackToTop />

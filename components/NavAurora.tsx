@@ -37,7 +37,7 @@ export default function NavAurora() {
         <Link href="/" className="nav-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[rgba(242,193,78,0.55)] focus-visible:ring-offset-[rgba(6,13,29,0.9)]">
           <span className="nav-brand-logo" aria-hidden="true">
             <Image
-              src="/images/branding/03-icon_crest_white-transparent.png"
+              src="/images/branding/header-logo.png"
               alt="Orion Apex crest"
               width={40}
               height={40}
