@@ -34,8 +34,8 @@ export default function Services({ coreOps }) {
             ]}
           />
           <div className="panel panel--accent panel--static overflow-hidden p-10">
-            <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-              <div className="space-y-7">
+            <div className="space-y-8">
+              <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex items-center gap-4">
                   <Logo variant="crestWhite" size={36} />
                   <div>
@@ -45,53 +45,30 @@ export default function Services({ coreOps }) {
                     </h1>
                   </div>
                 </div>
-                <p className="text-lg text-text-muted">
-                  We run two core engagements - crypto trading and digital asset acquisition - each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system stays consistent.
+                <p className="max-w-xl text-sm leading-relaxed text-text-muted">
+                  We run two core engagements – crypto trading and digital asset acquisition – each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system stays consistent.
                 </p>
-                <div className="grid gap-4 sm:grid-cols-3">
-                  {[
-                    { label: "Discovery to launch", value: "14-30 days" },
-                    { label: "Engagement length", value: "3-9 months" },
-                    { label: "Operator pods", value: "4-person team" }
-                  ].map(({ label, value }) => (
-                    <div key={label} className="panel panel--inline panel--static p-4 text-left">
-                      <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
-                      <p className="mt-2 text-xl font-semibold text-text-primary">{value}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Button href="/contact" variant="primary" className="px-8 py-4">
-                    Request Discovery Call
-                  </Button>
-                  <Button href="/insights" variant="secondary" className="px-8 py-4">
-                    View Research
-                  </Button>
-                </div>
               </div>
-              <aside className="panel panel--subtle panel--static space-y-5 p-8">
-                <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Engagement cadence</p>
-                <ul className="space-y-4 text-sm text-text-muted">
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
-                    Weekly operator calls with market + ops recaps
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
-                    Shared dashboards with live telemetry + compliance notes
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
-                    Governance-ready documentation for stakeholders
-                  </li>
-                </ul>
-                <div className="panel panel--accent panel--inline panel--static p-5 text-sm text-text-onCopper">
-                  <p className="text-xs uppercase tracking-[0.3em]">Credentialed</p>
-                  <p className="mt-3 text-text-onCopper/90">
-                    Operator pods combine trading, acquisition, and GTM experience across 4 markets and 7-figure mandates.
-                  </p>
-                </div>
-              </aside>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  { label: "Discovery to launch", value: "14-30 days" },
+                  { label: "Engagement length", value: "3-9 months" },
+                  { label: "Operator pods", value: "4-person team" }
+                ].map(({ label, value }) => (
+                  <div key={label} className="panel panel--inline panel--static p-4 text-left">
+                    <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
+                    <p className="mt-2 text-xl font-semibold text-text-primary">{value}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button href="/contact" variant="primary" className="px-8 py-4">
+                  Request Discovery Call
+                </Button>
+                <Button href="/insights" variant="secondary" className="px-8 py-4">
+                  View Research
+                </Button>
+              </div>
             </div>
           </div>
         </Section>

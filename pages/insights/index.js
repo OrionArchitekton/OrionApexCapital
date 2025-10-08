@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
 import { Section } from "@/components/Section";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { InsightPreviewCard } from "@/components/insights";
 import { getAllPosts } from "@/lib/posts";
 
@@ -20,6 +21,12 @@ export default function Insights({ posts }) {
         description="Deep analysis and strategic frameworks from the front lines of modern capital markets."
         containerClassName="space-y-12"
       >
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Insights" }
+          ]}
+        />
         <div className="panel panel--accent panel--static overflow-hidden p-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4">

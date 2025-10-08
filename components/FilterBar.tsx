@@ -31,8 +31,8 @@ export default function FilterBar({ industries, outcomes, industry, outcome, onC
   return (
     <div className="panel panel--accent panel--inline panel--static flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between">
       <div className="space-y-2 text-left">
-        <p className="text-xs uppercase tracking-[0.32em] text-text-onCopper/70">Filter engagement history</p>
-        <p className="text-sm text-text-onCopper/90">
+        <p className="text-xs uppercase tracking-[0.32em] text-brand-gold">Filter engagement history</p>
+        <p className="text-sm text-white">
           Narrow the portfolio by sector focus and measurable outcome.
         </p>
       </div>
