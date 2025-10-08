@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import "@/styles/ui.css";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { track } from "@/lib/analytics";
 import CookieConsent from "@/components/CookieConsent";
@@ -11,6 +11,7 @@ export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const videoRef = useRef(null);
   const [allowMotion, setAllowMotion] = useState(true);
+  const [autoplayFailed, setAutoplayFailed] = useState(false);
 
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -34,23 +35,63 @@ export default function MyApp({ Component, pageProps }) {
     return () => mediaQuery.removeEventListener("change", syncMotionPreference);
   }, []);
 
+  const tryPlayVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    try {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch((error) => {
+          console.warn("Background video autoplay failed", error);
+          setAutoplayFailed(true);
+        });
+      }
+    } catch (error) {
+      console.warn("Background video playback exception", error);
+      setAutoplayFailed(true);
+    }
+  }, []);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
     if (allowMotion) {
-      const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {});
-      }
+      tryPlayVideo();
     } else {
       video.pause();
       video.currentTime = 0;
     }
-  }, [allowMotion]);
+  }, [allowMotion, tryPlayVideo]);
+
+  useEffect(() => {
+    if (!autoplayFailed) return;
+
+    const handleUserInteract = () => {
+      const video = videoRef.current;
+      if (!video) return;
+
+      video.muted = true;
+      video.play().then(() => {
+        setAutoplayFailed(false);
+      }).catch((error) => {
+        console.warn("Background video replay after interaction failed", error);
+      });
+    };
+
+    window.addEventListener("pointerdown", handleUserInteract, { once: true });
+    window.addEventListener("keydown", handleUserInteract, { once: true });
+
+    return () => {
+      window.removeEventListener("pointerdown", handleUserInteract);
+      window.removeEventListener("keydown", handleUserInteract);
+    };
+  }, [autoplayFailed]);
 
   return (
     <>
-      <div className="background-canvas" aria-hidden="true">
+  <div className="background-canvas" aria-hidden="true" data-autoplay-failed={autoplayFailed ? "true" : "false"}>
         <div className="background-video-layer">
           <video
             ref={videoRef}
