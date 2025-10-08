@@ -12,7 +12,7 @@ import MobileNav from "./MobileNav";
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
+  { href: "/services", label: "Core Operations" },
   { href: "/insights", label: "Insights" },
   { href: "/contact", label: "Contact" }
 ];

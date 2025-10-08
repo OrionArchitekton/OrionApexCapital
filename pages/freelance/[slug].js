@@ -12,7 +12,7 @@ export default function CaseStudy({ cs }) {
         <Breadcrumb
           items={[
             { label: "Home", href: "/" },
-            { label: "Services", href: "/services" },
+            { label: "Core Operations", href: "/services" },
             { label: "Client Work", href: "/freelance" },
             { label: cs.title }
           ]}

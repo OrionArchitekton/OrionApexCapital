@@ -29,7 +29,7 @@ export default function ClientServices() {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Services", href: "/services" },
+              { label: "Core Operations", href: "/services" },
               { label: "Client Work" }
             ]}
           />

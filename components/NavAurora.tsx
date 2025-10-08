@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 const NAV_LINKS = [
   { href: "/about", label: "About", description: "Who We Are" },
-  { href: "/services", label: "Services", description: "Capabilities" },
+  { href: "/services", label: "Core Operations", description: "Capabilities" },
   { href: "/insights", label: "Insights", description: "Playbooks" },
   { href: "/freelance", label: "Client Work", description: "Outcomes" },
   { href: "/contact", label: "Contact", description: "Work With Us" },

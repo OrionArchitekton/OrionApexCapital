@@ -21,8 +21,8 @@ export default function Services({ coreOps }) {
         />
       </Head>
       <Layout
-        title="Services"
-        description="Disciplined operator lanes across crypto and digital assets. Crypto trading advisory and website investing with systematic approaches to wealth creation."
+        title="Core Operations"
+        description="Disciplined operator lanes across crypto markets, digital asset acquisitions, and applied AI integration. Systematic approaches that compound capital and execution leverage."
         url="/services"
         image="/og/og-services.png"
       >
@@ -30,7 +30,7 @@ export default function Services({ coreOps }) {
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Services" }
+              { label: "Core Operations" }
             ]}
           />
           <div className="panel panel--accent panel--static overflow-hidden p-10">
@@ -176,6 +176,94 @@ export default function Services({ coreOps }) {
               dangerouslySetInnerHTML={{ __html: coreOps.html }}
             />
           </div>
+        </Section>
+
+        <Section
+          eyebrow="Strategic Pillars"
+          title="Where we deploy disciplined operator math"
+          description="Three integrated lanes compound edge: algorithmic trading intelligence, accretive digital asset cycles, and applied AI leverage across operator workflows."
+          className="pt-0"
+        >
+          <Container className="grid gap-8 lg:grid-cols-12">
+            {[{
+              id: "ai-trading",
+              icon: (
+                <svg className="h-6 w-6 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
+                </svg>
+              ),
+              label: "1️⃣ AI-Driven Trading",
+              headline: "Adaptive signal engines",
+              body: "Short-duration, risk-governed systems with volatility gating, drawdown resets, and telemetry loops feeding reinforcement of validated edges.",
+              bullets: [
+                "Regime + liquidity aware position sizing",
+                "Multi-factor confirmation (momentum, vol, structure)",
+                "Operator sign-off + automated execution hooks"
+              ],
+              cta: { href: "/services#crypto", label: "Explore trading lane" }
+            }, {
+              id: "digital-assets",
+              icon: (
+                <svg className="h-6 w-6 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 3l9.5 5.5v7L12 21l-9.5-5.5v-7z" />
+                  <path d="M12 12l9.5-5.5M12 12v9" />
+                  <path d="M12 12L2.5 6.5" />
+                </svg>
+              ),
+              label: "2️⃣ Website Acquisitions & Digital Asset Flipping",
+              headline: "Acquire → Improve → Recycle",
+              body: "Value creation across content and commerce properties using speed audits, UX uplift, monetization tuning, and exit engineering.",
+              bullets: [
+                "Institutional diligence + valuation templates",
+                "Growth + monetization sprint playbooks",
+                "Structured exit pathways + buyer readiness"
+              ],
+              cta: { href: "/services#websites", label: "See acquisition framework" }
+            }, {
+              id: "ai-consulting",
+              icon: (
+                <svg className="h-6 w-6 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3" />
+                  <path d="M3 12h3M18 12h3M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
+                </svg>
+              ),
+              label: "3️⃣ AI Consulting & Integration",
+              headline: "Applied AI leverage",
+              body: "Operator-first AI adoption: agentic workflows, data enrichment, and decision support layered onto existing governance cadence.",
+              bullets: [
+                "Workflow + data exhaust mapping",
+                "Model + vendor evaluation scorecards",
+                "Secure deployment + change management"
+              ],
+              cta: { href: "/contact?interest=AI%20Consulting", label: "Discuss AI mandate" }
+            }].map(({ id, icon, label, headline, body, bullets, cta }) => (
+              <div key={id} className="panel panel--subtle flex flex-col gap-6 p-8 lg:col-span-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15 ring-1 ring-brand-gold/30">
+                    {icon}
+                  </div>
+                  <span className="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-brand-gold/80">{label}</span>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-xl font-semibold text-text-primary">{headline}</h3>
+                  <p className="text-sm leading-relaxed text-text-muted">{body}</p>
+                </div>
+                <ul className="space-y-2 text-sm text-text-muted">
+                  {bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" aria-hidden="true" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-2">
+                  <Button href={cta.href} variant="secondary" className="rounded-full text-xs uppercase tracking-[0.3em]">
+                    {cta.label}
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </Container>
         </Section>
       </Layout>
     </>
