@@ -65,9 +65,9 @@ export default function About({ missionVision }) {
                   </li>
                 ))}
               </ul>
-              <div className="panel panel--accent panel--inline panel--static p-5 text-sm text-text-onCopper">
-                <p className="text-xs uppercase tracking-[0.3em]">Signature belief</p>
-                <p className="mt-3 text-text-onCopper/90">
+              <div className="panel panel--accent panel--inline panel--static p-5 text-sm text-text-primary">
+                <p className="text-xs uppercase tracking-[0.3em] text-brand-gold/80">Signature belief</p>
+                <p className="mt-3 text-text-primary/85">
                   Wealth compounds when discipline, telemetry, and purpose align. We structure engagements to keep all three anchored in every decision.
                 </p>
               </div>

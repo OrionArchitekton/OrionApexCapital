@@ -49,6 +49,21 @@ export default function MyApp({ Component, pageProps }) {
   }, [tryPlayVideo]);
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleLoadedData = () => {
+      tryPlayVideo();
+    };
+
+    video.addEventListener("loadeddata", handleLoadedData, { once: true });
+
+    return () => {
+      video.removeEventListener("loadeddata", handleLoadedData);
+    };
+  }, [tryPlayVideo]);
+
+  useEffect(() => {
     if (!autoplayFailed) return;
 
     const handleUserInteract = () => {

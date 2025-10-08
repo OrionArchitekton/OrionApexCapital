@@ -73,19 +73,19 @@ export default function Freelance({ cases }) {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-4 text-sm text-text-muted lg:max-w-sm">
-              <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-text-onCopper">
-                <p className="text-xs uppercase tracking-[0.32em]">Mandate cadence</p>
-                <ul className="space-y-3 text-text-onCopper/90">
-                  <li className="flex items-start gap-3">
+            <div className="flex flex-col gap-4 text-sm text-text-primary/80 lg:max-w-sm">
+              <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-text-primary">
+                <p className="text-xs uppercase tracking-[0.32em] text-brand-gold/80">Mandate cadence</p>
+                <ul className="space-y-3 text-text-primary/85">
+                  <li className="flex items-start gap-3 text-text-primary/90">
                     <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Weekly operating reviews + dashboards
                   </li>
-                  <li className="flex items-start gap-3">
+                  <li className="flex items-start gap-3 text-text-primary/90">
                     <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Playbooks for market + ops turbulence
                   </li>
-                  <li className="flex items-start gap-3">
+                  <li className="flex items-start gap-3 text-text-primary/90">
                     <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Confidential telemetry sharing
                   </li>
