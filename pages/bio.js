@@ -16,8 +16,8 @@ export default function Bio() {
             { label: "Bio" }
           ]}
         />
-        <Container className="grid gap-10 lg:grid-cols-12">
-          <aside className="lg:col-span-4 flex flex-col items-center rounded-3xl border border-white/10 bg-surface-1/70 p-8 text-center shadow-2xl">
+        <Container className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <aside className="flex flex-col items-center gap-6 rounded-[2.5rem] border border-white/10 bg-surface-1/70 p-8 text-center shadow-[0_32px_90px_-60px_rgba(0,0,0,0.75)]">
             <div className="relative h-44 w-44 overflow-hidden rounded-full border border-white/10">
               <Image
                 src="/images/branding/logo_avatar_round_1024.png"
@@ -27,18 +27,30 @@ export default function Bio() {
                 sizes="176px"
               />
             </div>
-            <h1 className="mt-6 font-display text-3xl text-text-primary">Dan</h1>
-            <p className="text-sm uppercase tracking-[0.3em] text-brand-copper">
-              General Manager • Trader • Builder
-            </p>
-            <div className="mt-6 grid gap-3 text-sm text-text-muted">
+            <div className="space-y-2">
+              <h1 className="font-display text-3xl text-text-primary">Dan</h1>
+              <p className="text-xs uppercase tracking-[0.3em] text-brand-copper">
+                General Manager • Trader • Builder
+              </p>
+            </div>
+            <div className="grid w-full gap-3 rounded-3xl border border-white/10 bg-surface-0/70 p-5 text-left text-sm text-text-muted">
               <p>24 Hour Fitness — Sales & Ops Leadership</p>
               <p>Operator Studio — Orion Apex Capital</p>
               <p>Mandates across crypto, advisory, digital assets</p>
             </div>
+            <div className="grid w-full gap-4 text-xs uppercase tracking-[0.28em] text-text-muted/80">
+              <div className="rounded-2xl border border-white/10 bg-surface-0/70 p-4">
+                <p className="text-text-primary">Tenure</p>
+                <p className="mt-2 text-lg font-semibold text-brand-gold">12+ yrs ops</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-surface-0/70 p-4">
+                <p className="text-text-primary">Trading focus</p>
+                <p className="mt-2 text-lg font-semibold text-brand-gold">Scalp / Breakout</p>
+              </div>
+            </div>
           </aside>
-          <div className="lg:col-span-8 space-y-8">
-            <div className="space-y-4">
+          <div className="space-y-10">
+            <div className="space-y-5 rounded-[2.5rem] border border-white/10 bg-surface-1/70 p-8">
               <div className="flex items-center gap-4">
                 <Logo variant="crestWhite" size={32} />
                 <h2 className="text-3xl font-semibold text-text-primary">Personal Bio</h2>
@@ -55,15 +67,15 @@ export default function Bio() {
                 <h3 className="text-xl font-semibold text-text-primary">Focus Areas</h3>
                 <ul className="mt-3 space-y-2 text-sm text-text-muted">
                   <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Crypto trading (scalp, breakout, swing)
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Website investing & resale systems
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Revenue architecture & GTM execution
                   </li>
                 </ul>
@@ -72,19 +84,19 @@ export default function Bio() {
                 <h3 className="text-xl font-semibold text-text-primary">Operating Principles</h3>
                 <ul className="mt-3 space-y-2 text-sm text-text-muted">
                   <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Risk first, always
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Speed with discipline
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Transparent reporting
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
                     Purpose-aligned decisions
                   </li>
                 </ul>

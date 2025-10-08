@@ -1,1 +1,7 @@
-{"/_app":"pages/_app.js","/500":"pages/500.html","/_document":"pages/_document.js","/404":"pages/404.html","/about":"pages/about.html","/api/contact":"pages/api/contact.js","/api/subscribe":"pages/api/subscribe.js","/contact":"pages/contact.html","/legal":"pages/legal.html","/services":"pages/services.html","/services/client-services":"pages/services/client-services.html","/test":"pages/test.html","/bio":"pages/bio.html","/_error":"pages/_error.js","/freelance":"pages/freelance.js","/insights/[slug]":"pages/insights/[slug].js","/insights":"pages/insights.js","/freelance/[slug]":"pages/freelance/[slug].js","/":"pages/index.js"}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/404": "pages/404.js"
+}

@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Button from "@/components/Button";
-import Logo from "@/components/Logo";
+import Hero from "@/components/Hero";
 import LogoGrid from "@/components/LogoGrid";
 import { Section } from "@/components/Section";
 import { Featured } from "@/components/Featured";
@@ -18,86 +18,20 @@ const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Years Operating"
 const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
 
 export default function Home({ posts }) {
+  const heroBadges = [
+    { label: BADGE_1_LABEL, value: BADGE_1_VALUE },
+    { label: BADGE_2_LABEL, value: BADGE_2_VALUE },
+    { label: BADGE_3_LABEL, value: BADGE_3_VALUE }
+  ];
+
   return (
     <Layout
       title="Precision. Growth. Legacy."
       description="Disciplined, risk-managed strategies across crypto markets and digital assets. We align exceptional returns with long-term purpose through systematic wealth creation."
       url="/"
+      image="/og/og-home.png"
     >
-      {/* Premium Hero Section */}
-      <section className="relative isolate overflow-hidden bg-astro">
-        <video
-          className="absolute inset-0 h-full w-full object-cover opacity-60"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/media/photos/curated/pexels-philippe-donn-1257860.jpg"
-          aria-hidden="true"
-        >
-          <source src="/media/videos/curated/pexels-vimeo-857195.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-brand-navy/70 mix-blend-multiply" aria-hidden="true"></div>
-        <div className="absolute inset-0 overlay-gradient" aria-hidden="true"></div>
-
-        <div className="relative mx-auto flex min-h-[85vh] w-full max-w-7xl flex-col items-center justify-center gap-10 px-6 py-24 text-center">
-          <div className="flex flex-col items-center gap-6">
-            <div className="rounded-full border border-white/15 bg-surface-1/70 p-6 backdrop-blur">
-              <Logo
-                variant="crestWhite"
-                size={88}
-                className="drop-shadow-[0_25px_40px_rgba(0,0,0,0.45)]"
-              />
-            </div>
-            <p className="text-xs uppercase tracking-[0.45em] text-text-muted">
-              Boutique Digital Asset Management
-            </p>
-            <h1 className="max-w-3xl font-display text-4xl leading-tight text-text-primary sm:text-5xl md:text-6xl">
-              Precision capital for the next frontier of wealth
-            </h1>
-            <p className="max-w-2xl text-base text-text-muted md:text-lg">
-              We deploy disciplined, risk-managed strategies across crypto markets and digital assets—aligning exceptional returns with long-term purpose.
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center gap-4 sm:flex-row">
-            <Link href="/services" className="btn btn-primary min-w-[180px]">
-              Explore Strategies
-            </Link>
-            <Link href="/contact" className="btn btn-secondary min-w-[180px]">
-              Partner With Us
-            </Link>
-          </div>
-
-          <dl className="mt-12 grid w-full max-w-4xl grid-cols-1 gap-6 text-left text-text-primary sm:grid-cols-3">
-            <div className="surface-card h-full p-5" aria-label={`${BADGE_1_LABEL}: ${BADGE_1_VALUE}`}>
-              <dt className="text-xs uppercase tracking-[0.3em] text-text-muted">
-                {BADGE_1_LABEL}
-              </dt>
-              <dd className="mt-3 text-3xl font-semibold text-text-primary">
-                {BADGE_1_VALUE}
-              </dd>
-            </div>
-            <div className="surface-card h-full p-5" aria-label={`${BADGE_2_LABEL}: ${BADGE_2_VALUE}`}>
-              <dt className="text-xs uppercase tracking-[0.3em] text-text-muted">
-                {BADGE_2_LABEL}
-              </dt>
-              <dd className="mt-3 text-3xl font-semibold text-text-primary">
-                {BADGE_2_VALUE}
-              </dd>
-            </div>
-            <div className="surface-card h-full p-5" aria-label={`${BADGE_3_LABEL}: ${BADGE_3_VALUE}`}>
-              <dt className="text-xs uppercase tracking-[0.3em] text-text-muted">
-                {BADGE_3_LABEL}
-              </dt>
-              <dd className="mt-3 text-3xl font-semibold text-text-primary">
-                {BADGE_3_VALUE}
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </section>
+      <Hero badges={heroBadges} />
 
       {/* Social Proof */}
       <LogoGrid />
@@ -255,7 +189,7 @@ export default function Home({ posts }) {
                 <span>Monthly revenue</span>
                 <span className="text-brand-gold font-semibold">↗ +18.2%</span>
               </div>
-              <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
+              <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-brand-gold/15">
                 <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-4 text-xs text-text-muted">

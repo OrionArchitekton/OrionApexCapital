@@ -16,16 +16,24 @@ import {
 import { Section } from "@/components/Section";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { formatDate } from "@/lib/date";
+import Callout from "@/components/Callout";
 
 const mdxComponents = {
-  InsightImage
+  InsightImage,
+  Callout
 };
 
 export default function Post({ post, related }) {
   const publishedDate = formatDate(post.date) ?? post.date;
 
   return (
-    <Layout title={post.title} description={post.excerpt}>
+    <Layout
+      title={post.title}
+      description={post.excerpt}
+      url={`/insights/${post.slug}`}
+      image={post.ogImage ?? post.heroImage ?? "/og/og-insights.png"}
+      twitterImage={post.twitterImage ?? post.heroImage ?? "/og/og-insights.png"}
+    >
       <InsightLayout
         header={
           <>

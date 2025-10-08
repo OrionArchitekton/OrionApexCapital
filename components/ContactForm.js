@@ -25,7 +25,7 @@ export default function ContactForm() {
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <input
-          className="rounded-lg bg-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+          className="rounded-xl border border-white/10 bg-[rgba(9,16,30,0.82)] px-4 py-3 text-text-primary outline-none transition focus:border-[rgba(242,193,78,0.45)] focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
           placeholder="Your name"
           value={form.name}
           onChange={(e)=>setForm({ ...form, name: e.target.value })}
@@ -33,7 +33,7 @@ export default function ContactForm() {
         />
         <input
           type="email"
-          className="rounded-lg bg-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+          className="rounded-xl border border-white/10 bg-[rgba(9,16,30,0.82)] px-4 py-3 text-text-primary outline-none transition focus:border-[rgba(242,193,78,0.45)] focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
           placeholder="you@example.com"
           value={form.email}
           onChange={(e)=>setForm({ ...form, email: e.target.value })}
@@ -42,14 +42,14 @@ export default function ContactForm() {
       </div>
       <textarea
         rows={6}
-        className="w-full rounded-lg bg-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+        className="w-full rounded-xl border border-white/10 bg-[rgba(9,16,30,0.82)] px-4 py-3 text-text-primary outline-none transition focus:border-[rgba(242,193,78,0.45)] focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
         placeholder="Tell us about your goals..."
         value={form.message}
         onChange={(e)=>setForm({ ...form, message: e.target.value })}
         required
       />
       <button className="btn btn-primary" type="submit">Send Message</button>
-      {status && <p className="text-sm text-slate-300">{status}</p>}
+      {status && <p className="text-sm text-text-muted">{status}</p>}
     </form>
   );
 }

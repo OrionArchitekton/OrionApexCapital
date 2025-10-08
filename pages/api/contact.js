@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, message } = req.body || {};
+  const { name, email, message, company, interest } = req.body || {};
     const invalid = [];
     if (!name || name.length < 2 || name.length > 120) invalid.push('name');
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,12 +29,12 @@ export default async function handler(req, res) {
         from: "contact@orionapexcapital.com",
         to: process.env.CONTACT_TO_EMAIL,
         subject: `New Contact — ${name}`,
-        text: `From: ${name} <${email}>\n\n${message}`
+        text: `From: ${name} <${email}>\nCompany: ${company || 'N/A'}\nFocus: ${interest || 'N/A'}\n\n${message}`
       });
       logger.info('Contact email sent', { ip, email });
     } else {
       logger.info('Contact logged (no email configured)', { ip, email });
-      console.log("[contact]", { name, email, message });
+      console.log("[contact]", { name, email, company, interest, message });
     }
 
     res.status(200).json({ ok: true });

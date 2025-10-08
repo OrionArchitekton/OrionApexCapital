@@ -19,35 +19,53 @@ export default function Contact() {
             { label: "Contact" }
           ]}
         />
-        <Container className="max-w-3xl space-y-8">
-          <div className="flex items-center gap-4">
-            <Logo variant="crestWhite" size={32} />
-            <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Partnerships</p>
-              <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
-                Contact Orion Apex
-              </h1>
+        <Container className="max-w-5xl space-y-12">
+          <section className="grid gap-10 rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-[0_32px_80px_-60px_rgba(0,0,0,0.75)] lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-7">
+              <div className="flex items-center gap-4">
+                <Logo variant="crestWhite" size={32} />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Partnerships</p>
+                  <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
+                    Contact Orion Apex
+                  </h1>
+                </div>
+              </div>
+              <p className="text-base text-text-muted sm:text-lg">
+                Tell us about your objectives, constraints, and timeline. We reply within one to two business days to schedule discovery or share next steps.
+              </p>
+              <div className="glass space-y-4 rounded-3xl border border-brand-copper/20 bg-brand-copper/10 p-6 text-sm text-text-onCopper">
+                <p className="text-xs uppercase tracking-[0.32em]">What to include</p>
+                <ul className="space-y-3">
+                  {[
+                    "Scope of work or trading mandate",
+                    "Capital allocation or operating budget",
+                    "Compliance, governance, or timeline constraints"
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-text-onCopper/90">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  { label: "Response time", value: "1-2 days" },
+                  { label: "Engagement cap", value: "2 concurrent" },
+                  { label: "Preferred start", value: "2+ weeks" }
+                ].map((item) => (
+                  <div key={item.label} className="rounded-2xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                    <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{item.label}</p>
+                    <p className="mt-2 text-xl font-semibold text-text-primary">{item.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <p className="text-base text-text-muted sm:text-lg">
-            Tell us about your objectives, constraints, and timeline. We reply within one to two business days to schedule discovery or send next steps.
-          </p>
-          <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-6 text-sm text-text-muted">
-            <p className="font-semibold uppercase tracking-[0.3em] text-brand-copper">What to include</p>
-            <ul className="mt-4 space-y-2">
-              {[
-                "Scope of work or trading mandate",
-                "Capital allocation or operating budget",
-                "Any compliance or governance requirements"
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-brand-copper" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <ContactForm />
+            <div className="rounded-3xl border border-white/10 bg-surface-0/80 p-6 shadow-inner">
+              <ContactForm />
+            </div>
+          </section>
         </Container>
       </Section>
     </Layout>
