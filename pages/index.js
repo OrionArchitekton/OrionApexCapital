@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout";
 import Button from "@/components/Button";
 import Hero from "@/components/Hero";
-import LogoGrid from "@/components/LogoGrid";
 import { Section } from "@/components/Section";
 import { Featured } from "@/components/Featured";
 import { InsightPreviewCard } from "@/components/insights";
@@ -33,9 +32,6 @@ export default function Home({ posts }) {
       image="/og/og-home.png"
     >
       <Hero badges={heroBadges} />
-
-      {/* Social Proof */}
-      <LogoGrid />
 
       {/* Premium Services Section */}
       <Section
