@@ -91,7 +91,7 @@ export default function Hero() {
                 </div>
 
                 <div className="flex flex-col items-center gap-4 sm:flex-row md:items-center">
-                  <Link href="/services" className="btn btn-primary min-w-[180px] text-sm uppercase tracking-[0.28em]">
+                  <Link href="/services#ai-trading" className="btn btn-primary min-w-[180px] text-sm uppercase tracking-[0.28em]">
                     Explore Strategies
                   </Link>
                   <Link href="/contact" className="btn btn-secondary min-w-[180px] text-sm uppercase tracking-[0.28em]">

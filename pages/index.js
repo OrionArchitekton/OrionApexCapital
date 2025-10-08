@@ -45,8 +45,8 @@ export default function Home({ posts }) {
       >
         <div className="grid gap-8 lg:grid-cols-12">
           {[{
-            href: "/services#crypto",
-            title: "Crypto Trading",
+            href: "/services#ai-trading",
+            title: "AI-Driven Trading",
             tagline: `High Frequency ${BULLET} Low Risk`,
             gradient: "from-brand-copper/15 via-transparent to-brand-blue/10",
             accentBg: "bg-brand-copper/20",
@@ -59,8 +59,8 @@ export default function Home({ posts }) {
             cta: "Explore Strategy"
           },
           {
-            href: "/services#websites",
-            title: "Website Investing",
+            href: "/services#digital-assets",
+            title: "Website Acquisitions & Digital Asset Flipping",
             tagline: `Digital Assets ${BULLET} Growth Hacking`,
             gradient: "from-brand-blue/20 via-transparent to-brand-gold/10",
             accentBg: "bg-brand-blue/15",

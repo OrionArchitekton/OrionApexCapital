@@ -4,6 +4,7 @@ import Head from "next/head";
 import clsx from "clsx";
 import { generateServicesItemListJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
 import { Section } from "@/components/Section";
+import { motion } from "framer-motion";
 import { Container } from "@/components/Container";
 import { Featured } from "@/components/Featured";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -34,22 +35,20 @@ export default function Services({ coreOps }) {
             ]}
           />
           <div className="panel panel--accent panel--static overflow-hidden p-10">
-            <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-              <div className="space-y-8">
-                <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-                  <div className="flex items-center gap-4">
-                    <Logo variant="crestWhite" size={36} />
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator lanes</p>
-                      <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
-                        Mandates tuned for precision capital
-                      </h1>
-                    </div>
+            <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+              <div className="space-y-7">
+                <div className="flex items-center gap-4">
+                  <Logo variant="crestWhite" size={36} />
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator lanes</p>
+                    <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
+                      Mandates tuned for precision capital
+                    </h1>
                   </div>
-                  <p className="max-w-xl text-sm leading-relaxed text-text-muted">
-                    We run two core engagements – crypto trading and digital asset acquisition – each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system stays consistent.
-                  </p>
                 </div>
+                <p className="text-lg text-text-muted">
+                  We run three core engagements – AI-driven trading, digital asset acquisition, and applied AI consulting – each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system stays consistent.
+                </p>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {[
                     { label: "Discovery to launch", value: "14-30 days" },
@@ -180,8 +179,8 @@ export default function Services({ coreOps }) {
 
         <Section
           eyebrow="Strategic Pillars"
-          title="Where we deploy disciplined operator math"
-          description="Three integrated lanes compound edge: algorithmic trading intelligence, accretive digital asset cycles, and applied AI leverage across operator workflows."
+          title="Core operator pillars"
+          description="AI-powered trading intelligence, accretive digital asset cycles, and applied AI integration for execution leverage."
           className="pt-0"
         >
           <Container className="grid gap-8 lg:grid-cols-12">
@@ -193,14 +192,14 @@ export default function Services({ coreOps }) {
                 </svg>
               ),
               label: "1️⃣ AI-Driven Trading",
-              headline: "Adaptive signal engines",
-              body: "Short-duration, risk-governed systems with volatility gating, drawdown resets, and telemetry loops feeding reinforcement of validated edges.",
+              headline: "Advanced algorithmic & deep-learning models",
+              body: "Advanced algorithmic and deep-learning models for short-term crypto markets.",
               bullets: [
-                "Regime + liquidity aware position sizing",
-                "Multi-factor confirmation (momentum, vol, structure)",
-                "Operator sign-off + automated execution hooks"
+                "Deep-learning sentiment models",
+                "Automated trade execution & position control",
+                "Real-time strategy clusters with built-in risk filters"
               ],
-              cta: { href: "/services#crypto", label: "Explore trading lane" }
+              cta: { href: "/services#ai-trading", label: "Explore trading lane" }
             }, {
               id: "digital-assets",
               icon: (
@@ -211,14 +210,14 @@ export default function Services({ coreOps }) {
                 </svg>
               ),
               label: "2️⃣ Website Acquisitions & Digital Asset Flipping",
-              headline: "Acquire → Improve → Recycle",
-              body: "Value creation across content and commerce properties using speed audits, UX uplift, monetization tuning, and exit engineering.",
+              headline: "Accretive digital asset cycles",
+              body: "Leveraging AI to identify undervalued web assets, optimize them, and flip or scale for compounding digital returns.",
               bullets: [
-                "Institutional diligence + valuation templates",
-                "Growth + monetization sprint playbooks",
-                "Structured exit pathways + buyer readiness"
+                "AI-driven site valuation & content scoring",
+                "SEO / UX / automation optimization",
+                "Monetization & resale systems"
               ],
-              cta: { href: "/services#websites", label: "See acquisition framework" }
+              cta: { href: "/services#digital-assets", label: "See acquisition framework" }
             }, {
               id: "ai-consulting",
               icon: (
@@ -228,16 +227,24 @@ export default function Services({ coreOps }) {
                 </svg>
               ),
               label: "3️⃣ AI Consulting & Integration",
-              headline: "Applied AI leverage",
-              body: "Operator-first AI adoption: agentic workflows, data enrichment, and decision support layered onto existing governance cadence.",
+              headline: "Custom AI systems & integration",
+              body: "Custom AI-driven systems for traders & businesses — from trading models to intelligent web rebuilds.",
               bullets: [
-                "Workflow + data exhaust mapping",
-                "Model + vendor evaluation scorecards",
-                "Secure deployment + change management"
+                "Model design (sentiment, automation, analytics)",
+                "Workflow & site integrations",
+                "Education + scalability support"
               ],
               cta: { href: "/contact?interest=AI%20Consulting", label: "Discuss AI mandate" }
             }].map(({ id, icon, label, headline, body, bullets, cta }) => (
-              <div key={id} className="panel panel--subtle flex flex-col gap-6 p-8 lg:col-span-4">
+              <motion.div
+                key={id}
+                id={id}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="panel panel--subtle flex flex-col gap-6 p-8 lg:col-span-4"
+              >
                 <div className="flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15 ring-1 ring-brand-gold/30">
                     {icon}
@@ -246,7 +253,9 @@ export default function Services({ coreOps }) {
                 </div>
                 <div className="space-y-3">
                   <h3 className="text-xl font-semibold text-text-primary">{headline}</h3>
-                  <p className="text-sm leading-relaxed text-text-muted">{body}</p>
+                  {body && (
+                    <p className="text-sm leading-relaxed text-text-muted">{body}</p>
+                  )}
                 </div>
                 <ul className="space-y-2 text-sm text-text-muted">
                   {bullets.map((b) => (
@@ -261,7 +270,7 @@ export default function Services({ coreOps }) {
                     {cta.label}
                   </Button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </Container>
         </Section>

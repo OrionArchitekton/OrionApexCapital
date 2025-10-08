@@ -15,12 +15,7 @@ export default function Insights({ posts }) {
       url="/insights"
       image="/og/og-insights.png"
     >
-      <Section
-        eyebrow="Intelligence Briefs"
-        title="Insights"
-        description="Deep analysis and strategic frameworks from the front lines of modern capital markets."
-        containerClassName="space-y-12"
-      >
+      <Section containerClassName="space-y-12">
         <Breadcrumb
           items={[
             { label: "Home", href: "/" },
