@@ -20,7 +20,7 @@ export default function Contact() {
           ]}
         />
         <Container className="max-w-5xl space-y-12">
-          <section className="grid gap-10 rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-[0_32px_80px_-60px_rgba(0,0,0,0.75)] lg:grid-cols-[1.1fr_0.9fr]">
+          <section className="panel panel--accent panel--static grid gap-10 p-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-7">
               <div className="flex items-center gap-4">
                 <Logo variant="crestWhite" size={32} />
@@ -34,7 +34,7 @@ export default function Contact() {
               <p className="text-base text-text-muted sm:text-lg">
                 Tell us about your objectives, constraints, and timeline. We reply within one to two business days to schedule discovery or share next steps.
               </p>
-              <div className="glass space-y-4 rounded-3xl border border-brand-copper/20 bg-brand-copper/10 p-6 text-sm text-text-onCopper">
+              <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-sm text-text-onCopper">
                 <p className="text-xs uppercase tracking-[0.32em]">What to include</p>
                 <ul className="space-y-3">
                   {[
@@ -55,14 +55,14 @@ export default function Contact() {
                   { label: "Engagement cap", value: "2 concurrent" },
                   { label: "Preferred start", value: "2+ weeks" }
                 ].map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                  <div key={item.label} className="panel panel--inline panel--static p-4 text-left">
                     <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{item.label}</p>
                     <p className="mt-2 text-xl font-semibold text-text-primary">{item.value}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-surface-0/80 p-6 shadow-inner">
+            <div className="panel panel--subtle panel--static p-6">
               <ContactForm />
             </div>
           </section>

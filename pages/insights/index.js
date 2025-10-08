@@ -20,26 +20,28 @@ export default function Insights({ posts }) {
         description="Deep analysis and strategic frameworks from the front lines of modern capital markets."
         containerClassName="space-y-12"
       >
-        <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-surface-1/70 px-8 py-10 shadow-[0_34px_90px_-60px_rgba(0,0,0,0.75)]">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="panel panel--accent panel--static overflow-hidden p-10">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4">
               <Logo variant="crestWhite" size={32} />
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-brand-copper">Briefing center</p>
-                <h1 className="text-3xl font-display leading-tight text-text-primary">Market Insights</h1>
+                <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Briefing center</p>
+                <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-[2.75rem]">
+                  Market Insights
+                </h1>
               </div>
             </div>
             <p className="max-w-2xl text-sm text-text-muted">
               Weekly operator notes covering trading setups, advisory playbooks, and asset recycling frameworks. Filter through to surface the signals that matter.
             </p>
           </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {[
               { label: "Median read", value: "7 min" },
               { label: "Tags tracked", value: "12" },
               { label: "Featured briefs", value: featuredCount > 0 ? featuredCount : "3" }
             ].map(({ label, value }) => (
-              <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+              <div key={label} className="panel panel--inline panel--static p-5 text-left">
                 <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                 <p className="mt-2 text-xl font-semibold text-text-primary">{value}</p>
               </div>

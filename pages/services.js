@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import Logo from "@/components/Logo";
 import Head from "next/head";
+import clsx from "clsx";
 import { generateServicesItemListJsonLd, renderJsonLdScript } from "@/lib/seo/jsonldService";
 import { Section } from "@/components/Section";
 import { Container } from "@/components/Container";
@@ -32,7 +33,7 @@ export default function Services({ coreOps }) {
               { label: "Services" }
             ]}
           />
-          <div className="overflow-hidden rounded-[2.75rem] border border-white/10 bg-surface-1/70 p-10 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.75)]">
+          <div className="panel panel--accent panel--static overflow-hidden p-10">
             <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
               <div className="space-y-7">
                 <div className="flex items-center gap-4">
@@ -53,7 +54,7 @@ export default function Services({ coreOps }) {
                     { label: "Engagement length", value: "3-9 months" },
                     { label: "Operator pods", value: "≤4 team" }
                   ].map(({ label, value }) => (
-                    <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                    <div key={label} className="panel panel--inline panel--static p-4 text-left">
                       <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                       <p className="mt-2 text-xl font-semibold text-text-primary">{value}</p>
                     </div>
@@ -68,7 +69,7 @@ export default function Services({ coreOps }) {
                   </Button>
                 </div>
               </div>
-              <aside className="space-y-5 rounded-3xl border border-white/10 bg-surface-0/80 p-8 shadow-inner">
+              <aside className="panel panel--subtle panel--static space-y-5 p-8">
                 <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Engagement cadence</p>
                 <ul className="space-y-4 text-sm text-text-muted">
                   <li className="flex items-start gap-3">
@@ -84,7 +85,7 @@ export default function Services({ coreOps }) {
                     Governance-ready documentation for stakeholders
                   </li>
                 </ul>
-                <div className="rounded-2xl border border-brand-copper/25 bg-brand-copper/10 p-5 text-sm text-text-onCopper">
+                <div className="panel panel--accent panel--inline panel--static p-5 text-sm text-text-onCopper">
                   <p className="text-xs uppercase tracking-[0.3em]">Credentialed</p>
                   <p className="mt-3 text-text-onCopper/90">
                     Operator pods combine trading, acquisition, and GTM experience across 4 markets and 7-figure mandates.
@@ -126,7 +127,11 @@ export default function Services({ coreOps }) {
               <article
                 key={id}
                 id={id}
-                className="lg:col-span-6 flex flex-col gap-6 rounded-3xl border border-white/12 bg-surface-0/80 p-8 transition duration-300 hover:-translate-y-1 hover:border-brand-gold/50 hover:shadow-glow"
+                className={clsx(
+                  "panel flex flex-col gap-6 p-8 transition duration-300",
+                  featured ? "panel--accent" : "panel--subtle",
+                  "lg:col-span-6"
+                )}
               >
                 <div className="flex items-center gap-3">
                   <h2 className="text-2xl font-semibold text-text-primary">{title}</h2>
@@ -152,7 +157,7 @@ export default function Services({ coreOps }) {
         </Section>
 
         <Section className="pt-0" containerClassName="space-y-6">
-          <Container className="rounded-3xl border border-white/10 bg-surface-1/70 p-8">
+          <Container className="panel panel--inline panel--static p-8">
             <h3 className="text-lg font-semibold text-text-primary">Disclaimer</h3>
             <p className="mt-2 text-sm text-text-muted">
               Nothing here is a solicitation to invest or an offer of securities. Engagements proceed only after compliance reviews and mutual scope alignment.
@@ -161,7 +166,7 @@ export default function Services({ coreOps }) {
         </Section>
 
         <Section eyebrow="Core Operations" title={coreOps.title} className="pt-0">
-          <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-glow">
+          <div className="panel panel--subtle panel--static p-8">
             <div
               className="space-y-6 text-base leading-relaxed text-text-muted [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-text-primary [&_ul]:space-y-2 [&_li]:pl-4 [&_li]:text-sm [&_li]:text-text-muted [&_li]:before:-ml-3 [&_li]:before:mr-1 [&_li]:before:text-brand-gold [&_li]:before:content-['•']"
               dangerouslySetInnerHTML={{ __html: coreOps.html }}

@@ -11,7 +11,7 @@ export default function GlassCard({ as: Component = "div", className, children }
   return (
     <Component
       className={clsx(
-        "glass rounded-3xl border border-white/10 bg-[rgba(12,21,39,0.75)] p-6 shadow-[0_28px_60px_-48px_rgba(3,7,18,0.9)]",
+        "panel panel--subtle p-6",
         className
       )}
     >

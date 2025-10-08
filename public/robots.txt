@@ -1,6 +1,9 @@
-# robots.txt for orionapexcapital.com
-
+# *
 User-agent: *
 Allow: /
 
+# Host
+Host: https://www.orionapexcapital.com
+
+# Sitemaps
 Sitemap: https://www.orionapexcapital.com/sitemap.xml

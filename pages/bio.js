@@ -17,7 +17,7 @@ export default function Bio() {
           ]}
         />
         <Container className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <aside className="flex flex-col items-center gap-6 rounded-[2.5rem] border border-white/10 bg-surface-1/70 p-8 text-center shadow-[0_32px_90px_-60px_rgba(0,0,0,0.75)]">
+          <aside className="panel panel--accent panel--static flex flex-col items-center gap-6 p-8 text-center">
             <div className="relative h-44 w-44 overflow-hidden rounded-full border border-white/10">
               <Image
                 src="/images/branding/logo_avatar_round_1024.png"
@@ -33,24 +33,24 @@ export default function Bio() {
                 General Manager • Trader • Builder
               </p>
             </div>
-            <div className="grid w-full gap-3 rounded-3xl border border-white/10 bg-surface-0/70 p-5 text-left text-sm text-text-muted">
+            <div className="panel panel--inline panel--static grid w-full gap-3 p-5 text-left text-sm text-text-muted">
               <p>24 Hour Fitness — Sales & Ops Leadership</p>
               <p>Operator Studio — Orion Apex Capital</p>
               <p>Mandates across crypto, advisory, digital assets</p>
             </div>
             <div className="grid w-full gap-4 text-xs uppercase tracking-[0.28em] text-text-muted/80">
-              <div className="rounded-2xl border border-white/10 bg-surface-0/70 p-4">
+              <div className="panel panel--inline panel--static p-4">
                 <p className="text-text-primary">Tenure</p>
                 <p className="mt-2 text-lg font-semibold text-brand-gold">12+ yrs ops</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-surface-0/70 p-4">
+              <div className="panel panel--inline panel--static p-4">
                 <p className="text-text-primary">Trading focus</p>
                 <p className="mt-2 text-lg font-semibold text-brand-gold">Scalp / Breakout</p>
               </div>
             </div>
           </aside>
           <div className="space-y-10">
-            <div className="space-y-5 rounded-[2.5rem] border border-white/10 bg-surface-1/70 p-8">
+            <div className="panel panel--subtle panel--static space-y-5 p-8">
               <div className="flex items-center gap-4">
                 <Logo variant="crestWhite" size={32} />
                 <h2 className="text-3xl font-semibold text-text-primary">Personal Bio</h2>
@@ -63,7 +63,7 @@ export default function Bio() {
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-6">
+              <div className="panel panel--subtle panel--static p-6">
                 <h3 className="text-xl font-semibold text-text-primary">Focus Areas</h3>
                 <ul className="mt-3 space-y-2 text-sm text-text-muted">
                   <li className="flex items-start gap-3">
@@ -80,7 +80,7 @@ export default function Bio() {
                   </li>
                 </ul>
               </div>
-              <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-6">
+              <div className="panel panel--subtle panel--static p-6">
                 <h3 className="text-xl font-semibold text-text-primary">Operating Principles</h3>
                 <ul className="mt-3 space-y-2 text-sm text-text-muted">
                   <li className="flex items-start gap-3">
@@ -102,7 +102,7 @@ export default function Bio() {
                 </ul>
               </div>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-6">
+            <div className="panel panel--subtle panel--static p-6">
               <h3 className="text-xl font-semibold text-text-primary">Story & Milestones</h3>
               <ul className="mt-3 space-y-3 text-sm text-text-muted">
                 <li>Scaled sales operations across multi-site fitness portfolio.</li>
@@ -110,7 +110,7 @@ export default function Bio() {
                 <li>Launched digital asset acquisition playbooks blending AI tooling with operator oversight.</li>
               </ul>
             </div>
-            <div className="rounded-3xl border border-brand-copper/30 bg-brand-copper/10 p-6 text-sm text-text-onCopper">
+            <div className="panel panel--accent panel--inline panel--static p-6 text-sm text-text-onCopper">
               <p>
                 <strong>For collaborations, speaking, or advisory requests</strong>, connect via the {" "}
                 <Link href="/contact" className="underline">

@@ -36,8 +36,8 @@ export default function Legal() {
         description="Our commitments to transparency, data stewardship, and responsible use of Orion Apex assets."
       >
         <Container className="space-y-8">
-          <div className="rounded-[2.5rem] border border-white/12 bg-surface-1/70 p-8 shadow-[0_36px_90px_-60px_rgba(0,0,0,0.75)]">
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div className="panel panel--accent panel--static p-10">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-4">
                 <Logo variant="crestWhite" size={36} />
                 <div>
@@ -51,7 +51,7 @@ export default function Legal() {
                   { label: "Data retention", value: "12 months" },
                   { label: "Consent refresh", value: "Quarterly" }
                 ].map(({ label, value }) => (
-                  <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                  <div key={label} className="panel panel--inline panel--static p-4 text-left">
                     <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                     <p className="mt-2 text-base font-semibold text-text-primary">{value}</p>
                   </div>
@@ -65,7 +65,7 @@ export default function Legal() {
 
           <div className="grid gap-6">
             {LEGAL_BLOCKS.map(({ title, copy, link }) => (
-              <article key={title} className="card space-y-4 rounded-3xl border border-white/12 bg-surface-0/80 p-6">
+              <article key={title} className="panel panel--subtle panel--static space-y-4 p-6">
                 <p className="text-xs uppercase tracking-[0.28em] text-brand-gold/80">{title}</p>
                 <p className="text-sm leading-relaxed text-text-muted">
                   {copy.split(link?.label ?? "__NONE__").map((segment, index, arr) => (

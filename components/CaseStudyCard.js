@@ -4,7 +4,7 @@ export default function CaseStudyCard({ slug, title, outcome, tags = [] }) {
   return (
     <Link
       href={`/freelance/${slug}`}
-      className="card block h-full rounded-3xl border border-white/12 bg-surface-0/75 p-6 transition hover:-translate-y-1 hover:border-brand-gold/40"
+      className="panel panel--subtle block h-full p-6 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
     >
       <div className="flex items-center justify-between gap-3 text-xs uppercase tracking-[0.28em] text-text-muted/70">
         <span>Case Study</span>

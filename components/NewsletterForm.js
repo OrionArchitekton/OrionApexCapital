@@ -24,7 +24,7 @@ export default function NewsletterForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-surface-0/60 p-4 sm:flex-row sm:items-center"
+      className="panel panel--inline panel--static flex flex-col gap-3 p-4 sm:flex-row sm:items-center"
     >
       <label htmlFor="newsletter-email" className="sr-only">
         Email address
@@ -36,7 +36,7 @@ export default function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
-        className="w-full rounded-xl border border-white/10 bg-surface-1/80 px-4 py-3 text-sm text-text-primary outline-none transition focus:border-brand-copper focus:ring-2 focus:ring-brand-copper/70"
+        className="form-field"
       />
       <button
         className="btn btn-primary w-full rounded-xl sm:w-auto"

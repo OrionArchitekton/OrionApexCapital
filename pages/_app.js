@@ -44,9 +44,32 @@ export default function MyApp({ Component, pageProps }) {
     }
   }, []);
 
-  useEffect(() => {
+  const resumePlayback = useCallback(() => {
+    if (typeof document !== "undefined" && document.hidden) return;
     tryPlayVideo();
   }, [tryPlayVideo]);
+
+  useEffect(() => {
+    resumePlayback();
+  }, [resumePlayback]);
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", resumePlayback);
+    return () => {
+      document.removeEventListener("visibilitychange", resumePlayback);
+    };
+  }, [resumePlayback]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.addEventListener("loadeddata", resumePlayback, { once: true });
+
+    return () => {
+      video.removeEventListener("loadeddata", resumePlayback);
+    };
+  }, [resumePlayback]);
 
   useEffect(() => {
     if (!autoplayFailed) return;

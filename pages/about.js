@@ -18,7 +18,7 @@ export default function About({ missionVision }) {
             { label: "About" }
           ]}
         />
-        <div className="overflow-hidden rounded-[2.75rem] border border-white/10 bg-surface-1/70 p-10 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.75)]">
+  <div className="panel panel--accent panel--static overflow-hidden p-10">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
             <div className="space-y-8">
               <div className="flex flex-wrap items-center gap-4">
@@ -39,14 +39,14 @@ export default function About({ missionVision }) {
                   { label: "Programs deployed", value: "28" },
                   { label: "Markets covered", value: "4" }
                 ].map(({ label, value }) => (
-                  <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                  <div key={label} className="panel panel--inline panel--static p-4 text-left">
                     <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                     <p className="mt-2 text-2xl font-semibold text-text-primary">{value}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <aside className="space-y-6 rounded-3xl border border-white/10 bg-surface-0/80 p-8 shadow-inner">
+            <aside className="panel panel--subtle panel--static space-y-6 p-8">
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Operator code</p>
                 <p className="text-base text-text-muted">
@@ -65,9 +65,9 @@ export default function About({ missionVision }) {
                   </li>
                 ))}
               </ul>
-              <div className="rounded-2xl border border-brand-copper/25 bg-brand-copper/10 p-5 text-sm text-text-onCopper">
-                <p className="text-xs uppercase tracking-[0.3em]">Signature belief</p>
-                <p className="mt-3 text-text-onCopper/90">
+              <div className="panel panel--accent panel--inline panel--static p-5 text-sm text-text-primary">
+                <p className="text-xs uppercase tracking-[0.3em] text-brand-gold/80">Signature belief</p>
+                <p className="mt-3 text-text-primary/85">
                   Wealth compounds when discipline, telemetry, and purpose align. We structure engagements to keep all three anchored in every decision.
                 </p>
               </div>
@@ -96,7 +96,7 @@ export default function About({ missionVision }) {
               copy: "Quantified trading systems + operator-led execution in real businesses, linked through shared telemetry."
             }
           ].map(({ title, copy }) => (
-            <div key={title} className="lg:col-span-4 flex flex-col gap-4 rounded-3xl border border-white/10 bg-surface-1/70 p-6 transition hover:-translate-y-1 hover:border-brand-gold/45 hover:shadow-glow">
+              <div key={title} className="panel panel--subtle lg:col-span-4 flex flex-col gap-4 p-6 transition">
               <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{title}</p>
               <p className="text-base text-text-muted/90">{copy}</p>
             </div>
@@ -109,7 +109,7 @@ export default function About({ missionVision }) {
         title={missionVision.title}
         description={missionVision.summary}
       >
-        <div className="rounded-3xl border border-white/10 bg-surface-1/70 p-8 shadow-glow">
+        <div className="panel panel--subtle panel--static p-8">
           <div
             className="space-y-6 text-base leading-relaxed text-text-muted [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-text-primary [&_blockquote]:border-l-2 [&_blockquote]:border-brand-gold [&_blockquote]:pl-4 [&_blockquote]:text-text-muted [&_strong]:text-text-primary"
             dangerouslySetInnerHTML={{ __html: missionVision.html }}
