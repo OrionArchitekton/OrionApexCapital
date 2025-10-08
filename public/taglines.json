@@ -1,5 +1,11 @@
 {
   "signature": "AI-Driven Wealth. Human Wisdom. Reach New Heights.",
   "short": "Where Technology Meets Intuition to Create Abundance.",
-  "micro": "AI. Intuition. Abundance."
+  "micro": "AI. Intuition. Abundance.",
+  "rotation": [
+    "AI. Intuition. Abundance.",
+    "Where Technology Meets Intuition to Create Abundance.",
+    "AI-Driven Wealth. Human Wisdom. Reach New Heights."
+  ],
+  "intervalMs": 7000
 }

@@ -1,5 +1,6 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import taglines from "@/public/taglines.json";
 
 const DEFAULT_BADGES = [
@@ -16,6 +17,25 @@ const FEATURE_BULLETS = [
 
 export default function Hero({ badges = DEFAULT_BADGES }) {
   const shouldReduceMotion = useReducedMotion();
+  const rotatingTaglines = useMemo(() => {
+    if (Array.isArray(taglines.rotation) && taglines.rotation.length > 0) {
+      return taglines.rotation;
+    }
+    return [taglines.micro].filter(Boolean);
+  }, []);
+
+  const [taglineIndex, setTaglineIndex] = useState(0);
+
+  useEffect(() => {
+    if (shouldReduceMotion || rotatingTaglines.length <= 1) return;
+
+    const interval = typeof taglines.intervalMs === "number" ? taglines.intervalMs : 6000;
+    const id = window.setInterval(() => {
+      setTaglineIndex((prev) => (prev + 1) % rotatingTaglines.length);
+    }, interval);
+
+    return () => window.clearInterval(id);
+  }, [rotatingTaglines, shouldReduceMotion]);
 
   const fadeUp = {
     initial: { opacity: 0, y: shouldReduceMotion ? 0 : 28 },
@@ -41,9 +61,20 @@ export default function Hero({ badges = DEFAULT_BADGES }) {
               transition={transition}
               className="flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-between"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(242,193,78,0.32)] bg-[rgba(12,21,39,0.72)] px-4 py-2 text-[0.65rem] uppercase tracking-[0.4em] text-[rgba(244,220,162,0.9)]">
-                {taglines.micro}
-              </span>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={rotatingTaglines[taglineIndex] ?? taglines.micro}
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
+                  transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.4, 0, 0.2, 1] }}
+                  role="status"
+                  aria-live="polite"
+                  className="inline-flex items-center gap-2 rounded-full border border-[rgba(242,193,78,0.32)] bg-[rgba(12,21,39,0.72)] px-4 py-2 text-[0.65rem] uppercase tracking-[0.4em] text-[rgba(244,220,162,0.9)]"
+                >
+                  {rotatingTaglines[taglineIndex] ?? taglines.micro}
+                </motion.span>
+              </AnimatePresence>
               <span className="hidden text-xs uppercase tracking-[0.32em] text-text-muted/90 md:inline-flex">
                 Boutique digital asset operators • Confidential engagements only
               </span>
