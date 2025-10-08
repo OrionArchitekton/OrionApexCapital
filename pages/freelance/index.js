@@ -57,8 +57,8 @@ export default function Freelance({ cases }) {
             ]}
           />
           <div className="panel panel--accent panel--aurora p-10 floating-1">
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-              <div className="space-y-6 lg:max-w-3xl">
+            <div className="grid gap-8 lg:grid-cols-[2fr_1fr] lg:items-start">
+              <div className="space-y-6">
                 <div className="flex items-center gap-3">
                   <Logo variant="crestWhite" size={32} />
                   <div>
@@ -82,7 +82,7 @@ export default function Freelance({ cases }) {
                   ))}
                 </div>
               </div>
-              <div className="flex flex-col gap-4 text-sm text-text-primary/80 lg:max-w-sm">
+              <div className="flex flex-col gap-4 text-sm text-text-primary/80 lg:mt-16">
                 <div className="panel panel--accent panel--aurora panel--inline p-6 text-text-primary floating-2">
                   <p className="text-xs uppercase tracking-[0.32em] text-brand-gold/80 mb-4">Mandate cadence</p>
                   <ul className="space-y-3 text-text-primary/85">
