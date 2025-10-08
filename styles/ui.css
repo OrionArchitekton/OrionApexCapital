@@ -59,23 +59,33 @@ html, body {
   opacity: 0.72;
   mix-blend-mode: screen;
 }
-   .background-video {
-      position: fixed;
-      inset: 0;
-      z-index: -5;
-      pointer-events: none;
-      overflow: hidden;
-      opacity: 0.42;
-      filter: saturate(130%) brightness(0.7) contrast(1.05);
-      transform: scale(1.03);
-    }
-
-    .background-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: translateZ(0);
-    }
+.background-video-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.background-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(130%) brightness(0.7) contrast(1.05);
+  transform: translateZ(0) scale(1.03);
+  opacity: 0.42;
+}
+.background-video-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 14%, rgba(242, 193, 78, 0.22), transparent 58%),
+    radial-gradient(circle at 78% 4%, rgba(161, 29, 51, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(6, 13, 29, 0.18) 0%, rgba(6, 13, 29, 0.72) 100%);
+  z-index: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
 
 .app-shell {
   position: relative;
