@@ -140,17 +140,31 @@ export default function Hero() {
                     </svg>
                   </div>
                 </div>
-                <div className="panel panel--inline panel--static p-5 text-left">
-                  <p className="text-xs uppercase tracking-[0.3em] text-text-muted/80">Confidence Rating</p>
-                  <div className="mt-3 flex items-center gap-3">
-                    <div className="h-2 flex-1 overflow-hidden rounded-full bg-brand-gold/15">
-                      <div className="h-full w-[82%] rounded-full bg-gradient-to-r from-[rgba(242,193,78,0.8)] via-[rgba(161,29,51,0.85)] to-[rgba(28,47,77,0.9)]" />
-                    </div>
-                    <span className="text-sm font-semibold text-text-primary/90">82%</span>
+                <div className="space-y-4">
+                  <div className="grid gap-3 text-center">
+                    {[
+                      { label: "Client Projects Delivered", value: "15+" },
+                      { label: "On-Time Delivery", value: "97%" },
+                      { label: "Years Operating", value: "3+" }
+                    ].map(({ label, value }) => (
+                      <div key={label} className="panel panel--inline panel--static p-3 text-left">
+                        <p className="text-xs uppercase tracking-[0.28em] text-text-muted/80">{label}</p>
+                        <p className="mt-1 text-xl font-semibold text-text-primary">{value}</p>
+                      </div>
+                    ))}
                   </div>
-                  <p className="mt-3 text-xs text-text-muted">
-                    Active mandates across DeFi, digital assets, and revenue-backed transformations.
-                  </p>
+                  <div className="panel panel--inline panel--static p-4 text-left">
+                    <p className="text-xs uppercase tracking-[0.3em] text-text-muted/80">Confidence Rating</p>
+                    <div className="mt-3 flex items-center gap-3">
+                      <div className="h-2 flex-1 overflow-hidden rounded-full bg-brand-gold/15">
+                        <div className="h-full w-[82%] rounded-full bg-gradient-to-r from-[rgba(242,193,78,0.8)] via-[rgba(161,29,51,0.85)] to-[rgba(28,47,77,0.9)]" />
+                      </div>
+                      <span className="text-sm font-semibold text-text-primary/90">82%</span>
+                    </div>
+                    <p className="mt-3 text-xs text-text-muted">
+                      Active mandates across DeFi, digital assets, and revenue-backed transformations.
+                    </p>
+                  </div>
                 </div>
               </motion.aside>
             </div>

@@ -1,7 +1,14 @@
 import Image from "next/image";
 
 // Surface unique marks instead of repeating the same raster asset
-
+const PARTNER_MARKS = [
+  { src: "/images/branding/03-icon_crest_white-transparent.png", label: "Orion Apex Capital" },
+  { src: "/images/branding/03-icon_crest_white-transparent.png", label: "Partner Mark 1" },
+  { src: "/images/branding/03-icon_crest_white-transparent.png", label: "Partner Mark 2" },
+  { src: "/images/branding/03-icon_crest_white-transparent.png", label: "Partner Mark 3" },
+  { src: "/images/branding/03-icon_crest_white-transparent.png", label: "Partner Mark 4" },
+  { src: "/images/branding/03-icon_crest_white-transparent.png", label: "Partner Mark 5" }
+];
 
 export default function LogoGrid() {
   return (
