@@ -168,7 +168,7 @@ export default function Services({ coreOps }) {
         <Section eyebrow="Core Operations" title={coreOps.title} className="pt-0">
           <div className="panel panel--subtle panel--static p-8">
             <div
-              className="space-y-6 text-base leading-relaxed text-text-muted [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-text-primary [&_ul]:space-y-2 [&_li]:pl-4 [&_li]:text-sm [&_li]:text-text-muted [&_li]:before:-ml-3 [&_li]:before:mr-1 [&_li]:before:text-brand-gold [&_li]:before:content-['•']"
+              className="space-y-6 text-base leading-relaxed text-text-muted [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-text-primary [&_ul]:space-y-2 [&_li]:pl-4 [&_li]:text-sm [&_li]:text-text-muted [&_li]:before:-ml-3 [&_li]:before:mr-1 [&_li]:before:text-brand-gold [&_li]:before:content-['\\2022']"
               dangerouslySetInnerHTML={{ __html: coreOps.html }}
             />
           </div>

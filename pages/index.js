@@ -47,7 +47,7 @@ export default function Home({ posts }) {
           {[{
             href: "/services#crypto",
             title: "Crypto Trading",
-            tagline: `"High Frequency ${BULLET} Low Risk`",
+            tagline: `High Frequency ${BULLET} Low Risk`,
             gradient: "from-brand-copper/15 via-transparent to-brand-blue/10",
             accentBg: "bg-brand-copper/20",
             dotClass: "bg-brand-copper",
@@ -61,7 +61,7 @@ export default function Home({ posts }) {
           {
             href: "/services#websites",
             title: "Website Investing",
-            tagline: "Digital Assets \� Growth Hacking",
+            tagline: `Digital Assets ${BULLET} Growth Hacking`,
             gradient: "from-brand-blue/20 via-transparent to-brand-gold/10",
             accentBg: "bg-brand-blue/15",
             dotClass: "bg-brand-blue",
@@ -89,7 +89,7 @@ export default function Home({ posts }) {
                 {title === "Crypto Trading" ? (
                   <>Short-term setups with <span className="font-semibold text-text-primary">strict risk controls</span> and volatility gates. Systematic execution meets disciplined capital allocation.</>
                 ) : (
-                  <><span className="font-semibold text-text-primary">Acquire → Improve → Recycle.</span> Operator math over hype. Systematic value creation in digital properties.</>
+                  <><span className="font-semibold text-text-primary">Acquire + Improve + Recycle.</span> Operator math over hype. Systematic value creation in digital properties.</>
                 )}
               </p>
               <ul className="relative z-10 space-y-3 text-sm text-text-muted">

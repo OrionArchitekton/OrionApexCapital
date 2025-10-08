@@ -30,7 +30,7 @@ export default function Bio() {
             <div className="space-y-2">
               <h1 className="font-display text-3xl text-text-primary">Dan</h1>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-copper">
-                General Manager • Trader • Builder
+                General Manager &bull; Trader &bull; Builder
               </p>
             </div>
             <div className="panel panel--inline panel--static grid w-full gap-3 p-5 text-left text-sm text-text-muted">
