@@ -34,7 +34,7 @@ export default function NavAurora() {
     <header className="nav-aurora glass shadow-lg">
       <div className="nav-glow" aria-hidden="true" />
       <div className="nav-content">
-        <Link href="/" className="nav-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[rgba(242,193,78,0.55)] focus-visible:ring-offset-[rgba(6,13,29,0.9)]">
+        <Link href="/" className="nav-brand focus:outline-ring-2 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[rgba(242,193,78,0.55)] focus-visible:ring-offset-[rgba(6,13,29,0.9)]">
           <span className="nav-brand-logo" aria-hidden="true">
             <Image
               src="/images/branding/header-logo.png"
