@@ -25,7 +25,6 @@ export default function Hero({ badges = DEFAULT_BADGES }) {
 
   const transition = { duration: 0.9, ease: [0.16, 1, 0.3, 1] };
 
-  const newLocal = 260;
   return (
     <section className="relative isolate overflow-hidden border-b border-white/10 px-6 py-24 sm:px-8 md:py-32">
       <div className="absolute inset-0 -z-10 overflow-hidden rounded-[3rem] border border-white/10 bg-[rgba(10,18,34,0.78)] backdrop-blur-[18px] shadow-[0_40px_120px_-60px_rgba(0,0,0,0.7)]">
