@@ -46,13 +46,13 @@ export default function Services({ coreOps }) {
                   </div>
                 </div>
                 <p className="text-lg text-text-muted">
-                  We run two core engagements—crypto trading and digital asset acquisition—each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system stays consistent.
+                  We run two core engagements - crypto trading and digital asset acquisition - each with embedded governance, telemetry, and risk discipline. Every mandate is bespoke, but the operating system stays consistent.
                 </p>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {[
                     { label: "Discovery to launch", value: "14-30 days" },
                     { label: "Engagement length", value: "3-9 months" },
-                    { label: "Operator pods", value: "≤4 team" }
+                    { label: "Operator pods", value: "4-person team" }
                   ].map(({ label, value }) => (
                     <div key={label} className="panel panel--inline panel--static p-4 text-left">
                       <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
@@ -116,7 +116,7 @@ export default function Services({ coreOps }) {
             {
               id: "websites",
               title: "Digital Asset Investing",
-              summary: "Acquire → Improve → Recycle framework for content and commerce properties.",
+              summary: "Acquire + Improve + Recycle framework for content and commerce properties.",
               bullets: [
                 "Due diligence and valuation frameworks",
                 "Growth optimization sprints across UX, monetization, and search",
@@ -168,7 +168,7 @@ export default function Services({ coreOps }) {
         <Section eyebrow="Core Operations" title={coreOps.title} className="pt-0">
           <div className="panel panel--subtle panel--static p-8">
             <div
-              className="space-y-6 text-base leading-relaxed text-text-muted [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-text-primary [&_ul]:space-y-2 [&_li]:pl-4 [&_li]:text-sm [&_li]:text-text-muted [&_li]:before:-ml-3 [&_li]:before:mr-1 [&_li]:before:text-brand-gold [&_li]:before:content-['•']"
+              className="space-y-6 text-base leading-relaxed text-text-muted [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-text-primary [&_ul]:space-y-2 [&_li]:pl-4 [&_li]:text-sm [&_li]:text-text-muted [&_li]:before:-ml-3 [&_li]:before:mr-1 [&_li]:before:text-brand-gold [&_li]:before:content-['\\2022']"
               dangerouslySetInnerHTML={{ __html: coreOps.html }}
             />
           </div>

@@ -21,7 +21,7 @@ export default function Bio() {
             <div className="relative h-44 w-44 overflow-hidden rounded-full border border-white/10">
               <Image
                 src="/images/branding/logo_avatar_round_1024.png"
-                alt="Dan — Orion Apex Capital"
+                alt="Dan - Orion Apex Capital"
                 fill
                 className="object-cover"
                 sizes="176px"
@@ -30,12 +30,12 @@ export default function Bio() {
             <div className="space-y-2">
               <h1 className="font-display text-3xl text-text-primary">Dan</h1>
               <p className="text-xs uppercase tracking-[0.3em] text-brand-copper">
-                General Manager • Trader • Builder
+                General Manager &bull; Trader &bull; Builder
               </p>
             </div>
             <div className="panel panel--inline panel--static grid w-full gap-3 p-5 text-left text-sm text-text-muted">
-              <p>24 Hour Fitness — Sales & Ops Leadership</p>
-              <p>Operator Studio — Orion Apex Capital</p>
+              <p>24 Hour Fitness - Sales & Ops Leadership</p>
+              <p>Operator Studio - Orion Apex Capital</p>
               <p>Mandates across crypto, advisory, digital assets</p>
             </div>
             <div className="grid w-full gap-4 text-xs uppercase tracking-[0.28em] text-text-muted/80">
@@ -56,7 +56,7 @@ export default function Bio() {
                 <h2 className="text-3xl font-semibold text-text-primary">Personal Bio</h2>
               </div>
               <p className="text-base text-text-muted sm:text-lg">
-                I lead operations and sales at a national fitness brand while building Orion Apex Capital—an operator studio focused on disciplined growth across crypto markets and digital assets. Every initiative is grounded in risk management, data fluency, and operator discipline.
+                I lead operations and sales at a national fitness brand while building Orion Apex Capital, an operator studio focused on disciplined growth across crypto markets and digital assets. Every initiative is grounded in risk management, data fluency, and operator discipline.
               </p>
               <p className="text-base text-text-muted sm:text-lg">
                 Trading specialty: short-duration setups with strict risk protocols (≥2:1 R:R, ATR-based stops) and structured post-trade reviews.

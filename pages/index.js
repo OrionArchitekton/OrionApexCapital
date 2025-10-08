@@ -16,6 +16,7 @@ const BADGE_2_LABEL = process.env.NEXT_PUBLIC_BADGE_2_LABEL ?? "On-Time Delivery
 const BADGE_2_VALUE = process.env.NEXT_PUBLIC_BADGE_2_VALUE ?? "97%";
 const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Years Operating";
 const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
+const BULLET = "\u2022"; // Shared bullet token keeps ASCII-only source
 
 export default function Home({ posts }) {
   const heroBadges = [
@@ -46,28 +47,28 @@ export default function Home({ posts }) {
           {[{
             href: "/services#crypto",
             title: "Crypto Trading",
-            tagline: "High Frequency • Low Risk",
+            tagline: `High Frequency ${BULLET} Low Risk`,
             gradient: "from-brand-copper/15 via-transparent to-brand-blue/10",
             accentBg: "bg-brand-copper/20",
             dotClass: "bg-brand-copper",
             points: [
-              "Risk-managed position sizing",
-              "Automated volatility gates",
-              "Performance tracking & analytics"
+              "Regime-based position sizing guardrails",
+              "Automated volatility gates & drawdown resets",
+              "Live telemetry with accountable operators"
             ],
             cta: "Explore Strategy"
           },
           {
             href: "/services#websites",
             title: "Website Investing",
-            tagline: "Digital Assets • Growth Hacking",
+            tagline: `Digital Assets ${BULLET} Growth Hacking`,
             gradient: "from-brand-blue/20 via-transparent to-brand-gold/10",
             accentBg: "bg-brand-blue/15",
             dotClass: "bg-brand-blue",
             points: [
-              "Due diligence & valuation",
-              "Growth optimization systems",
-              "Strategic exit planning"
+              "Institutional-grade diligence & valuation",
+              "Full-stack growth and monetization sprints",
+              "Exit roadmaps with operator-led transitions"
             ],
             cta: "Learn Process"
           }].map(({ href, title, tagline, gradient, accentBg, dotClass, points, cta }) => (
@@ -86,9 +87,9 @@ export default function Home({ posts }) {
               </div>
               <p className="relative z-10 text-sm leading-relaxed text-text-muted md:text-base">
                 {title === "Crypto Trading" ? (
-                  <>Short-term setups with <span className="font-semibold text-text-primary">strict risk controls</span> and volatility gates. Systematic execution meets disciplined capital allocation.</>
+                  <>Short-cycle signals with <span className="font-semibold text-text-primary">risk envelopes</span>, automated drawdown resets, and operator sign-off.</>
                 ) : (
-                  <><span className="font-semibold text-text-primary">Acquire → Improve → Recycle.</span> Operator math over hype. Systematic value creation in digital properties.</>
+                  <><span className="font-semibold text-text-primary">Acquire + Improve + Recycle.</span> Operator math over hype with durable asset recycling playbooks.</>
                 )}
               </p>
               <ul className="relative z-10 space-y-3 text-sm text-text-muted">
@@ -187,7 +188,7 @@ export default function Home({ posts }) {
             <div className="panel panel--inline panel--static absolute bottom-6 left-6 right-6 p-6 backdrop-blur">
               <div className="flex items-center justify-between text-sm text-text-muted">
                 <span>Monthly revenue</span>
-                <span className="text-brand-gold font-semibold">↗ +18.2%</span>
+                <span className="text-brand-gold font-semibold">Up +18.2%</span>
               </div>
               <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-brand-gold/15">
                 <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
@@ -252,7 +253,7 @@ export default function Home({ posts }) {
               Ready to align execution with outcomes?
             </h3>
             <p className="mx-auto max-w-3xl text-lg text-text-muted md:text-xl">
-              Join the leaders who recognize that systematic wealth creation demands disciplined strategy, real-time intelligence, and operators that stay accountable from discovery to delivery.
+              Join leaders who demand disciplined strategy, real-time telemetry, and operator pods that stay accountable from discovery to delivery.
             </p>
             <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
               <Button href="/contact" variant="primary" className="px-10 py-4 text-base md:text-lg">
@@ -298,3 +299,4 @@ export default function Home({ posts }) {
 export async function getStaticProps() {
   return { props: { posts: getAllPosts() } };
 }
+

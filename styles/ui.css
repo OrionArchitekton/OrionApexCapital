@@ -7,9 +7,10 @@
       --accent-maroon: #a11d33;
       --accent-navy: #1c2f4d;
       --accent-gold-soft: rgba(242, 193, 78, 0.65);
-      --accent-maroon-soft: rgba(161, 29, 51, 0.55);
-      --accent-navy-soft: rgba(28, 47, 77, 0.55);
-      --text-muted: #a7b4cc;
+  --accent-maroon-soft: rgba(161, 29, 51, 0.55);
+  --accent-navy-soft: rgba(28, 47, 77, 0.55);
+  --text-primary: #eaeff5;
+  --text-muted: #a7b4cc;
       --border-soft: rgba(148, 163, 184, 0.12);
       --shadow-strong: 0 24px 64px -32px rgba(3, 7, 18, 0.85);
   --glow-gold: rgba(242, 193, 78, 0.45);
@@ -622,9 +623,28 @@ select.form-field {
   .nav-mobile { display: none !important; }
 }
 
+/* Reduce ambient animation for motion-sensitive visitors */
 @media (prefers-reduced-motion: reduce) {
   .nav-link,
   .nav-toggle,
   .nav-aurora::before,
-  .nav-glow { transition: none !important; animation: none !important; }
+  .nav-glow {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .aurora-field,
+  .sky-grid {
+    animation: none !important;
+    opacity: 0.4;
+  }
+
+  [data-reduce-motion="true"] .aurora-field,
+  [data-reduce-motion="true"] .sky-grid {
+    opacity: 0.25;
+  }
+
+  .panel::after {
+    transition: none !important;
+  }
 }

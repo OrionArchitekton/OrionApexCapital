@@ -41,7 +41,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-2 text-text-primary">
             <Mail size={18} className="text-brand-copper" aria-hidden="true" />
-            <Link href="mailto:contact@orionapexcapital.com" className="underline hover:text-brand-copper">
+            <Link href="mailto:contact@orionapexcapital.com" className="underline hover:text-brand-copper" aria-label="Email Orion Apex Capital">
               contact@orionapexcapital.com
             </Link>
           </div>
@@ -82,12 +82,15 @@ export default function Footer() {
         <div className="lg:col-span-2 space-y-4">
           <h3 className="text-xs uppercase tracking-[0.35em] text-text-muted">Connect</h3>
           <div className="flex gap-4">
+            {/* External channels open in a new tab to keep the primary session intact */}
             {socialLinks.map(({ label, icon: Icon, href }) => (
               <Link
                 key={label}
                 href={href}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-text-primary transition hover:border-brand-copper hover:text-brand-copper focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0"
                 aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Icon size={18} />
               </Link>
@@ -110,10 +113,13 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-col justify-between gap-4 border-t border-white/5 pt-6 text-xs text-text-muted sm:flex-row">
-          <p>© {new Date().getFullYear()} Orion Apex Capital. All rights reserved.</p>
+          {/* Preserve copyright glyph without relying on OS encoding */}
+          <p>
+            &copy; {new Date().getFullYear()} Orion Apex Capital. All rights reserved.
+          </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/legal" className="hover:text-brand-copper">Legal</Link>
-            <span>CLS &lt; 0.1 • AA Contrast</span>
+            <span aria-label="Core experience metrics">CLS &lt; 0.1 &bull; AA contrast</span>
             <Link href="#top" className="hover:text-brand-copper">Back to top</Link>
           </div>
         </div>
