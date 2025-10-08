@@ -139,29 +139,244 @@ html, body {
   mask-image: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.85), transparent 75%);
 }
 
-.glass, .card {
+.glass, .card, .panel {
   position: relative;
-  background: linear-gradient(160deg, rgba(19, 33, 58, 0.9), rgba(11, 20, 38, 0.82));
-  border: 1px solid var(--border-soft);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 18px 32px -26px rgba(3, 7, 18, 0.85);
+  isolation: isolate;
+  border-radius: var(--panel-radius, 1.75rem);
+  border: 1px solid var(--panel-border, rgba(148, 163, 184, 0.16));
+  background: var(
+    --panel-background,
+    linear-gradient(160deg, rgba(19, 33, 58, 0.9), rgba(11, 20, 38, 0.82))
+  );
+  -webkit-backdrop-filter: blur(var(--panel-blur, 18px));
+  backdrop-filter: blur(var(--panel-blur, 18px));
+  box-shadow: var(--panel-shadow, 0 22px 48px -32px rgba(3, 7, 18, 0.82));
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
 }
-.glass::before, .card::before {
+.glass::before, .card::before, .panel::before {
   content: ""; position: absolute; inset: 0; opacity: 0;
-  background: linear-gradient(120deg, rgba(242, 193, 78, 0.24), rgba(161, 29, 51, 0.28), rgba(28, 47, 77, 0.22));
-  transition: opacity 0.3s ease; pointer-events: none;
+  background: var(
+    --panel-overlay,
+    linear-gradient(120deg, rgba(242, 193, 78, 0.24), rgba(161, 29, 51, 0.28), rgba(28, 47, 77, 0.22))
+  );
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
-.glass::after, .card::after {
+.glass::after, .card::after, .panel::after {
   content: ""; position: absolute; inset: -60%;
-  background: radial-gradient(circle at var(--cursor-x, 50%) var(--cursor-y, 50%), rgba(242, 193, 78, 0.3), transparent 220px);
+  background: radial-gradient(
+    circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+    var(--panel-glow, rgba(242, 193, 78, 0.28)),
+    transparent 220px
+  );
   mix-blend-mode: screen; opacity: 0; transition: opacity 0.25s ease; pointer-events: none;
 }
-.glass:hover, .card:hover { transform: translateY(-4px); border-color: rgba(242, 193, 78, 0.38); box-shadow: 0 24px 60px -24px rgba(242, 193, 78, 0.32); }
-.glass:hover::before, .card:hover::before { opacity: 1; }
-.glass:hover::after, .card:hover::after { opacity: 0.32; }
+.glass:hover, .card:hover, .panel:hover {
+  transform: translateY(var(--panel-translate, -4px));
+  border-color: var(--panel-hover-border, rgba(242, 193, 78, 0.38));
+  box-shadow: var(--panel-hover-shadow, 0 32px 72px -36px rgba(242, 193, 78, 0.32));
+}
+.glass:hover::before, .card:hover::before, .panel:hover::before {
+  opacity: var(--panel-overlay-hover-opacity, 0.35);
+}
+.glass:hover::after, .card:hover::after, .panel:hover::after {
+  opacity: var(--panel-glow-hover-opacity, 0.28);
+}
+
+.panel {
+  border-radius: var(--panel-radius, 1.75rem);
+}
+
+.panel[data-variant="subtle"],
+.panel--subtle {
+  --panel-border: rgba(148, 163, 184, 0.14);
+  --panel-background: linear-gradient(160deg, rgba(15, 24, 42, 0.9), rgba(9, 16, 30, 0.82));
+  --panel-shadow: 0 26px 56px -40px rgba(3, 7, 18, 0.75);
+  --panel-hover-shadow: 0 32px 70px -40px rgba(28, 47, 77, 0.32);
+  --panel-overlay: linear-gradient(130deg, rgba(242, 193, 78, 0.16), rgba(161, 29, 51, 0.18), rgba(28, 47, 77, 0.18));
+  --panel-overlay-hover-opacity: 0.28;
+  --panel-glow-hover-opacity: 0.22;
+}
+
+.panel[data-variant="accent"],
+.panel--accent {
+  --panel-border: rgba(242, 193, 78, 0.45);
+  --panel-background: linear-gradient(150deg, rgba(161, 29, 51, 0.25), rgba(242, 193, 78, 0.2) 45%, rgba(12, 21, 39, 0.92) 100%);
+  --panel-shadow: 0 32px 80px -42px rgba(242, 193, 78, 0.38);
+  --panel-hover-shadow: 0 38px 90px -44px rgba(242, 193, 78, 0.48);
+  --panel-overlay: linear-gradient(120deg, rgba(242, 193, 78, 0.35), rgba(161, 29, 51, 0.28), rgba(28, 47, 77, 0.24));
+  --panel-overlay-hover-opacity: 0.45;
+  --panel-glow-hover-opacity: 0.42;
+}
+
+.panel[data-variant="metric"],
+.panel--metric {
+  --panel-border: rgba(242, 193, 78, 0.28);
+  --panel-background: linear-gradient(150deg, rgba(18, 28, 49, 0.9), rgba(12, 20, 38, 0.82));
+  --panel-hover-border: rgba(242, 193, 78, 0.45);
+  --panel-shadow: 0 26px 64px -42px rgba(161, 29, 51, 0.38);
+  --panel-hover-shadow: 0 36px 78px -40px rgba(161, 29, 51, 0.45);
+  --panel-overlay: linear-gradient(120deg, rgba(242, 193, 78, 0.28), rgba(161, 29, 51, 0.26), rgba(28, 47, 77, 0.22));
+  --panel-overlay-hover-opacity: 0.4;
+  --panel-glow-hover-opacity: 0.36;
+}
+
+.panel[data-variant="inline"],
+.panel--inline {
+  --panel-radius: 1.25rem;
+  --panel-blur: 12px;
+  --panel-shadow: 0 18px 38px -30px rgba(3, 7, 18, 0.65);
+  --panel-hover-shadow: 0 24px 46px -28px rgba(242, 193, 78, 0.28);
+  --panel-overlay-hover-opacity: 0.25;
+  --panel-translate: -2px;
+}
+
+.panel[data-variant="static"],
+.panel--static {
+  --panel-translate: 0;
+  --panel-hover-border: var(--panel-border, rgba(148, 163, 184, 0.16));
+  --panel-hover-shadow: var(--panel-shadow, 0 22px 48px -32px rgba(3, 7, 18, 0.82));
+  --panel-overlay-hover-opacity: var(--panel-overlay-opacity, 0);
+  --panel-glow-hover-opacity: 0;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.panel-eyebrow {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: rgba(244, 220, 162, 0.82);
+}
+
+.panel-title {
+  font-size: clamp(1.25rem, 1.7vw + 0.5rem, 2rem);
+  font-weight: 600;
+  color: #f8fafc;
+  letter-spacing: -0.01em;
+}
+
+.panel-description {
+  color: rgba(177, 193, 219, 0.88);
+  font-size: 0.95rem;
+}
+
+.metric-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.1rem 1.35rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(242, 193, 78, 0.24);
+  background: linear-gradient(135deg, rgba(18, 28, 49, 0.88), rgba(11, 20, 38, 0.82));
+  box-shadow: 0 18px 42px -32px rgba(161, 29, 51, 0.45);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.metric-card::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(circle at var(--cursor-x, 50%) var(--cursor-y, 50%), rgba(242, 193, 78, 0.25), transparent 220px);
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.metric-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(242, 193, 78, 0.22), rgba(161, 29, 51, 0.2));
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(242, 193, 78, 0.42);
+  box-shadow: 0 26px 60px -36px rgba(242, 193, 78, 0.48);
+}
+
+.metric-card:hover::after {
+  opacity: 0.35;
+}
+
+.metric-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(244, 220, 162, 0.72);
+}
+
+.metric-value {
+  font-size: clamp(1.5rem, 1.7vw + 0.9rem, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fdf6d3;
+}
+
+.metric-caption {
+  font-size: 0.78rem;
+  color: rgba(177, 193, 219, 0.78);
+}
+
+.form-field {
+  width: 100%;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: linear-gradient(140deg, rgba(12, 21, 39, 0.82), rgba(9, 16, 30, 0.9));
+  padding: 0.85rem 1.15rem;
+  font-size: 0.95rem;
+  color: #f8fafc;
+  letter-spacing: 0.02em;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(242, 193, 78, 0.08);
+}
+
+.form-field::placeholder {
+  color: rgba(177, 193, 219, 0.65);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.form-field:focus {
+  outline: none;
+  border-color: rgba(242, 193, 78, 0.45);
+  box-shadow: 0 0 0 3px rgba(242, 193, 78, 0.18);
+  background: linear-gradient(140deg, rgba(18, 28, 49, 0.9), rgba(11, 20, 38, 0.88));
+}
+
+.form-field:hover {
+  border-color: rgba(242, 193, 78, 0.3);
+}
+
+select.form-field {
+  appearance: none;
+  background-image: linear-gradient(135deg, rgba(242, 193, 78, 0.16), rgba(18, 28, 49, 0));
+}
+
+.form-field--textarea {
+  min-height: 180px;
+  resize: vertical;
+}
 
 .section-title {
   display: flex; align-items: center; gap: 0.75rem; width: 100%;

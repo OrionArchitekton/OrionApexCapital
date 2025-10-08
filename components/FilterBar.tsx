@@ -29,20 +29,20 @@ export default function FilterBar({ industries, outcomes, industry, outcome, onC
   const resetDisabled = !industry && !outcome;
 
   return (
-    <div className="glass flex flex-col gap-5 rounded-3xl border border-white/10 bg-[rgba(12,21,39,0.72)] p-6 md:flex-row md:items-center md:justify-between">
+    <div className="panel panel--accent panel--inline panel--static flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between">
       <div className="space-y-2 text-left">
-        <p className="text-xs uppercase tracking-[0.32em] text-text-muted/80">Filter engagement history</p>
-        <p className="text-sm text-text-muted">
+        <p className="text-xs uppercase tracking-[0.32em] text-text-onCopper/70">Filter engagement history</p>
+        <p className="text-sm text-text-onCopper/90">
           Narrow the portfolio by sector focus and measurable outcome.
         </p>
       </div>
-      <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-end">
-        <label className="flex flex-1 flex-col text-left text-xs uppercase tracking-[0.28em] text-text-muted/70">
-          Industry
+      <div className="flex w-full flex-col gap-4 md:w-auto md:flex-row md:items-end">
+        <label className="flex flex-1 flex-col gap-2 text-sm text-text-onCopper/80">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold/80">Industry</span>
           <select
             value={industry}
             onChange={handleOptionChange(selection, onChange, "industry")}
-            className="mt-2 w-full rounded-2xl border border-white/15 bg-[rgba(10,18,34,0.85)] px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-[rgba(242,193,78,0.4)] focus:outline-none focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
+            className="form-field"
           >
             <option value="">All Industries</option>
             {industries.map((value) => (
@@ -52,12 +52,12 @@ export default function FilterBar({ industries, outcomes, industry, outcome, onC
             ))}
           </select>
         </label>
-        <label className="flex flex-1 flex-col text-left text-xs uppercase tracking-[0.28em] text-text-muted/70">
-          Outcome
+        <label className="flex flex-1 flex-col gap-2 text-sm text-text-onCopper/80">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold/80">Outcome</span>
           <select
             value={outcome}
             onChange={handleOptionChange(selection, onChange, "outcome")}
-            className="mt-2 w-full rounded-2xl border border-white/15 bg-[rgba(10,18,34,0.85)] px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-[rgba(242,193,78,0.4)] focus:outline-none focus:ring-2 focus:ring-[rgba(242,193,78,0.35)]"
+            className="form-field"
           >
             <option value="">All Outcomes</option>
             {outcomes.map((value) => (

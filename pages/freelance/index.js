@@ -47,7 +47,7 @@ export default function Freelance({ cases }) {
         url="/freelance"
       >
       <section className="container py-20">
-        <div className="rounded-[2.75rem] border border-white/10 bg-surface-1/70 p-10 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.75)]">
+        <div className="panel panel--accent panel--static p-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div className="space-y-6 lg:max-w-3xl">
               <div className="flex items-center gap-3">
@@ -66,7 +66,7 @@ export default function Freelance({ cases }) {
                   { label: "Mandate win rate", value: "84%" },
                   { label: "Retention", value: "90 day+" }
                 ].map(({ label, value }) => (
-                  <div key={label} className="rounded-3xl border border-white/10 bg-surface-0/70 p-4 text-left">
+                  <div key={label} className="panel panel--inline panel--static p-4 text-left">
                     <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
                     <p className="mt-2 text-2xl font-semibold text-text-primary">{value}</p>
                   </div>
@@ -74,7 +74,7 @@ export default function Freelance({ cases }) {
               </div>
             </div>
             <div className="flex flex-col gap-4 text-sm text-text-muted lg:max-w-sm">
-              <div className="glass space-y-4 rounded-3xl border border-white/10 bg-brand-copper/10 p-6 text-text-onCopper">
+              <div className="panel panel--accent panel--inline panel--static space-y-4 p-6 text-text-onCopper">
                 <p className="text-xs uppercase tracking-[0.32em]">Mandate cadence</p>
                 <ul className="space-y-3 text-text-onCopper/90">
                   <li className="flex items-start gap-3">
@@ -131,7 +131,7 @@ export default function Freelance({ cases }) {
                   />
                 ))
               ) : (
-                <div className="md:col-span-2 xl:col-span-3 rounded-3xl border border-white/10 bg-surface-1/70 p-8 text-center text-sm text-text-muted/90">
+                <div className="md:col-span-2 xl:col-span-3 panel panel--subtle panel--static p-8 text-center text-sm text-text-muted/90">
                   No case studies match the selected filters. Try clearing one of the options above.
                 </div>
               )}

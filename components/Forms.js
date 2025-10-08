@@ -7,7 +7,7 @@ export function ContactForm() {
             Name
           </span>
           <input
-            className="w-full rounded-2xl border border-white/10 bg-surface-0/70 px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold/30"
+            className="form-field"
             name="name"
             placeholder="Your name"
             autoComplete="name"
@@ -19,7 +19,7 @@ export function ContactForm() {
             Email
           </span>
           <input
-            className="w-full rounded-2xl border border-white/10 bg-surface-0/70 px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold/30"
+            className="form-field"
             type="email"
             name="email"
             placeholder="you@example.com"
@@ -35,7 +35,7 @@ export function ContactForm() {
             Company / Fund
           </span>
           <input
-            className="w-full rounded-2xl border border-white/10 bg-surface-0/70 px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold/30"
+            className="form-field"
             name="company"
             placeholder="Optional"
             autoComplete="organization"
@@ -46,7 +46,7 @@ export function ContactForm() {
             Engagement focus
           </span>
           <select
-            className="w-full appearance-none rounded-2xl border border-white/10 bg-surface-0/70 px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold/30"
+            className="form-field"
             name="interest"
             defaultValue=""
           >
@@ -66,7 +66,7 @@ export function ContactForm() {
           How can we help?
         </span>
         <textarea
-          className="min-h-[180px] w-full resize-y rounded-3xl border border-white/10 bg-surface-0/70 px-4 py-3 text-sm text-text-primary shadow-inner transition focus:border-brand-gold/60 focus:outline-none focus:ring-2 focus:ring-brand-gold/30"
+          className="form-field form-field--textarea"
           name="message"
           placeholder="Tell us about your objectives, constraints, and timeline..."
           required

@@ -36,11 +36,11 @@ export function InsightPreviewCard({
     <Link
       href={`/insights/${post.slug}`}
       className={clsx(
-        "group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-surface-1/70 shadow-glow transition duration-300 hover:-translate-y-1 hover:border-brand-copper/60 hover:shadow-brand-copper/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1",
+        "panel panel--subtle group flex h-full flex-col overflow-hidden transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
         className
       )}
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-white/5">
+      <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-white/10">
         {post.heroImage ? (
           <>
             <Image
