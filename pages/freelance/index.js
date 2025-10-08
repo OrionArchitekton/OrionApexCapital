@@ -44,7 +44,7 @@ export default function Freelance({ cases }) {
         />
       </Head>
       <Layout
-        title="Client Services"
+        title="Client Work"
         description="Strategic consulting and implementation services for operators, investors, and founders. We deliver measurable outcomes through disciplined execution across finance, operations, and digital assets."
         url="/freelance"
       >
@@ -53,7 +53,7 @@ export default function Freelance({ cases }) {
             items={[
               { label: "Home", href: "/" },
               { label: "Services", href: "/services" },
-              { label: "Client Services" }
+              { label: "Client Work" }
             ]}
           />
           <div className="panel panel--accent panel--static p-10">
@@ -63,7 +63,7 @@ export default function Freelance({ cases }) {
                   <Logo variant="crestWhite" size={32} />
                   <div>
                     <p className="text-xs uppercase tracking-[0.35em] text-brand-copper">Operator Studio</p>
-                    <h1 className="font-display text-4xl text-text-primary sm:text-5xl">Client Services</h1>
+                    <h1 className="font-display text-4xl text-text-primary sm:text-5xl">Client Work</h1>
                   </div>
                 </div>
                 <p className="text-lg text-text-muted">
