@@ -55,7 +55,7 @@ export default function NavAurora() {
       <div className="nav-glow" aria-hidden="true" />
       <div className="nav-content">
         {/* Custom focus ring utilities live in ui.css; remove invalid Tailwind token */}
-        <Link href="/" className="nav-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[rgba(242,193,78,0.55)] focus-visible:ring-offset-[rgba(6,13,29,0.9)]">
+        <Link href="/" className="nav-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-[var(--focus-ring-offset)]">
           <span className="nav-brand-logo" aria-hidden="true">
             <Image
               src="/images/branding/header-logo.png"
