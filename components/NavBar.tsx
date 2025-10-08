@@ -105,7 +105,7 @@ export default function NavBar() {
           className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-text-primary transition hover:border-brand-copper hover:text-brand-copper focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 lg:hidden"
           aria-label="Open navigation menu"
           aria-haspopup="dialog"
-          aria-expanded={mobileOpen ? "true" : "false"}
+          aria-expanded={mobileOpen}
         >
           <Menu size={22} />
         </button>

@@ -188,7 +188,7 @@ export default function Home({ posts }) {
             <div className="panel panel--inline panel--static absolute bottom-6 left-6 right-6 p-6 backdrop-blur">
               <div className="flex items-center justify-between text-sm text-text-muted">
                 <span>Monthly revenue</span>
-                <span className="text-brand-gold font-semibold">↗ +18.2%</span>
+                <span className="text-brand-gold font-semibold">Up +18.2%</span>
               </div>
               <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-brand-gold/15">
                 <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
