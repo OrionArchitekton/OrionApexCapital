@@ -165,10 +165,7 @@ export default function MyApp({ Component, pageProps }) {
           >
             <source src={BACKGROUND_VIDEO_SRC} type="video/mp4" />
           </video>
-          <div className="background-video-overlay" />
         </div>
-        <div className="aurora-field" />
-        <div className="sky-grid" />
       </div>
 
       <div className="app-shell app-bg">

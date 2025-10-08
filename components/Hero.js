@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import taglines from "@/public/taglines.json";
 
 const DEFAULT_BADGES = [
@@ -57,15 +56,7 @@ export default function Hero({ badges = DEFAULT_BADGES }) {
                 transition={{ ...transition, delay: 0.08 }}
                 className="flex flex-col items-center gap-6 text-center md:items-start md:text-left"
               >
-                <div className="flex flex-col items-center gap-4 md:items-start">
-                  <Image
-                    src="/images/branding/header-logo-removebg-preview.png"
-                    alt="Orion Apex Capital crest and wordmark"
-                    width={90}
-                    height={90}
-                    priority
-                    className="drop-shadow-[0_22px_48px_rgba(13,22,40,0.65)]"
-                  />
+                <div className="flex flex-col items-center gap-3 md:items-start">
                   <h1 className="max-w-2xl font-display text-4xl leading-tight text-text-primary sm:text-5xl md:text-6xl">
                     {taglines.signature}
                   </h1>
