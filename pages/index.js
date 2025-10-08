@@ -52,7 +52,9 @@ export default function Home({ posts }) {
             accentBg: "bg-brand-copper/20",
             dotClass: "bg-brand-copper",
             points: [
-              "Regime-based position sizing guardrails",\r\n              "Automated volatility gates & drawdown resets",\r\n              "Live telemetry with accountable operators"
+              "Regime-based position sizing guardrails",
+              "Automated volatility gates & drawdown resets",
+              "Live telemetry with accountable operators"
             ],
             cta: "Explore Strategy"
           },
@@ -64,7 +66,9 @@ export default function Home({ posts }) {
             accentBg: "bg-brand-blue/15",
             dotClass: "bg-brand-blue",
             points: [
-              "Institutional-grade diligence & valuation",\r\n              "Full-stack growth and monetization sprints",\r\n              "Exit roadmaps with operator-led transitions"
+              "Institutional-grade diligence & valuation",
+              "Full-stack growth and monetization sprints",
+              "Exit roadmaps with operator-led transitions"
             ],
             cta: "Learn Process"
           }].map(({ href, title, tagline, gradient, accentBg, dotClass, points, cta }) => (
