@@ -89,33 +89,18 @@ export default function NavAurora() {
           })}
         </nav>
 
-        {open ? (
-          <button
-            type="button"
-            className="nav-toggle open"
-            aria-label="Toggle navigation"
-            aria-controls={mobileNavId}
-            aria-expanded="true"
-            onClick={handleToggle}
-          >
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="nav-toggle"
-            aria-label="Toggle navigation"
-            aria-controls={mobileNavId}
-            aria-expanded="false"
-            onClick={handleToggle}
-          >
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </button>
-        )}
+        <button
+          type="button"
+          className={`nav-toggle${open ? " open" : ""}`}
+          aria-label="Toggle navigation"
+          aria-controls={mobileNavId}
+          aria-expanded={open ? "true" : "false"}
+          onClick={handleToggle}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
       </div>
 
       {open ? (
