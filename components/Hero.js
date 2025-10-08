@@ -171,31 +171,6 @@ export default function Hero({ badges = DEFAULT_BADGES }) {
           </div>
         </div>
       </div>
-
-      {/* Revenue highlight overlay */}
-      <div
-        className="panel panel--inline panel--static absolute bottom-6 left-6 right-6 flex flex-col gap-4 p-6 backdrop-blur"
-        role="region"
-        aria-label="Monthly revenue performance snapshot"
-      >
-        <div className="flex items-center justify-between text-sm text-text-muted">
-          <span>Monthly revenue</span>
-          <span className="font-semibold text-brand-gold">Up +18.2%</span>
-        </div>
-        <div className="h-2 w-full overflow-hidden rounded-full bg-brand-gold/15">
-          <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue" aria-hidden="true" />
-        </div>
-        <dl className="grid grid-cols-2 gap-4 text-xs text-text-muted">
-          <div className="flex flex-col gap-1">
-            <dt className="tracking-[0.1em] uppercase text-text-muted/80">This month</dt>
-            <dd className="text-lg font-semibold text-text-primary">$247K</dd>
-          </div>
-          <div className="flex flex-col gap-1">
-            <dt className="tracking-[0.1em] uppercase text-text-muted/80">Last month</dt>
-            <dd className="text-lg font-semibold text-text-primary/70">$209K</dd>
-          </div>
-        </dl>
-      </div>
     </section>
   );
 }

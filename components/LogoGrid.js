@@ -17,15 +17,14 @@ export default function LogoGrid() {
         Operators &amp; partners we&apos;ve worked with
       </p>
       <div className="grid grid-cols-2 gap-6 opacity-80 sm:grid-cols-3 md:grid-cols-6">
-        {PARTNER_MARKS.map(({ src, label }, index) => (
+        {PARTNER_MARKS.map(({ src, label }) => (
           <Image
             key={src}
             src={src}
             alt={label}
             width={140}
             height={40}
-            loading={index >= 3 ? "lazy" : undefined}
-            priority={index < 3}
+            loading="lazy"
             sizes="(max-width: 768px) 33vw, 140px"
             className="mx-auto h-10 w-auto object-contain"
           />
