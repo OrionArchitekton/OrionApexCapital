@@ -12,9 +12,10 @@
       --text-muted: #a7b4cc;
       --border-soft: rgba(148, 163, 184, 0.12);
       --shadow-strong: 0 24px 64px -32px rgba(3, 7, 18, 0.85);
-      --glow-gold: rgba(242, 193, 78, 0.45);
-      --glow-maroon: rgba(161, 29, 51, 0.38);
-      --glow-navy: rgba(28, 47, 77, 0.42);
+  --glow-gold: rgba(242, 193, 78, 0.45);
+  --glow-maroon: rgba(161, 29, 51, 0.38);
+  --glow-navy: rgba(28, 47, 77, 0.42);
+  --brand-banner-image: url("/images/branding/orion-apex-banner.png");
       --grid-line: rgba(148, 163, 184, 0.08);
     }
 
@@ -51,7 +52,7 @@ html, body {
   -webkit-mask-image: radial-gradient(circle at 22% 42%, rgba(255, 255, 255, 0.7), transparent 60%);
   mask-image: radial-gradient(circle at 22% 42%, rgba(255, 255, 255, 0.7), transparent 60%);
   background:
-    url("/images/branding/orion-apex-banner.png") center/140% no-repeat,
+    var(--brand-banner-image) center/140% no-repeat,
     radial-gradient(1200px 820px at 12% -8%, rgba(161, 29, 51, 0.24) 0, rgba(6, 13, 29, 0) 52%),
     radial-gradient(900px 720px at 112% 10%, rgba(242, 193, 78, 0.22) 0, rgba(6, 13, 29, 0) 46%);
   opacity: 0.58;
