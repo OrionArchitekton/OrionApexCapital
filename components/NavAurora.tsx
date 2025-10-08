@@ -14,6 +14,7 @@ const NAV_LINKS = [
 export default function NavAurora() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  // Landmarks keep desktop and mobile navigation discoverable
   const navListId = "primary-navigation";
   const mobileNavId = "mobile-navigation";
 
@@ -34,12 +35,20 @@ export default function NavAurora() {
 
   const handleToggle = () => setOpen((prev) => !prev);
 
-  const mobileNavLinks = NAV_LINKS.map(({ href, label, description }) => (
-    <Link key={href} href={href} className={`nav-link nav-link-mobile${isActive(href) ? " active" : ""}`}>
-      <span className="nav-link-label">{label}</span>
-      <span className="nav-link-sub">{description}</span>
-    </Link>
-  ));
+  const mobileNavLinks = NAV_LINKS.map(({ href, label, description }) => {
+    const active = isActive(href);
+    return (
+      <Link
+        key={href}
+        href={href}
+        className={`nav-link nav-link-mobile${active ? " active" : ""}`}
+        aria-current={active ? "page" : undefined}
+      >
+        <span className="nav-link-label">{label}</span>
+        <span className="nav-link-sub">{description}</span>
+      </Link>
+    );
+  });
 
   return (
     <header className="nav-aurora glass shadow-lg">
@@ -64,12 +73,20 @@ export default function NavAurora() {
         </Link>
 
         <nav className="nav-links" id={navListId}>
-          {NAV_LINKS.map(({ href, label, description }) => (
-            <Link key={href} href={href} className={`nav-link${isActive(href) ? " active" : ""}`}>
-              <span className="nav-link-label">{label}</span>
-              <span className="nav-link-sub">{description}</span>
-            </Link>
-          ))}
+          {NAV_LINKS.map(({ href, label, description }) => {
+            const active = isActive(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`nav-link${active ? " active" : ""}`}
+                aria-current={active ? "page" : undefined}
+              >
+                <span className="nav-link-label">{label}</span>
+                <span className="nav-link-sub">{description}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         {open ? (
