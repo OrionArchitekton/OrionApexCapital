@@ -9,12 +9,13 @@ import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 
 // Environment-driven badge configuration
-const BADGE_1_LABEL = process.env.NEXT_PUBLIC_BADGE_1_LABEL ?? "Client Projects Delivered";
-const BADGE_1_VALUE = process.env.NEXT_PUBLIC_BADGE_1_VALUE ?? "15+";
-const BADGE_2_LABEL = process.env.NEXT_PUBLIC_BADGE_2_LABEL ?? "On-Time Delivery";
-const BADGE_2_VALUE = process.env.NEXT_PUBLIC_BADGE_2_VALUE ?? "97%";
-const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Years Operating";
-const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3+";
+// Default hero badge values reflect our HoldCo status rather than service metrics.
+const BADGE_1_LABEL = process.env.NEXT_PUBLIC_BADGE_1_LABEL ?? "Subsidiaries Governed";
+const BADGE_1_VALUE = process.env.NEXT_PUBLIC_BADGE_1_VALUE ?? "3";
+const BADGE_2_LABEL = process.env.NEXT_PUBLIC_BADGE_2_LABEL ?? "Years Operating";
+const BADGE_2_VALUE = process.env.NEXT_PUBLIC_BADGE_2_VALUE ?? "3+";
+const BADGE_3_LABEL = process.env.NEXT_PUBLIC_BADGE_3_LABEL ?? "Ecosystem Domains";
+const BADGE_3_VALUE = process.env.NEXT_PUBLIC_BADGE_3_VALUE ?? "3";
 const BULLET = "\u2022"; // Shared bullet token keeps ASCII-only source
 
 export default function Home({ posts }) {
@@ -26,52 +27,71 @@ export default function Home({ posts }) {
 
   return (
     <Layout
-      title="Precision. Growth. Legacy."
-      description="Disciplined, risk-managed strategies across crypto markets and digital assets. We align exceptional returns with long-term purpose through systematic wealth creation."
+      title="Disciplined Growth, Lasting Legacy"
+      description="Orion Apex Capital is a modern holding company that governs independent subsidiaries across AI, media, and trading R&D. We provide governance, architecture, and capital discipline so innovation compounds responsibly."
       url="/"
       image="/og/og-home.png"
     >
       <Hero badges={heroBadges} />
 
-      {/* Premium Services Section */}
+      {/* Holdings Section */}
       <Section
-        eyebrow="Core Verticals"
-        title="Disciplined operator lanes"
-        description="Two distinct verticals. One unified approach to systematic wealth creation."
+        eyebrow="Holdings"
+        title="Independent subsidiaries"
+        description="Three distinct companies. One shared standard of discipline."
       >
         <div className="grid gap-8 lg:grid-cols-12">
           {[{
-            href: "/services#ai-trading",
-            title: "AI-Driven Trading",
-            tagline: `High Frequency ${BULLET} Low Risk`,
-            gradient: "from-brand-copper/15 via-transparent to-brand-blue/10",
-            accentBg: "bg-brand-copper/20",
-            dotClass: "bg-brand-copper",
-            points: [
-              "Regime-based position sizing guardrails",
-              "Automated volatility gates & drawdown resets",
-              "Live telemetry with accountable operators"
-            ],
-            cta: "Explore Strategy"
-          },
-          {
-            href: "/services#digital-assets",
-            title: "Website Acquisitions & Digital Asset Flipping",
-            tagline: `Digital Assets ${BULLET} Growth Hacking`,
-            gradient: "from-brand-blue/20 via-transparent to-brand-gold/10",
+            href: "https://orionintelligenceagency.com",
+            title: "Orion Intelligence Agency",
+            tagline: `AI Agents ${BULLET} Decision Intelligence`,
+            gradient: "from-brand-blue/20 via-transparent to-brand-copper/10",
             accentBg: "bg-brand-blue/15",
             dotClass: "bg-brand-blue",
+            description: "Guardrailed AI agents and orchestration tooling. Non-custodial, KPI-driven, and designed for secure decision support.",
             points: [
-              "Institutional-grade diligence & valuation",
-              "Full-stack growth and monetization sprints",
-              "Exit roadmaps with operator-led transitions"
+              "AI agents & orchestration services",
+              "Knowledge base only responses with guardrails",
+              "Weekly KPI loops & custom dashboards"
             ],
-            cta: "Learn Process"
-          }].map(({ href, title, tagline, gradient, accentBg, dotClass, points, cta }) => (
-            <Link
+            cta: "Visit OIA"
+          },
+          {
+            href: "https://orionaimedia.com",
+            title: "Orion Ascend Media",
+            tagline: `Acquire ${BULLET} Improve ${BULLET} Recycle`,
+            gradient: "from-brand-copper/15 via-transparent to-brand-gold/10",
+            accentBg: "bg-brand-copper/20",
+            dotClass: "bg-brand-copper",
+            description: "Acquire, improve, and recycle digital assets. Growth funnels and traffic systems that route demand back to our ecosystem.",
+            points: [
+              "Acquire undervalued digital assets",
+              "Optimize SEO, UX, and monetization",
+              "Recycle assets and route leads to OIA"
+            ],
+            cta: "Visit Ascend"
+          },
+          {
+            href: "https://apexaitrading-com.vercel.app",
+            title: "Apex Trading Systems",
+            tagline: `Research ${BULLET} Backtest ${BULLET} Risk`,
+            gradient: "from-brand-gold/15 via-transparent to-brand-blue/10",
+            accentBg: "bg-brand-gold/20",
+            dotClass: "bg-brand-gold",
+            description: "Proprietary trading R&D and risk tooling. Backtesting and paper trading platforms that democratize strategy iteration.",
+            points: [
+              "Fast backtests & paper trading tools",
+              "AI-assisted strategy idea generation",
+              "Risk tooling and telemetry frameworks"
+            ],
+            cta: "Visit ATS"
+          }].map(({ href, title, tagline, gradient, accentBg, dotClass, description, points, cta }) => (
+            <a
               key={href}
               href={href}
-              className="panel panel--accent group relative lg:col-span-6 flex flex-col gap-5 overflow-hidden p-8 transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              className="panel panel--accent group relative lg:col-span-4 flex flex-col gap-5 overflow-hidden p-8 transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-copper/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <div className={`pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br ${gradient} opacity-90 transition group-hover:opacity-100`} />
               <div className="relative z-10 flex items-start gap-4">
@@ -82,11 +102,7 @@ export default function Home({ posts }) {
                 </div>
               </div>
               <p className="relative z-10 text-sm leading-relaxed text-text-muted md:text-base">
-                {title === "Crypto Trading" ? (
-                  <>Short-cycle signals with <span className="font-semibold text-text-primary">risk envelopes</span>, automated drawdown resets, and operator sign-off.</>
-                ) : (
-                  <><span className="font-semibold text-text-primary">Acquire + Improve + Recycle.</span> Operator math over hype with durable asset recycling playbooks.</>
-                )}
+                {description}
               </p>
               <ul className="relative z-10 space-y-3 text-sm text-text-muted">
                 {points.map((point) => (
@@ -102,7 +118,7 @@ export default function Home({ posts }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </span>
-            </Link>
+            </a>
           ))}
         </div>
         <div className="grid gap-8 lg:grid-cols-12">
