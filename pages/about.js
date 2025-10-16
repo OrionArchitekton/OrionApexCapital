@@ -8,7 +8,7 @@ export default function About({ missionVision }) {
   return (
     <Layout 
       title="About"
-      description="Orion Apex Capital was founded on disciplined strategy beating noise. We operate across crypto markets and digital assets with emphasis on risk management and execution speed."
+      description="Orion Apex Capital is a modern holding company where human intuition + algorithmic precision drive disciplined growth. We govern three operating subsidiaries across AI, media, and trading R&D."
       url="/about"
     >
       <Section className="pb-12" containerClassName="space-y-10">
@@ -31,13 +31,13 @@ export default function About({ missionVision }) {
                 </div>
               </div>
               <p className="text-lg leading-relaxed text-text-muted">
-                Orion Apex Capital operates on a simple mandate: disciplined strategy beats noise. We partner with investors and operators who value precision, transparent communication, and resilient execution across crypto markets and digital asset programs.
+                Orion Apex Capital is a modern holding company where <strong className="text-text-primary">human intuition + algorithmic precision</strong> drive disciplined growth. We own and coordinate three operating subsidiaries across AI agents, digital asset acquisition, and trading R&D.
               </p>
               <div className="grid gap-4 sm:grid-cols-3">
                 {[
-                  { label: "Years operating", value: "3+" },
-                  { label: "Programs deployed", value: "28" },
-                  { label: "Markets covered", value: "4" }
+                  { label: "Subsidiaries Governed", value: "3" },
+                  { label: "Years Operating", value: "3+" },
+                  { label: "Ecosystem Domains", value: "3" }
                 ].map(({ label, value }, index) => (
                   <div key={label} className={`panel panel--kpi panel--inline p-4 text-left floating-${index + 1}`}>
                     <p className="text-xs uppercase tracking-[0.28em] text-text-muted">{label}</p>
@@ -48,16 +48,16 @@ export default function About({ missionVision }) {
             </div>
             <aside className="panel panel--accent panel--aurora space-y-6 p-8 floating-2">
               <div className="space-y-4">
-                <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Operator code</p>
+                <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Operating Arms</p>
                 <p className="text-base text-text-muted">
-                  Every mandate opens with rigorous market prep, scenario planning, and risk-first governance. Execution pods stay lean, data-native, and accountable to cadence.
+                  Three independent subsidiaries, each with clear mandates and coordinated through shared governance, architecture, and capital discipline.
                 </p>
               </div>
               <ul className="space-y-3 text-sm text-text-muted">
                 {[
-                  "Institutional-grade reporting standards",
-                  "Playbooks for market and ops turbulence",
-                  "Operators embedded from strategy to delivery"
+                  "Orion Intelligence Agency: AI agents & orchestration",
+                  "Orion Ascend Media: Digital asset acquisition & growth",
+                  "Apex Trading Systems: Trading R&D & risk tooling"
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="mt-1 h-2 w-2 rounded-full bg-brand-gold" aria-hidden="true" />
@@ -66,9 +66,9 @@ export default function About({ missionVision }) {
                 ))}
               </ul>
               <div className="panel panel--accent panel--inline panel--static p-5 text-sm text-text-primary">
-                <p className="text-xs uppercase tracking-[0.3em] text-brand-gold/80">Signature belief</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-brand-gold/80">Core Approach</p>
                 <p className="mt-3 text-text-primary/85">
-                  Wealth compounds when discipline, telemetry, and purpose align. We structure engagements to keep all three anchored in every decision.
+                  Corporate architecture, compliance posture, and clear no-custody/no-advice boundaries. Weekly KPI loops, lean infrastructure, and growth engines that compound.
                 </p>
               </div>
             </aside>
@@ -79,21 +79,21 @@ export default function About({ missionVision }) {
       <Section
         eyebrow="Operating DNA"
         title="What sets Orion apart"
-        description="We synthesize trading intelligence, digital asset engineering, and advisory governance into a single operator stack."
+        description="We provide governance, architecture, and capital discipline so innovation compounds responsibly across independent subsidiaries."
       >
         <Container className="grid gap-6 lg:grid-cols-12">
           {[
             {
-              title: "Mission",
-              copy: "Build wealth with integrity and precision, compounding risk-adjusted returns into enduring legacy capital."
+              title: "Structure",
+              copy: "Ohio HoldCo with siloed subsidiaries. Clear intercompany IP & services agreements. No custody, no advice—just software, media, and R&D."
             },
             {
-              title: "Values",
-              copy: "Trust, transparency, and disciplined growth sit at the center of every mandate we accept."
+              title: "Discipline",
+              copy: "Weekly KPI rhythm (replies • demos • closes • MRR). Lean infrastructure under $100/mo until scale demands more. Risk limits and audit-friendly logs."
             },
             {
-              title: "Edge",
-              copy: "Quantified trading systems + operator-led execution in real businesses, linked through shared telemetry."
+              title: "Growth Engine",
+              copy: "Ascend media properties generate qualified leads that route to OIA. AI orchestration and trading tooling compound our internal advantage."
             }
           ].map(({ title, copy }) => (
               <div key={title} className="panel panel--subtle lg:col-span-4 flex flex-col gap-4 p-6 transition">
