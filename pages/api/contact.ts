@@ -39,8 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (process.env.CONVERTKIT_FORM_ID && process.env.CONVERTKIT_API_KEY) {
     try {
-      const formId = process.env.CONVERTKIT_FORM_ID;
-      await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
+      await fetch(`https://api.convertkit.com/v3/forms/${process.env.CONVERTKIT_FORM_ID}/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
