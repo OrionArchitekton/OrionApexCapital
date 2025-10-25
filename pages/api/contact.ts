@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const hubspotKey = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
   if (hubspotKey) {
     try {
-      await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
+      const hubspotRes = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,14 +32,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           },
         }),
       });
+
+      if (!hubspotRes.ok) {
+        const errorText = await hubspotRes.text();
+        console.error('HubSpot submission failed', hubspotRes.status, errorText);
+        return res.status(500).json({ error: 'Failed to submit contact to HubSpot' });
+      }
     } catch (error) {
       console.error('HubSpot submission failed', error);
+      return res.status(500).json({ error: 'Failed to submit contact to HubSpot' });
     }
   }
 
   if (process.env.CONVERTKIT_FORM_ID && process.env.CONVERTKIT_API_KEY) {
     try {
-      await fetch(`https://api.convertkit.com/v3/forms/${process.env.CONVERTKIT_FORM_ID}/subscribe`, {
+      const convertKitRes = await fetch(`https://api.convertkit.com/v3/forms/${process.env.CONVERTKIT_FORM_ID}/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -52,8 +59,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           },
         }),
       });
+
+      if (!convertKitRes.ok) {
+        const errorText = await convertKitRes.text();
+        console.error('ConvertKit submission failed', convertKitRes.status, errorText);
+        return res.status(500).json({ error: 'Failed to subscribe contact to ConvertKit' });
+      }
     } catch (error) {
       console.error('ConvertKit submission failed', error);
+      return res.status(500).json({ error: 'Failed to subscribe contact to ConvertKit' });
     }
   }
 

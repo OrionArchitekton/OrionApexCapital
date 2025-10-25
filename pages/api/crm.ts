@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await fetch(`https://api.hubapi.com/crm/v3/objects/${objectType}`, {
+    const hubspotRes = await fetch(`https://api.hubapi.com/crm/v3/objects/${objectType}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,8 +25,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
       body: JSON.stringify(payload),
     });
+
+    if (!hubspotRes.ok) {
+      const errorText = await hubspotRes.text();
+      console.error('HubSpot CRM proxy failure', hubspotRes.status, errorText);
+      return res.status(500).json({ error: 'Failed to submit payload to HubSpot CRM' });
+    }
   } catch (error) {
     console.error('HubSpot CRM proxy failure', error);
+    return res.status(500).json({ error: 'Failed to submit payload to HubSpot CRM' });
   }
 
   return res.status(200).json({ ok: true });
