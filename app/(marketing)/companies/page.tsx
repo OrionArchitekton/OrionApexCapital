@@ -38,7 +38,7 @@ export default function CompaniesPage() {
                   <Link href={`${company.url}`} className={styles.primary}>
                     View overview
                   </Link>
-                  <Link href={`${company.url}/services/${company.slug === 'trading-system' ? 'features' : company.slug === 'media' ? 'brand' : 'market-diligence'}`} className={styles.secondary}>
+                  <Link href={`${company.url}/services/${company.primaryServiceSlug}`} className={styles.secondary}>
                     Explore services
                   </Link>
                 </div>
