@@ -1,0 +1,83 @@
+.page {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.cards {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.card {
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: rgba(10, 18, 32, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  display: grid;
+  gap: var(--space-5);
+}
+
+.card[data-theme='oia'] {
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.card[data-theme='oam'] {
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.card[data-theme='ats'] {
+  border-color: rgba(132, 204, 22, 0.3);
+}
+
+.short {
+  font-size: var(--step--1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.card h2 {
+  margin: 0.4rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+}
+
+.card p {
+  margin: 0;
+  max-width: 42rem;
+  color: rgba(226, 232, 240, 0.86);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--step--1);
+}
+
+.primary {
+  background: var(--color-accent);
+  color: #020817;
+}
+
+.secondary {
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: var(--space-5);
+  }
+}
