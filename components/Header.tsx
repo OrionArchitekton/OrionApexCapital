@@ -79,7 +79,7 @@ export function Header() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    data-active={pathname === link.href}
+                    data-active={pathname === '/' ? pathname === link.href : pathname.startsWith(link.href)}
                     className={styles.navLink}
                     onClick={() => setIsMobileOpen(false)}
                   >
