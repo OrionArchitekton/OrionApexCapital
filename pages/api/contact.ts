@@ -11,10 +11,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  const failedIntegrations: string[] = [];
+
   const hubspotKey = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
   if (hubspotKey) {
     try {
-      await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
+      const hubspotRes = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,14 +34,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           },
         }),
       });
+
+      if (!hubspotRes.ok) {
+        const errorText = await hubspotRes.text();
+        console.error('HubSpot submission failed', errorText);
+        failedIntegrations.push('HubSpot');
+      }
     } catch (error) {
       console.error('HubSpot submission failed', error);
+      failedIntegrations.push('HubSpot');
     }
   }
 
   if (process.env.CONVERTKIT_FORM_ID && process.env.CONVERTKIT_API_KEY) {
     try {
-      await fetch(`https://api.convertkit.com/v3/forms/${process.env.CONVERTKIT_FORM_ID}/subscribe`, {
+      const convertKitRes = await fetch(`https://api.convertkit.com/v3/forms/${process.env.CONVERTKIT_FORM_ID}/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -52,9 +61,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           },
         }),
       });
+
+      if (!convertKitRes.ok) {
+        const errorText = await convertKitRes.text();
+        console.error('ConvertKit submission failed', errorText);
+        failedIntegrations.push('ConvertKit');
+      }
     } catch (error) {
       console.error('ConvertKit submission failed', error);
+      failedIntegrations.push('ConvertKit');
     }
+  }
+
+  if (failedIntegrations.length > 0) {
+    return res.status(502).json({
+      error: `Failed to submit to ${failedIntegrations.join(' and ')}`,
+    });
   }
 
   return res.status(200).json({ ok: true });
