@@ -16,7 +16,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https:",
-  "connect-src 'self' https://www.google-analytics.com https://*.vercel-insights.com",
+  "connect-src 'self' https://www.google-analytics.com https://*.vercel-insights.com https://plausible.io",
   "frame-ancestors 'self'",
   "form-action 'self'",
   "base-uri 'self'"

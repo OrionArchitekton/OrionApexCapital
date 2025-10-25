@@ -1,0 +1,38 @@
+.page {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.section {
+  padding: var(--space-6) 0;
+}
+
+.services {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.portfolio {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.portfolio article {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-2);
+  border: 1px solid rgba(124, 58, 237, 0.28);
+  background: rgba(26, 20, 44, 0.65);
+}
+
+.portfolio h3 {
+  margin: 0;
+  font-family: var(--font-display);
+}
+
+.result {
+  color: rgba(244, 244, 255, 0.85);
+  font-weight: 600;
+}

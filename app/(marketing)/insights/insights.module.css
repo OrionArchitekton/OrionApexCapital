@@ -1,0 +1,41 @@
+.page {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.card {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.date {
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.card h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+}
+
+.card p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.88);
+}
+
+.readMore {
+  justify-self: flex-start;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
