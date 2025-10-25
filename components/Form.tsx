@@ -59,7 +59,7 @@ export function Form({ title, description, endpoint, successRedirect, cta, field
     <form className={styles.form} onSubmit={handleSubmit} aria-describedby={`${fields[0]?.name}-help`}>
       <div className={styles.header}>
         <h2>{title}</h2>
-        <p>{description}</p>
+        <p id={`${fields[0]?.name}-help`}>{description}</p>
       </div>
       <div className={styles.grid}>
         {fields.map((field) => (
