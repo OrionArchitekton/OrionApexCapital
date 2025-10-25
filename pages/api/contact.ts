@@ -11,6 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
+  const failedIntegrations: string[] = [];
+
   const hubspotKey = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
   if (hubspotKey) {
     try {
@@ -35,12 +37,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (!hubspotRes.ok) {
         const errorText = await hubspotRes.text();
-        console.error('HubSpot submission failed', hubspotRes.status, errorText);
-        return res.status(500).json({ error: 'Failed to submit contact to HubSpot' });
+        console.error('HubSpot submission failed', errorText);
+        failedIntegrations.push('HubSpot');
       }
     } catch (error) {
       console.error('HubSpot submission failed', error);
-      return res.status(500).json({ error: 'Failed to submit contact to HubSpot' });
+      failedIntegrations.push('HubSpot');
     }
   }
 
@@ -62,13 +64,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (!convertKitRes.ok) {
         const errorText = await convertKitRes.text();
-        console.error('ConvertKit submission failed', convertKitRes.status, errorText);
-        return res.status(500).json({ error: 'Failed to subscribe contact to ConvertKit' });
+        console.error('ConvertKit submission failed', errorText);
+        failedIntegrations.push('ConvertKit');
       }
     } catch (error) {
       console.error('ConvertKit submission failed', error);
-      return res.status(500).json({ error: 'Failed to subscribe contact to ConvertKit' });
+      failedIntegrations.push('ConvertKit');
     }
+  }
+
+  if (failedIntegrations.length > 0) {
+    return res.status(502).json({
+      error: `Failed to submit to ${failedIntegrations.join(' and ')}`,
+    });
   }
 
   return res.status(200).json({ ok: true });

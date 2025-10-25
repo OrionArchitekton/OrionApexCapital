@@ -28,12 +28,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!hubspotRes.ok) {
       const errorText = await hubspotRes.text();
-      console.error('HubSpot CRM proxy failure', hubspotRes.status, errorText);
-      return res.status(500).json({ error: 'Failed to submit payload to HubSpot CRM' });
+      console.error('HubSpot CRM proxy failure', errorText);
+      return res.status(502).json({ error: 'Failed to create CRM object' });
     }
   } catch (error) {
     console.error('HubSpot CRM proxy failure', error);
-    return res.status(500).json({ error: 'Failed to submit payload to HubSpot CRM' });
+    return res.status(502).json({ error: 'Failed to create CRM object' });
   }
 
   return res.status(200).json({ ok: true });
