@@ -48,7 +48,7 @@ export function Form({ title, description, endpoint, successRedirect, cta, field
       }
 
       trackEvent(eventName, payload);
-      window.location.href = successRedirect;
+      router.push(successRedirect);
     } catch (err) {
       setStatus('error');
       setError('We could not process your request. Please email team@orionapexcapital.com.');
