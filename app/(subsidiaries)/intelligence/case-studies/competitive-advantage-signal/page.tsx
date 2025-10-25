@@ -20,7 +20,7 @@ export default function CompetitiveAdvantageSignalCaseStudy() {
   ]);
 
   if (!study) {
-    return null;
+    notFound();
   }
 
   return (
