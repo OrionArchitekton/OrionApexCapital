@@ -2,12 +2,30 @@
 const isProd = process.env.NODE_ENV === "production";
 
 const securityHeaders = [
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-  { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "X-Frame-Options", value: "DENY" },
-  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-  { key: "Cross-Origin-Opener-Policy", value: "same-origin" }
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload"
+  },
+  {
+    key: "X-Content-Type-Options",
+    value: "nosniff"
+  },
+  {
+    key: "X-Frame-Options",
+    value: "DENY"
+  },
+  {
+    key: "Referrer-Policy",
+    value: "strict-origin-when-cross-origin"
+  },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=()"
+  },
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin"
+  }
 ];
 
 const csp = [
@@ -23,7 +41,10 @@ const csp = [
 ].join("; ");
 
 const assetCachingHeaders = [
-  { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+  {
+    key: "Cache-Control",
+    value: "public, max-age=31536000, immutable"
+  }
 ];
 
 const nextConfig = {
@@ -31,15 +52,18 @@ const nextConfig = {
   images: {
     unoptimized: false
   },
+
   async headers() {
     if (!isProd) {
       return [];
     }
-
     return [
       {
         source: "/(.*)",
-        headers: [...securityHeaders, { key: "Content-Security-Policy", value: csp }]
+        headers: [
+          ...securityHeaders,
+          { key: "Content-Security-Policy", value: csp }
+        ]
       },
       {
         source: "/images/:path*",
@@ -48,6 +72,99 @@ const nextConfig = {
       {
         source: "/_next/static/:path*",
         headers: assetCachingHeaders
+      }
+    ];
+  },
+
+  async redirects() {
+    return [
+      // Subsidiary route renames
+      {
+        source: "/intelligence",
+        destination: "/oia",
+        permanent: true
+      },
+      {
+        source: "/media",
+        destination: "/oam",
+        permanent: true
+      },
+
+      // Kill deep service/case-study trees
+      {
+        source: "/intelligence/services/:path*",
+        destination: "/oia",
+        permanent: true
+      },
+      {
+        source: "/intelligence/case-studies/:path*",
+        destination: "/oia",
+        permanent: true
+      },
+
+      // Legacy marketing pages
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true
+      },
+      {
+        source: "/team",
+        destination: "/",
+        permanent: true
+      },
+      {
+        source: "/careers",
+        destination: "/",
+        permanent: true
+      },
+      {
+        source: "/press",
+        destination: "/",
+        permanent: true
+      },
+      {
+        source: "/insights",
+        destination: "/",
+        permanent: true
+      },
+
+      // Funnel pages → contact
+      {
+        source: "/thanks/:path*",
+        destination: "/contact",
+        permanent: true
+      },
+
+      // ATS route guesses
+      {
+        source: "/trading-system",
+        destination: "/ats",
+        permanent: true
+      },
+      {
+        source: "/tradingsystem",
+        destination: "/ats",
+        permanent: true
+      },
+      {
+        source: "/trading",
+        destination: "/ats",
+        permanent: true
+      },
+
+      // Services catch-all
+      {
+        source: "/services",
+        destination: "/companies",
+        permanent: true
+      },
+
+      // Security page removed
+      {
+        source: "/security",
+        destination: "/legal/disclosures",
+        permanent: true
       }
     ];
   }

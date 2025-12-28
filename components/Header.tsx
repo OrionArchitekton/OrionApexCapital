@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { subsidiaries, navLinks } from '@/lib/data';
-import styles from './Header.module.css';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { subsidiaries, navLinks } from "@/lib/data";
+import styles from "./Header.module.css";
 
 export function Header() {
   const pathname = usePathname();
@@ -24,7 +24,7 @@ export function Header() {
             aria-expanded={isMobileOpen}
             aria-controls="primary-navigation"
           >
-            {isMobileOpen ? 'Close' : 'Menu'}
+            {isMobileOpen ? "Close" : "Menu"}
           </button>
           <ul
             id="primary-navigation"
@@ -51,14 +51,13 @@ export function Header() {
                     : styles.megaPanel
                 }
                 role="group"
-                aria-label="Subsidiaries"
+                aria-label="Portfolio Companies"
               >
                 {subsidiaries.map((company) => (
                   <Link
                     key={company.slug}
                     href={company.url}
                     className={styles.megaLink}
-                    data-theme={company.accent}
                     onClick={() => {
                       setIsMobileOpen(false);
                       setIsCompaniesOpen(false);
@@ -67,19 +66,22 @@ export function Header() {
                     <span className={styles.megaShort}>{company.short}</span>
                     <span>
                       <strong>{company.name}</strong>
-                      <span className={styles.megaDescription}>{company.description}</span>
                     </span>
                   </Link>
                 ))}
               </div>
             </li>
             {navLinks
-              .filter((link) => link.label !== 'Companies')
+              .filter((link) => link.label !== "Companies")
               .map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    data-active={pathname === '/' ? pathname === link.href : pathname.startsWith(link.href)}
+                    data-active={
+                      pathname === "/"
+                        ? pathname === link.href
+                        : pathname.startsWith(link.href)
+                    }
                     className={styles.navLink}
                     onClick={() => setIsMobileOpen(false)}
                   >
@@ -91,7 +93,7 @@ export function Header() {
         </nav>
         <div className={styles.ctaGroup}>
           <Link href="/contact" className={styles.primaryCta}>
-            Talk to our team
+            Contact
           </Link>
         </div>
       </div>

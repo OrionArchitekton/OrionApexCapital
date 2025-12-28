@@ -1,48 +1,51 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { subsidiaries } from '@/lib/data';
-import { Hero } from '@/components/Hero';
-import styles from './companies.module.css';
-import { buildBreadcrumb } from '@/lib/schema';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { subsidiaries } from "@/lib/data";
+import styles from "./companies.module.css";
 
 export const metadata: Metadata = {
-  title: 'Portfolio companies | Orion Apex Capital',
-  description: 'Explore Orion Apex Capital subsidiaries: Orion Intelligence Agency, Orion Ascend Media, and Apex Trading System.',
+  title: "Portfolio Companies | Orion Apex Capital",
+  description:
+    "Explore Orion Apex Capital portfolio companies: Cosmocrat, Orion Intelligence Agency, Orion Ascend Media, and Apex Trading Systems.",
 };
 
 export default function CompaniesPage() {
-  const breadcrumb = buildBreadcrumb([
-    { name: 'Home', url: 'https://www.orionapexcapital.com/' },
-    { name: 'Companies', url: 'https://www.orionapexcapital.com/companies' },
-  ]);
-
   return (
     <div className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <Hero
-        eyebrow="HoldCo portfolio"
-        title="Three specialist firms. One shared governance framework."
-        description="Orion Apex Capital owns and operates subsidiaries that complement one another: intelligence to sense, media to influence, and systems to execute."
-      />
-      <section>
-        <div className="container">
-          <div className={styles.cards}>
+      <section className="py-16">
+        <div className="container mx-auto max-w-4xl px-6">
+          <p className="text-sm uppercase tracking-widest opacity-70 mb-4">
+            Portfolio
+          </p>
+          <h1 className="text-3xl font-semibold mb-4">Companies</h1>
+          <p className="text-base opacity-70 mb-12 max-w-xl">
+            Orion Apex Capital governs a portfolio of specialized operating
+            companies across intelligence, media, trading, and cognitive
+            systems.
+          </p>
+
+          <p className="text-sm opacity-50 mb-8">
+            Each company operates independently within the Orion Apex Capital portfolio.
+          </p>
+
+          <div className="grid gap-6 md:grid-cols-2">
             {subsidiaries.map((company) => (
-              <article key={company.slug} className={styles.card} data-theme={company.accent}>
-                <div>
-                  <span className={styles.short}>{company.short}</span>
-                  <h2>{company.name}</h2>
-                  <p>{company.description}</p>
-                </div>
-                <div className={styles.actions}>
-                  <Link href={`${company.url}`} className={styles.primary}>
-                    View overview
-                  </Link>
-                  <Link href={`${company.url}/services/${company.primaryServiceSlug}`} className={styles.secondary}>
-                    Explore services
-                  </Link>
-                </div>
-              </article>
+              <Link
+                key={company.slug}
+                href={company.url}
+                className="block rounded-lg border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition-colors"
+              >
+                <span className="text-xs uppercase tracking-widest opacity-50">
+                  {company.short}
+                </span>
+                <h2 className="text-xl font-semibold mt-2 mb-2">
+                  {company.name}
+                </h2>
+                <p className="text-sm opacity-70">{company.description}</p>
+                <span className="inline-block mt-4 text-sm opacity-50">
+                  Learn more →
+                </span>
+              </Link>
             ))}
           </div>
         </div>

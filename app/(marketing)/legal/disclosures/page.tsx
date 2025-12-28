@@ -19,7 +19,7 @@ export default function DisclosuresPage() {
       <h1>Regulatory disclosures</h1>
       <h2>Orion Intelligence Agency</h2>
       <p>
-        Orion Intelligence Agency delivers research and diligence services to institutional clients. We do not conduct surveillance activities for unlawful purposes and comply with OFAC and ITAR controls.
+        Orion Intelligence Agency provides research services to institutional clients. OIA complies with OFAC and ITAR controls.
       </p>
       <h2>Orion Ascend Media</h2>
       <p>

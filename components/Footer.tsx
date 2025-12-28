@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import styles from './Footer.module.css';
-import { subsidiaries, navLinks } from '@/lib/data';
+import Link from "next/link";
+import styles from "./Footer.module.css";
+import { subsidiaries, navLinks } from "@/lib/data";
 
 const currentYear = new Date().getFullYear();
 
@@ -10,20 +10,15 @@ export function Footer() {
       <div className={styles.container}>
         <div>
           <p className={styles.brand}>Orion Apex Capital</p>
-          <p className={styles.tagline}>
-            Intelligence, Media, and Systems for modern markets.
-          </p>
-          <p className={styles.disclaimer}>
-            Apex Trading System is made available to qualified institutional and
-            professional investors only. It does not constitute investment
-            advice, and trading involves risk, including potential loss of
-            principal.
-          </p>
+          <p className={styles.tagline}>Holding Company</p>
         </div>
         <div className={styles.links}>
           <div>
             <p className={styles.heading}>Navigation</p>
             <ul>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}>{link.label}</Link>
@@ -32,7 +27,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className={styles.heading}>Subsidiaries</p>
+            <p className={styles.heading}>Portfolio</p>
             <ul>
               {subsidiaries.map((company) => (
                 <li key={company.slug}>
@@ -42,7 +37,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className={styles.heading}>Compliance</p>
+            <p className={styles.heading}>Legal</p>
             <ul>
               <li>
                 <Link href="/legal/privacy">Privacy</Link>
@@ -53,16 +48,12 @@ export function Footer() {
               <li>
                 <Link href="/legal/disclosures">Disclosures</Link>
               </li>
-              <li>
-                <Link href="/security">Security</Link>
-              </li>
             </ul>
           </div>
         </div>
       </div>
       <div className={styles.bottomBar}>
         <p>© {currentYear} Orion Apex Capital. All rights reserved.</p>
-        <p>HQ: Washington, D.C. • New York • London</p>
       </div>
     </footer>
   );

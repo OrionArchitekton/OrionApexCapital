@@ -1,75 +1,54 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Hero } from '@/components/Hero';
-import { CTAButton } from '@/components/CTAButton';
-import { CTASection } from '@/components/CTASection';
-import { subsidiaries, governanceValues } from '@/lib/data';
-import { organizationSchema, websiteSchema } from '@/lib/schema';
-import styles from './home.module.css';
+import type { Metadata } from "next";
+import Link from "next/link";
+import styles from "./home.module.css";
 
 export const metadata: Metadata = {
-  title: 'Orion Apex Capital | Intelligence, Media, and Systems for modern markets.',
+  title: "Orion Apex Capital | Holding Company",
   description:
-    'Orion Apex Capital is the holding company behind Orion Intelligence Agency, Orion Ascend Media, and Apex Trading System. We equip operators with verified intelligence, brand leadership, and algorithmic infrastructure.',
+    "Orion Apex Capital is a holding company overseeing intelligence systems, digital assets, and automated operations.",
 };
 
 export default function HomePage() {
   return (
     <div className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      <Hero
-        eyebrow="Holding Company"
-        title="Intelligence, media, and trading systems for decisive operators"
-        description="Orion Apex Capital partners with leaders navigating complex markets. Our portfolio supplies rigorously sourced intelligence, trust-building media, and compliant algorithmic execution."
-        actions={
-          <>
-            <CTAButton href="/companies">Explore the companies</CTAButton>
-            <CTAButton href="/contact" variant="secondary">
-              Talk to our team
-            </CTAButton>
-          </>
-        }
-      />
-      <section className={styles.section}>
-        <div className="container">
-          <h2 className="section-heading">Portfolio companies</h2>
-          <p className="text-subtle">
-            Each subsidiary focuses on a critical operator workflow: sensing markets, shaping reputation, and executing strategies.
+      <section className="py-24 text-center">
+        <div className="container mx-auto max-w-3xl px-6">
+          <p className="text-sm uppercase tracking-widest opacity-70 mb-4">
+            Holding Company
           </p>
-          <div className={styles.cards}>
-            {subsidiaries.map((company) => (
-              <Link key={company.slug} href={company.url} className={styles.companyCard} data-theme={company.accent}>
-                <div>
-                  <span className={styles.companyShort}>{company.short}</span>
-                  <h3>{company.name}</h3>
-                  <p>{company.description}</p>
-                </div>
-                <span aria-hidden>→</span>
-              </Link>
-            ))}
+          <h1 className="text-4xl font-semibold mb-6">Orion Apex Capital</h1>
+          <p className="text-xl leading-relaxed opacity-80 mb-8">
+            A holding company overseeing intelligence systems, digital assets,
+            and automated operations.
+          </p>
+
+          <div className="space-y-4 text-base leading-7 opacity-70 max-w-xl mx-auto mb-10">
+            <p>
+              Orion Apex Capital governs a portfolio of specialized operating
+              companies.
+            </p>
+            <p>
+              We provide structure, capital alignment, and shared infrastructure
+              across the portfolio.
+            </p>
+          </div>
+
+          <div className="flex justify-center gap-4 flex-wrap">
+            <Link
+              href="/companies"
+              className="inline-flex items-center rounded-md bg-white text-black px-5 py-3 text-sm font-medium hover:opacity-90"
+            >
+              View Companies
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center rounded-md border border-white/20 px-5 py-3 text-sm font-medium hover:bg-white/10"
+            >
+              Contact
+            </Link>
           </div>
         </div>
       </section>
-      <section className={styles.section}>
-        <div className="container">
-          <h2 className="section-heading">What we solve</h2>
-          <div className={styles.grid}>
-            {governanceValues.map((item) => (
-              <article key={item.title} data-surface>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-      <CTASection
-        title="Ready to brief your mandate?"
-        description="Connect with our holding company team to scope diligence, media, or systematic trading initiatives."
-        primary={{ label: 'Talk to our team', href: '/contact' }}
-        secondary={{ label: 'Download the deck', href: '/press' }}
-      />
     </div>
   );
 }
