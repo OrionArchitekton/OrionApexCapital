@@ -165,7 +165,7 @@ export default function Home({ posts }) {
         <div className="grid gap-8 lg:grid-cols-12">
           <div className="panel panel--accent lg:col-span-12 flex flex-col gap-8 p-8 backdrop-blur-xl floating-1">
             <Featured />
-            <dl className="grid gap-6 sm:grid-cols-4">
+            <dl className="grid gap-6 sm:grid-cols-3">
               <div className="panel panel--kpi panel--inline panel--static p-4 text-center">
                 <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Retention increase</dt>
                 <dd className="mt-2 text-2xl font-semibold text-brand-gold">+2.8pp</dd>
@@ -177,10 +177,6 @@ export default function Home({ posts }) {
               <div className="panel panel--kpi panel--inline panel--static p-4 text-center">
                 <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Data accuracy</dt>
                 <dd className="mt-2 text-2xl font-semibold text-text-primary">100%</dd>
-              </div>
-              <div className="panel panel--kpi panel--inline panel--static p-4 text-center">
-                <dt className="text-xs uppercase tracking-[0.25em] text-text-muted">Locations tracked</dt>
-                <dd className="mt-2 text-2xl font-semibold text-brand-copper">12</dd>
               </div>
             </dl>
             <div className="flex flex-wrap gap-4">
