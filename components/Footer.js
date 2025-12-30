@@ -1,1 +1,2 @@
+export { Footer } from "./Footer.tsx";
 export { default } from "./Footer.tsx";

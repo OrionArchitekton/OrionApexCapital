@@ -163,7 +163,7 @@ export default function Home({ posts }) {
         description="Transformed operational efficiency through data visualization and automated reporting systems tuned for franchise scale."
       >
         <div className="grid gap-8 lg:grid-cols-12">
-          <div className="panel panel--accent lg:col-span-7 flex flex-col gap-8 p-8 backdrop-blur-xl floating-1">
+          <div className="panel panel--accent lg:col-span-12 flex flex-col gap-8 p-8 backdrop-blur-xl floating-1">
             <Featured />
             <dl className="grid gap-6 sm:grid-cols-3">
               <div className="panel panel--kpi panel--inline panel--static p-4 text-center">
@@ -186,35 +186,6 @@ export default function Home({ posts }) {
               <Button href="/freelance" variant="outline">
                 View All Work
               </Button>
-            </div>
-          </div>
-          <div className="panel panel--accent relative lg:col-span-5 h-80 p-0 md:h-full floating-3">
-            <Image
-              src="/media/photos/curated/pexels-quintin-gellar-313782.jpg"
-              alt="City skyline at night with illuminated financial district skyscrapers."
-              fill
-              className="rounded-3xl object-cover"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-navy/20 via-brand-navy/40 to-brand-navy/90" aria-hidden="true"></div>
-            <div className="panel panel--aurora panel--inline absolute bottom-4 left-4 right-4 p-4 backdrop-blur md:bottom-6 md:left-6 md:right-6 md:p-6">
-              <div className="flex items-center justify-between text-sm text-text-muted mb-3">
-                <span className="font-medium">Monthly revenue</span>
-                <span className="text-brand-gold font-semibold">Up +18.2%</span>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-brand-gold/15 mb-4">
-                <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-copper to-brand-blue"></div>
-              </div>
-              <div className="grid grid-cols-2 gap-3 text-xs text-text-muted">
-                <div className="text-center">
-                  <div className="text-xl font-bold text-text-primary mb-1">$247K</div>
-                  <div className="text-text-muted/80">This month</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xl font-bold text-text-primary/70 mb-1">$209K</div>
-                  <div className="text-text-muted/80">Last month</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -311,4 +282,3 @@ export default function Home({ posts }) {
 export async function getStaticProps() {
   return { props: { posts: getAllPosts() } };
 }
-

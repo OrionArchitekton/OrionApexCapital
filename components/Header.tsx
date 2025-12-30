@@ -8,6 +8,7 @@ import styles from "./Header.module.css";
 
 export function Header() {
   const pathname = usePathname();
+  const currentPath = pathname ?? "";
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCompaniesOpen, setIsCompaniesOpen] = useState(false);
 
@@ -78,9 +79,9 @@ export function Header() {
                   <Link
                     href={link.href}
                     data-active={
-                      pathname === "/"
-                        ? pathname === link.href
-                        : pathname.startsWith(link.href)
+                      currentPath === "/"
+                        ? currentPath === link.href
+                        : currentPath.startsWith(link.href)
                     }
                     className={styles.navLink}
                     onClick={() => setIsMobileOpen(false)}

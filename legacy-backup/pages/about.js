@@ -24,14 +24,14 @@ export default function About({ missionVision }) {
               <div className="flex flex-wrap items-center gap-4">
                 <Logo variant="crestWhite" size={40} />
                 <div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper pulse-dot">Operator studio</p>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-copper pulse-dot">Operator Programs</p>
                   <h1 className="font-display text-4xl leading-tight text-text-primary sm:text-5xl">
                     About Orion Apex Capital
                   </h1>
                 </div>
               </div>
               <p className="text-lg leading-relaxed text-text-muted">
-                Orion Apex Capital is a modern holding company where <strong className="text-text-primary">human intuition + algorithmic precision</strong> drive disciplined growth. We own and coordinate three operating subsidiaries across AI agents, digital asset acquisition, and trading R&D.
+                Orion Apex Capital is a modern holding company where <strong className="text-text-primary">human intuition + algorithmic precision</strong> drive disciplined growth. We own and coordinate three operating subsidiaries across AI agents, digital asset acquisition, and trading R&D. Cosmocrat serves as our internal operating system—aligning strategy, execution, and governance across the portfolio.
               </p>
               <div className="grid gap-4 sm:grid-cols-3">
                 {[
@@ -50,7 +50,7 @@ export default function About({ missionVision }) {
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.32em] text-brand-copper">Operating Arms</p>
                 <p className="text-base text-text-muted">
-                  Three independent subsidiaries, each with clear mandates and coordinated through shared governance, architecture, and capital discipline.
+                  Three independent operating subsidiaries, each with clear mandates and coordinated through shared governance, architecture, and capital discipline.
                 </p>
               </div>
               <ul className="space-y-3 text-sm text-text-muted">
@@ -85,7 +85,7 @@ export default function About({ missionVision }) {
           {[
             {
               title: "Structure",
-              copy: "Ohio HoldCo with siloed subsidiaries. Clear intercompany IP & services agreements. No custody, no advice—just software, media, and R&D."
+              copy: "Ohio HoldCo with siloed operating subsidiaries. Clear intercompany IP & services agreements. No custody, no advice—governed software, media, and R&D."
             },
             {
               title: "Discipline",

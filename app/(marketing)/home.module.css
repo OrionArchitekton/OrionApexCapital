@@ -69,14 +69,14 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-div[data-surface] {
+.grid :global(div[data-surface]) {
   padding: var(--space-4);
   border-radius: var(--radius-lg);
   display: grid;
   gap: var(--space-3);
 }
 
-div[data-surface] h3 {
+.grid :global(div[data-surface] h3) {
   margin: 0;
   font-family: var(--font-display);
 }

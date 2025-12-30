@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './Form.module.css';
 import { trackEvent } from '@/lib/analytics';
 
@@ -25,6 +26,7 @@ interface FormProps {
 export function Form({ title, description, endpoint, successRedirect, cta, fields, eventName }: FormProps) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
