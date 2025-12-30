@@ -47,25 +47,29 @@ export type MetadataParams = {
 export const buildMetadata = (
   params: MetadataParams,
   parent?: ResolvingMetadata
-): Metadata => ({
-  title: params.title,
-  description: params.description,
-  alternates: params.path
-    ? {
-        canonical: `${siteUrl}${params.path}`,
-      }
-    : undefined,
-  openGraph: {
-    ...(parent?.openGraph ?? {}),
+): Metadata => {
+  const parentMetadata = parent as Metadata | undefined;
+
+  return {
     title: params.title,
     description: params.description,
-    url: params.path ? `${siteUrl}${params.path}` : siteUrl,
-    images: params.image ? [params.image] : parent?.openGraph?.images,
-  },
-  twitter: {
-    ...(parent?.twitter ?? {}),
-    title: params.title,
-    description: params.description,
-    images: params.image ? [params.image] : parent?.twitter?.images,
-  },
-});
+    alternates: params.path
+      ? {
+          canonical: `${siteUrl}${params.path}`,
+        }
+      : undefined,
+    openGraph: {
+      ...(parentMetadata?.openGraph ?? {}),
+      title: params.title,
+      description: params.description,
+      url: params.path ? `${siteUrl}${params.path}` : siteUrl,
+      images: params.image ? [params.image] : parentMetadata?.openGraph?.images,
+    },
+    twitter: {
+      ...(parentMetadata?.twitter ?? {}),
+      title: params.title,
+      description: params.description,
+      images: params.image ? [params.image] : parentMetadata?.twitter?.images,
+    },
+  };
+};
