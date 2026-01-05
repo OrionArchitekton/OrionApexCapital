@@ -18,7 +18,7 @@ export default function SEOHead({
   
   // Use provided canonical or generate from URL
   const canonicalUrl = canonical || (url ? getCanonical(url) : getCanonical('/'));
-  const ogUrl = url ? getCanonical(url) : getCanonical('/');
+  const ogUrl = canonical || (url ? getCanonical(url) : getCanonical('/'));
   const siteOrigin = getCanonical('/').replace(/\/$/, "");
   const ogImageUrl = image?.startsWith("http") ? image : `${siteOrigin}${image}`;
   const twitterImagePath = twitterImage || image;

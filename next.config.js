@@ -50,6 +50,20 @@ const nextConfig = {
         headers: assetCachingHeaders
       }
     ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/services/client-services",
+        destination: "/freelance",
+        permanent: true
+      },
+      {
+        source: "/services/client-services/",
+        destination: "/freelance",
+        permanent: true
+      }
+    ];
   }
 };
 
